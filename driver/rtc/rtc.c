@@ -109,6 +109,8 @@ DWORD get_fattime (void) {
     DWORD fatfs_time;
     RTC_INFO rtc_data;
     
+    rtc_init();
+    
     rtc_obtain_time( &rtc_data );
     
     /* 根据格式将获取的时间数据进行转换 */

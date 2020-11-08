@@ -94,6 +94,8 @@
 .\project\obj\rtc.o: .\third_party\lvgl\lvgl\src/../lvgl.h
 .\project\obj\rtc.o: .\third_party\lvgl\lvgl\porting\lv_port_disp.h
 .\project\obj\rtc.o: inc\pro_conf.h
+.\project\obj\rtc.o: .\third_party\lvgl\lvgl\porting\lv_port_fs.h
+.\project\obj\rtc.o: .\third_party\lvgl\lvgl\porting\lv_port_indev.h
 .\project\obj\rtc.o: third_party\ff14\source\ff.h
 .\project\obj\rtc.o: third_party\ff14\source\ffconf.h
 .\project\obj\rtc.o: .\third_party\rt-thread-sorted\include\rtthread.h

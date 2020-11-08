@@ -17,7 +17,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 #include "lvgl/lvgl.h"
-#include "main.h"
+#include "pro_conf.h"
 
 /*********************
  *      DEFINES
@@ -41,7 +41,6 @@ extern "C" {
  **********************/
 
 void lv_port_fs_init(void);
-void fs_deinit( FS_DEVICE device );
 
 #ifdef __cplusplus
 } /* extern "C" */

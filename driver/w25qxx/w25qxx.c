@@ -127,7 +127,7 @@ void w25qxx_powerUp( void ) {
     if ( !retry ) {
         DEBUG_PRINT( "W25QXX init failed.\n" );
     } else {
-        DEBUG_PRINT( "W25QXX init ok. (%x)\n", status );
+        DEBUG_PRINT( "W25QXX init successfully.. (%x)\n", status );
     }
     
 }
@@ -147,7 +147,7 @@ void w25qxx_JEDECID( void ) {
         w25qxx.JEDECID |= w25qxx_trans_byte( W25QXX_DUMMY_BYTE );
     }
     if ( w25qxx.JEDECID>>16 == 0xEF ) {
-        DEBUG_PRINT( "W25QXX JEDECID: %x\n", w25qxx.JEDECID );
+        // DEBUG_PRINT( "W25QXX JEDECID: %x\n", w25qxx.JEDECID );
         w25qxx.mType = w25qxx.JEDECID&0xFFFF;
         switch ( w25qxx.mType ) {
             case W25Q256:
@@ -171,9 +171,9 @@ void w25qxx_JEDECID( void ) {
         }
         w25qxx.sect_cnt  = w25qxx.pageCnt>>4;
         w25qxx.capacity  = w25qxx.pageCnt*w25qxx.pageSize;
-        DEBUG_PRINT( "W25QXX capacity: %d MiB\n", w25qxx.capacity>>20 );
+        //DEBUG_PRINT( "W25QXX capacity: %d MiB\n", w25qxx.capacity>>20 );
     } else {
-        DEBUG_PRINT( "W25QXX JEDECID error. %x\n", w25qxx.JEDECID );
+       // DEBUG_PRINT( "W25QXX JEDECID error. %x\n", w25qxx.JEDECID );
     }
     
     

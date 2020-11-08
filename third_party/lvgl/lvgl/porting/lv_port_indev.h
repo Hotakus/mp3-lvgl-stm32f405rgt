@@ -39,6 +39,8 @@ extern "C" {
 
 void lv_port_indev_init(void);
 
+lv_group_t *lv_get_indev_group(void);
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

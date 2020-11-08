@@ -74,7 +74,7 @@ lv_indev_t * indev_keypad;
 lv_indev_t * indev_encoder;
 lv_indev_t * indev_button;
 
-lv_group_t * group;
+static lv_group_t *indev_group;
 
 #if ( INPUT_DEVICE == 3 )
 static int32_t encoder_diff;
@@ -88,6 +88,10 @@ static lv_indev_state_t encoder_state;
  *   GLOBAL FUNCTIONS
  **********************/
 
+lv_group_t *lv_get_indev_group(void)
+{
+    return indev_group;
+}
 
 void lv_port_indev_init(void)
 {
@@ -150,11 +154,9 @@ void lv_port_indev_init(void)
     indev_drv.read_cb = keypad_read;
     indev_keypad = lv_indev_drv_register(&indev_drv);
 
-    group = lv_group_create();
-    lv_indev_set_group( indev_keypad, group );
-    
-    printf("indev done\n");
-    
+    indev_group = lv_group_create();
+    lv_indev_set_group( indev_keypad, indev_group );
+
     /* Later you should create group(s) with `lv_group_t * group = lv_group_create()`,
      * add objects to the group with `lv_group_add_obj(group, obj)`
      * and assign this input device to group to navigate in it:
@@ -325,7 +327,8 @@ static bool keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 
     /*Get whether the a key is pressed and save the pressed key*/
     uint32_t act_key = keypad_get_key();
-    printf( "act_key: %x\n", act_key );
+    //printf( "act_key: %x\n", act_key );
+    
     if(act_key != 0) {
         data->state = LV_INDEV_STATE_PR;
 

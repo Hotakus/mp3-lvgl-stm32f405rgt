@@ -38,15 +38,6 @@ void test( int argc, const char **args )
 }
 MSH_CMD_EXPORT( test, test );
 
-void fatfs( int argc, char **args )
-{
-    if ( argc != 2 )
-        return;
-    DEBUG_PRINT( "into fatfs test.\n" );
-    fatfs_test( args[1] );
-}
-MSH_CMD_EXPORT( fatfs, RT_NULL );
-
 void scr_test( int argc, char **args )
 {
     scr_opr_handler *scr;
@@ -73,3 +64,22 @@ void scr_test( int argc, char **args )
 }
 MSH_CMD_EXPORT( scr_test, RT_NULL );
 
+#if USER_USE_FATFS == 1
+void fatfs( int argc, char **args )
+{
+    if ( argc != 2 )
+        return;
+    DEBUG_PRINT( "into fatfs test.\n" );
+    fatfs_test( args[1] );
+}
+MSH_CMD_EXPORT( fatfs, RT_NULL );
+#endif
+
+#if USER_USE_LVGL == 1
+void reinit_lvgl( int argc, char **args )
+{
+    lv_port_indev_init();       // 输入设备初始化
+    lv_port_fs_init();          // 文件系统设备初始化
+}
+MSH_CMD_EXPORT( reinit_lvgl, RT_NULL );
+#endif

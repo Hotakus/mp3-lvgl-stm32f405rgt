@@ -54,6 +54,8 @@ extern "C" {
 /* lvgl */
 #include "lvgl.h"
 #include "lv_port_disp.h"
+#include "lv_port_fs.h"
+#include "lv_port_indev.h"
 #endif
 
 #if USER_USE_APP == 1
@@ -90,8 +92,8 @@ extern "C" {
 #if USER_USE_SD_NUM == 1
 #define USER_USE_SD1         USER_USE_SD_SDIO
 #elif USER_USE_SD_NUM == 2
-#define USER_USE_SD1         USER_USE_SD_SPI
-#define USER_USE_SD2         USER_USE_SD_SDIO
+#define USER_USE_SD1         USER_USE_SD_SDIO
+#define USER_USE_SD2         USER_USE_SD_SPI
 #endif
 
 #if USER_USE_SD_NUM == 1

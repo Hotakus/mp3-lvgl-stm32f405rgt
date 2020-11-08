@@ -10,6 +10,7 @@
  *      INCLUDES
  *********************/
 #include "lv_port_fs.h"
+#include "ff_user.h"
 
 /*********************
  *      DEFINES
@@ -58,12 +59,6 @@ static lv_fs_res_t fs_dir_close (lv_fs_drv_t * drv, void * rddir_p);
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-#include "ff_user.h"
-FRESULT init_fres[2] = { 
-    FR_NOT_READY,
-    FR_NOT_READY,
-};
-FATFS   init_fs[FF_VOLUMES];
 
 /**********************
  *      MACROS
@@ -110,27 +105,6 @@ void lv_port_fs_init(void)
     fs_drv[0].dir_read_cb   = fs_dir_read;
     lv_fs_drv_register(&fs_drv[0]);
     
-#if DEBUG_PRINTF==1    
-    lv_fs_file_t lv_file;
-    lv_fs_res_t lv_res;
-    u32 br;
-    u8 buf[512] = {0};
-    u16 i;
-
-    lv_res = lv_fs_open( &lv_file, "S:/mp3_bg.bin", LV_FS_MODE_RD );
-    if ( lv_res == LV_FS_RES_OK ) {
-        lv_fs_close( &lv_file );
-        lv_res = lv_fs_open( &lv_file, "S:/mp3_bg.bin", LV_FS_MODE_RD );
-        if ( lv_res == LV_FS_RES_OK ) {
-
-        } else {
-            printf( "fs_read error(%d)\n", lv_res );
-        }
-        lv_fs_close( &lv_file );
-    } else {
-        printf( "open error(%d)\n", lv_res );
-    }
-#endif
     /* For SPI FLASH */
     fs_drv[1].file_size     = sizeof(file_t);
     fs_drv[1].letter        = 'F';
@@ -157,53 +131,62 @@ void lv_port_fs_init(void)
  *   STATIC FUNCTIONS
  **********************/
 
+FATFS   fs_lv[2]    = {NULL, NULL};
+FRESULT fr_lv[2]    = {!FR_OK, !FR_OK};
+
 /* Initialize your Storage device and File system. */
 static void fs_init(void) 
 {
     /*E.g. for FatFS initalize the SD card and FatFS itself*/
     /*You code here*/
+    if ( fr_lv[0] != FR_OK ) {
+        fr_lv[0] = f_mount( &fs_lv[0], "SD_SDIO:", 1 );
+        if ( fr_lv[0] != FR_OK ) {
+            DEBUG_PRINT( "sd card mount error. (fr: %d)\n", fr_lv[0] );
+            if ( fr_lv[0] == FR_NOT_READY )
+                DEBUG_PRINT( "no sd card.\n" );
+        }
+        DEBUG_PRINT( "sd card mount successfully.\n" );
+    }
 
-    init_fres[SPIF_INDEX] = f_mount( &init_fs[0], "SPIF:/", 1 );
-    init_fres[SD_INDEX]   = f_mount( &init_fs[1], "SD:/"  , 1 );
-    
-    if ( init_fres[SPIF_INDEX] == FR_OK ) {
-        printf( "SPI FLASH mounted.\n" );
-#if DEBUG_PRINTF==1
-        scan_catalog( "SPIF:", SCAN_OPT_ALL );
-#endif
-    } else {
-        printf( "SPI FLASH unmounted. (%d)\n", init_fres[SPIF_INDEX] );
+    if ( fr_lv[1] != FR_OK ) {
+        fr_lv[1] = f_mount( &fs_lv[1], "SPIF:", 1 );
+        if ( fr_lv[1] != FR_OK ) {
+            DEBUG_PRINT( "spi flash mount error. (fr: %d)\n", fr_lv[1] );
+        }
+        DEBUG_PRINT( "spi flash mount successfully.\n" );
     }
     
-    if ( init_fres[SD_INDEX] == FR_OK ) {
-        printf( "SD card mounted.\n" );
-#if DEBUG_PRINTF==1        
-        scan_catalog( "SD:", SCAN_OPT_CUR_DIR );
-#endif
-        } else {
-        printf( "SD card unmounted. (%d)\n", init_fres[SD_INDEX] );
+    if ( fr_lv[0] == FR_OK ) {
+        SD_CardInfo sd_info;
+        SD_GetCardInfo( &sd_info );
+        printf("sd card info:\n");
+        printf("CardType    : %d\n", (int)sd_info.CardType );
+        printf("Capacity    : %0.2f GiB\n", ((double)sd_info.CardCapacity/(1<<30)) );
+        printf("OEM_AppliID : %c%c\n", 
+            sd_info.SD_cid.OEM_AppliID>>8,
+            sd_info.SD_cid.OEM_AppliID
+        );
+        printf("ProdName    : %c%c%c%c%c\n", 
+            sd_info.SD_cid.ProdName1>>24,
+            sd_info.SD_cid.ProdName1>>16,
+            sd_info.SD_cid.ProdName1>>8,
+            sd_info.SD_cid.ProdName1,
+            sd_info.SD_cid.ProdName2
+        );
+        printf("ManufactDate: %d.%d\n", 
+            2000+(sd_info.SD_cid.ManufactDate>>4),
+            (sd_info.SD_cid.ManufactDate>>4)&0x0f
+        );
     }
+    
     
 }
 
 /* unmount devices */
 void fs_deinit( FS_DEVICE device )
 {
-    FRESULT res;
-    switch ( device ) {
-    case DEVICE_SPI_FLASH:
-        res = f_unmount( "SPIF:" );
-        if ( res == FR_OK )
-            init_fres[SPIF_INDEX] = FR_NOT_READY;
-        break;
-    case DEVICE_SD_CARD:
-        res = f_unmount( "SD:" );
-        if ( res == FR_OK )
-            init_fres[SD_INDEX] = FR_NOT_READY;
-        break;
-    default:
-        printf( "No drive %c\n", device );
-    }
+
 }
 
 /**
@@ -548,7 +531,7 @@ static lv_fs_res_t fs_dir_read (lv_fs_drv_t * drv, void * rddir_p, char *fn)
     FILINFO fno;
 
     /* Add your code here*/
-    fn = NULL; 
+    fn = fn; 
 
     fres = f_readdir( (DIR*)rddir_p, &fno );
     if ( fres != FR_OK ) {
