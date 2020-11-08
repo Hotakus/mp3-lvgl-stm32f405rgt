@@ -5,8 +5,6 @@
 extern "C" {
 #endif
 
-#define DEBUG_PRINT rt_kprintf
-
 /* USER USE */
 #define USER_USE_RTTHREAD   1
 #define USER_USE_LVGL       0
@@ -14,7 +12,6 @@ extern "C" {
 #define USER_USE_FATFS      1
 
 #define USER_USE_APP        0
-
 
 /* FatFs thread-safe conf */
 #define THREAD_SAFE_SW      0
@@ -25,8 +22,8 @@ extern "C" {
 // USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
 #define USE_SCR_IPS_133_INCH                0
 #define USE_SCR_LCD_2_INCH                  1
-#define USE_SCR_LCD_144_ST7735_144_INCH     2
-#define USER_USE_SCR      USE_SCR_LCD_144_ST7735_144_INCH
+#define USE_SCR_LCD_144_ST7735              2
+#define USER_USE_SCR      USE_SCR_LCD_144_ST7735
 
 /* 延时函数时钟源 */
 #define DELAY_SRC_SYSTICK  0
@@ -62,6 +59,15 @@ extern "C" {
 #include <rtthread.h>
 #define APP_THREAD_NUM  5       // 定义APP最大线程
 #endif
+
+#if USER_USE_RTTHREAD == 1
+#define DEBUG_PRINT     rt_kprintf
+#define DELAY_MS        rt_thread_mdelay
+#elif USER_USE_RTTHREAD == 0
+#define DEBUG_PRINT     printf
+#define DELAY_MS        delay_ms
+#endif
+
 
 /* SD configuration */
 #define USER_ON_SD          1

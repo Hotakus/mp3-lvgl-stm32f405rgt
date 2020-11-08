@@ -51,11 +51,14 @@
 .\project\obj\board.o: .\third_party\rt-thread-sorted\include\rtm.h
 .\project\obj\board.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\board.o: .\third_party\rt-thread-sorted\finsh\finsh_api.h
-.\project\obj\board.o: .\third_party\rt-thread-sorted\include\rthw.h
-.\project\obj\board.o: driver\usart\usart.h
+.\project\obj\board.o: .\driver\screen\screen_conf.h
+.\project\obj\board.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
+.\project\obj\board.o: driver\systicks\systick.h
 .\project\obj\board.o: inc\arm_math.h
 .\project\obj\board.o: inc\core_cm4.h
 .\project\obj\board.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\string.h
 .\project\obj\board.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
-.\project\obj\board.o: driver\systicks\systick.h
+.\project\obj\board.o: .\third_party\rt-thread-sorted\include\rthw.h
+.\project\obj\board.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\project\obj\board.o: driver\usart\usart.h
 .\project\obj\board.o: third_party\ff14\source\ff_user.h

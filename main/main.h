@@ -20,7 +20,7 @@ extern "C" {
 #include "nvic_conf.h"
 #include "led.h"
 #include "ff_user.h"
-#include "lcd_144_st7735.h"
+#include "screen_conf.h"
 
 /* functions */
 

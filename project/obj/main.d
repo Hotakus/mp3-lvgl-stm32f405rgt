@@ -64,4 +64,5 @@
 .\project\obj\main.o: driver\nvic\nvic_conf.h
 .\project\obj\main.o: driver\led\led.h
 .\project\obj\main.o: third_party\ff14\source\ff_user.h
+.\project\obj\main.o: .\driver\screen\screen_conf.h
 .\project\obj\main.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
