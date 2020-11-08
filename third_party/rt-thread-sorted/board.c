@@ -1,13 +1,14 @@
-/*
- * Copyright (c) 2006-2019, RT-Thread Development Team
- *
- * SPDX-License-Identifier: Apache-2.0
- *
- * Change Logs:
- * Date           Author       Notes
- * 2017-07-24     Tanek        the first version
- * 2018-11-12     Ernest Chen  modify copyright
- */
+/************************************************
+ * @file board.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-09
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
+
 #include "stm32f4xx_conf.h"
 #include "sd_sdio_conf.h"
 #include "pro_conf.h"

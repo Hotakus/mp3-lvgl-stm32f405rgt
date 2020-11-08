@@ -1,3 +1,13 @@
+/************************************************
+ * @file lcd_144_st7735.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-09
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "lcd_144_st7735.h"
 #include "pro_conf.h"
 

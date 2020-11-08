@@ -1,3 +1,13 @@
+/************************************************
+ * @file spi_conf.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-09
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "spi_conf.h"
 
 SPI_InitTypeDef  spi_s;

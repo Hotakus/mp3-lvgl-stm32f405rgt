@@ -1,3 +1,13 @@
+/************************************************
+ * @file w25qxx.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-09
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "w25qxx.h"
 #include "spi_conf.h"
 #include "dma_conf.h"
