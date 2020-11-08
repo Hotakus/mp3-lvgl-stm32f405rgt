@@ -94,9 +94,9 @@
 .\project\obj\lv_port_indev.o: main\main.h
 .\project\obj\lv_port_indev.o: inc\pro_conf.h
 .\project\obj\lv_port_indev.o: .\third_party\lvgl\lvgl\porting\lv_port_disp.h
+.\project\obj\lv_port_indev.o: inc\pro_conf.h
 .\project\obj\lv_port_indev.o: third_party\ff14\source\ff.h
 .\project\obj\lv_port_indev.o: third_party\ff14\source\ffconf.h
-.\project\obj\lv_port_indev.o: inc\pro_conf.h
 .\project\obj\lv_port_indev.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\lv_port_indev.o: .\third_party\rt-thread-sorted\rtconfig.h
 .\project\obj\lv_port_indev.o: .\third_party\rt-thread-sorted\include\RTE_Components.h

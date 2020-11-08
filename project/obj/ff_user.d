@@ -95,6 +95,7 @@
 .\project\obj\ff_user.o: .\third_party\lvgl\lvgl\src/lv_api_map.h
 .\project\obj\ff_user.o: .\third_party\lvgl\lvgl\src/../lvgl.h
 .\project\obj\ff_user.o: .\third_party\lvgl\lvgl\porting\lv_port_disp.h
+.\project\obj\ff_user.o: inc\pro_conf.h
 .\project\obj\ff_user.o: third_party\ff14\source\ff.h
 .\project\obj\ff_user.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\ff_user.o: .\third_party\rt-thread-sorted\rtconfig.h

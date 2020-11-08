@@ -11,6 +11,7 @@ static rt_thread_t threadx[APP_THREAD_NUM] = {RT_NULL};
 static rt_thread_t *led_blink_th = &threadx[0];      // 从线程堆分配线程
 static void led_blink_thread( void *param )
 {
+    param = param;
     led_conf( GPIOA, GPIO_Pin_8 );
     led_on( GPIOA, GPIO_Pin_8 );
     while ( 1 ) {
@@ -24,12 +25,13 @@ static void led_blink_thread( void *param )
 /* lvgl tick线程 */
 #define LVGL_TICK   10
 #define LVGL_TICK_THREAD_NAME   "lvgl_tick"         // 线程名
-#define LVGL_TICK_STACK_SIZE    1024                // 线程栈大小
+#define LVGL_TICK_STACK_SIZE    128                // 线程栈大小
 #define LVGL_TICK_TIME_SLICE    5                   // 线程时间片
 #define LVGL_TICK_PRIOROTY      10                  // 线程优先级
 static rt_thread_t *lvgl_tick_th = &threadx[1];      // 从线程堆分配线程
 static void lvgl_tick_thread( void *param )
 {
+    param = param;
     while ( 1 ) {
         lv_tick_inc(LVGL_TICK);
         rt_thread_mdelay(LVGL_TICK);
@@ -38,12 +40,13 @@ static void lvgl_tick_thread( void *param )
 
 /* lvgl task handler线程 */
 #define LVGL_TASK_THREAD_NAME   "lvgl_task"         // 线程名
-#define LVGL_TASK_STACK_SIZE    4096                // 线程栈大小
+#define LVGL_TASK_STACK_SIZE    2048                // 线程栈大小
 #define LVGL_TASK_TIME_SLICE    10                   // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                  // 线程优先级
 static rt_thread_t *lvgl_task_th = &threadx[2];      // 从线程堆分配线程
 static void lvgl_task_thread( void *param )
 {
+    param = param;
     while ( 1 ) {
         lv_task_handler();
         rt_thread_mdelay(LVGL_TICK<<1);
@@ -65,7 +68,7 @@ void lv_ex_label_1(void)
     lv_label_set_long_mode(label1, LV_LABEL_LONG_BREAK); /*Break the long lines*/
     lv_label_set_recolor(label1, true); /*Enable re-coloring by␣,!commands in the text*/
     lv_label_set_align(label1, LV_LABEL_ALIGN_CENTER); /*Center aligned lines*/
-    lv_label_set_text(label1, "#0000ff Re-color# #ff00ff words# #ff0000 of a# label " "and wrap long text automatically.");
+    lv_label_set_text(label1, "#0000ff Re-color# #ff00ff words# #ff0000 of a# label " "#00ff00 and# wrap long text automatically.");
     lv_obj_set_width(label1, 120);
     lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, -0);
     lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
@@ -74,7 +77,6 @@ void lv_ex_label_1(void)
     lv_label_set_text(label2, "It is a circularly scrolling text. ");
     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 0);
 }
-
 
 /* 主函数 */
 int main () 

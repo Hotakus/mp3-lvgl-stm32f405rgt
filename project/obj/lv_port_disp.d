@@ -91,7 +91,6 @@
 .\project\obj\lv_port_disp.o: .\third_party\lvgl\lvgl/src/lv_draw/lv_img_cache.h
 .\project\obj\lv_port_disp.o: .\third_party\lvgl\lvgl/src/lv_api_map.h
 .\project\obj\lv_port_disp.o: .\third_party\lvgl\lvgl/src/../lvgl.h
-.\project\obj\lv_port_disp.o: .\driver\screen\screen_conf.h
 .\project\obj\lv_port_disp.o: inc\pro_conf.h
 .\project\obj\lv_port_disp.o: .\third_party\lvgl\lvgl\porting\lv_port_disp.h
 .\project\obj\lv_port_disp.o: third_party\ff14\source\ff.h
@@ -143,6 +142,7 @@
 .\project\obj\lv_port_disp.o: lib\inc\stm32f4xx_fsmc.h
 .\project\obj\lv_port_disp.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\obj\lv_port_disp.o: driver\sdio\sd_sdio.h
+.\project\obj\lv_port_disp.o: .\driver\screen\screen_conf.h
 .\project\obj\lv_port_disp.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
 .\project\obj\lv_port_disp.o: driver\systicks\systick.h
 .\project\obj\lv_port_disp.o: inc\arm_math.h

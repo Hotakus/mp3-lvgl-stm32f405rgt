@@ -380,7 +380,7 @@ LV_ATTRIBUTE_FAST_MEM void lv_draw_label(const lv_area_t * coords, const lv_area
         if(pos.y > mask->y2) return;
     }
 
-    LV_ASSERT_MEM_INTEGRITY();
+//    LV_ASSERT_MEM_INTEGRITY();
 }
 
 /**********************

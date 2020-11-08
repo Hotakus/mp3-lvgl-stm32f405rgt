@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\project\obj\405mp3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\project\obj\405mp3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Nov 09 03:14:59 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Nov 09 03:50:57 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1696 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1908,7 +1908,7 @@ Global Symbols
 <LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_font_get_bitmap_fmt_txt
 </UL>
 
-<P><STRONG><a name="[2c9]"></a>_lv_mem_init</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, lv_mem.o(i._lv_mem_init))
+<P><STRONG><a name="[2c9]"></a>_lv_mem_init</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, lv_mem.o(i._lv_mem_init))
 <BR><BR>[Called By]<UL><LI><a href="#[2c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_init
 </UL>
 
@@ -5276,7 +5276,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[37b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
 
-<P><STRONG><a name="[37b]"></a>$Super$$main</STRONG> (Thumb, 174 bytes, Stack size 16 bytes, main.o(i.main))
+<P><STRONG><a name="[37b]"></a>$Super$$main</STRONG> (Thumb, 172 bytes, Stack size 16 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 920<LI>Call Chain = $Super$$main &rArr; lv_ex_label_1 &rArr; lv_label_create &rArr; lv_label_set_text &rArr; lv_label_refr_text &rArr; lv_obj_set_height &rArr; lv_obj_set_size &rArr; lv_obj_realign &rArr; lv_obj_align_mid &rArr; obj_align_mid_core &rArr; lv_obj_set_y &rArr; lv_obj_set_pos &rArr; lv_obj_invalidate &rArr; lv_obj_invalidate_area &rArr; lv_obj_area_is_visible &rArr; lv_obj_get_disp &rArr; lv_obj_get_screen &rArr; lv_obj_get_parent &rArr; lv_debug_log_error &rArr; _lv_memcpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_startup
@@ -6316,7 +6316,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[98]"></a>led_blink_thread</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, main.o(i.led_blink_thread))
+<P><STRONG><a name="[98]"></a>led_blink_thread</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, main.o(i.led_blink_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = led_blink_thread &rArr; rt_thread_mdelay &rArr; rt_thread_sleep &rArr; rt_timer_start &rArr; rt_object_get_type &rArr; rt_assert_handler &rArr; rt_kprintf &rArr; rt_vsnprintf &rArr; print_number
 </UL>
 <BR>[Calls]<UL><LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_mdelay
@@ -6335,7 +6335,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[2a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_ex_label_1
 </UL>
 
-<P><STRONG><a name="[9a]"></a>lvgl_task_thread</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, main.o(i.lvgl_task_thread))
+<P><STRONG><a name="[9a]"></a>lvgl_task_thread</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main.o(i.lvgl_task_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = lvgl_task_thread &rArr; rt_thread_mdelay &rArr; rt_thread_sleep &rArr; rt_timer_start &rArr; rt_object_get_type &rArr; rt_assert_handler &rArr; rt_kprintf &rArr; rt_vsnprintf &rArr; print_number
 </UL>
 <BR>[Calls]<UL><LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_mdelay
@@ -6343,7 +6343,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[99]"></a>lvgl_tick_thread</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main.o(i.lvgl_tick_thread))
+<P><STRONG><a name="[99]"></a>lvgl_tick_thread</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.lvgl_tick_thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 276<LI>Call Chain = lvgl_tick_thread &rArr; rt_thread_mdelay &rArr; rt_thread_sleep &rArr; rt_timer_start &rArr; rt_object_get_type &rArr; rt_assert_handler &rArr; rt_kprintf &rArr; rt_vsnprintf &rArr; print_number
 </UL>
 <BR>[Calls]<UL><LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_mdelay

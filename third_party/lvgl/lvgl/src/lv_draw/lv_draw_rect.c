@@ -121,7 +121,7 @@ void lv_draw_rect(const lv_area_t * coords, const lv_area_t * clip, const lv_dra
     draw_outline(coords, clip, dsc);
 #endif
 
-    LV_ASSERT_MEM_INTEGRITY();
+    //LV_ASSERT_MEM_INTEGRITY();
 }
 
 /**

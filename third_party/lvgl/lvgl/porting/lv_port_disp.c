@@ -81,7 +81,7 @@ void lv_port_disp_init(void)
      * */
 
 #define EXAMPLE 2
-
+    
 #if  ( EXAMPLE == 1 )
     /* Example for 1) */
     static lv_disp_buf_t disp_buf_1;
@@ -92,8 +92,8 @@ void lv_port_disp_init(void)
 #if  ( EXAMPLE == 2 )
     /* Example for 2) */
     static lv_disp_buf_t disp_buf_2;
-    static lv_color_t buf2_1[LV_HOR_RES_MAX * 10];                        /*A buffer for 10 rows*/
-    static lv_color_t buf2_2[LV_HOR_RES_MAX * 10];                        /*An other buffer for 10 rows*/
+    SECTION("CCRAM") static lv_color_t buf2_1[LV_HOR_RES_MAX * 10];                        /*A buffer for 10 rows*/
+    SECTION("CCRAM") static lv_color_t buf2_2[LV_HOR_RES_MAX * 10];                        /*An other buffer for 10 rows*/
     lv_disp_buf_init(&disp_buf_2, buf2_1, buf2_2, LV_HOR_RES_MAX * 10);   /*Initialize the display buffer*/
 #endif
 

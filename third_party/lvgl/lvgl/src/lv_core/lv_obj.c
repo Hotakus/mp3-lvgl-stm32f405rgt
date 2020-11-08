@@ -4506,7 +4506,7 @@ static bool style_prop_is_cacheble(lv_style_property_t prop)
     case LV_STYLE_TEXT_BLEND_MODE:
     case LV_STYLE_VALUE_BLEND_MODE:
         return true;
-        break;
+//        break;
     default:
         return false;
     }

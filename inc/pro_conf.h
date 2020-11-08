@@ -1,3 +1,13 @@
+/************************************************
+ * @file pro_conf.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-09
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #ifndef PRO_CONF_H
 #define PRO_CONF_H
 
@@ -65,6 +75,7 @@ extern "C" {
 #define DEBUG_PRINT     rt_kprintf
 #define DELAY_MS        rt_thread_mdelay
 #elif USER_USE_RTTHREAD == 0
+#define SECTION(x) __attribute__((section(x)))
 #define DEBUG_PRINT     printf
 #define DELAY_MS        delay_ms
 #endif
