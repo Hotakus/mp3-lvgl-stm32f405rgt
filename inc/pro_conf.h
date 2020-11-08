@@ -22,11 +22,11 @@ extern "C" {
 /* USER USE screen */
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
-// USER_USE_SCR == 2 : tft_1.44_inch
-#define USE_SCR_IPS_133_INCH    0
-#define USE_SCR_LCD_2_INCH      1
-#define USE_SCR_TFT_144_INCH    2
-#define USER_USE_SCR      USE_SCR_TFT_144_INCH
+// USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
+#define USE_SCR_IPS_133_INCH                0
+#define USE_SCR_LCD_2_INCH                  1
+#define USE_SCR_LCD_144_ST7735_144_INCH     2
+#define USER_USE_SCR      USE_SCR_LCD_144_ST7735_144_INCH
 
 /* 延时函数时钟源 */
 #define DELAY_SRC_SYSTICK  0

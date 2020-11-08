@@ -45,7 +45,7 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
     
     fres = f_opendir( &dir, path );
     if ( fres != FR_OK ) {
-        printf( "open dir: '%s' error.\n", path );
+        DEBUG_PRINT( "open dir: '%s' error.\n", path );
         return fres;
     }
     while ( 1 ) {
@@ -55,10 +55,10 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
             if ( opt&SCAN_OPT_NO_HIDEN && fno.fattrib&AM_HID )
                 continue;
             if ( opt&SCAN_OPT_CUR_DIR || SCAN_OPT_ALL )
-                printf("%s/%s\n", path, fno.fname);
+                DEBUG_PRINT("%s/%s\n", path, fno.fname);
             else {
                 tail = strlen(path);
-                sprintf(&pathBuf[tail], "/%s", fno.fname);
+                DEBUG_PRINT(&pathBuf[tail], "/%s", fno.fname);
                 fres = scan_catalog( pathBuf , SCAN_OPT_NO_HIDEN );                    /* Enter the directory */
                 if ( fres != FR_OK ) break;
                 pathBuf[tail] = 0;
@@ -67,7 +67,7 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
             if ( opt&SCAN_OPT_NO_HIDEN ) 
                 if ( fno.fattrib&AM_HID ) 
                     continue;
-            printf("%s/%s (size: %d)\n", path, fno.fname, fno.fsize );
+            DEBUG_PRINT("%s/%s (size: %d)\n", path, fno.fname, fno.fsize );
         }
     }
     
@@ -84,11 +84,11 @@ FRESULT show_element_info( TCHAR *path )
     
     switch ( fr ) {
     case FR_OK:
-        printf( "Size: %d\n", fno.fsize );
-        printf("Timestamp: %u/%02u/%02u, %02u:%02u\n",
+        DEBUG_PRINT( "Size: %d\n", fno.fsize );
+        DEBUG_PRINT("Timestamp: %u/%02u/%02u, %02u:%02u\n",
                (fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,
                fno.ftime >> 11, fno.ftime >> 5 & 63);
-        printf("Attributes: %c%c%c%c%c\n",
+        DEBUG_PRINT("Attributes: %c%c%c%c%c\n",
                (fno.fattrib & AM_DIR) ? 'D' : '-',
                (fno.fattrib & AM_RDO) ? 'R' : '-',
                (fno.fattrib & AM_HID) ? 'H' : '-',
@@ -96,10 +96,10 @@ FRESULT show_element_info( TCHAR *path )
                (fno.fattrib & AM_ARC) ? 'A' : '-');
         break;
     case FR_NO_FILE:
-        printf("It is not exist.\n");
+        DEBUG_PRINT("It is not exist.\n");
 
     default:
-        printf("An error occured. (%d)\n", fr);
+        DEBUG_PRINT("An error occured. (%d)\n", fr);
     }
     return fr;
 }
@@ -115,22 +115,23 @@ void fatfs_test( char *dev )
     strcat( buf, ":" );
     
     test_fr[0] = f_mount( &test_fs[0], buf, 1 );
+
     if ( test_fr[0] != FR_OK ) {
-        printf( "test dev mounted error. (%d)\n\r", test_fr[0] );
-        printf( "you want to do mkfs ? ( y/n )\n\r" );
+        DEBUG_PRINT( "test dev mounted error. (%d)\n\r", test_fr[0] );
+        DEBUG_PRINT( "you want to do mkfs ? ( y/n )\n\r" );
         u8 input = 0;
         fflush(stdout);
         fflush(stdin);
         input = getchar();
-        printf( "input: %c.\n\r", input );
+        DEBUG_PRINT( "input: %c.\n\r", input );
         if ( input == 'y' ) {
-            printf( "mkfs start.\n\r" );
+            DEBUG_PRINT( "mkfs start.\n\r" );
             test_fr[0] = f_mkfs( buf, 0, ws, FF_MAX_SS );
             if ( test_fr[0] != FR_OK ) {
-                printf( "test dev mkfs error. (%d)\n\r", test_fr[0] );
+                DEBUG_PRINT( "test dev mkfs error. (%d)\n\r", test_fr[0] );
                 goto test_done;
             } else {
-                printf( "test dev mkfs successfully.\n\r" );
+                DEBUG_PRINT( "test dev mkfs successfully.\n\r" );
             }
         } else if ( input == 'n' ) {
             goto test_done;
@@ -140,16 +141,12 @@ void fatfs_test( char *dev )
     u32 total_size;
     u32 free_size;
     exf_getfree( buf, &total_size, &free_size );
-    printf( "total size: %d kb\n\r", total_size );
-    printf( "free size : %d kb\n\r", free_size );
+    DEBUG_PRINT( "total size: %d kb\n\r", total_size );
+    DEBUG_PRINT( "free size : %d kb\n\r", free_size );
     
 test_done:
     f_mount( NULL, buf, 0 );
-    printf( "test done.\n\r" );
+    DEBUG_PRINT( "test done.\n\r" );
 }
-
-
-
-
 
 

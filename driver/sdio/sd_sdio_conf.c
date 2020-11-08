@@ -96,10 +96,8 @@ u32 Clock_End()
 #define BLOCK_SIZE 512       /* Block Size in Bytes */
 #define NUMBER_OF_BLOCKS 100 /* For Multi Blocks operation (Read/Write) */
 #define MULTI_BUFFER_SIZE (BLOCK_SIZE * NUMBER_OF_BLOCKS)
-uint8_t aBuffer_Block_Tx[BLOCK_SIZE];
-uint8_t aBuffer_Block_Rx[BLOCK_SIZE];
-uint8_t aBuffer_MultiBlock_Tx[MULTI_BUFFER_SIZE];
-uint8_t aBuffer_MultiBlock_Rx[MULTI_BUFFER_SIZE];
+uint8_t aBuffer_MultiBlock_Tx[MULTI_BUFFER_SIZE] = {0};
+uint8_t aBuffer_MultiBlock_Rx[MULTI_BUFFER_SIZE] = {0};
 void SD_MultiBlockTest(void)
 {
     double wtime, rtime;
@@ -107,11 +105,12 @@ void SD_MultiBlockTest(void)
     double wspeed, rspeed;
 
     SD_Error Status;
+    
     /* Fill the buffer to send */
     Fill_Buffer(aBuffer_MultiBlock_Tx, MULTI_BUFFER_SIZE, 0x0);
 
     TIM5_Int_Init();
-    //SD_HighSpeed();
+    SD_HighSpeed();
 
     if (Status == SD_OK)
     {
@@ -122,8 +121,7 @@ void SD_MultiBlockTest(void)
 
         /* Check if the Transfer is finished */
         Status = SD_WaitWriteOperation();
-        while (SD_GetStatus() != SD_TRANSFER_OK)
-            ;
+        while (SD_GetStatus() != SD_TRANSFER_OK);
 
         wtime = (float)Clock_End();
         wsec = wtime / 1000000;
@@ -138,8 +136,7 @@ void SD_MultiBlockTest(void)
 
         /* Check if the Transfer is finished */
         Status = SD_WaitReadOperation();
-        while (SD_GetStatus() != SD_TRANSFER_OK)
-            ;
+        while (SD_GetStatus() != SD_TRANSFER_OK);
 
         rtime = (float)Clock_End();
         rsec = rtime / 1000000;
@@ -156,13 +153,14 @@ void SD_MultiBlockTest(void)
     if (TransferStatus2 == PASSED)
     {
         DEBUG_PRINT("m ok\n");
-        printf("sd write %04f s\n", wsec);
-        printf("sd read %04f s\n", rsec);
-        printf("sd write speed %04f MiB/s\n", wspeed / 1024);
-        printf("sd read speed %04f MiB/s\n", rspeed / 1024);
     }
     else
     {
         DEBUG_PRINT("m err\n");
     }
+    printf("sd write %0.4f s\n", wsec);
+    printf("sd read %0.4f s\n", rsec);
+    printf("sd write speed %0.4f MiB/s\n", wspeed / 1024);
+    printf("sd read speed %0.4f MiB/s\n", rspeed / 1024);
 }
+

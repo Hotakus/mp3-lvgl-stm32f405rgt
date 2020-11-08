@@ -191,7 +191,7 @@ static __I uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6
           of STM32F429x/439x devices.
      
       (#) PLLSAI clocked by (HSI or HSE), used to generate an accurate clock to SAI 
-          interface and LCD TFT controller available only for STM32F42xxx/43xxx/446xx/469xx/479xx devices.
+          interface and LCD LCD_144_ST7735 controller available only for STM32F42xxx/43xxx/446xx/469xx/479xx devices.
   
       (#) CSS (Clock security system), once enable and if a HSE clock failure occurs 
          (HSE used directly or through PLL as System clock source), the System clock

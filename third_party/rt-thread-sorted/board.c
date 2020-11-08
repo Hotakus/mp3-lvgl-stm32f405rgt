@@ -9,6 +9,8 @@
  * 2018-11-12     Ernest Chen  modify copyright
  */
 #include "stm32f4xx_conf.h"
+#include "sd_sdio_conf.h"
+#include "pro_conf.h"
 #include <stdint.h>
 #include <rthw.h>
 #include <rtthread.h>
@@ -45,7 +47,7 @@ static uint32_t _SysTick_Config(rt_uint32_t ticks)
 }
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
-#define RT_HEAP_SIZE 2048
+#define RT_HEAP_SIZE 4096
 static uint32_t rt_heap[RT_HEAP_SIZE];     // heap default size: 4K(1024 * 4)
 RT_WEAK void *rt_heap_begin_get(void)
 {
@@ -117,6 +119,18 @@ void rt_hw_console_output(const char *str)
     }
 }
 
+
+#include "ff_user.h"
+
+/************************************************
+ * @brief cmd for msh
+ ************************************************/
+/************************************************
+ * @brief test cmd for msh
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 void test( int argc, const char **args )
 {
     if ( argc == 1 )
@@ -125,4 +139,19 @@ void test( int argc, const char **args )
         rt_kprintf( "%s\n",  args[1] );
 }
 MSH_CMD_EXPORT( test, test );
+
+
+void sd_fatfs_test( int argc, char **args )
+{
+    DEBUG_PRINT( "into fatfs test.\n" );
+    fatfs_test( "SD_SDIO" );
+}
+MSH_CMD_EXPORT( sd_fatfs_test, RT_NULL );
+
+void spiflash_fatfs_test( int argc, char **args )
+{
+    DEBUG_PRINT( "into fatfs test.\n" );
+    fatfs_test( "SPIF" );
+}
+MSH_CMD_EXPORT( spiflash_fatfs_test, RT_NULL );
 

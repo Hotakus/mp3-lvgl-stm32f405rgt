@@ -431,7 +431,7 @@ typedef struct
 /** 
   * @brief   AF 14 selection  
   */
-#define GPIO_AF_LTDC          ((uint8_t)0x0E)  /* LCD-TFT Alternate Function mapping */
+#define GPIO_AF_LTDC          ((uint8_t)0x0E)  /* LCD-LCD_144_ST7735 Alternate Function mapping */
 #if defined(STM32F413_423xx)
 #define GPIO_AF14_RNG         ((uint8_t)0x0E)  /* RNG Alternate Function mapping  */
 #endif /* STM32F413_423xx */

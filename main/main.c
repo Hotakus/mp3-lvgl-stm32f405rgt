@@ -5,7 +5,7 @@ static rt_thread_t threadx[APP_THREAD_NUM] = {RT_NULL};
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
-#define LED_BLINK_STACK_SIZE    128                 // 线程栈大小
+#define LED_BLINK_STACK_SIZE    512                 // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      1                   // 线程优先级
 static rt_thread_t *led_blink_t = &threadx[0];      // 从线程堆分配线程
@@ -30,12 +30,8 @@ static void device_init( void )
 //    usart_conf( USART1, 2000000 );
 //    delay_init();
     
-    //w25qxx_init();
-    
-    //fatfs_test( "SD_SDIO" );
-    sd_sdio_init();
-    SD_MultiBlockTest();
-    
+    w25qxx_init();
+    fatfs_test( "SD_SDIO" );
 }
 
  
@@ -47,6 +43,7 @@ int main ()
     led_conf( GPIOA, GPIO_Pin_8 );
     led_on( GPIOA, GPIO_Pin_8 );
     
+
     rt_thread_t t = rt_thread_find( "main" );
     
     DEBUG_PRINT( "current thread: %s.\n", t->name );
