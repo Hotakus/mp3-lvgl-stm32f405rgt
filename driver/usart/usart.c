@@ -1,6 +1,7 @@
 #include "usart.h"
 #include "nvic_conf.h"
 #include "dma_conf.h"
+#include <rtthread.h>
 
 static void usart_gpio( void ) {
     GPIO_InitTypeDef uio;
@@ -18,7 +19,7 @@ static void usart_gpio( void ) {
     
 }
 
-void usart_conf( USART_TypeDef* USARTx, u32 baudRate ) {
+void usart_conf( USART_TypeDef* USARTx, u32 baud_rate ) {
     USART_InitTypeDef us_s;
     
     usart_gpio();
@@ -26,7 +27,7 @@ void usart_conf( USART_TypeDef* USARTx, u32 baudRate ) {
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_USART1, ENABLE );
     
     us_s.USART_Mode                 = USART_Mode_Tx | USART_Mode_Rx;
-    us_s.USART_BaudRate             = baudRate;
+    us_s.USART_BaudRate             = baud_rate;
     us_s.USART_WordLength           = USART_WordLength_8b;
     us_s.USART_Parity               = USART_Parity_No;
     us_s.USART_StopBits             = USART_StopBits_1;
@@ -44,6 +45,25 @@ void usart_conf( USART_TypeDef* USARTx, u32 baudRate ) {
 
 }
 
+void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate )
+{
+    USART_InitTypeDef us_s;
+    
+    usart_gpio();
+
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_USART1, ENABLE );
+    
+    us_s.USART_Mode                 = USART_Mode_Tx | USART_Mode_Rx;
+    us_s.USART_BaudRate             = baud_rate;
+    us_s.USART_WordLength           = USART_WordLength_8b;
+    us_s.USART_Parity               = USART_Parity_No;
+    us_s.USART_StopBits             = USART_StopBits_1;
+    us_s.USART_HardwareFlowControl  = USART_HardwareFlowControl_None;
+    USART_Init( USARTx, &us_s );
+    USART_Cmd( USARTx, ENABLE );
+}
+INIT_BOARD_EXPORT(rt_usart_conf);
+
 void my_putc( u8 ch ) 
 {
     while ( !( USART1->SR & USART_FLAG_TC ) );
@@ -58,6 +78,9 @@ u8 my_getc( void )
 
 PUTCHAR_PROTOTYPE 
 {
+    if ( ch == '\n' ) {
+        my_putc( '\r' );
+    }
     my_putc( (u8)ch );
     return ch;
 }

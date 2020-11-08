@@ -1,113 +1,168 @@
 
 #include "sd_sdio_conf.h"
-#include "stm324xg_eval.h"
 #include <string.h>
+#include "pro_conf.h"
 
 u8 conf_flag = 0;
 
 static void sdio_nvic_configuration(void)
 {
-  NVIC_InitTypeDef NVIC_InitStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* Configure the NVIC Preemption Priority Bits */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    /* Configure the NVIC Preemption Priority Bits */
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
-  NVIC_InitStructure.NVIC_IRQChannel = SDIO_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-  NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-  NVIC_Init(&NVIC_InitStructure);  
+    NVIC_InitStructure.NVIC_IRQChannel = SDIO_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+    NVIC_InitStructure.NVIC_IRQChannel = SD_SDIO_DMA_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_Init(&NVIC_InitStructure);
 }
 
 SD_Error sd_sdio_init(void)
 {
-    if ( !conf_flag ) {
+    if (!conf_flag)
+    {
         sdio_nvic_configuration();
         conf_flag = 1;
     }
     return SD_Init();
 }
 
-
-typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
+typedef enum
+{
+    FAILED = 0,
+    PASSED = !FAILED
+} TestStatus;
 
 static void Fill_Buffer(uint8_t *pBuffer, uint32_t BufferLength, uint32_t Offset)
 {
-  uint16_t index = 0;
+    uint16_t index = 0;
 
-  /* Put in global buffer same values */
-  for (index = 0; index < BufferLength; index++)
-  {
-    pBuffer[index] = index + Offset;
-  }
+    /* Put in global buffer same values */
+    for (index = 0; index < BufferLength; index++)
+    {
+        pBuffer[index] = index + Offset;
+    }
 }
 
-static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength)
+static TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint32_t BufferLength)
 {
-  while (BufferLength--)
-  {
-    if (*pBuffer1 != *pBuffer2)
+    while (BufferLength--)
     {
-      return FAILED;
+        if (*pBuffer1 != *pBuffer2)
+        {
+            return FAILED;
+        }
+
+        pBuffer1++;
+        pBuffer2++;
     }
 
-    pBuffer1++;
-    pBuffer2++;
-  }
-
-  return PASSED;
+    return PASSED;
 }
 
-#define BLOCK_SIZE            512 /* Block Size in Bytes */
-#define NUMBER_OF_BLOCKS      5  /* For Multi Blocks operation (Read/Write) */
-#define MULTI_BUFFER_SIZE    (BLOCK_SIZE * NUMBER_OF_BLOCKS)
-uint8_t aBuffer_Block_Tx[BLOCK_SIZE]; 
+void TIM5_Int_Init(void)
+{
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+
+    TIM_TimeBaseInitStructure.TIM_Period = 1000000;
+    TIM_TimeBaseInitStructure.TIM_Prescaler = 83;
+    TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+
+    TIM_TimeBaseInit(TIM5, &TIM_TimeBaseInitStructure);
+}
+
+void Clock_Start()
+{
+    TIM5->CNT = 0x00;
+    TIM_Cmd(TIM5, ENABLE);
+}
+
+u32 Clock_End()
+{
+    u32 result;
+    result = TIM5->CNT;
+    TIM_Cmd(TIM5, DISABLE);
+    return result;
+}
+
+#define BLOCK_SIZE 512       /* Block Size in Bytes */
+#define NUMBER_OF_BLOCKS 100 /* For Multi Blocks operation (Read/Write) */
+#define MULTI_BUFFER_SIZE (BLOCK_SIZE * NUMBER_OF_BLOCKS)
+uint8_t aBuffer_Block_Tx[BLOCK_SIZE];
 uint8_t aBuffer_Block_Rx[BLOCK_SIZE];
 uint8_t aBuffer_MultiBlock_Tx[MULTI_BUFFER_SIZE];
 uint8_t aBuffer_MultiBlock_Rx[MULTI_BUFFER_SIZE];
 void SD_MultiBlockTest(void)
 {
+    double wtime, rtime;
+    double wsec, rsec;
+    double wspeed, rspeed;
+
     SD_Error Status;
-  /* Fill the buffer to send */
-  Fill_Buffer(aBuffer_MultiBlock_Tx, MULTI_BUFFER_SIZE, 0x0);
+    /* Fill the buffer to send */
+    Fill_Buffer(aBuffer_MultiBlock_Tx, MULTI_BUFFER_SIZE, 0x0);
 
-  if (Status == SD_OK)
-  {
-    /* Write multiple block of many bytes on address 0 */
-    Status = SD_WriteMultiBlocks(aBuffer_MultiBlock_Tx, 0, BLOCK_SIZE, NUMBER_OF_BLOCKS);
-    
-    /* Check if the Transfer is finished */
-    Status = SD_WaitWriteOperation();
-    while(SD_GetStatus() != SD_TRANSFER_OK);
-  }
+    TIM5_Int_Init();
+    //SD_HighSpeed();
 
-  if (Status == SD_OK)
-  {
-    /* Read block of many bytes from address 0 */
-    Status = SD_ReadMultiBlocks(aBuffer_MultiBlock_Rx, 0, BLOCK_SIZE, NUMBER_OF_BLOCKS);
-    
-    /* Check if the Transfer is finished */
-    Status = SD_WaitReadOperation();
-    while(SD_GetStatus() != SD_TRANSFER_OK);
-  }
+    if (Status == SD_OK)
+    {
+        Clock_Start();
 
-  /* Check the correctness of written data */
-  TestStatus TransferStatus2;
-  if (Status == SD_OK)
-  {
-    TransferStatus2 = Buffercmp(aBuffer_MultiBlock_Tx, aBuffer_MultiBlock_Rx, MULTI_BUFFER_SIZE);
-  }
-  
-  if(TransferStatus2 == PASSED)
-  {
-    printf( "m ok\n" );
-  }
-  else
-  {
-    printf( "m err\n" );  
-  }
+        /* Write multiple block of many bytes on address 0 */
+        Status = SD_WriteMultiBlocks(aBuffer_MultiBlock_Tx, 0, BLOCK_SIZE, NUMBER_OF_BLOCKS);
+
+        /* Check if the Transfer is finished */
+        Status = SD_WaitWriteOperation();
+        while (SD_GetStatus() != SD_TRANSFER_OK)
+            ;
+
+        wtime = (float)Clock_End();
+        wsec = wtime / 1000000;
+        wspeed = 50.0 / wsec;
+    }
+
+    if (Status == SD_OK)
+    {
+        Clock_Start();
+        /* Read block of many bytes from address 0 */
+        Status = SD_ReadMultiBlocks(aBuffer_MultiBlock_Rx, 0, BLOCK_SIZE, NUMBER_OF_BLOCKS);
+
+        /* Check if the Transfer is finished */
+        Status = SD_WaitReadOperation();
+        while (SD_GetStatus() != SD_TRANSFER_OK)
+            ;
+
+        rtime = (float)Clock_End();
+        rsec = rtime / 1000000;
+        rspeed = 50.0 / rsec;
+    }
+
+    /* Check the correctness of written data */
+    TestStatus TransferStatus2;
+    if (Status == SD_OK)
+    {
+        TransferStatus2 = Buffercmp(aBuffer_MultiBlock_Tx, aBuffer_MultiBlock_Rx, MULTI_BUFFER_SIZE);
+    }
+
+    if (TransferStatus2 == PASSED)
+    {
+        DEBUG_PRINT("m ok\n");
+        printf("sd write %04f s\n", wsec);
+        printf("sd read %04f s\n", rsec);
+        printf("sd write speed %04f MiB/s\n", wspeed / 1024);
+        printf("sd read speed %04f MiB/s\n", rspeed / 1024);
+    }
+    else
+    {
+        DEBUG_PRINT("m err\n");
+    }
 }
-

@@ -22,7 +22,9 @@
 #define DEV_USB		    3	/* Example: Map USB MSD to physical drive 3 */
 
 #if USER_USE_SD_NUM == 1
-SD_CardInfo card_info;
+SD_CardInfo card_info = {
+    .CardType = 0xff,
+};
 #elif USER_USE_SD_NUM == 2
 SD_CardInfo card_info;
 #endif
@@ -70,22 +72,24 @@ DSTATUS disk_initialize (
         do {
             sd_err = sd_sdio_init();
             if ( sd_err != SD_OK ) {
-                printf( "SD init retry %d. (%d)\n", retry, sd_err );
+                printf( "SD init retry %d. (%d)\n\r", retry, sd_err );
             }
         } while ( --retry && (sd_err != SD_OK) );
         if ( sd_err != SD_OK )
             return STA_NOINIT;
-        printf( "SD init successfully.\n" );
+        printf( "SD init successfully.\n\r" );
         /* Get Card info */
-        do {
-            sd_err = SD_GetCardInfo( &card_info );
-            if ( sd_err != SD_OK ) {
-                printf( "SD get info retry %d. (%d)\n", retry, sd_err );
-            }
-        } while ( --retry && (sd_err != SD_OK) );
-        if ( sd_err != SD_OK ) 
-            return STA_NOINIT;
-        printf( "SD get info successfully.\n" );
+        if ( card_info.CardType == 0xff ) {
+            do {
+                sd_err = SD_GetCardInfo( &card_info );
+                if ( sd_err != SD_OK ) {
+                    printf( "SD get info retry %d. (%d)\n\r", retry, sd_err );
+                }
+            } while ( --retry && (sd_err != SD_OK) );
+            if ( sd_err != SD_OK ) 
+                return STA_NOINIT;
+            printf( "SD get info successfully.\n\r" );
+        }
         SD_HighSpeed();
         return !STA_NOINIT;
 	case DEV_USB :
@@ -127,7 +131,7 @@ DRESULT disk_read (
         SD_WaitReadOperation();
         while(SD_GetStatus() != SD_TRANSFER_OK);
         if ( sd_err != SD_OK ) {
-            printf( "SD read retry %d. (%d)\n", retry, sd_err );
+            printf( "SD read retry %d. (%d)\n\r", retry, sd_err );
             return RES_PARERR;
         }
         return RES_OK;
@@ -157,7 +161,7 @@ DRESULT disk_write (
 	int res;
     u8 retry = 5;
     SD_Error sd_err;
-
+    
 	switch (pdrv) {
 	case DEV_SPIF :
         res = w25qxx_writ_sector( (u8*)buff, sector, count );
@@ -165,13 +169,17 @@ DRESULT disk_write (
 		return RES_OK;
 	case DEV_SD_SDIO :
         sd_err = SD_WriteMultiBlocks(
-            (uint8_t*)buff, \
-            sector<<9, \
+            (u8*)buff, \
+            (sector<<9), \
             card_info.CardBlockSize, \
             count \
         );
         SD_WaitWriteOperation();
         while(SD_GetStatus() != SD_TRANSFER_OK);
+        if ( sd_err != SD_OK ) {
+            printf( "SD writ retry %d. (%d)\n\r", retry, sd_err );
+            return RES_PARERR;
+        }
         return RES_OK;
 	case DEV_USB :
 		return RES_PARERR;

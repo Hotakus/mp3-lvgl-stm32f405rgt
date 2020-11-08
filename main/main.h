@@ -22,7 +22,7 @@ extern "C" {
 #include "ff_user.h"
 
 /* functions */
-void device_init( void );
+
 
 
 #ifdef __cplusplus

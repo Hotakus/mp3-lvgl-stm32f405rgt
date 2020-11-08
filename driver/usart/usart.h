@@ -12,7 +12,7 @@
 #define USART1_PIN_TX   GPIO_Pin_9
 
 #ifdef __GNUC__
-    /* With GCC/RAISONANCE, small DEBUG_PRINT (option LD Linker->Libraries->Small DEBUG_PRINT
+    /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
      set to 'Yes') calls __io_putchar() */
     #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
@@ -22,10 +22,11 @@
 
 /* functions */
 void usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
+void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
 void my_putc( u8 ch );
 u8 my_getc( void );
 void usart_dma_tx( u8 *buf );
 
-#define DEBUG_PRINT     printf
+#define printf     printf
 
 #endif

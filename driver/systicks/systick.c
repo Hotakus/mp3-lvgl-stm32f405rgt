@@ -18,7 +18,7 @@ void delay_init( void ) {
     TIM_TimeBaseInitTypeDef tim_s;
     RCC_APB1PeriphClockCmd( RCC_APB1Periph_TIM4, ENABLE );
     tim_s.TIM_CounterMode       = TIM_CounterMode_Up;
-    tim_s.TIM_Period            = (SystemCoreClock) / (msDiv*usDiv) - 1;
+    tim_s.TIM_Period            = (SystemCoreClock>>1) / (msDiv*usDiv) - 1;
     tim_s.TIM_Prescaler         = 0;
     tim_s.TIM_ClockDivision     = TIM_CKD_DIV1;
     TIM_TimeBaseInit( TIM4, &tim_s );

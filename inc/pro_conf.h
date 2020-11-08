@@ -5,7 +5,10 @@
 extern "C" {
 #endif
 
+#define DEBUG_PRINT rt_kprintf
+
 /* USER USE */
+#define USER_USE_RTTHREAD   1
 #define USER_USE_LVGL       0
 #define USER_USE_UCOS       0
 #define USER_USE_FATFS      1
@@ -55,6 +58,10 @@ extern "C" {
 #include "ff.h"
 #endif
 
+#if USER_USE_RTTHREAD == 1
+#include <rtthread.h>
+#define APP_THREAD_NUM  5       // 定义APP最大线程
+#endif
 
 /* SD configuration */
 #define USER_ON_SD          1

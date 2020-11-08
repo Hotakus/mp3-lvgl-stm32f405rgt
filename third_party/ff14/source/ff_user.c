@@ -45,7 +45,7 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
     
     fres = f_opendir( &dir, path );
     if ( fres != FR_OK ) {
-        DEBUG_PRINT( "open dir: '%s' error.\n", path );
+        printf( "open dir: '%s' error.\n", path );
         return fres;
     }
     while ( 1 ) {
@@ -55,7 +55,7 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
             if ( opt&SCAN_OPT_NO_HIDEN && fno.fattrib&AM_HID )
                 continue;
             if ( opt&SCAN_OPT_CUR_DIR || SCAN_OPT_ALL )
-                DEBUG_PRINT("%s/%s\n", path, fno.fname);
+                printf("%s/%s\n", path, fno.fname);
             else {
                 tail = strlen(path);
                 sprintf(&pathBuf[tail], "/%s", fno.fname);
@@ -67,7 +67,7 @@ FRESULT scan_catalog( TCHAR *path, u8 opt ) {
             if ( opt&SCAN_OPT_NO_HIDEN ) 
                 if ( fno.fattrib&AM_HID ) 
                     continue;
-            DEBUG_PRINT("%s/%s (size: %d)\n", path, fno.fname, fno.fsize );
+            printf("%s/%s (size: %d)\n", path, fno.fname, fno.fsize );
         }
     }
     
@@ -84,11 +84,11 @@ FRESULT show_element_info( TCHAR *path )
     
     switch ( fr ) {
     case FR_OK:
-        DEBUG_PRINT( "Size: %d\n", fno.fsize );
-        DEBUG_PRINT("Timestamp: %u/%02u/%02u, %02u:%02u\n",
+        printf( "Size: %d\n", fno.fsize );
+        printf("Timestamp: %u/%02u/%02u, %02u:%02u\n",
                (fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,
                fno.ftime >> 11, fno.ftime >> 5 & 63);
-        DEBUG_PRINT("Attributes: %c%c%c%c%c\n",
+        printf("Attributes: %c%c%c%c%c\n",
                (fno.fattrib & AM_DIR) ? 'D' : '-',
                (fno.fattrib & AM_RDO) ? 'R' : '-',
                (fno.fattrib & AM_HID) ? 'H' : '-',
@@ -96,10 +96,10 @@ FRESULT show_element_info( TCHAR *path )
                (fno.fattrib & AM_ARC) ? 'A' : '-');
         break;
     case FR_NO_FILE:
-        DEBUG_PRINT("It is not exist.\n");
+        printf("It is not exist.\n");
 
     default:
-        DEBUG_PRINT("An error occured. (%d)\n", fr);
+        printf("An error occured. (%d)\n", fr);
     }
     return fr;
 }
@@ -116,21 +116,21 @@ void fatfs_test( char *dev )
     
     test_fr[0] = f_mount( &test_fs[0], buf, 1 );
     if ( test_fr[0] != FR_OK ) {
-        printf( "test dev mounted error. (%d)\n", test_fr[0] );
-        printf( "you want to do mkfs ? ( y/n )\n" );
+        printf( "test dev mounted error. (%d)\n\r", test_fr[0] );
+        printf( "you want to do mkfs ? ( y/n )\n\r" );
         u8 input = 0;
         fflush(stdout);
         fflush(stdin);
         input = getchar();
-        printf( "input: %c.\n", input );
+        printf( "input: %c.\n\r", input );
         if ( input == 'y' ) {
-            printf( "mkfs start.\n" );
+            printf( "mkfs start.\n\r" );
             test_fr[0] = f_mkfs( buf, 0, ws, FF_MAX_SS );
             if ( test_fr[0] != FR_OK ) {
-                printf( "test dev mkfs error. (%d)\n", test_fr[0] );
+                printf( "test dev mkfs error. (%d)\n\r", test_fr[0] );
                 goto test_done;
             } else {
-                printf( "test dev mkfs successfully.\n" );
+                printf( "test dev mkfs successfully.\n\r" );
             }
         } else if ( input == 'n' ) {
             goto test_done;
@@ -140,12 +140,12 @@ void fatfs_test( char *dev )
     u32 total_size;
     u32 free_size;
     exf_getfree( buf, &total_size, &free_size );
-    printf( "total size: %d kb\n", total_size );
-    printf( "free size : %d kb\n", free_size );
+    printf( "total size: %d kb\n\r", total_size );
+    printf( "free size : %d kb\n\r", free_size );
     
 test_done:
     f_mount( NULL, buf, 0 );
-    printf( "test done.\n" );
+    printf( "test done.\n\r" );
 }
 
 

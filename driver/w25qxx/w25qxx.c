@@ -115,12 +115,12 @@ void w25qxx_powerUp( void ) {
         }
         status = w25qxx_trans_byte( W25QXX_DUMMY_BYTE );
         W25QXX_CS_SET;
-        //DEBUG_PRINT( "status (%x)\n", status );
+        //printf( "status (%x)\n", status );
     } while ( --retry && (status == W25QXX_DUMMY_BYTE) );
     if ( !retry ) {
-        DEBUG_PRINT( "W25QXX init failed.\n" );
+        printf( "W25QXX init failed.\n" );
     } else {
-        DEBUG_PRINT( "W25QXX init ok. (%x)\n", status );
+        printf( "W25QXX init ok. (%x)\n", status );
     }
     
 }
@@ -140,7 +140,7 @@ void w25qxx_JEDECID( void ) {
         w25qxx.JEDECID |= w25qxx_trans_byte( W25QXX_DUMMY_BYTE );
     }
     if ( w25qxx.JEDECID>>16 == 0xEF ) {
-        DEBUG_PRINT( "W25QXX JEDECID: %x\n", w25qxx.JEDECID );
+        printf( "W25QXX JEDECID: %x\n", w25qxx.JEDECID );
         w25qxx.mType = w25qxx.JEDECID&0xFFFF;
         switch ( w25qxx.mType ) {
             case W25Q256:
@@ -159,14 +159,14 @@ void w25qxx_JEDECID( void ) {
                 w25qxx.pageCnt   = 131072>>4;
                 break;
             default:
-                DEBUG_PRINT( "W25QXX unknown.\n" );
+                printf( "W25QXX unknown.\n" );
                 break;
         }
         w25qxx.sect_cnt  = w25qxx.pageCnt>>4;
         w25qxx.capacity  = w25qxx.pageCnt*w25qxx.pageSize;
-        DEBUG_PRINT( "W25QXX capacity: %d MiB\n", w25qxx.capacity>>20 );
+        printf( "W25QXX capacity: %d MiB\n", w25qxx.capacity>>20 );
     } else {
-        DEBUG_PRINT( "W25QXX JEDECID error. %x\n", w25qxx.JEDECID );
+        printf( "W25QXX JEDECID error. %x\n", w25qxx.JEDECID );
     }
     
     
@@ -201,14 +201,14 @@ u8 w25qxx_erase_sector ( u32 ssect, u32 sectLen ) {
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         W25QXX_CS_SET;
         w25qxx_writ_disable();        // 写失能
-        DEBUG_PRINT( "erase: %d\n", ssect );
+        printf( "erase: %d\n", ssect );
         ssect++;
     }
     return W25QXX_OPT_OK;
 }
 
 u8 w25qxx_erase_chip( void ) {
-    DEBUG_PRINT( "please wait a moment.\n" );
+    printf( "please wait a moment.\n" );
     if ( w25qxx_wait_busy() == W25QXX_TIMEOUT ) return W25QXX_TIMEOUT;
     w25qxx_writ_enable();        // 写使能
     W25QXX_CS_CLR;
@@ -216,7 +216,7 @@ u8 w25qxx_erase_chip( void ) {
     W25QXX_CS_SET;
     if ( w25qxx_wait_busy() == W25QXX_TIMEOUT ) return W25QXX_TIMEOUT;
     w25qxx_writ_disable();        // 写失能
-    DEBUG_PRINT( "W25QXX chip erased.\n" );
+    printf( "W25QXX chip erased.\n" );
     return W25QXX_OPT_OK;
 }
 /*---------------------------------------------------------------------------------------------------------*/
@@ -227,7 +227,7 @@ u8 w25qxx_read_page( u8* pRecBuf , u32 page, u32 cnt ) {
     
     if ( cnt == 0 ) return W25QXX_OPT_FAILED;
     if ( w25qxx_wait_busy() == W25QXX_TIMEOUT ){
-        DEBUG_PRINT( "read page timeout.\n" );
+        printf( "read page timeout.\n" );
         return W25QXX_TIMEOUT;
     }
 
@@ -261,7 +261,7 @@ u8 w25qxx_writ_page( u8* pSendBuf, u32 page, u32 cnt ) {
     
     if ( cnt == 0 ) return W25QXX_OPT_FAILED;
     if ( w25qxx_wait_busy() == W25QXX_TIMEOUT ){
-        DEBUG_PRINT( "write page timeout.\n" );
+        printf( "write page timeout.\n" );
         return W25QXX_TIMEOUT;
     }
     /* 循环写入 */

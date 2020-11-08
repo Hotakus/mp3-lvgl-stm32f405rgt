@@ -10,27 +10,25 @@
 /*
 *   USART1 RX ISR function
 */
-#define USART_BUF_SIZE  256
-u8 usart_rx_buf[USART_BUF_SIZE] = {0};
-u16 urp = 0;
+u8 cur_char;
 
 void USART1_IRQHandler( void ) {
-    
 #if USER_USE_UCOS == 1
     OSIntEnter();
 #endif
     if ( USART_GetITStatus( USART1, USART_IT_RXNE ) ) {
-        usart_rx_buf[urp] = my_getc();
-        my_putc( usart_rx_buf[urp] );
-        urp++;
-        
+        cur_char = my_getc();
+        //my_putc( cur_char );
         USART_ClearITPendingBit( USART1, USART_IT_RXNE );
+    }
+    if(USART_GetFlagStatus( USART1, USART_FLAG_ORE ) != RESET)
+    {
+        USART_ClearFlag( USART1, USART_FLAG_ORE );
     }
     
 #if USER_USE_UCOS == 1
     OSIntExit();
 #endif
-    
 }
 
 /*

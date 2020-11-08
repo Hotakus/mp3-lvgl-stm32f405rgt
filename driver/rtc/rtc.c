@@ -3,7 +3,7 @@
 
 void rtc_init( void ) 
 {
-    DEBUG_PRINT( "rtc_check: %x\n", rtc_check() );
+    printf( "rtc_check: %x\n", rtc_check() );
 }
 
 RTC_STAT rtc_check( void ) 

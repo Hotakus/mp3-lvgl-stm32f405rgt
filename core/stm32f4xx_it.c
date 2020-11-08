@@ -61,6 +61,7 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
+#if USER_USE_RTTHREAD == 0
 void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
@@ -68,6 +69,31 @@ void HardFault_Handler(void)
   {
   }
 }
+
+/**
+  * @brief  This function handles PendSVC exception.
+  * @param  None
+  * @retval None
+  */
+void PendSV_Handler(void)
+{
+}
+
+/**
+  * @brief  This function handles SysTick Handler.
+  * @param  None
+  * @retval None
+  */
+void SysTick_Handler(void)
+{
+#if USER_USE_UCOS == 0
+    ticks_decrease();
+#endif
+    
+}
+
+#endif
+
 
 /**
   * @brief  This function handles Memory Manage exception.
@@ -126,27 +152,6 @@ void DebugMon_Handler(void)
 {
 }
 
-/**
-  * @brief  This function handles PendSVC exception.
-  * @param  None
-  * @retval None
-  */
-void PendSV_Handler(void)
-{
-}
-
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
-void SysTick_Handler(void)
-{
-#if USER_USE_UCOS == 0
-    ticks_decrease();
-#endif
-    
-}
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
