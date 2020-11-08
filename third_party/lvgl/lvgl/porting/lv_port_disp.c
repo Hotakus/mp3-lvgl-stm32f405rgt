@@ -19,7 +19,7 @@
 /**********************
  *      TYPEDEFS
  **********************/
-extern pScreen scrFunc;
+
 
 /**********************
  *  STATIC PROTOTYPES
@@ -32,10 +32,16 @@ static void gpu_blend(lv_disp_drv_t * disp_drv, lv_color_t * dest, const lv_colo
 static void gpu_fill(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, lv_coord_t dest_width,
         const lv_area_t * fill_area, lv_color_t color);
 #endif
+/**********************
+ *  VARIABLES
+ **********************/
+
 
 /**********************
  *  STATIC VARIABLES
  **********************/
+static scr_opr_handler *scr;
+
 
 /**********************
  *      MACROS
@@ -148,7 +154,8 @@ void lv_port_disp_init(void)
 static void disp_init(void)
 {
     /*You code here*/
-    scrFunc.screen_init();
+    scr = scr_get_opr_handler();
+    scr->init();
 }
 
 /* Flush the content of the internal buffer the specific area on the display
@@ -158,17 +165,20 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 {
     /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
 
-    //int32_t x;
-    //int32_t y;
+    u16 x, y;
     
-    u8 x;
-    u8 y;
+    u16 x1 = area->x1;
+    u16 y1 = area->y1;
+    u16 x2 = area->x2;
+    u16 y2 = area->y2;
     
-    for(y = area->y1; y <= area->y2; y++) {
-        for(x = area->x1; x <= area->x2; x++) {
+    scr->set_region( x1, y1, x2, y2 );
+    
+    for(y = y1; y <= y2; y++) {
+        for(x = x1; x <= x2; x++) {
             /* Put a pixel to the display. For example: */
             /* put_px(x, y, *color_p)*/
-            scrFunc.screen_draw_point( x, y, color_p->full );
+            scr->send_pixel_dat( color_p->full );
             color_p++;
         }
     }

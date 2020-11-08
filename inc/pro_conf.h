@@ -7,7 +7,7 @@ extern "C" {
 
 /* USER USE */
 #define USER_USE_RTTHREAD   1
-#define USER_USE_LVGL       0
+#define USER_USE_LVGL       1
 #define USER_USE_UCOS       0
 #define USER_USE_FATFS      1
 
@@ -43,6 +43,7 @@ extern "C" {
 #if USER_USE_LVGL == 1
 /* lvgl */
 #include "lvgl.h"
+#include "lv_port_disp.h"
 #endif
 
 #if USER_USE_APP == 1

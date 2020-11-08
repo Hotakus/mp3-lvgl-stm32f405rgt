@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_indev.h"
 #include "main.h"
-#include "key.h"
+//#include "key.h"
 
 /*********************
  *      DEFINES
@@ -312,7 +312,7 @@ static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y)
 static void keypad_init(void)
 {
     /*Your code comes here*/
-    key_init();
+   // key_init();
 }
 
 /* Will be called by the library to read the mouse */
@@ -366,29 +366,29 @@ static bool keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 static uint32_t keypad_get_key(void)
 {
     /*Your code comes here*/
-    u32 key_value_f = 0;
-    
-    u32 key_value1 = GET_KEY_STATUS;          //
-    //delay_ms(100);                            //    去抖动,非常必须
-    u32 key_value2 = GET_KEY_STATUS;          //
-    
-    /* 计算并获取最终值 */
-    key_value_f = ( key_value1 == key_value2 )?( key_value1 ):( key_value2 );
-    
-    switch ( key_value_f ) {
-        case KEY_NEXT:
-            return 1;
-        case KEY_SURE:
-            return 5;
-        case KEY_PREV:
-            return 2;
-        case KEY_NEXT|KEY_SURE:         // To simulate LV_KEY_RIGHT
-            return 4;
-        case KEY_PREV|KEY_SURE:         // To simulate LV_KEY_LEFT
-            return 3;
-        case KEY_PREV|KEY_NEXT:         // To simulate LV_KEY_ESC
-            return 6;
-    }
+//    u32 key_value_f = 0;
+//    
+//    u32 key_value1 = GET_KEY_STATUS;          //
+//    //delay_ms(100);                            //    去抖动,非常必须
+//    u32 key_value2 = GET_KEY_STATUS;          //
+//    
+//    /* 计算并获取最终值 */
+//    key_value_f = ( key_value1 == key_value2 )?( key_value1 ):( key_value2 );
+//    
+//    switch ( key_value_f ) {
+//        case KEY_NEXT:
+//            return 1;
+//        case KEY_SURE:
+//            return 5;
+//        case KEY_PREV:
+//            return 2;
+//        case KEY_NEXT|KEY_SURE:         // To simulate LV_KEY_RIGHT
+//            return 4;
+//        case KEY_PREV|KEY_SURE:         // To simulate LV_KEY_LEFT
+//            return 3;
+//        case KEY_PREV|KEY_NEXT:         // To simulate LV_KEY_ESC
+//            return 6;
+//    }
     
     return 0;
 }
