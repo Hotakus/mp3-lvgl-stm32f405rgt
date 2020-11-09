@@ -56,6 +56,41 @@ static void lvgl_task_thread( void *param )
     }
 }
 
+/* sd卡检测线程 */
+#define SD_DETECT_THREAD_NAME   "sd_detect"         // 线程名
+#define SD_DETECT_STACK_SIZE    2048                // 线程栈大小
+#define SD_DETECT_TIME_SLICE    10                   // 线程时间片
+#define SD_DETECT_PRIOROTY      9                  // 线程优先级
+#define SD_DETECT_TIMER_TIME    1000              // 定时时间
+static rt_thread_t *sd_detect_th = &threadx[3];      // 从线程堆分配线程
+u8 sd_detect_flag = 0;
+extern FATFS   fs_lv[2];
+extern FRESULT fr_lv[2];
+static void sd_detect_thread( void *param )
+{
+    param = param;
+    while ( 1 ) {
+        if ( SD_Detect() == SD_PRESENT ) {
+            if ( !sd_detect_flag ) {
+                sd_detect_flag = 1;
+                fr_lv[SD_SDIO_INDEX] = f_mount( &fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1 );
+                if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+                    DEBUG_PRINT( "sd card mounted error. (%d)\n", fr_lv[SD_SDIO_INDEX] );
+                    return;
+                }
+                DEBUG_PRINT( "sd card inserted.\n" );
+            }
+        } else {
+            if( sd_detect_flag ) {
+                sd_detect_flag = 0;
+                fr_lv[SD_SDIO_INDEX] = FR_NOT_READY;
+                DEBUG_PRINT( "sd card ejected.\n" );
+            }
+        }
+        rt_thread_mdelay(SD_DETECT_TIMER_TIME);
+    }
+}
+
 int app_create_task( void )
 {
     /*  创建led闪烁线程 */
@@ -100,4 +135,19 @@ int app_create_task( void )
     else
         return -1;
 
+    /*  创建sd卡检测线程 */
+    *sd_detect_th = rt_thread_create( 
+        SD_DETECT_THREAD_NAME,        /*线程名字*/                    
+        sd_detect_thread,             /*线程入口函数*/
+        RT_NULL,                      /*线程入口函数参数*/
+        SD_DETECT_STACK_SIZE,         /*线程栈大小*/
+        SD_DETECT_PRIOROTY ,          /*线程优先级*/
+        SD_DETECT_TIME_SLICE          /*线程时间片*/
+    );               
+    if(sd_detect_th !=RT_NULL)
+        rt_thread_startup (*sd_detect_th);
+    else
+        return -1;
+    
+    return 0;
 }

@@ -22,15 +22,11 @@ extern "C" {
 /*********************
  *      DEFINES
  *********************/
-#define SPIF_INDEX  0
-#define SD_INDEX    1
+#define SPIF_INDEX       1
+#define SD_SDIO_INDEX    0
 /**********************
  *      TYPEDEFS
  **********************/
- typedef enum {
-    DEVICE_SPI_FLASH  = 0,
-    DEVICE_SD_CARD       ,
- } FS_DEVICE;
 
 /**********************
  * GLOBAL PROTOTYPES

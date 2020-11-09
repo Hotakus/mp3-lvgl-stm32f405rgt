@@ -20,8 +20,17 @@ void lv_ex_label_1(void)
     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 0);
 }
 
+void lv_ex_spinner_1(void)
+{
+/*Create a Preloader object*/
+    lv_obj_t * preload = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload, 50, 50);
+    lv_obj_align(preload, NULL, LV_ALIGN_CENTER, 0, 0);
+}
+
 void app_create_ui(void)
 {
     lv_ex_label_1();
+    lv_ex_spinner_1();
 }
 

@@ -35,7 +35,7 @@
 
 // <o>the stack size of main thread<1-4086>
 //  <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE     2048
+#define RT_MAIN_THREAD_STACK_SIZE     1024
 
 // </h>
 
@@ -75,7 +75,7 @@
 #define RT_TIMER_THREAD_PRIO        4
 // <o>The stack size of timer thread <0-8192>
 //  <i>Default: 512
-#define RT_TIMER_THREAD_STACK_SIZE  256
+#define RT_TIMER_THREAD_STACK_SIZE  512
 // </e>
 
 // <h>IPC(Inter-process communication) Configuration
@@ -139,7 +139,7 @@
     // <o>the stack of finsh thread <1-4096>
     //  <i>the stack of finsh thread
     //  <i>Default: 4096  (4096Byte)
-    #define FINSH_THREAD_STACK_SIZE     512
+    #define FINSH_THREAD_STACK_SIZE     4096
     // <o>the history lines of finsh thread <1-32>
     //  <i>the history lines of finsh thread
     //  <i>Default: 5

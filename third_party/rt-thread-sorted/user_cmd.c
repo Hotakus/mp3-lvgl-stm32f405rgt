@@ -65,21 +65,54 @@ void scr_test( int argc, char **args )
 MSH_CMD_EXPORT( scr_test, RT_NULL );
 
 #if USER_USE_FATFS == 1
+/* declared in "lv_port_fs.c" */
+extern FATFS   fs_lv[2];
+extern FRESULT fr_lv[2];
 void fatfs( int argc, char **args )
 {
-    if ( argc != 2 )
+    if ( argc < 1 ) {
+        if ( fr_lv[SD_SDIO_INDEX] != FR_OK )
+            lv_port_fs_init(); 
+        fatfs_test( "SD_SDIO" );
+        return;
+    } else if ( argc > 2 )
         return;
     DEBUG_PRINT( "into fatfs test.\n" );
     fatfs_test( args[1] );
 }
 MSH_CMD_EXPORT( fatfs, RT_NULL );
+
+void mount( int argc, char **args )
+{
+    if ( argc != 2 ) {
+        DEBUG_PRINT( "usage: mount {dev}\n" );
+        return;
+    }
+
+    if ( !strcmp( args[1], "SD_SDIO" ) ) {
+        if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+            fr_lv[SD_SDIO_INDEX] = f_mount( &fs_lv[SD_SDIO_INDEX], "SD_SDIO:",  1 );
+        }
+    } else if ( !strcmp( args[1], "SPIF" ) ) {
+        if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+            fr_lv[SPIF_INDEX] = f_mount( &fs_lv[SPIF_INDEX], "SPIF:",  1 );
+        }
+    }
+    
+}
+MSH_CMD_EXPORT( mount, RT_NULL );
+
+void umount( int argc, char **args )
+{
+    
+}
+MSH_CMD_EXPORT( umount, RT_NULL );
 #endif
 
 #if USER_USE_LVGL == 1
-void reinit_lvgl( int argc, char **args )
+void lvgl_fs_remount( int argc, char **args )
 {
-    lv_port_indev_init();       // 输入设备初始化
     lv_port_fs_init();          // 文件系统设备初始化
 }
-MSH_CMD_EXPORT( reinit_lvgl, RT_NULL );
+MSH_CMD_EXPORT( lvgl_fs_remount, RT_NULL );
 #endif

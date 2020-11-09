@@ -44,7 +44,7 @@ void lcd_gpio( void ) {
 
     spi_s.SPI_Mode              = SPI_Mode_Master;
     spi_s.SPI_FirstBit          = SPI_FirstBit_MSB;
-    spi_s.SPI_Direction         = SPI_Direction_2Lines_FullDuplex;
+    spi_s.SPI_Direction         = SPI_Direction_Tx;
     spi_s.SPI_DataSize          = SPI_DataSize_8b;
     spi_s.SPI_NSS               = SPI_NSS_Soft;
     spi_s.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2; 

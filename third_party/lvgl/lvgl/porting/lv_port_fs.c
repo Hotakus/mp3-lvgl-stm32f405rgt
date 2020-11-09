@@ -1,5 +1,5 @@
 /**
- * @file lv_port_fs_templ.c
+ * @file lv_port_fs.c
  *
  */
 
@@ -55,6 +55,9 @@ static lv_fs_res_t fs_dir_close (lv_fs_drv_t * drv, void * rddir_p);
  *  STATIC VARIABLES
  **********************/
 
+FATFS   fs_lv[2]    = {NULL, NULL};
+FRESULT fr_lv[2]    = {FR_NOT_READY, FR_NOT_READY};
+static u8 dev_conf_status[2] = {0};
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -79,6 +82,9 @@ void lv_port_fs_init(void)
      * Register the file system interface  in LittlevGL
      *--------------------------------------------------*/
 
+    if ( dev_conf_status[SD_SDIO_INDEX] == 1 && dev_conf_status[SPIF_INDEX] == 1 )
+        return;
+    
     /* Add a simple drive to open images */
     lv_fs_drv_t fs_drv[2];
     lv_fs_drv_init(&fs_drv[0]);
@@ -86,78 +92,80 @@ void lv_port_fs_init(void)
 
     /*Set up fields...*/
     /* For SD card */
-    fs_drv[0].file_size     = sizeof(file_t);
-    fs_drv[0].letter        = 'S';
-    fs_drv[0].open_cb       = fs_open;
-    fs_drv[0].close_cb      = fs_close;
-    fs_drv[0].read_cb       = fs_read;
-    fs_drv[0].write_cb      = fs_write;
-    fs_drv[0].seek_cb       = fs_seek;
-    fs_drv[0].tell_cb       = fs_tell;
-    fs_drv[0].free_space_cb = fs_free;
-    fs_drv[0].size_cb       = fs_size;
-    fs_drv[0].remove_cb     = fs_remove;
-    fs_drv[0].rename_cb     = fs_rename;
-    fs_drv[0].trunc_cb      = fs_trunc;
-    fs_drv[0].rddir_size    = sizeof(dir_t);
-    fs_drv[0].dir_close_cb  = fs_dir_close;
-    fs_drv[0].dir_open_cb   = fs_dir_open;
-    fs_drv[0].dir_read_cb   = fs_dir_read;
-    lv_fs_drv_register(&fs_drv[0]);
+    if ( dev_conf_status[SD_SDIO_INDEX] != 1 ) {
+        fs_drv[0].file_size     = sizeof(file_t);
+        fs_drv[0].letter        = 'S';
+        fs_drv[0].open_cb       = fs_open;
+        fs_drv[0].close_cb      = fs_close;
+        fs_drv[0].read_cb       = fs_read;
+        fs_drv[0].write_cb      = fs_write;
+        fs_drv[0].seek_cb       = fs_seek;
+        fs_drv[0].tell_cb       = fs_tell;
+        fs_drv[0].free_space_cb = fs_free;
+        fs_drv[0].size_cb       = fs_size;
+        fs_drv[0].remove_cb     = fs_remove;
+        fs_drv[0].rename_cb     = fs_rename;
+        fs_drv[0].trunc_cb      = fs_trunc;
+        fs_drv[0].rddir_size    = sizeof(dir_t);
+        fs_drv[0].dir_close_cb  = fs_dir_close;
+        fs_drv[0].dir_open_cb   = fs_dir_open;
+        fs_drv[0].dir_read_cb   = fs_dir_read;
+        lv_fs_drv_register(&fs_drv[0]);
+        dev_conf_status[SD_SDIO_INDEX] = 1;
+    }
     
     /* For SPI FLASH */
-    fs_drv[1].file_size     = sizeof(file_t);
-    fs_drv[1].letter        = 'F';
-    fs_drv[1].open_cb       = fs_open;
-    fs_drv[1].close_cb      = fs_close;
-    fs_drv[1].read_cb       = fs_read;
-    fs_drv[1].write_cb      = fs_write;
-    fs_drv[1].seek_cb       = fs_seek;
-    fs_drv[1].tell_cb       = fs_tell;
-    fs_drv[1].free_space_cb = fs_free;
-    fs_drv[1].size_cb       = fs_size;
-    fs_drv[1].remove_cb     = fs_remove;
-    fs_drv[1].rename_cb     = fs_rename;
-    fs_drv[1].trunc_cb      = fs_trunc;
-    fs_drv[1].rddir_size    = sizeof(dir_t);
-    fs_drv[1].dir_close_cb  = fs_dir_close;
-    fs_drv[1].dir_open_cb   = fs_dir_open;
-    fs_drv[1].dir_read_cb   = fs_dir_read;
-    lv_fs_drv_register(&fs_drv[1]);
-    
+    if ( dev_conf_status[SPIF_INDEX] != 1 ) {
+        fs_drv[1].file_size     = sizeof(file_t);
+        fs_drv[1].letter        = 'F';
+        fs_drv[1].open_cb       = fs_open;
+        fs_drv[1].close_cb      = fs_close;
+        fs_drv[1].read_cb       = fs_read;
+        fs_drv[1].write_cb      = fs_write;
+        fs_drv[1].seek_cb       = fs_seek;
+        fs_drv[1].tell_cb       = fs_tell;
+        fs_drv[1].free_space_cb = fs_free;
+        fs_drv[1].size_cb       = fs_size;
+        fs_drv[1].remove_cb     = fs_remove;
+        fs_drv[1].rename_cb     = fs_rename;
+        fs_drv[1].trunc_cb      = fs_trunc;
+        fs_drv[1].rddir_size    = sizeof(dir_t);
+        fs_drv[1].dir_close_cb  = fs_dir_close;
+        fs_drv[1].dir_open_cb   = fs_dir_open;
+        fs_drv[1].dir_read_cb   = fs_dir_read;
+        lv_fs_drv_register(&fs_drv[1]);
+        dev_conf_status[SPIF_INDEX] = 1;
+    }
 }
 
 /**********************
  *   STATIC FUNCTIONS
  **********************/
 
-FATFS   fs_lv[2]    = {NULL, NULL};
-FRESULT fr_lv[2]    = {!FR_OK, !FR_OK};
-
 /* Initialize your Storage device and File system. */
 static void fs_init(void) 
 {
     /*E.g. for FatFS initalize the SD card and FatFS itself*/
     /*You code here*/
-    if ( fr_lv[0] != FR_OK ) {
-        fr_lv[0] = f_mount( &fs_lv[0], "SD_SDIO:", 1 );
-        if ( fr_lv[0] != FR_OK ) {
-            DEBUG_PRINT( "sd card mount error. (fr: %d)\n", fr_lv[0] );
-            if ( fr_lv[0] == FR_NOT_READY )
+    if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+        fr_lv[SD_SDIO_INDEX] = f_mount( &fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1 );
+        if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+            DEBUG_PRINT( "sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX] );
+            if ( fr_lv[SD_SDIO_INDEX] == FR_NOT_READY )
                 DEBUG_PRINT( "no sd card.\n" );
         }
         DEBUG_PRINT( "sd card mount successfully.\n" );
     }
 
-    if ( fr_lv[1] != FR_OK ) {
-        fr_lv[1] = f_mount( &fs_lv[1], "SPIF:", 1 );
-        if ( fr_lv[1] != FR_OK ) {
-            DEBUG_PRINT( "spi flash mount error. (fr: %d)\n", fr_lv[1] );
+    if ( fr_lv[SPIF_INDEX] != FR_OK ) {
+        fr_lv[SPIF_INDEX] = f_mount( &fs_lv[SPIF_INDEX], "SPIF:", 1 );
+        if ( fr_lv[SPIF_INDEX] != FR_OK ) {
+            DEBUG_PRINT( "spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX] );
         }
         DEBUG_PRINT( "spi flash mount successfully.\n" );
     }
     
-    if ( fr_lv[0] == FR_OK ) {
+    if ( fr_lv[SD_SDIO_INDEX] == FR_OK ) {
         SD_CardInfo sd_info;
         SD_GetCardInfo( &sd_info );
         printf("sd card info:\n");
@@ -179,15 +187,9 @@ static void fs_init(void)
             (sd_info.SD_cid.ManufactDate>>4)&0x0f
         );
     }
-    
-    
-}
-
-/* unmount devices */
-void fs_deinit( FS_DEVICE device )
-{
 
 }
+
 
 /**
  * Open a file
