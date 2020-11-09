@@ -4,14 +4,14 @@
 #include "stm32f4xx_conf.h"
 #include "led.h"
 
-static rt_thread_t threadx[APP_THREAD_NUM] = {RT_NULL};
+static rt_thread_t u_threadx[APP_THREAD_NUM] = {RT_NULL};
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
 #define LED_BLINK_STACK_SIZE    128                  // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      20                  // 线程优先级
-static rt_thread_t *led_blink_th = &threadx[0];      // 从线程堆分配线程
+static rt_thread_t *led_blink_th = &u_threadx[0];      // 从线程堆分配线程
 static void led_blink_thread( void *param )
 {
     param = param;
@@ -31,7 +31,7 @@ static void led_blink_thread( void *param )
 #define LVGL_TICK_STACK_SIZE    128                // 线程栈大小
 #define LVGL_TICK_TIME_SLICE    5                   // 线程时间片
 #define LVGL_TICK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *lvgl_tick_th = &threadx[1];      // 从线程堆分配线程
+static rt_thread_t *lvgl_tick_th = &u_threadx[1];      // 从线程堆分配线程
 static void lvgl_tick_thread( void *param )
 {
     param = param;
@@ -46,7 +46,7 @@ static void lvgl_tick_thread( void *param )
 #define LVGL_TASK_STACK_SIZE    2048                // 线程栈大小
 #define LVGL_TASK_TIME_SLICE    10                   // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *lvgl_task_th = &threadx[2];      // 从线程堆分配线程
+static rt_thread_t *lvgl_task_th = &u_threadx[2];      // 从线程堆分配线程
 static void lvgl_task_thread( void *param )
 {
     param = param;
@@ -58,11 +58,11 @@ static void lvgl_task_thread( void *param )
 
 /* sd卡检测线程 */
 #define SD_DETECT_THREAD_NAME   "sd_detect"         // 线程名
-#define SD_DETECT_STACK_SIZE    2048                // 线程栈大小
+#define SD_DETECT_STACK_SIZE    512                // 线程栈大小
 #define SD_DETECT_TIME_SLICE    10                   // 线程时间片
 #define SD_DETECT_PRIOROTY      9                  // 线程优先级
 #define SD_DETECT_TIMER_TIME    1000              // 定时时间
-static rt_thread_t *sd_detect_th = &threadx[3];      // 从线程堆分配线程
+static rt_thread_t *sd_detect_th = &u_threadx[3];      // 从线程堆分配线程
 u8 sd_detect_flag = 0;
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
@@ -73,10 +73,12 @@ static void sd_detect_thread( void *param )
         if ( SD_Detect() == SD_PRESENT ) {
             if ( !sd_detect_flag ) {
                 sd_detect_flag = 1;
-                fr_lv[SD_SDIO_INDEX] = f_mount( &fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1 );
                 if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
-                    DEBUG_PRINT( "sd card mounted error. (%d)\n", fr_lv[SD_SDIO_INDEX] );
-                    return;
+                    fr_lv[SD_SDIO_INDEX] = f_mount( &fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1 );
+                    if ( fr_lv[SD_SDIO_INDEX] != FR_OK ) {
+                        DEBUG_PRINT( "sd card mounted error. (%d)\n", fr_lv[SD_SDIO_INDEX] );
+                        goto rt_delay;
+                    }
                 }
                 DEBUG_PRINT( "sd card inserted.\n" );
             }
@@ -87,6 +89,7 @@ static void sd_detect_thread( void *param )
                 DEBUG_PRINT( "sd card ejected.\n" );
             }
         }
+        rt_delay:
         rt_thread_mdelay(SD_DETECT_TIMER_TIME);
     }
 }

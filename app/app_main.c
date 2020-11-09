@@ -9,13 +9,17 @@ static void lvgl_init( void )
     lv_port_fs_init();          // 文件系统设备初始化
 }
 
-void app_init( void )
+int app_init( void )
 {
     lvgl_init();
     
-    app_create_ui();
+#if defined(USE_LV_EX)
+    app_create_example();
+#endif
     
     app_create_task();
+    
+    return 0;
     
 }
 INIT_APP_EXPORT(app_init);  // 导出为APP，rtthread启动时会自动调用这个函数执行

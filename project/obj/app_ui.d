@@ -35,6 +35,7 @@
 .\project\obj\app_ui.o: lib\inc\stm32f4xx_dac.h
 .\project\obj\app_ui.o: lib\inc\stm32f4xx_dcmi.h
 .\project\obj\app_ui.o: lib\inc\stm32f4xx_fsmc.h
+.\project\obj\app_ui.o: app\app_typedef.h
 .\project\obj\app_ui.o: inc\pro_conf.h
 .\project\obj\app_ui.o: .\third_party\lvgl\lvgl\lvgl.h
 .\project\obj\app_ui.o: .\third_party\lvgl\lvgl\src/lv_misc/lv_log.h

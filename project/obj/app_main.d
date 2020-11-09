@@ -37,6 +37,7 @@
 .\project\obj\app_main.o: lib\inc\stm32f4xx_fsmc.h
 .\project\obj\app_main.o: app\app_task.h
 .\project\obj\app_main.o: app\app_ui.h
+.\project\obj\app_main.o: app\app_typedef.h
 .\project\obj\app_main.o: inc\pro_conf.h
 .\project\obj\app_main.o: .\third_party\lvgl\lvgl\lvgl.h
 .\project\obj\app_main.o: .\third_party\lvgl\lvgl\src/lv_misc/lv_log.h

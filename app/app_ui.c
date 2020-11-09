@@ -1,6 +1,10 @@
 #include "app_ui.h"
 #include "pro_conf.h"
 
+/**********************
+ *  STATIC PROTOTYPES
+ **********************/
+
 void lv_ex_label_1(void)
 {
 //    lv_obj_t * label1 = lv_label_create(lv_scr_act(), NULL);
@@ -28,9 +32,19 @@ void lv_ex_spinner_1(void)
     lv_obj_align(preload, NULL, LV_ALIGN_CENTER, 0, 0);
 }
 
-void app_create_ui(void)
+#if defined(USE_LV_EX)
+void app_create_example(void)
 {
     lv_ex_label_1();
     lv_ex_spinner_1();
+}
+#endif
+
+void app_create_ui( const u8 *ui_name )
+{
+
+    
+    
+    
 }
 
