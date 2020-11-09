@@ -36,6 +36,7 @@
                 "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\lvgl\\lvgl\\src\\lv_misc",
                 "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\lvgl\\lvgl\\src\\lv_themes",
                 "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\lvgl\\lvgl\\src\\lv_widgets",
+                "d:\\project\\stm32\\STM32F405\\mp3\\driver\\file_thrans_with_fatfs",
                 "D:\\SOFTWARE\\keil\\ARM\\ARMCC\\include",
                 "D:\\SOFTWARE\\keil\\ARM\\ARMCC\\include\\rw",
                 "d:\\project\\stm32\\STM32F405\\mp3\\core\\startup",

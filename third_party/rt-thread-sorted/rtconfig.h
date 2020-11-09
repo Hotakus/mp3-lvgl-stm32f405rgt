@@ -10,8 +10,6 @@
 #endif //RTE_USING_FINSH
 #endif //(__CC_ARM) || (__CLANG_ARM)
 
-//#define RT_USING_DEVICE
-
 // <<< Use Configuration Wizard in Context Menu >>>
 // <h>Basic Configuration
 // <o>Maximal level of thread priority <8-256>
@@ -52,6 +50,9 @@
 // #define RT_USING_OVERFLOW_CHECK
 // </c>
 // </h>
+
+#define FINSH_USING_DESCRIPTION
+#define FINSH_USING_SYMTAB
 
 // <h>Hook Configuration
 // <c1>using hook

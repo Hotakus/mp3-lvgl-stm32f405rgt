@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,ARM_MATH_CM4,ARM_MATH_ROUNDING,__TARGET_FPU_VFP,</Define>
               <Undefine></Undefine>
-              <IncludePath>core;inc;lib\inc;main;driver\dma;driver\nvic;driver\sdio;driver\systicks;driver\tim;driver\usart;driver\led;driver\spi;driver\w25qxx;driver\rtc;.\driver\screen;.\driver\screen\lcd_144_st7735;.\app;third_party\ff14\source;.\third_party\rt-thread-sorted\finsh;.\third_party\rt-thread-sorted\include;.\third_party\rt-thread-sorted\include\libc;.\third_party\rt-thread-sorted;.\third_party\lvgl;.\third_party\lvgl\lvgl;.\third_party\lvgl\lvgl\porting;.\third_party\lvgl\lvgl\src\lv_core;.\third_party\lvgl\lvgl\src\lv_draw;.\third_party\lvgl\lvgl\src\lv_font;.\third_party\lvgl\lvgl\src\lv_gpu;.\third_party\lvgl\lvgl\src\lv_hal;.\third_party\lvgl\lvgl\src\lv_misc;.\third_party\lvgl\lvgl\src\lv_themes;.\third_party\lvgl\lvgl\src\lv_widgets</IncludePath>
+              <IncludePath>core;inc;lib\inc;main;driver\dma;driver\nvic;driver\sdio;driver\systicks;driver\tim;driver\usart;driver\led;driver\spi;driver\w25qxx;driver\rtc;.\driver\screen;.\driver\screen\lcd_144_st7735;.\app;third_party\ff14\source;.\third_party\rt-thread-sorted\finsh;.\third_party\rt-thread-sorted\include;.\third_party\rt-thread-sorted\include\libc;.\third_party\rt-thread-sorted;.\third_party\lvgl;.\third_party\lvgl\lvgl;.\third_party\lvgl\lvgl\porting;.\third_party\lvgl\lvgl\src\lv_core;.\third_party\lvgl\lvgl\src\lv_draw;.\third_party\lvgl\lvgl\src\lv_font;.\third_party\lvgl\lvgl\src\lv_gpu;.\third_party\lvgl\lvgl\src\lv_hal;.\third_party\lvgl\lvgl\src\lv_misc;.\third_party\lvgl\lvgl\src\lv_themes;.\third_party\lvgl\lvgl\src\lv_widgets;.\driver\file_thrans_with_fatfs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -885,6 +885,11 @@
               <FileType>1</FileType>
               <FilePath>.\driver\screen\lcd_144_st7735\lcd_144_st7735.c</FilePath>
             </File>
+            <File>
+              <FileName>file_thrans.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\file_thrans_with_fatfs\file_thrans.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -958,7 +963,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rtthread/finsh</GroupName>
+          <GroupName>rtt_nano/finsh</GroupName>
           <Files>
             <File>
               <FileName>cmd.c</FileName>
@@ -1131,7 +1136,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rtthread/kernal</GroupName>
+          <GroupName>rtt_nano/kernal</GroupName>
           <Files>
             <File>
               <FileName>clock.c</FileName>
@@ -1221,7 +1226,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rtthread/user</GroupName>
+          <GroupName>rtt_nano/user</GroupName>
           <Files>
             <File>
               <FileName>board.c</FileName>
@@ -1804,9 +1809,6 @@
               <FilePath>.\third_party\lvgl\lvgl\lvgl.h</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>lvgl/font</GroupName>
         </Group>
       </Groups>
     </Target>

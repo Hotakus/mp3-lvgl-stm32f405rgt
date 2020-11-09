@@ -29,7 +29,7 @@ FRESULT exf_getfree( TCHAR *path, u32 *total, u32 *free ) {
 
 /* 遍历指定目录 */
 char pathBuf[512] = {0};
-FRESULT scan_catalog( TCHAR *path, u8 opt ) {
+FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt ) {
     
     static FILINFO fno;
     static u8 root_flag = 0;
@@ -149,4 +149,26 @@ test_done:
     DEBUG_PRINT( "test done.\n\r" );
 }
 
+
+const char * get_real_path(const char * path)
+{
+    /* Example path: "S:/folder/file.txt"
+     * Leave the letter and the : / \ characters*/
+
+    
+    if ( path == NULL ) 
+        return NULL;
+    /*Ignore the driver letter*/
+    while ( *path != ':' && *path != '\0' )
+        path++;
+
+    while(*path != '\0') {
+        if(*path == ':' || *path == '\\' || *path == '/')
+            path++;
+        else 
+            break;
+    }
+    
+    return path;
+}
 
