@@ -18,8 +18,8 @@ FRESULT exf_getfree( TCHAR *path, u32 *total, u32 *free ) {
         tot_sect = (fs1->n_fatent-2)*fs1->csize;    //得到总扇区数
         fre_sect = fre_clust*fs1->csize;            //得到空闲扇区数
 #if FF_MAX_SS!=512                                  //扇区大小不是512字节,则转换为512字节
-        tot_sect *= fs1->ssize/512;
-        fre_sect *= fs1->ssize/512;
+        tot_sect *= fs1->ssize>>9;
+        fre_sect *= fs1->ssize>>9;
 #endif
         *total = tot_sect>>1;    //单位为KB
         *free  = fre_sect>>1;    //单位为KB
@@ -171,4 +171,26 @@ const char * get_real_path(const char * path)
     
     return path;
 }
+
+
+const char * get_file_name(const char * path)
+{
+    if ( path == NULL ) 
+        return NULL;
+    
+    u8 len = strlen(path);
+    const char *pep = path+len-1;   // path end pointer
+
+    while ( 1 ) {
+        if ( *pep == '/' ) {
+            return pep++;
+        } else {
+            pep--;
+        } 
+    }
+ 
+}
+
+
+
 

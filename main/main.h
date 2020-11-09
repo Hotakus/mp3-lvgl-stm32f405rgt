@@ -31,7 +31,8 @@ extern "C" {
 #include "led.h"
 #include "ff_user.h"
 #include "screen_conf.h"
-
+#include "file_thrans.h"
+    
 /* functions */
 
 

@@ -72,23 +72,23 @@ DSTATUS disk_initialize (
         do {
             sd_err = sd_sdio_init();
             if ( sd_err != SD_OK ) {
-                DEBUG_PRINT( "SD init retry %d. (%d)\n", retry, sd_err );
+                printf( "SD init retry %d. (%d)\n", retry, sd_err );
             }
         } while ( --retry && (sd_err != SD_OK) );
         if ( sd_err != SD_OK )
             return STA_NOINIT;
-        DEBUG_PRINT( "SD init successfully.\n" );
+        printf( "SD init successfully.\n" );
         /* Get Card info */
         if ( card_info.CardType == 0xff ) {
             do {
                 sd_err = SD_GetCardInfo( &card_info );
                 if ( sd_err != SD_OK ) {
-                    DEBUG_PRINT( "SD get info retry %d. (%d)\n", retry, sd_err );
+                    printf( "SD get info retry %d. (%d)\n", retry, sd_err );
                 }
             } while ( --retry && (sd_err != SD_OK) );
             if ( sd_err != SD_OK ) 
                 return STA_NOINIT;
-            DEBUG_PRINT( "SD get info successfully.\n" );
+            printf( "SD get info successfully.\n" );
         }
         SD_HighSpeed();
         return !STA_NOINIT;
@@ -131,7 +131,7 @@ DRESULT disk_read (
         SD_WaitReadOperation();
         while(SD_GetStatus() != SD_TRANSFER_OK);
         if ( sd_err != SD_OK ) {
-            DEBUG_PRINT( "SD read retry %d. (%d)\n\r", retry, sd_err );
+            printf( "SD read retry %d. (%d)\n\r", retry, sd_err );
             return RES_PARERR;
         }
         return RES_OK;
@@ -177,7 +177,7 @@ DRESULT disk_write (
         SD_WaitWriteOperation();
         while(SD_GetStatus() != SD_TRANSFER_OK);
         if ( sd_err != SD_OK ) {
-            DEBUG_PRINT( "SD writ retry %d. (%d)\n\r", retry, sd_err );
+            printf( "SD writ retry %d. (%d)\n\r", retry, sd_err );
             return RES_PARERR;
         }
         return RES_OK;

@@ -19,20 +19,16 @@ typedef enum SD2SPIF_CHECK{
 }SD2SPIF_CHECK;
 
 typedef enum TRANS_STAT{
-    
-    SD2SPIF_TRANS_CHECK_ERR = 0,
-    
-    SD2SPIF_TRANS_STAT_OK,
-    SD2SPIF_TRANS_STAT_ERR,
-    
-    SD2SPIF_SD_PATH_ERR,
-    SD2SPIF_SPIF_PATH_ERR,
-    
+    TRANS_CHECK_ERR = 0,
+    TRANS_STAT_OK,
+    TRANS_STAT_ERR,
+    SD_PATH_ERR,
+    SPIF_PATH_ERR,
 }TRANS_STAT;
 
 /* function */
 
-TRANS_STAT sd2spif( const char *sd_path, const char *spif_path );
+TRANS_STAT file_thrans( const char *sd_path, const char *spif_path );
 
 #ifdef __cplusplus
 }

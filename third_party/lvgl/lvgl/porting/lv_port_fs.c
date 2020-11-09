@@ -153,8 +153,8 @@ static void fs_init(void)
             DEBUG_PRINT( "sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX] );
             if ( fr_lv[SD_SDIO_INDEX] == FR_NOT_READY )
                 DEBUG_PRINT( "no sd card.\n" );
-        }
-        DEBUG_PRINT( "sd card mount successfully.\n" );
+        } else
+            DEBUG_PRINT( "sd card mount successfully.\n" );
     }
 
     if ( fr_lv[SPIF_INDEX] != FR_OK ) {
@@ -165,6 +165,7 @@ static void fs_init(void)
         DEBUG_PRINT( "spi flash mount successfully.\n" );
     }
     
+
     if ( fr_lv[SD_SDIO_INDEX] == FR_OK ) {
         SD_CardInfo sd_info;
         SD_GetCardInfo( &sd_info );

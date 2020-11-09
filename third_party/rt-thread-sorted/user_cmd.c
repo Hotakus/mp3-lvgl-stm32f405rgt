@@ -19,40 +19,19 @@
 #include <stdio.h>
 #include <string.h>
 #include "ff_user.h"
+#include "file_thrans.h"
 
 /************************************************
  * @brief cmd for msh
  ************************************************/
-static void scr_test( int argc, char **args )
-{
-    scr_opr_handler *scr;
-    scr = scr_get_opr_handler();
-
-    if ( argc > 2 )
-        return;
-    if ( argc < 2 )
-        scr->clear( 0xffff );
-    else {
-        switch( *args[1] ) {
-        case 'r':
-            scr->clear( 0xf800 );
-            break;
-        case 'g':
-            scr->clear( 0x07f0 );
-            break;
-        case 'b':
-            scr->clear( 0x001f );
-            break;
-        }
-    }
-   
-}
-MSH_CMD_EXPORT( scr_test, screen test for current screen. );
-
 #if USER_USE_FATFS == 1
 /* declared in "lv_port_fs.c" */
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
+
+char *sd_buf   = "SD_SDIO:/file_thrans.c";
+char *spif_buf = "SPIF:";
+
 static void fatfs( int argc, char **args )
 {
     if ( argc < 1 ) {
@@ -67,18 +46,16 @@ static void fatfs( int argc, char **args )
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
 
-static void list_sd_file(uint8_t argc, char **argv)
+static void list_file(int argc, char **args)
 {
     
-    scan_catalog( "SD_SDIO:", SCAN_OPT_CUR_DIR );
+    scan_catalog( args[1], SCAN_OPT_CUR_DIR );
     
 }
-MSH_CMD_EXPORT(list_sd_file, list files in sd);
+MSH_CMD_EXPORT(list_file, list files in sd);
 
-static FIL fil;
-static FRESULT fres = FR_NOT_READY;
 static char dev_buf[512]  = {0};
-static void cat( int argc, char **args )
+static void rtt_cat( int argc, char **args )
 {
     if ( argc != 2 )
         return;
@@ -86,7 +63,8 @@ static void cat( int argc, char **args )
     u8 index = 0;
     u8 dev_name_len = 0;
     char *path_buf = args[1];
-    
+    static FIL fil;
+    static FRESULT fres = FR_NOT_READY;
     
     while ( *(path_buf+dev_name_len) != ':' ) {
         dev_buf[dev_name_len] = *(path_buf+dev_name_len);
@@ -113,18 +91,28 @@ static void cat( int argc, char **args )
         return;
     }
 
+    
     f_read( &fil, dev_buf, sizeof( dev_buf ), NULL );
     
     f_close( &fil );
-    
 
     char *p = dev_buf;
-    while ( *p++ != '\0' )
-        my_putc( *p );
+    while ( *p != '\0' )
+        my_putc( *p++ );
+}
+MSH_CMD_EXPORT( rtt_cat, show file content );
+
+void rtt_cp( int argc, char **args )
+{
+//    FATFS   fss[2];
+//    FRESULT res[2];
+    
+    rt_kprintf( get_file_name( args[1] ) );
+    
+    file_thrans(0,0);
     
 }
-MSH_CMD_EXPORT( cat, show file content );
-
+MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
 
 #if USER_USE_LVGL == 1
@@ -135,7 +123,7 @@ static void lvgl_fs_remount( int argc, char **args )
 MSH_CMD_EXPORT( lvgl_fs_remount, remount sd and spi flash );
 #endif
 
-static void reboot(uint8_t argc, char **argv)
+static void reboot(int argc, char **args)
 {
     rt_hw_cpu_reset();
 }

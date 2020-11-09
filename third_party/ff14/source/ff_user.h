@@ -28,6 +28,7 @@ FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt );
 FRESULT show_element_info( TCHAR *path );
 
 const char * get_real_path(const char * path);
+const char * get_file_name(const char * path);
 void fatfs_test( char *dev );
 
 #ifdef __cplusplus

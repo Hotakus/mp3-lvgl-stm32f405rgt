@@ -11,6 +11,6 @@
 
 
 /* functions */
-int app_create_task( void );
+int app_init( void );
 
 #endif

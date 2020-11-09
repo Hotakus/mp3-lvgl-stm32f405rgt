@@ -1,12 +1,16 @@
 #include "app_main.h"
 #include "pro_conf.h"
 
+extern FATFS   fs_lv[2];
+extern FRESULT fr_lv[2];
+
 static void lvgl_init( void ) 
 {
     lv_init();
     lv_port_disp_init();        // 显示器初始化
     lv_port_indev_init();       // 输入设备初始化
     lv_port_fs_init();          // 文件系统设备初始化
+
 }
 
 int app_init( void )

@@ -33,7 +33,7 @@
 
 // <o>the stack size of main thread<1-4086>
 //  <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE     1024
+#define RT_MAIN_THREAD_STACK_SIZE     2048
 
 // </h>
 
@@ -51,8 +51,7 @@
 // </c>
 // </h>
 
-#define FINSH_USING_DESCRIPTION
-#define FINSH_USING_SYMTAB
+
 
 // <h>Hook Configuration
 // <c1>using hook
@@ -129,6 +128,7 @@
 // </h>
 
 #if defined(RT_USING_FINSH)
+    #define FINSH_USING_HISTORY
     #define FINSH_USING_MSH
     #define FINSH_USING_MSH_ONLY
     // <h>Finsh Configuration
@@ -140,13 +140,15 @@
     // <o>the stack of finsh thread <1-4096>
     //  <i>the stack of finsh thread
     //  <i>Default: 4096  (4096Byte)
-    #define FINSH_THREAD_STACK_SIZE     4096
+    #define FINSH_THREAD_STACK_SIZE     (8<<10)
     // <o>the history lines of finsh thread <1-32>
     //  <i>the history lines of finsh thread
     //  <i>Default: 5
     #define FINSH_HISTORY_LINES         5
 
     #define FINSH_USING_SYMTAB
+    #define FINSH_USING_DESCRIPTION
+
     // </h>
 #endif
 
