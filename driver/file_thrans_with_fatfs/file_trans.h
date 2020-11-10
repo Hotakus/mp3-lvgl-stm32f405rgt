@@ -22,13 +22,13 @@ typedef enum TRANS_STAT{
     TRANS_CHECK_ERR = 0,
     TRANS_STAT_OK,
     TRANS_STAT_ERR,
-    SD_PATH_ERR,
-    SPIF_PATH_ERR,
+    TRANS_SD_PATH_ERR,
+    TRANS_SPIF_PATH_ERR,
 }TRANS_STAT;
 
 /* function */
 
-TRANS_STAT file_thrans( const char *sd_path, const char *spif_path );
+TRANS_STAT file_trans( const char *sd_path, const char *spif_path );
 
 #ifdef __cplusplus
 }

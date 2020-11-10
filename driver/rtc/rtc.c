@@ -1,9 +1,15 @@
 #include "rtc.h"
 #include "usart.h"
 
+static u8 rtc_conf_flag = 0;
+
 void rtc_init( void ) 
 {
-    printf( "rtc_check: %x\n", rtc_check() );
+    if ( rtc_conf_flag == 0 ) {
+        printf( "rtc_check: %x\n", rtc_check() );
+        rtc_conf_flag = 1;
+    }
+    
 }
 
 RTC_STAT rtc_check( void ) 

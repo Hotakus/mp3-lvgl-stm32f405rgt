@@ -165,7 +165,8 @@ DRESULT disk_write (
 	switch (pdrv) {
 	case DEV_SPIF :
         res = w25qxx_writ_sector( (u8*)buff, sector, count );
-        if ( res ) return RES_PARERR;
+        if ( res ) 
+            return RES_PARERR;
 		return RES_OK;
 	case DEV_SD_SDIO :
         sd_err = SD_WriteMultiBlocks(

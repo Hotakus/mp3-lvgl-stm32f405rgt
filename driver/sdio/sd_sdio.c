@@ -2949,7 +2949,7 @@ void SD_LowLevel_Init(void)
   GPIO_InitTypeDef  GPIO_InitStructure;
 
   /* GPIOC and GPIOD Periph clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOD | SD_DETECT_GPIO_CLK, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA |RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOD | SD_DETECT_GPIO_CLK, ENABLE);
 
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource8, GPIO_AF_SDIO);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource9, GPIO_AF_SDIO);

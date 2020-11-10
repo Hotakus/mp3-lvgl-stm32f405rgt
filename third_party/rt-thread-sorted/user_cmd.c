@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "ff_user.h"
-#include "file_thrans.h"
+#include "file_trans.h"
 
 /************************************************
  * @brief cmd for msh
@@ -29,7 +29,7 @@
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
 
-char *sd_buf   = "SD_SDIO:/file_thrans.c";
+char *sd_buf   = "SD_SDIO:/file_trans.c";
 char *spif_buf = "SPIF:";
 
 static void fatfs( int argc, char **args )
@@ -46,71 +46,106 @@ static void fatfs( int argc, char **args )
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
 
-static void list_file(int argc, char **args)
+static void scan_file(int argc, char **args)
 {
     
     scan_catalog( args[1], SCAN_OPT_CUR_DIR );
     
 }
-MSH_CMD_EXPORT(list_file, list files in sd);
+MSH_CMD_EXPORT(scan_file, list files in sd);
 
-static char dev_buf[512]  = {0};
+static void file_info(int argc, char **args)
+{
+    show_element_info( args[1] );
+}
+MSH_CMD_EXPORT(file_info, get info which file);
+
+
 static void rtt_cat( int argc, char **args )
 {
-    if ( argc != 2 )
-        return;
-
-    u8 index = 0;
-    u8 dev_name_len = 0;
-    char *path_buf = args[1];
-    static FIL fil;
-    static FRESULT fres = FR_NOT_READY;
     
-    while ( *(path_buf+dev_name_len) != ':' ) {
-        dev_buf[dev_name_len] = *(path_buf+dev_name_len);
-        dev_name_len++;
-    }
-
-    rt_kprintf( "open dev : %s\n", dev_buf );
-
-    if ( strcmp( dev_buf, "SD_SDIO" ) == 0 ) {
-        index = SD_SDIO_INDEX;
-        rt_kprintf( "SD_SDIO_INDEX\n" );
-    } else {
-        index = SPIF_INDEX;
-        rt_kprintf( "SPIF_INDEX\n" );
-    }
-
-    if ( fr_lv[index] != FR_OK )
-        return;
+    u32 btr = 0;
+    u32 br = 0;
+    u8 *ch_buf = NULL;
     
-    rt_kprintf( "open file: %s\n", path_buf );
-    fres = f_open( &fil, path_buf, FA_OPEN_EXISTING | FA_READ );
-    if ( fres != FR_OK ) {
-        rt_kprintf( "open file \"%s\" error. (%d)\n", args[2], fres );
+    if ( argc < 2 )
+        rt_kprintf( "usage rtt_cat {file}\n" );
+    else if ( argc == 2 ) {
+        btr = sizeof(ch_buf);
+    } else if ( argc == 3 ) {
+        btr = atoi(args[2]);
+    }
+    ch_buf = (u8*)rt_malloc( sizeof(u8)*btr );
+    
+    FRESULT cat_fres;
+    FIL     cat_fil;
+    
+    cat_fres = f_open( &cat_fil, args[1], FA_READ | FA_OPEN_EXISTING );
+    if ( cat_fres != FR_OK ) {
+        rt_kprintf( "open '%s' error. (%d)\n", get_file_name(args[1]), cat_fres );
+        f_close( &cat_fil );
         return;
     }
-
     
-    f_read( &fil, dev_buf, sizeof( dev_buf ), NULL );
+    cat_fres = f_read( &cat_fil, ch_buf, btr, &br );
+    if ( cat_fres != FR_OK ) {
+        rt_kprintf( "read '%s' error. (%d)\n", get_file_name(args[1]), cat_fres );
+        f_close( &cat_fil );
+        return;
+    }
     
-    f_close( &fil );
-
-    char *p = dev_buf;
-    while ( *p != '\0' )
-        my_putc( *p++ );
+    rt_kprintf( "get %d characters\n", br );
+    
+    if ( !br ) {
+        u8 *pc = ch_buf;
+        while( *pc != '\0' )
+            my_putc( *pc++ );
+    }
+    
+    rt_free( ch_buf );
+    f_close( &cat_fil );
+    
 }
 MSH_CMD_EXPORT( rtt_cat, show file content );
 
+
+extern u8 ws[FF_MAX_SS];
+void test( int argc, char **args )
+{
+    FIL fil_test;
+    FRESULT fres = FR_NOT_READY;
+    
+    if ( args[1][0] == 'K' ) {
+        fres = f_mkfs( "SPIF:", 0, ws, sizeof(ws) );
+        if ( fres != FR_OK ) {
+            rt_kprintf( "f_mkfs fres: %d\n", fres );
+            return;
+        }
+    }
+    
+    if ( args[1][0] == 'F' )
+        fres = f_open( &fil_test, "SPIF:/vimrc", FA_OPEN_EXISTING | FA_READ );
+    if ( args[1][0] == 'S' )
+        fres = f_open( &fil_test, "SD_SDIO:/h.c", FA_OPEN_EXISTING | FA_READ );
+    
+    if ( fres != FR_OK ) {
+        rt_kprintf( "f_open fres: %d\n", fres );
+        return;
+    }
+    
+    
+    rt_kprintf( "seek: %d\n", f_lseek( &fil_test, 0 ) );
+    f_gets( ws, 50, &fil_test );
+    rt_kprintf( "text: %s\n", ws );
+    f_close( &fil_test );
+}
+MSH_CMD_EXPORT( test, copy file );
+
 void rtt_cp( int argc, char **args )
 {
-//    FATFS   fss[2];
-//    FRESULT res[2];
-    
-    rt_kprintf( get_file_name( args[1] ) );
-    
-    file_thrans(0,0);
-    
+    if ( argc != 3 )
+        return;
+    file_trans( args[1] , args[2] );
 }
 MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif

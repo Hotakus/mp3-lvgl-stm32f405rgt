@@ -886,9 +886,9 @@
               <FilePath>.\driver\screen\lcd_144_st7735\lcd_144_st7735.c</FilePath>
             </File>
             <File>
-              <FileName>file_thrans.c</FileName>
+              <FileName>file_trans.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\driver\file_thrans_with_fatfs\file_thrans.c</FilePath>
+              <FilePath>.\driver\file_thrans_with_fatfs\file_trans.c</FilePath>
             </File>
           </Files>
         </Group>

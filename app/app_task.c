@@ -8,7 +8,7 @@ static rt_thread_t u_threadx[APP_THREAD_NUM] = {RT_NULL};
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
-#define LED_BLINK_STACK_SIZE    128                  // 线程栈大小
+#define LED_BLINK_STACK_SIZE    160                  // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      20                  // 线程优先级
 static rt_thread_t *led_blink_th = &u_threadx[0];      // 从线程堆分配线程
@@ -28,7 +28,7 @@ static void led_blink_thread( void *param )
 /* lvgl tick线程 */
 #define LVGL_TICK   10
 #define LVGL_TICK_THREAD_NAME   "lvgl_tick"         // 线程名
-#define LVGL_TICK_STACK_SIZE    128                // 线程栈大小
+#define LVGL_TICK_STACK_SIZE    160                // 线程栈大小
 #define LVGL_TICK_TIME_SLICE    5                   // 线程时间片
 #define LVGL_TICK_PRIOROTY      10                  // 线程优先级
 static rt_thread_t *lvgl_tick_th = &u_threadx[1];      // 从线程堆分配线程

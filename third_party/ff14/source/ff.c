@@ -4194,7 +4194,9 @@ FRESULT f_close (
 	FATFS *fs;
 
 #if !FF_FS_READONLY
+    printf( "1\n" );
 	res = f_sync(fp);					/* Flush cached data */
+    printf( "2\n" );
 	if (res == FR_OK)
 #endif
 	{

@@ -58,7 +58,7 @@
 ".\project\obj\w25qxx.o"
 ".\project\obj\screen_conf.o"
 ".\project\obj\lcd_144_st7735.o"
-".\project\obj\file_thrans.o"
+".\project\obj\file_trans.o"
 ".\project\obj\app_main.o"
 ".\project\obj\app_task.o"
 ".\project\obj\app_ui.o"

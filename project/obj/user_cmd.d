@@ -153,4 +153,4 @@
 .\project\obj\user_cmd.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\obj\user_cmd.o: third_party\ff14\source\ff_user.h
 .\project\obj\user_cmd.o: driver\usart\usart.h
-.\project\obj\user_cmd.o: .\driver\file_thrans_with_fatfs\file_thrans.h
+.\project\obj\user_cmd.o: .\driver\file_thrans_with_fatfs\file_trans.h

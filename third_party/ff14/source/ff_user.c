@@ -145,7 +145,6 @@ void fatfs_test( char *dev )
     DEBUG_PRINT( "free size : %d kb\n\r", free_size );
     
 test_done:
-    f_mount( NULL, buf, 0 );
     DEBUG_PRINT( "test done.\n\r" );
 }
 
@@ -182,8 +181,8 @@ const char * get_file_name(const char * path)
     const char *pep = path+len-1;   // path end pointer
 
     while ( 1 ) {
-        if ( *pep == '/' ) {
-            return pep++;
+        if ( *pep == '/' || *pep == ':' ) {
+            return ++pep;
         } else {
             pep--;
         } 
