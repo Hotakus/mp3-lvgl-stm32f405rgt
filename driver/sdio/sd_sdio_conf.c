@@ -2,6 +2,7 @@
 #include "sd_sdio_conf.h"
 #include <string.h>
 #include "pro_conf.h"
+#include "tim.h"
 
 u8 conf_flag = 0;
 
@@ -65,33 +66,6 @@ static TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint32_t Buffe
     return PASSED;
 }
 
-void TIM5_Int_Init(void)
-{
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
-
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
-
-    TIM_TimeBaseInitStructure.TIM_Period = 1000000;
-    TIM_TimeBaseInitStructure.TIM_Prescaler = 83;
-    TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-
-    TIM_TimeBaseInit(TIM5, &TIM_TimeBaseInitStructure);
-}
-
-void Clock_Start()
-{
-    TIM5->CNT = 0x00;
-    TIM_Cmd(TIM5, ENABLE);
-}
-
-u32 Clock_End()
-{
-    u32 result;
-    result = TIM5->CNT;
-    TIM_Cmd(TIM5, DISABLE);
-    return result;
-}
 
 #define BLOCK_SIZE 512       /* Block Size in Bytes */
 #define NUMBER_OF_BLOCKS 100 /* For Multi Blocks operation (Read/Write) */
@@ -109,7 +83,6 @@ void SD_MultiBlockTest(void)
     /* Fill the buffer to send */
     Fill_Buffer(aBuffer_MultiBlock_Tx, MULTI_BUFFER_SIZE, 0x0);
 
-    TIM5_Int_Init();
     SD_HighSpeed();
 
     if (Status == SD_OK)

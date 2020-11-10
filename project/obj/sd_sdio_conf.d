@@ -147,3 +147,4 @@
 .\project\obj\sd_sdio_conf.o: .\third_party\rt-thread-sorted\include\rtm.h
 .\project\obj\sd_sdio_conf.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\sd_sdio_conf.o: .\third_party\rt-thread-sorted\finsh\finsh_api.h
+.\project\obj\sd_sdio_conf.o: driver\tim\tim.h

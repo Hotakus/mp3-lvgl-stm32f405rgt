@@ -156,4 +156,5 @@
 .\project\obj\file_trans.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
 .\project\obj\file_trans.o: driver\systicks\systick.h
 .\project\obj\file_trans.o: driver\usart\usart.h
+.\project\obj\file_trans.o: driver\tim\tim.h
 .\project\obj\file_trans.o: .\third_party\lvgl\lvgl\porting\lv_port_fs.h

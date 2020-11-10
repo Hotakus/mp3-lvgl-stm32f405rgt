@@ -117,9 +117,8 @@ static void rtt_cat( int argc, char **args )
 
     if ( br ) {
         rt_kprintf( "br: %d\n", br );
-        u8 *pc = ch_buf;
-        while( *pc != '\0' )
-            my_putc( *pc++ );
+        for ( u32 i = 0; i < br; i++ )
+            my_putc( ch_buf[i] );
     } else {
         rt_kprintf( "Null to read\n" );
     }
@@ -163,8 +162,10 @@ void rtt_cp( int argc, char **args )
 {
     if ( argc != 3 )
         return;
-    
-    file_trans( args[1] , args[2] );
+    rt_kprintf( "trans begin.\n" );
+    if ( file_trans( args[1] , args[2] ) != TRANS_STAT_OK )
+        rt_kprintf( "trans error.\n" );
+    rt_kprintf( "trans end.\n" );
 }
 MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif

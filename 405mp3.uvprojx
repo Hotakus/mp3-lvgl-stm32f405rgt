@@ -941,6 +941,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\tim\tim.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
