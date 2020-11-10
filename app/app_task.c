@@ -5,6 +5,7 @@
 #include "led.h"
 
 static rt_thread_t u_threadx[APP_THREAD_NUM] = {RT_NULL};
+static struct rt_thread u_static_threadx[APP_THREAD_NUM];
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
@@ -42,27 +43,29 @@ static void lvgl_tick_thread( void *param )
 }
 
 /* lvgl task handler线程 */
-#define LVGL_TASK_THREAD_NAME   "lvgl_task"         // 线程名
-#define LVGL_TASK_STACK_SIZE    2048                // 线程栈大小
-#define LVGL_TASK_TIME_SLICE    10                   // 线程时间片
-#define LVGL_TASK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *lvgl_task_th = &u_threadx[2];      // 从线程堆分配线程
+#define LVGL_TASK_THREAD_NAME   "lvgl_task"                         // 线程名
+#define LVGL_TASK_STACK_SIZE    2048                                // 线程栈大小
+#define LVGL_TASK_TIME_SLICE    10                                  // 线程时间片
+#define LVGL_TASK_PRIOROTY      10                                  // 线程优先级
+ALIGN(RT_ALIGN_SIZE) static u8 lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈
+static struct rt_thread *lvgl_task_th_s = &u_static_threadx[3];     // 从线程堆分配线程
 static void lvgl_task_thread( void *param )
 {
     param = param;
     while ( 1 ) {
         lv_task_handler();
-        rt_thread_mdelay(LVGL_TICK<<1);
+        rt_thread_mdelay(LVGL_TICK);
     }
 }
 
 /* sd卡检测线程 */
-#define SD_DETECT_THREAD_NAME   "sd_detect"         // 线程名
-#define SD_DETECT_STACK_SIZE    512                // 线程栈大小
-#define SD_DETECT_TIME_SLICE    10                   // 线程时间片
-#define SD_DETECT_PRIOROTY      9                  // 线程优先级
-#define SD_DETECT_TIMER_TIME    1000              // 定时时间
-static rt_thread_t *sd_detect_th = &u_threadx[3];      // 从线程堆分配线程
+#define SD_DETECT_THREAD_NAME   "sd_detect"                         // 线程名
+#define SD_DETECT_STACK_SIZE    512                                 // 线程栈大小
+#define SD_DETECT_TIME_SLICE    10                                  // 线程时间片
+#define SD_DETECT_PRIOROTY      9                                   // 线程优先级
+#define SD_DETECT_TIMER_TIME    1000                                // 定时时间
+ALIGN(RT_ALIGN_SIZE) static u8 sd_detect_stk[SD_DETECT_STACK_SIZE]; // 线程栈
+static struct rt_thread *sd_detect_th_s = &u_static_threadx[4];     // 从线程堆分配线程
 u8 sd_detect_flag = 0;
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
@@ -96,6 +99,9 @@ static void sd_detect_thread( void *param )
 
 int app_create_task( void )
 {
+    
+    rt_err_t err = RT_ERROR;
+    
     /*  创建led闪烁线程 */
     *led_blink_th = rt_thread_create( 
         LED_THREAD_NAME,        /*线程名字*/                    
@@ -124,33 +130,38 @@ int app_create_task( void )
     else
         return -1;
     
+    
     /*  创建lvgl task线程 */
-    *lvgl_task_th = rt_thread_create( 
-        LVGL_TASK_THREAD_NAME,        /*线程名字*/                    
-        lvgl_task_thread,             /*线程入口函数*/
-        RT_NULL,                      /*线程入口函数参数*/
-        LVGL_TASK_STACK_SIZE,         /*线程栈大小*/
-        LVGL_TASK_PRIOROTY ,          /*线程优先级*/
-        LVGL_TASK_TIME_SLICE          /*线程时间片*/
-    );               
-    if(lvgl_task_th !=RT_NULL)
-        rt_thread_startup (*lvgl_task_th);
+    err = rt_thread_init(  
+        lvgl_task_th_s,                 
+        LVGL_TASK_THREAD_NAME,          /*线程名字*/ 
+        lvgl_task_thread,               /*线程入口函数*/
+        RT_NULL,                        /*线程入口函数*/
+        lvgl_task_stk,                  /*线程栈*/
+        LVGL_TASK_STACK_SIZE,           /*线程栈大小*/
+        LVGL_TASK_PRIOROTY,
+        LVGL_TASK_TIME_SLICE
+    );
+    if ( err == RT_EOK ) 
+        rt_thread_startup (lvgl_task_th_s);
     else
-        return -1;
+        rt_kprintf( "create thread \"%s\" error. (%d)\n", LVGL_TASK_THREAD_NAME, err );
 
     /*  创建sd卡检测线程 */
-    *sd_detect_th = rt_thread_create( 
-        SD_DETECT_THREAD_NAME,        /*线程名字*/                    
-        sd_detect_thread,             /*线程入口函数*/
-        RT_NULL,                      /*线程入口函数参数*/
-        SD_DETECT_STACK_SIZE,         /*线程栈大小*/
-        SD_DETECT_PRIOROTY ,          /*线程优先级*/
-        SD_DETECT_TIME_SLICE          /*线程时间片*/
-    );               
-    if(sd_detect_th !=RT_NULL)
-        rt_thread_startup (*sd_detect_th);
+    err = rt_thread_init(  
+        sd_detect_th_s,                 
+        SD_DETECT_THREAD_NAME,          /*线程名字*/ 
+        sd_detect_thread,               /*线程入口函数*/
+        RT_NULL,                        /*线程入口函数*/
+        sd_detect_stk,                  /*线程栈*/
+        SD_DETECT_STACK_SIZE,           /*线程栈大小*/
+        SD_DETECT_PRIOROTY,
+        SD_DETECT_TIME_SLICE
+    );
+    if ( err == RT_EOK ) 
+        rt_thread_startup (sd_detect_th_s);
     else
-        return -1;
+        rt_kprintf( "create thread \"%s\" error. (%d)\n", SD_DETECT_THREAD_NAME, err );
     
     return 0;
 }

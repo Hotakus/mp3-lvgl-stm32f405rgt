@@ -21,7 +21,7 @@ extern "C" {
 #define USER_USE_UCOS       0
 #define USER_USE_FATFS      1
 
-#define USER_USE_APP        0
+#define USER_USE_APP        1
 
 /* FatFs thread-safe conf */
 #define THREAD_SAFE_SW      0

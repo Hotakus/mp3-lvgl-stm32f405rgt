@@ -32,6 +32,10 @@ extern "C" {
 #include "ff_user.h"
 #include "screen_conf.h"
 #include "file_trans.h"
+
+#if USER_USE_APP == 1
+#include "app_main.h"
+#endif
     
 /* functions */
 

@@ -134,6 +134,10 @@
 .\project\obj\file_trans.o: inc\pro_conf.h
 .\project\obj\file_trans.o: .\third_party\lvgl\lvgl\porting\lv_port_fs.h
 .\project\obj\file_trans.o: .\third_party\lvgl\lvgl\porting\lv_port_indev.h
+.\project\obj\file_trans.o: .\app\app_main.h
+.\project\obj\file_trans.o: .\app\app_task.h
+.\project\obj\file_trans.o: .\app\app_ui.h
+.\project\obj\file_trans.o: .\app\app_typedef.h
 .\project\obj\file_trans.o: third_party\ff14\source\ff.h
 .\project\obj\file_trans.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\file_trans.o: .\third_party\rt-thread-sorted\rtconfig.h

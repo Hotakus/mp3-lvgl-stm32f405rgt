@@ -190,9 +190,13 @@ void rt_application_init(void)
     rt_thread_t tid;
 
 #ifdef RT_USING_HEAP
-    tid = rt_thread_create("main", main_thread_entry, RT_NULL,
-                           RT_MAIN_THREAD_STACK_SIZE, RT_MAIN_THREAD_PRIORITY, 20);
-    RT_ASSERT(tid != RT_NULL);
+    tid = rt_thread_create("main", 
+        main_thread_entry, 
+        RT_NULL,
+        RT_MAIN_THREAD_STACK_SIZE, 
+        RT_MAIN_THREAD_PRIORITY, 20);
+        RT_ASSERT(tid != RT_NULL
+    );
 #else
     rt_err_t result;
 

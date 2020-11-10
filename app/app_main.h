@@ -11,6 +11,6 @@
 
 
 /* functions */
-int app_init( void );
+void app_init( void *param );
 
 #endif

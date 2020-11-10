@@ -132,6 +132,10 @@
 .\project\obj\isr_funcs.o: inc\pro_conf.h
 .\project\obj\isr_funcs.o: .\third_party\lvgl\lvgl\porting\lv_port_fs.h
 .\project\obj\isr_funcs.o: .\third_party\lvgl\lvgl\porting\lv_port_indev.h
+.\project\obj\isr_funcs.o: .\app\app_main.h
+.\project\obj\isr_funcs.o: .\app\app_task.h
+.\project\obj\isr_funcs.o: .\app\app_ui.h
+.\project\obj\isr_funcs.o: .\app\app_typedef.h
 .\project\obj\isr_funcs.o: third_party\ff14\source\ff.h
 .\project\obj\isr_funcs.o: third_party\ff14\source\ffconf.h
 .\project\obj\isr_funcs.o: .\third_party\rt-thread-sorted\include\rtthread.h

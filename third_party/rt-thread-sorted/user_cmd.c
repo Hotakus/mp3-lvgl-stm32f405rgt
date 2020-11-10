@@ -52,6 +52,8 @@ static void fatfs( int argc, char **args )
         f_close( &fil );
         return;
     }
+    
+    fatfs_test( args[1] );
 
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
@@ -131,7 +133,7 @@ MSH_CMD_EXPORT( rtt_cat, show file content );
 
 static void rtt_mkfs( int argc, char **args )
 {
-    FIL fil_test;
+
     FRESULT fres = FR_NOT_READY;
     
     u8 *works = (u8*)rt_malloc( sizeof(u8)*FF_MAX_SS );
@@ -168,11 +170,17 @@ MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
 
 #if USER_USE_LVGL == 1
-static void lvgl_fs_remount( int argc, char **args )
+static void app_boot( int argc, char **args )
 {
+    lv_init();
+    lv_port_disp_init();        // 显示器初始化
+    lv_port_indev_init();       // 输入设备初始化
+#if USER_USE_FATFS == 1
     lv_port_fs_init();          // 文件系统设备初始化
+#endif
+    app_init(0);
 }
-MSH_CMD_EXPORT( lvgl_fs_remount, remount sd and spi flash );
+MSH_CMD_EXPORT( app_boot, lvgl_boot );
 #endif
 
 static void reboot(int argc, char **args)
