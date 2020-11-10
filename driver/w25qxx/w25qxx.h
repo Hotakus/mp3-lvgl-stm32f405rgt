@@ -72,7 +72,7 @@ enum w25qxx_opt_stat {
 #define W25Q64      0x4017
 #define W25Q128     0x4018
 #define W25Q256     0x4019
-typedef struct w25qxx_feature {
+typedef struct {
     u16     pageSize;       // bytes
     u32     pageCnt;        // pages
     u16     sect_size;       // bytes

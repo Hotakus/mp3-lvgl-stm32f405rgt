@@ -76,6 +76,7 @@ extern "C" {
 #if USER_USE_RTTHREAD == 1
 #define DEBUG_PRINT     rt_kprintf
 #define DELAY_MS        rt_thread_mdelay
+#define APP_INIT_STK_SIZE   (1<<10)         // 应用栈大小
 #elif USER_USE_RTTHREAD == 0
 #define SECTION(x) __attribute__((section(x)))
 #define DEBUG_PRINT     printf

@@ -171,7 +171,7 @@ MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
 
 #if USER_USE_LVGL == 1
-static void app_boot( int argc, char **args )
+static void lvgl_reboot( int argc, char **args )
 {
     lv_init();
     lv_port_disp_init();        // 显示器初始化
@@ -179,9 +179,8 @@ static void app_boot( int argc, char **args )
 #if USER_USE_FATFS == 1
     lv_port_fs_init();          // 文件系统设备初始化
 #endif
-    app_init(0);
 }
-MSH_CMD_EXPORT( app_boot, lvgl_boot );
+MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
 #endif
 
 static void reboot(int argc, char **args)

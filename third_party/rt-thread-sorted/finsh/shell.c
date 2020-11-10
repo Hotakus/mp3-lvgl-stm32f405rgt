@@ -104,8 +104,8 @@ int finsh_set_prompt(const char * prompt)
 
 const char *finsh_get_prompt()
 {
-#define _MSH_PROMPT "msh "
-#define _PROMPT     "finsh "
+#define _MSH_PROMPT "Trisu "
+#define _PROMPT     "Trisu_fin "
     static char finsh_prompt[RT_CONSOLEBUF_SIZE + 1] = {0};
 
     /* check prompt mode */

@@ -33,7 +33,7 @@
 
 // <o>the stack size of main thread<1-4086>
 //  <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE     512
+#define RT_MAIN_THREAD_STACK_SIZE     256
 
 // </h>
 
@@ -144,7 +144,7 @@
     // <o>the history lines of finsh thread <1-32>
     //  <i>the history lines of finsh thread
     //  <i>Default: 5
-    #define FINSH_HISTORY_LINES         10
+    #define FINSH_HISTORY_LINES         32
 
     #define FINSH_USING_SYMTAB
     #define FINSH_USING_DESCRIPTION

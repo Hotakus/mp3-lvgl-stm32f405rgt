@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_fs.h"
 #include "ff_user.h"
-
+#include "w25qxx.h"
 /*********************
  *      DEFINES
  *********************/
@@ -162,14 +162,14 @@ static void fs_init(void)
         if ( fr_lv[SPIF_INDEX] != FR_OK ) {
             DEBUG_PRINT( "spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX] );
         }
-        DEBUG_PRINT( "spi flash mount successfully.\n" );
+        DEBUG_PRINT( "spi flash mount successfully.\n\n" );
     }
     
 
     if ( fr_lv[SD_SDIO_INDEX] == FR_OK ) {
         SD_CardInfo sd_info;
         SD_GetCardInfo( &sd_info );
-        printf("sd card info:\n");
+        printf("SD info:\n");
         printf("CardType    : %d\n", (int)sd_info.CardType );
         printf("Capacity    : %0.2f GiB\n", ((double)sd_info.CardCapacity/(1<<30)) );
         printf("OEM_AppliID : %c%c\n", 
@@ -189,6 +189,16 @@ static void fs_init(void)
         );
     }
 
+    DEBUG_PRINT( "\n" );
+    
+    if ( fr_lv[SPIF_INDEX] == FR_OK ) {
+        extern w25qxx_feature w25qxx;
+        printf( "SPI FLASH info:\n" );
+        printf( "JEDECID    : %X\n", w25qxx.JEDECID );
+        printf( "Capacity   : %0.2f MiB\n", (double)w25qxx.capacity / 1024.0 / 1024.0 );
+    }
+    
+    DEBUG_PRINT( "\n" );
 }
 
 

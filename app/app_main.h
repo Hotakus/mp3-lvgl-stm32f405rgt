@@ -11,6 +11,6 @@
 
 
 /* functions */
-void app_init( void *param );
-
+int app_create_init_thread(void);
+    
 #endif

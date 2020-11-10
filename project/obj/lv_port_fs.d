@@ -154,3 +154,4 @@
 .\project\obj\lv_port_fs.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
 .\project\obj\lv_port_fs.o: driver\systicks\systick.h
 .\project\obj\lv_port_fs.o: driver\usart\usart.h
+.\project\obj\lv_port_fs.o: driver\w25qxx\w25qxx.h

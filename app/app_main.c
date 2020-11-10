@@ -4,6 +4,9 @@
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
 
+static struct rt_thread app_init_thread;
+ALIGN(4) static u8 app_init_stk[APP_INIT_STK_SIZE]; 
+
 static void lvgl_init( void ) 
 {
     lv_init();
@@ -22,8 +25,27 @@ void app_init( void *param )
     
     app_create_task();
 
-    
 }
-// INIT_APP_EXPORT(app_init);  // 导出为APP，rtthread启动时会自动调用这个函数执行
+
+int app_create_init_thread(void)
+{
+    rt_err_t err = rt_thread_init(
+        &app_init_thread, 
+        "app_init_th",
+        app_init,
+        RT_NULL,
+        app_init_stk,
+        APP_INIT_STK_SIZE,
+        1, 1
+    );
+    if ( err == RT_EOK ) {
+        rt_thread_startup( &app_init_thread );
+    } else {
+        rt_kprintf( "app init err.\n" );
+        rt_thread_detach( &app_init_thread );
+        return -1;
+    }
+}
+INIT_APP_EXPORT(app_create_init_thread);  // 导出为APP，rtthread启动时会自动调用这个函数执行
 
 
