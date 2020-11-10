@@ -78,7 +78,12 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     u32 ts    = src_size / DATA_BUF_SIZE;
     u32 sdatn = src_size % DATA_BUF_SIZE;
     u8 retry = TRANS_RETRY_TIME;
+#if USER_USE_RTTHREAD == 1
     dat_buf = (u8*)rt_malloc( sizeof(u8)*DATA_BUF_SIZE );
+#else
+    dat_buf = (u8*)malloc( sizeof(u8)*DATA_BUF_SIZE );
+#endif
+    
     
     double ttime = 0;
     double sec   = 0;
@@ -121,7 +126,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
         retry = TRANS_RETRY_TIME;
         do {
             src_fres   = f_read( &src_fil, dat_buf, (ts==1)?(sdatn):(DATA_BUF_SIZE), NULL );
-            dest_fres = f_write( &dest_fil, dat_buf, (ts==1)?(sdatn):(DATA_BUF_SIZE), NULL );
+            dest_fres  = f_write( &dest_fil, dat_buf, (ts==1)?(sdatn):(DATA_BUF_SIZE), NULL );
         } while ( (dest_fres || src_fres) && --retry );
         if ( !retry ) {
             DEBUG_PRINT( "2 : trans error! ( %d %d )\n", dest_fres, src_fres  );
@@ -135,6 +140,8 @@ trans_end:
     f_close( &dest_fil );
 #if USER_USE_RTTHREAD == 1
     rt_free( dat_buf );  
+#else
+    free( dat_buf );
 #endif
     
     /* 计算传输速度 */
