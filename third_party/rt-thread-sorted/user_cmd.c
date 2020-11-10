@@ -34,15 +34,25 @@ char *spif_buf = "SPIF:";
 
 static void fatfs( int argc, char **args )
 {
-    if ( argc < 1 ) {
-        if ( fr_lv[SD_SDIO_INDEX] != FR_OK )
-            lv_port_fs_init(); 
-        fatfs_test( "SD_SDIO" );
+    
+    if ( args[1][0] == 'F' ) {
+        FIL fil;
+        FRESULT fres = FR_NOT_READY;
+    
+        fres = f_open( &fil, "SPIF:/spif.txt", FA_OPEN_ALWAYS | FA_WRITE );
+        if ( fres != FR_OK ) {
+            rt_kprintf( "f_open fres: %d\n", fres );
+            f_close( &fil );
+            return;
+        }
+        
+        f_lseek( &fil, 0 );
+        f_printf( &fil, "Hello spi flash." );
+        
+        f_close( &fil );
         return;
-    } else if ( argc > 2 )
-        return;
-    DEBUG_PRINT( "into fatfs test.\n" );
-    fatfs_test( args[1] );
+    }
+
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
 
@@ -60,7 +70,7 @@ static void file_info(int argc, char **args)
 }
 MSH_CMD_EXPORT(file_info, get info which file);
 
-
+//u8 ch_buf[50] = {0};
 static void rtt_cat( int argc, char **args )
 {
     
@@ -68,13 +78,15 @@ static void rtt_cat( int argc, char **args )
     u32 br = 0;
     u8 *ch_buf = NULL;
     
-    if ( argc < 2 )
+    if ( argc < 2 ) {
         rt_kprintf( "usage rtt_cat {file}\n" );
-    else if ( argc == 2 ) {
+        return;
+    } else if ( argc == 2 ) {
         btr = sizeof(ch_buf);
     } else if ( argc == 3 ) {
         btr = atoi(args[2]);
     }
+    rt_kprintf( "btr: %d\n", btr );
     ch_buf = (u8*)rt_malloc( sizeof(u8)*btr );
     
     FRESULT cat_fres;
@@ -87,19 +99,27 @@ static void rtt_cat( int argc, char **args )
         return;
     }
     
+    cat_fres = f_lseek( &cat_fil, 0 );
+    if ( cat_fres != FR_OK ) {
+        rt_kprintf( "seek begin error. (%d)\n", cat_fres );
+        f_close( &cat_fil );
+        return;
+    }
+    
     cat_fres = f_read( &cat_fil, ch_buf, btr, &br );
     if ( cat_fres != FR_OK ) {
         rt_kprintf( "read '%s' error. (%d)\n", get_file_name(args[1]), cat_fres );
         f_close( &cat_fil );
         return;
     }
-    
-    rt_kprintf( "get %d characters\n", br );
-    
-    if ( !br ) {
+
+    if ( br ) {
+        rt_kprintf( "br: %d\n", br );
         u8 *pc = ch_buf;
         while( *pc != '\0' )
             my_putc( *pc++ );
+    } else {
+        rt_kprintf( "Null to read\n" );
     }
     
     rt_free( ch_buf );
@@ -109,42 +129,39 @@ static void rtt_cat( int argc, char **args )
 MSH_CMD_EXPORT( rtt_cat, show file content );
 
 
-extern u8 ws[FF_MAX_SS];
-void test( int argc, char **args )
+static void rtt_mkfs( int argc, char **args )
 {
     FIL fil_test;
     FRESULT fres = FR_NOT_READY;
     
-    if ( args[1][0] == 'K' ) {
-        fres = f_mkfs( "SPIF:", 0, ws, sizeof(ws) );
+    u8 *works = (u8*)rt_malloc( sizeof(u8)*FF_MAX_SS );
+    
+    if ( args[1][0] == 'F' ) {
+        fres = f_mkfs( "SPIF:", 0, works, FF_MAX_SS );
         if ( fres != FR_OK ) {
-            rt_kprintf( "f_mkfs fres: %d\n", fres );
+            rt_kprintf( "mkfs SPIF: %d\n", fres );
+            return;
+        }
+    } else if ( args[1][0] == 'S' ) {
+        fres = f_mkfs( "SD_SDIO:", 0, works, FF_MAX_SS );
+        if ( fres != FR_OK ) {
+            rt_kprintf( "mkfs SD: %d\n", fres );
             return;
         }
     }
     
-    if ( args[1][0] == 'F' )
-        fres = f_open( &fil_test, "SPIF:/vimrc", FA_OPEN_EXISTING | FA_READ );
-    if ( args[1][0] == 'S' )
-        fres = f_open( &fil_test, "SD_SDIO:/h.c", FA_OPEN_EXISTING | FA_READ );
+    rt_kprintf( "mkfs done.\n" );
     
-    if ( fres != FR_OK ) {
-        rt_kprintf( "f_open fres: %d\n", fres );
-        return;
-    }
-    
-    
-    rt_kprintf( "seek: %d\n", f_lseek( &fil_test, 0 ) );
-    f_gets( ws, 50, &fil_test );
-    rt_kprintf( "text: %s\n", ws );
-    f_close( &fil_test );
+    rt_free( works );
+
 }
-MSH_CMD_EXPORT( test, copy file );
+MSH_CMD_EXPORT( rtt_mkfs, mkfs dev );
 
 void rtt_cp( int argc, char **args )
 {
     if ( argc != 3 )
         return;
+    
     file_trans( args[1] , args[2] );
 }
 MSH_CMD_EXPORT( rtt_cp, copy file );

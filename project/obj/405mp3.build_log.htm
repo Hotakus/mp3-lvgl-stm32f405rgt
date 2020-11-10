@@ -28,12 +28,12 @@ Project File Date:  11/10/2020
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\SOFTWARE\keil\ARM\ARMCC\Bin'
 Build target 'f405mp3'
 compiling cmd.c...
-compiling user_cmd.c...
-third_party\rt-thread-sorted\user_cmd.c(138): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "TCHAR *"
-      f_gets( ws, 50, &fil_test );
-third_party\rt-thread-sorted\user_cmd.c: 1 warning, 0 errors
+compiling file_trans.c...
+driver\file_thrans_with_fatfs\file_trans.c(74): warning:  #185-D: dynamic initialization in unreachable code
+      const char *file_name = get_file_name(sd_path);
+driver\file_thrans_with_fatfs\file_trans.c: 1 warning, 0 errors
 linking...
-Program Size: Code=171732 RO-data=77940 RW-data=6060 ZI-data=78220  
+Program Size: Code=171672 RO-data=77928 RW-data=6060 ZI-data=69936  
 FromELF: creating hex file...
 ".\project\obj\405mp3.axf" - 0 Error(s), 1 Warning(s).
 
