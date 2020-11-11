@@ -90,7 +90,7 @@ void w25qxx_JEDECID( void );
 
 u8 w25qxx_wait_busy( void );
 
-u8 w25qxx_erase_sector( u32 ssect, u32 sectLen );
+u8 w25qxx_erase_sector( u32 ssect, int sectLen );
 u8 w25qxx_erase_chip( void );
 
 u8 w25qxx_read_page( u8* pRecBuf , u32 page, u32 cnt );

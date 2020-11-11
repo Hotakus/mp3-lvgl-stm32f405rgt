@@ -13,7 +13,7 @@ typedef struct {
 
 
 typedef struct {
-    u8 *ui_name;
+    char *ui_name;
     app_ui_ctl_handler *ctl_h;
 } app_ui;
 

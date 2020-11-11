@@ -195,10 +195,13 @@ u8 w25qxx_wait_busy( void ) {
 }
 /*---------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------*/
-u8 w25qxx_erase_sector ( u32 ssect, u32 sectLen ) {
+u8 w25qxx_erase_sector ( u32 ssect, int sectLen ) {
     u32 addr;
 
-    while ( sectLen-- ) {
+    if ( !sectLen )
+        return W25QXX_OPT_OK;
+    
+     do {
         addr = ssect<<12;
         w25qxx_writ_enable();        // 写使能
         W25QXX_CS_CLR;
@@ -208,9 +211,10 @@ u8 w25qxx_erase_sector ( u32 ssect, u32 sectLen ) {
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         W25QXX_CS_SET;
         w25qxx_writ_disable();        // 写失能
-        DEBUG_PRINT( "erase: %d\n", ssect );
+        DEBUG_PRINT( "erase sect : %d\n", ssect );
         ssect++;
-    }
+    } while ( --sectLen );
+    
     return W25QXX_OPT_OK;
 }
 

@@ -61,6 +61,9 @@ extern "C" {
 #if USER_USE_APP == 1
 /* app */
 #include "app_main.h"
+#if USER_USE_LVGL == 1
+#define USE_LV_EX   1
+#endif
 #endif
 
 #if USER_USE_FATFS == 1
@@ -71,18 +74,25 @@ extern "C" {
 #if USER_USE_RTTHREAD == 1
 #include <rtthread.h>
 #define APP_THREAD_NUM  5       // 定义APP最大线程
-#endif
-
-#if USER_USE_RTTHREAD == 1
-#define DEBUG_PRINT     rt_kprintf
-#define DELAY_MS        rt_thread_mdelay
 #define APP_INIT_STK_SIZE   (1<<10)         // 应用栈大小
+
+#define RT_PRINT        rt_kprintf
+#define RT_DELAY        rt_thread_mdelay
+#define RT_STRCMP       rt_strcmp
+#define RT_STRCAT       rt_strcat
+#define RT_MALLOC       rt_malloc
+#define RT_FREE         rt_free
+
 #elif USER_USE_RTTHREAD == 0
 #define SECTION(x) __attribute__((section(x)))
-#define DEBUG_PRINT     printf
-#define DELAY_MS        delay_ms
 #endif
 
+#define DEBUG_PRINT     RT_PRINT
+#define DELAY           RT_DELAY
+#define STRCMP          RT_STRCMP
+#define STRCAT          RT_STRCAT
+#define MALLOC          RT_MALLOC
+#define FREE            RT_FREE
 
 /* SD configuration */
 #define USER_ON_SD          1

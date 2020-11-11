@@ -966,6 +966,11 @@
               <FileType>1</FileType>
               <FilePath>.\app\app_ui.c</FilePath>
             </File>
+            <File>
+              <FileName>app_typedef.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\app\app_typedef.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

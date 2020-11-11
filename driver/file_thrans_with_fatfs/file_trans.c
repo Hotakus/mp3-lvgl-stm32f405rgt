@@ -4,9 +4,9 @@
 #include "ff_user.h"
 #include "tim.h"
 
-#define DATA_BUF_SIZE      1024
+#define DATA_BUF_SIZE      4096
 #define TRANS_RETRY_TIME   5
-#if DATA_BUF_SIZE > 1024
+#if DATA_BUF_SIZE > 4096
 #error "DATA_BUF_SIZE too big"
 #endif
 static u8 *dat_buf = NULL;
@@ -78,12 +78,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     u32 ts    = src_size / DATA_BUF_SIZE;
     u32 sdatn = src_size % DATA_BUF_SIZE;
     u8 retry = TRANS_RETRY_TIME;
-#if USER_USE_RTTHREAD == 1
-    dat_buf = (u8*)rt_malloc( sizeof(u8)*DATA_BUF_SIZE );
-#else
-    dat_buf = (u8*)malloc( sizeof(u8)*DATA_BUF_SIZE );
-#endif
-    
+    dat_buf = (u8*)MALLOC( sizeof(u8)*DATA_BUF_SIZE );
     
     double ttime = 0;
     double sec   = 0;
@@ -146,10 +141,12 @@ trans_end:
     
     /* 计算传输速度 */
     if ( err == TRANS_STAT_OK ) {
-        ttime = (double)Clock_End();
-        sec   = ttime / 1000000;
+        ttime = Clock_End();
+        sec   = ttime / 84000.0;
         speed = (double)src_size / sec;
-        printf( "\ntrans speed : %0.4f MiB/s\n", speed/(1<<20) );
+        printf( "\nsec         : %f s\n", sec  );
+        printf( "preriod     : %d s\n", (int)ttime  );
+        printf( "trans speed : %0.4f MiB/s\n", speed/(1<<20) );
     }
     
     return err;

@@ -66,9 +66,9 @@ void lcd_gpio( void ) {
 void lcd_144_hw_reset(void)
 {
     LCD_144_ST7735_RST_CLR;
-    DELAY_MS( 10 );
+    DELAY( 10 );
     LCD_144_ST7735_RST_SET;
-    DELAY_MS( 10 );
+    DELAY( 10 );
 }
 
 void lcd_144_init( void )

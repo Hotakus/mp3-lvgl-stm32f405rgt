@@ -133,6 +133,7 @@
 .\project\obj\app_ui.o: .\third_party\lvgl\lvgl\porting\lv_port_indev.h
 .\project\obj\app_ui.o: .\app\app_main.h
 .\project\obj\app_ui.o: .\app\app_task.h
+.\project\obj\app_ui.o: .\app\app_ui.h
 .\project\obj\app_ui.o: third_party\ff14\source\ff.h
 .\project\obj\app_ui.o: third_party\ff14\source\ffconf.h
 .\project\obj\app_ui.o: .\third_party\rt-thread-sorted\include\rtthread.h

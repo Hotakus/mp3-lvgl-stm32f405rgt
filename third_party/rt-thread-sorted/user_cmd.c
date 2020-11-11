@@ -89,7 +89,7 @@ static void rtt_cat( int argc, char **args )
         btr = atoi(args[2]);
     }
     rt_kprintf( "btr: %d\n", btr );
-    ch_buf = (u8*)rt_malloc( sizeof(u8)*btr );
+    ch_buf = (u8*)MALLOC( sizeof(u8)*btr );
     
     FRESULT cat_fres;
     FIL     cat_fil;
@@ -135,7 +135,7 @@ static void rtt_mkfs( int argc, char **args )
 
     FRESULT fres = FR_NOT_READY;
     
-    u8 *works = (u8*)rt_malloc( sizeof(u8)*FF_MAX_SS );
+    u8 *works = (u8*)MALLOC( sizeof(u8)*FF_MAX_SS );
     
     if ( args[1][0] == 'F' ) {
         fres = f_mkfs( "SPIF:", 0, works, FF_MAX_SS );
