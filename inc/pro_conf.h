@@ -62,7 +62,7 @@ extern "C" {
 /* app */
 #include "app_main.h"
 #if USER_USE_LVGL == 1
-#define USE_LV_EX   1
+#define USE_LV_EX   0
 #endif
 #endif
 
@@ -74,7 +74,7 @@ extern "C" {
 #if USER_USE_RTTHREAD == 1
 #include <rtthread.h>
 #define APP_THREAD_NUM  5       // 定义APP最大线程
-#define APP_INIT_STK_SIZE   (1<<10)         // 应用栈大小
+#define APP_INIT_STK_SIZE   (4<<10)         // 应用栈大小
 
 #define RT_PRINT        rt_kprintf
 #define RT_DELAY        rt_thread_mdelay

@@ -136,6 +136,8 @@
 .\project\obj\user_cmd.o: .\app\app_task.h
 .\project\obj\user_cmd.o: .\app\app_ui.h
 .\project\obj\user_cmd.o: .\app\app_typedef.h
+.\project\obj\user_cmd.o: .\app\app_ui\app_mainmenu.h
+.\project\obj\user_cmd.o: .\app\app_ui.h
 .\project\obj\user_cmd.o: third_party\ff14\source\ff.h
 .\project\obj\user_cmd.o: third_party\ff14\source\ffconf.h
 .\project\obj\user_cmd.o: .\third_party\rt-thread-sorted\include\rtthread.h

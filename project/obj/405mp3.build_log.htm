@@ -29,13 +29,15 @@ Project File Date:  11/12/2020
 Build target 'f405mp3'
 compiling cmd.c...
 compiling app_ui.c...
-app\app_ui.c(94): warning:  #940-D: missing return statement at end of non-void function "app_ui_unregister" 
-  }
-app\app_ui.c: 1 warning, 0 errors
+app\app_ui.c(18): warning:  #177-D: function "lv_ex_label_1"  was declared but never referenced
+  static void lv_ex_label_1(void)
+app\app_ui.c(28): warning:  #177-D: function "lv_ex_spinner_1"  was declared but never referenced
+  static void lv_ex_spinner_1(void)
+app\app_ui.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=173960 RO-data=77928 RW-data=6072 ZI-data=74384  
+Program Size: Code=158204 RO-data=77940 RW-data=6076 ZI-data=77496  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 1 Warning(s).
+".\project\obj\405mp3.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -48,7 +50,7 @@ Package Vendor: Keil
   D:\SOFTWARE\keil\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

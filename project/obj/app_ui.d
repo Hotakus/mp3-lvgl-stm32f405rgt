@@ -148,3 +148,4 @@
 .\project\obj\app_ui.o: driver\sdio\sd_sdio_conf.h
 .\project\obj\app_ui.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\obj\app_ui.o: driver\sdio\sd_sdio.h
+.\project\obj\app_ui.o: .\app\app_ui\app_mainmenu.h

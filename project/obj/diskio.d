@@ -133,6 +133,8 @@
 .\project\obj\diskio.o: .\app\app_task.h
 .\project\obj\diskio.o: .\app\app_ui.h
 .\project\obj\diskio.o: .\app\app_typedef.h
+.\project\obj\diskio.o: .\app\app_ui\app_mainmenu.h
+.\project\obj\diskio.o: .\app\app_ui.h
 .\project\obj\diskio.o: third_party\ff14\source\ff.h
 .\project\obj\diskio.o: third_party\ff14\source\ffconf.h
 .\project\obj\diskio.o: .\third_party\rt-thread-sorted\include\rtthread.h

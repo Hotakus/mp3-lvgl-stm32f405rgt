@@ -63,6 +63,7 @@
 ".\project\obj\app_main.o"
 ".\project\obj\app_task.o"
 ".\project\obj\app_ui.o"
+".\project\obj\app_mainmenu.o"
 ".\project\obj\diskio.o"
 ".\project\obj\ff.o"
 ".\project\obj\ff_user.o"

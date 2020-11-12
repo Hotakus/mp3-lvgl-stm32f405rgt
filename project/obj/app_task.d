@@ -133,6 +133,8 @@
 .\project\obj\app_task.o: .\app\app_main.h
 .\project\obj\app_task.o: .\app\app_ui.h
 .\project\obj\app_task.o: .\app\app_typedef.h
+.\project\obj\app_task.o: .\app\app_ui\app_mainmenu.h
+.\project\obj\app_task.o: .\app\app_ui.h
 .\project\obj\app_task.o: third_party\ff14\source\ff.h
 .\project\obj\app_task.o: third_party\ff14\source\ffconf.h
 .\project\obj\app_task.o: .\third_party\rt-thread-sorted\include\rtthread.h

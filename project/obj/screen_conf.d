@@ -134,6 +134,8 @@
 .\project\obj\screen_conf.o: .\app\app_task.h
 .\project\obj\screen_conf.o: .\app\app_ui.h
 .\project\obj\screen_conf.o: .\app\app_typedef.h
+.\project\obj\screen_conf.o: .\app\app_ui\app_mainmenu.h
+.\project\obj\screen_conf.o: .\app\app_ui.h
 .\project\obj\screen_conf.o: third_party\ff14\source\ff.h
 .\project\obj\screen_conf.o: third_party\ff14\source\ffconf.h
 .\project\obj\screen_conf.o: .\third_party\rt-thread-sorted\include\rtthread.h

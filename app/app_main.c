@@ -19,12 +19,13 @@ void app_init( void *param )
 {
     lvgl_init();
     
-#if defined(USE_LV_EX)
+#if USE_LV_EX == 1
     app_create_example();
+#else
+    app_ui_init();
 #endif
-    
-    app_create_task();
 
+    app_create_task();
 }
 
 int app_create_init_thread(void)
@@ -45,6 +46,7 @@ int app_create_init_thread(void)
         rt_thread_detach( &app_init_thread );
         return -1;
     }
+    return 0;
 }
 INIT_APP_EXPORT(app_create_init_thread);  // 导出为APP，rtthread启动时会自动调用这个函数执行
 

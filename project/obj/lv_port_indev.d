@@ -135,6 +135,8 @@
 .\project\obj\lv_port_indev.o: .\app\app_task.h
 .\project\obj\lv_port_indev.o: .\app\app_ui.h
 .\project\obj\lv_port_indev.o: .\app\app_typedef.h
+.\project\obj\lv_port_indev.o: .\app\app_ui\app_mainmenu.h
+.\project\obj\lv_port_indev.o: .\app\app_ui.h
 .\project\obj\lv_port_indev.o: third_party\ff14\source\ff.h
 .\project\obj\lv_port_indev.o: third_party\ff14\source\ffconf.h
 .\project\obj\lv_port_indev.o: .\third_party\rt-thread-sorted\include\rtthread.h
