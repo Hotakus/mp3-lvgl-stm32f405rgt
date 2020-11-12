@@ -10,6 +10,6 @@
 /* definations */
 
 /* functions */
-app_ui *mainmenu_ui_get( void );
+app_ui_t *mainmenu_ui_get( void );
 
 #endif

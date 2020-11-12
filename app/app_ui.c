@@ -11,10 +11,12 @@
 /**********************
  *  STATIC VARIABLE
  **********************/
-static u8 reg_ui_num = 0;
-static app_ui *app_ui_s[APP_UI_NUM];
+static app_ui_managed_t aums = {
+    .reg_ui_num     = 0,
+    .cur_ui_layer   = 0,
+    .next_ui_layer  = 0,
+};
 
- 
 static void lv_ex_label_1(void)
 {
     lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
@@ -64,32 +66,32 @@ void app_create_example(void)
  * @param ui 
  * @return ui_register_stat 
  ************************************************/
-ui_register_stat app_ui_register( app_ui *ui )
+ui_register_stat app_ui_register( app_ui_t *ui )
 {
 
-    if ( reg_ui_num == APP_UI_NUM )
+    if ( aums.reg_ui_num == APP_UI_NUM )
         return APP_UI_REGISTER_UI_FULL;
     
     for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
-        if ( app_ui_s[i] != NULL )
+        if ( aums.app_ui_s[i] != NULL )
             continue;
         
-        app_ui_s[i] = ui;
+        aums.app_ui_s[i] = ui;
         
-        reg_ui_num += 1;
+        aums.reg_ui_num += 1;
         return APP_UI_REGISTER_OK;
     }
     
     return APP_UI_REGISTER_OK;
 }
 
-ui_register_stat app_ui_unregister( app_ui *ui )
+ui_register_stat app_ui_unregister( app_ui_t *ui )
 {
     for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
-        if ( STRCMP( app_ui_s[i]->ui_name, ui->ui_name ) != 0 )
+        if ( aums.app_ui_s[i] != ui )
             continue;
-        app_ui_s[i] = NULL;
-        reg_ui_num -= 1;
+        aums.app_ui_s[i] = NULL;
+        aums.reg_ui_num -= 1;
         return APP_UI_UNREGISTER_OK;
     }
     
@@ -97,21 +99,25 @@ ui_register_stat app_ui_unregister( app_ui *ui )
 }
 
 /************************************************
- * @brief 根据ui名创建已注册的ui
+ * @brief 创建已注册的ui
  * 
- * @param ui_name 
+ * @param ui 
  ************************************************/
-void app_create_ui( const char *ui_name )
+void app_create_ui( app_ui_t *ui )
 {
-
+    /* 从已注册的ui对象找到相应的ui对象后 将ui对象装入层级管理块并创建 */
     for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
-        if ( app_ui_s[i]->ui_name == NULL )
+        if ( aums.app_ui_s[i] == NULL )
             continue;
-        if ( STRCMP( app_ui_s[i]->ui_name, ui_name ) == 0 )
-            app_ui_s[i]->ctl_h->create();
-        break;
+        if ( aums.app_ui_s[i]  == ui ) {
+            aums.app_ui_layer[aums.next_ui_layer] = aums.app_ui_s[i];
+            aums.app_ui_layer[aums.next_ui_layer]->ctl_h->create();
+            aums.cur_ui_layer = aums.next_ui_layer;
+            aums.next_ui_layer += 1;
+        } else
+            DEBUG_PRINT( "No ui object: %s\n", ui->ui_name );
+        return;
     }
-
 }
 
 /************************************************
@@ -119,34 +125,38 @@ void app_create_ui( const char *ui_name )
  * 
  * @param ui_name 
  ************************************************/
-void app_delete_ui( const char *ui_name )
+void app_delete_ui( app_ui_t *ui )
 {
     for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
-        if ( STRCMP( app_ui_s[i]->ui_name, ui_name ) == 0 ) {
-            app_ui_s[i]->ctl_h->remove();
-            return;
-        }
+        
     }
 }
 
 /************************************************
- * @brief 创建所有已注册的ui
+ * @brief 创建mainmenu 和 可配置相关ui组件
  ************************************************/
 void app_ui_init(void)
 {
     
     for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
-        app_ui_s[i] = NULL;
+        aums.app_ui_s[i] = NULL;
     }
 
+    /* 创建mainmenu */
     app_ui_register( mainmenu_ui_get() );
+    app_create_ui( mainmenu_ui_get() );
     
+    DEBUG_PRINT( "%s\n", aums.app_ui_layer[aums.cur_ui_layer]->ui_name );
+    
+    lv_ex_spinner_1();
 
-    for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
-        if ( app_ui_s[i] == NULL )
-            continue;
-        app_ui_s[i]->ctl_h->create();
-    }
 }
 
+/************************************************
+ * @brief 获取app_ui_managed_t aums
+ ************************************************/
+app_ui_managed_t *app_get_ui_layer(void)
+{
+    return &aums;
+}
 

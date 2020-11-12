@@ -19,11 +19,11 @@ static app_ui_ctl_handler ctl_handler = {
     .remove = mainmenu_remove,
 };
 
-static app_ui app_mainmenu = {
+static app_ui_t app_mainmenu = {
     .ui_name = THIS_UI_NAME,
     .ctl_h = &ctl_handler,
 };
-static u8 register_flag = 0;
+
  /**********************
  *  FUNCTIONS
  **********************/
@@ -50,7 +50,7 @@ static void mainmenu_remove(void)
 
 }
 
-app_ui *mainmenu_ui_get( void )
+app_ui_t *mainmenu_ui_get( void )
 {
     return &app_mainmenu;
 }
