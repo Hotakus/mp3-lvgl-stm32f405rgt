@@ -180,6 +180,9 @@ const char * get_file_name(const char * path)
     u8 len = strlen(path);
     const char *pep = path+len-1;   // path end pointer
 
+    if ( *pep == '/' || *pep == ':' )
+        return NULL;
+    
     while ( 1 ) {
         if ( *pep == '/' || *pep == ':' ) {
             return ++pep;

@@ -29,8 +29,11 @@ extern "C" {
 #elif  (IPS_ST7789_USE_SPI==2) 
 #define IPS_ST7789_SPI        SPI2
 #define IPS_ST7789_SPI_GPIO   GPIOB
+#define IPS_ST7789_SPI_AF     GPIO_AF_SPI2
 #define IPS_ST7789_SCLK       GPIO_Pin_13       // PB
 #define IPS_ST7789_MOSI       GPIO_Pin_15       // PB
+#define IPS_ST7789_SCLK_SRC   GPIO_PinSource13  
+#define IPS_ST7789_MOSI_SRC   GPIO_PinSource15 
 #elif  (IPS_ST7789_USE_SPI==3) 
 #define IPS_ST7789_SPI        SPI3
 #define IPS_ST7789_SPI_AF     GPIO_AF_SPI3    
@@ -51,8 +54,8 @@ extern "C" {
 #define IPS_ST7789_RES_HIGH    GPIOA->BSRRL |= IPS_ST7789_RES
 #define IPS_ST7789_RES_LOW     GPIOA->BSRRH |= IPS_ST7789_RES
 
-#define IPS_ST7789_BLK_HIGH    GPIOB->BSRRL |= IPS_ST7789_BLK
-#define IPS_ST7789_BLK_LOW     GPIOB->BSRRH |= IPS_ST7789_BLK
+#define IPS_ST7789_BLK_HIGH    GPIOA->BSRRL |= IPS_ST7789_BLK
+#define IPS_ST7789_BLK_LOW     GPIOA->BSRRH |= IPS_ST7789_BLK
 
 
 typedef enum {
@@ -65,11 +68,6 @@ typedef enum {
 /* functions */
 /* 初始函数 */
         void ips_st7789_init( void );
-/* 数据传输函数 */  
-        u8   ips_st7789_trans_byte( u8 byte );
-        void ips_st7789_send_cmd( u8 cmd );
-        void ips_st7789_send_dat( u8 dat );
-        void ips_st7789_send( u8 byte, ST7789_DC_OPT opt );
 /* 绘图函数 */
         void ips_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye );
         void ips_st7789_draw_point( u16 x, u16 y, u16 color );

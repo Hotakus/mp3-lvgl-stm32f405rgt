@@ -58,9 +58,21 @@ void TIM4_IRQHandler( void ) {
 
 void SDIO_IRQHandler(void)
 {
+#if USER_USE_RTTHREAD == 1
+    rt_interrupt_enter();
+#endif 
     SD_ProcessIRQSrc();  
+#if USER_USE_RTTHREAD == 1
+  rt_interrupt_leave();
+#endif 
 }   
 void SD_SDIO_DMA_IRQHANDLER(void)
 {
+#if USER_USE_RTTHREAD == 1
+    rt_interrupt_enter();
+#endif 
     SD_ProcessDMAIRQ();  
+#if USER_USE_RTTHREAD == 1
+  rt_interrupt_leave();
+#endif 
 } 

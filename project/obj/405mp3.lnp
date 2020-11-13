@@ -200,6 +200,8 @@
 ".\project\obj\lv_port_disp.o"
 ".\project\obj\lv_port_fs.o"
 ".\project\obj\lv_port_indev.o"
+".\project\obj\sd.o"
+".\project\obj\spif.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

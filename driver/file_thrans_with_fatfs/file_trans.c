@@ -31,7 +31,9 @@ FRESULT fr_lv[2] = {FR_NOT_READY, FR_NOT_READY};
 TRANS_STAT file_trans( const char *src_path, const char *dest_path ) 
 {
     
-    const char *file_name = get_file_name(src_path);
+    const char *file_name;
+    const char *file_name2 = get_file_name(dest_path);
+    char spif_buf[50] = {0};
     TRANS_STAT err = TRANS_STAT_OK;
     u32 dest_size = 0;
     u32 src_size  = 0;
@@ -39,6 +41,11 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     FIL src_fil, dest_fil;
     FRESULT src_fres, dest_fres;
     FILINFO t_fno[2];
+    
+    if ( file_name2 == NULL )
+        file_name = get_file_name(src_path);
+    else 
+        file_name = file_name2;
     
     /* 获取源文件大小 */
     src_fres = f_stat( src_path, &t_fno[SD_SDIO_INDEX] );
@@ -48,7 +55,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     }
     src_size  = t_fno[SD_SDIO_INDEX].fsize;
     
-    char spif_buf[50] = {0};
+    
     sprintf( spif_buf, "%s/%s", dest_path, file_name );
     dest_fres = f_stat( spif_buf, &t_fno[SPIF_INDEX] );
     if ( dest_fres != FR_OK ) {

@@ -1981,6 +1981,16 @@
               <FileType>5</FileType>
               <FilePath>.\third_party\lvgl\lvgl\lvgl.h</FilePath>
             </File>
+            <File>
+              <FileName>sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>spif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\spif.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

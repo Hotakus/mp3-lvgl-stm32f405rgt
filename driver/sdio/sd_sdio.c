@@ -223,7 +223,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "sd_sdio.h"
-
+#include "pro_conf.h"
 /** 
   * @brief  SDIO Static flags, TimeOut, FIFO Address  
   */
@@ -1970,6 +1970,7 @@ SD_Error SD_SendSDStatus(uint32_t *psdstatus)
   */
 SD_Error SD_ProcessIRQSrc(void)
 { 
+
   if (SDIO_GetITStatus(SDIO_IT_DATAEND) != RESET)
   {
     TransferError = SD_OK;
@@ -2005,6 +2006,7 @@ SD_Error SD_ProcessIRQSrc(void)
   SDIO_ITConfig(SDIO_IT_DCRCFAIL | SDIO_IT_DTIMEOUT | SDIO_IT_DATAEND |
                 SDIO_IT_TXFIFOHE | SDIO_IT_RXFIFOHF | SDIO_IT_TXUNDERR |
                 SDIO_IT_RXOVERR | SDIO_IT_STBITERR, DISABLE);
+
   return(TransferError);
 }
 
@@ -2015,11 +2017,13 @@ SD_Error SD_ProcessIRQSrc(void)
   */
 void SD_ProcessDMAIRQ(void)
 {
+
   if(DMA2->LISR & SD_SDIO_DMA_FLAG_TCIF)
   {
     DMAEndOfTransfer = 0x01;
     DMA_ClearFlag(SD_SDIO_DMA_STREAM, SD_SDIO_DMA_FLAG_TCIF|SD_SDIO_DMA_FLAG_FEIF);
   }
+
 }
 
 /**

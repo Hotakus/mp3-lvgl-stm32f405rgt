@@ -122,13 +122,25 @@ DRESULT disk_read (
 		return RES_OK;
 
 	case DEV_SD_SDIO :
-        sd_err = SD_ReadMultiBlocks(
-            buff, \
-            (sector<<9), \
-            card_info.CardBlockSize, \
-            count \
-        );
-        SD_WaitReadOperation();
+    
+        if ( count == 1 )
+            sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
+        else {
+            sd_err = SD_ReadMultiBlocks(
+                buff, \
+                (sector<<9), \
+                card_info.CardBlockSize, \
+                count \
+            );
+            sd_err = SD_WaitReadOperation();
+//            for ( u32 i = 0; i < count; i++ ) {
+//                sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
+//                if (sd_err != SD_OK)
+//                    return RES_PARERR;
+//                sector++;
+//            }
+        }  
+            
         while(SD_GetStatus() != SD_TRANSFER_OK);
         if ( sd_err != SD_OK ) {
             printf( "SD read retry %d. (%d)\n\r", retry, sd_err );

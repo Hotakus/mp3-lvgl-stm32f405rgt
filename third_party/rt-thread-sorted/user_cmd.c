@@ -34,11 +34,10 @@ char *spif_buf = "SPIF:";
 
 static void fatfs( int argc, char **args )
 {
+    FIL fil;
+    FRESULT fres = FR_NOT_READY;
     
     if ( args[1][0] == 'F' ) {
-        FIL fil;
-        FRESULT fres = FR_NOT_READY;
-    
         fres = f_open( &fil, "SPIF:/spif.txt", FA_OPEN_ALWAYS | FA_WRITE );
         if ( fres != FR_OK ) {
             rt_kprintf( "f_open fres: %d\n", fres );
@@ -51,9 +50,20 @@ static void fatfs( int argc, char **args )
         
         f_close( &fil );
         return;
+    } else if ( args[1][0] == 'S' ) {
+        fres = f_open( &fil, "SD_SDIO:/sd.txt", FA_OPEN_ALWAYS | FA_WRITE );
+        if ( fres != FR_OK ) {
+            rt_kprintf( "f_open fres: %d\n", fres );
+            f_close( &fil );
+            return;
+        }
+        
+        f_lseek( &fil, 0 );
+        f_printf( &fil, "Hello spi sd." );
+        
+        f_close( &fil );
+        return;
     }
-    
-    fatfs_test( args[1] );
 
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
@@ -181,6 +191,17 @@ static void lvgl_reboot( int argc, char **args )
 #endif
 }
 MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
+
+static void show_pic(int argc, char **args)
+{
+    if ( argc == 1 )
+        return;
+    lv_obj_t *background_img = lv_img_create( lv_scr_act(), NULL );
+    lv_img_set_src(background_img, args[1] );
+    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+}
+MSH_CMD_EXPORT(show_pic, show pic. from memory device.);
+
 #endif
 
 static void reboot(int argc, char **args)

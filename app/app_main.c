@@ -14,7 +14,6 @@ static void lvgl_init( void )
     lv_port_indev_init();       // 输入设备初始化
     lv_port_fs_init();          // 文件系统设备初始化
     
-    
 }
 
 void app_init( void *param )

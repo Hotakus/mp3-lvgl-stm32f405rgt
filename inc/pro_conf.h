@@ -62,7 +62,7 @@ extern "C" {
 /* app */
 #include "app_main.h"
 #if USER_USE_LVGL == 1
-#define USE_LV_EX   1
+#define USE_LV_EX   0
 #endif
 #endif
 

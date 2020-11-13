@@ -1,7 +1,12 @@
 #include "ips_st7789.h"
 
+static void ips_st7789_gpio( void );
+static void ips_st7789_send_cmd( u8 cmd );
+static void ips_st7789_send_dat( u8 dat );
+static void ips_st7789_trans_byte( u8 byte );
+static void ips_st7789_send( u8 byte, ST7789_DC_OPT opt );
 
-void ips_st7789_gpio( void ) {
+static void ips_st7789_gpio( void ) {
     
     GPIO_InitTypeDef ips_st7789_g;
     SPI_InitTypeDef  ips_st7789_s;
@@ -39,7 +44,7 @@ void ips_st7789_gpio( void ) {
     ips_st7789_s.SPI_Mode                  = SPI_Mode_Master;
     ips_st7789_s.SPI_DataSize              = SPI_DataSize_8b;
     ips_st7789_s.SPI_FirstBit              = SPI_FirstBit_MSB;
-    ips_st7789_s.SPI_Direction             = SPI_Direction_2Lines_FullDuplex;
+    ips_st7789_s.SPI_Direction             = SPI_Direction_1Line_Tx;
     ips_st7789_s.SPI_BaudRatePrescaler     = SPI_BaudRatePrescaler_2;
     ips_st7789_s.SPI_NSS                   = SPI_NSS_Soft;
     SPI_Init( IPS_ST7789_SPI, &ips_st7789_s );
@@ -50,11 +55,8 @@ void ips_st7789_gpio( void ) {
 void ips_st7789_init( void ) {
     
     ips_st7789_gpio();
-//    DELAY(150);
-//    ips_st7789_sw_reset();
-//    DELAY(150);
+
     ips_st7789_hw_reset();
-    
 
     ips_st7789_send_cmd(0x36);
     
@@ -144,27 +146,25 @@ void ips_st7789_init( void ) {
 }
 
 
-u8 ips_st7789_trans_byte( u8 byte )
+static void ips_st7789_trans_byte( u8 byte )
 {
-    while ( !( IPS_ST7789_SPI->SR & SPI_I2S_FLAG_TXE ) );
     IPS_ST7789_SPI->DR = byte;
-    while ( !( IPS_ST7789_SPI->SR & SPI_I2S_FLAG_RXNE ) );
-    return IPS_ST7789_SPI->DR; 
+    while ( !( IPS_ST7789_SPI->SR & SPI_I2S_FLAG_TXE ) );
 }
 
-void ips_st7789_send_cmd( u8 cmd )
+static void ips_st7789_send_cmd( u8 cmd )
 {
     IPS_ST7789_DC_LOW;
     ips_st7789_trans_byte( cmd );
 }
 
-void ips_st7789_send_dat( u8 dat )
+static void ips_st7789_send_dat( u8 dat )
 {
     IPS_ST7789_DC_HIGH;
     ips_st7789_trans_byte( dat );
 }
 
-void ips_st7789_send( u8 byte, ST7789_DC_OPT opt )
+static void ips_st7789_send( u8 byte, ST7789_DC_OPT opt )
 {
     if ( opt == ST7789_CMD )
         ips_st7789_send_cmd( byte );
@@ -177,16 +177,12 @@ void ips_st7789_send( u8 byte, ST7789_DC_OPT opt )
 void ips_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye )
 {
     ips_st7789_send_cmd( 0x2a );
-	ips_st7789_send_dat( 0x00 );
-	ips_st7789_send_dat( xs );
-	ips_st7789_send_dat( 0x00 );
-	ips_st7789_send_dat( xe );
+    ips_st7789_send_pixel_dat( xs );
+    ips_st7789_send_pixel_dat( xe );
 	
     ips_st7789_send_cmd( 0x2b );
-	ips_st7789_send_dat( 0x00 );
-	ips_st7789_send_dat( ys );
-	ips_st7789_send_dat( 0x00 );
-	ips_st7789_send_dat( ye );
+    ips_st7789_send_pixel_dat( ys );
+    ips_st7789_send_pixel_dat( ye );
 	
 	ips_st7789_send_cmd( 0x2c );
 }

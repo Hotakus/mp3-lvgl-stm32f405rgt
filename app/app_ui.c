@@ -60,6 +60,13 @@ static void lv_ex_spinner_1(void)
     lv_obj_set_size(preload7, 50, 50);
     lv_obj_align(preload7, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
     
+    lv_obj_t * preload8 = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload8, 50, 50);
+    lv_obj_align(preload8, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0);
+    
+    lv_obj_t * preload9 = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload9, 50, 50);
+    lv_obj_align(preload9, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
     
 }
 
@@ -168,7 +175,7 @@ void app_ui_init(void)
     
     DEBUG_PRINT( "%s\n", aums.app_ui_layer[aums.cur_ui_layer]->ui_name );
     
-    lv_ex_spinner_1();
+    //lv_ex_spinner_1();
 
 }
 

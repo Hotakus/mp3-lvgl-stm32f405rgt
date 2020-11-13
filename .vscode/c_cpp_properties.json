@@ -44,7 +44,8 @@
                 "d:\\project\\stm32\\STM32F405\\mp3\\core\\startup",
                 "d:\\project\\stm32\\STM32F405\\mp3\\lib",
                 "d:\\project\\stm32\\STM32F405\\mp3\\lib\\src",
-                "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\rt-thread-sorted\\src"
+                "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\rt-thread-sorted\\src",
+                "d:\\project\\stm32\\STM32F405\\mp3\\third_party\\lvgl\\lvgl\\font"
             ],
             "defines": [
                 "STM32F40_41xxx",

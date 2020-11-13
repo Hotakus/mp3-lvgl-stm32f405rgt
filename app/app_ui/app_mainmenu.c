@@ -27,22 +27,14 @@ static app_ui_t app_mainmenu = {
  /**********************
  *  FUNCTIONS
  **********************/
+lv_obj_t *background_img;
+lv_obj_t *background_img_2;
 static void mainmenu_create(void)
 {
-
-    /*Create a LED and switch it OFF*/
-lv_obj_t * led1 = lv_led_create(lv_scr_act(), NULL);
-lv_obj_align(led1, NULL, LV_ALIGN_CENTER, -10, 0);
-lv_led_off(led1);
-/*Copy the previous LED and set a brightness*/
-lv_obj_t * led2 = lv_led_create(lv_scr_act(), led1);
-lv_obj_align(led2, NULL, LV_ALIGN_CENTER, 0, 0);
-lv_led_set_bright(led2, 190);
-/*Copy the previous LED and switch it ON*/
-lv_obj_t * led3 = lv_led_create(lv_scr_act(), led1);
-lv_obj_align(led3, NULL, LV_ALIGN_CENTER, 0, 0);
-lv_led_on(led3);
-    
+    LV_IMG_DECLARE( sd );
+//    background_img = lv_img_create( lv_scr_act(), NULL );
+//    lv_img_set_src(background_img, "S:/.mp3_icon/sd.bin" );
+//    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 }
 
 static void mainmenu_remove(void)
