@@ -192,15 +192,18 @@ static void lvgl_reboot( int argc, char **args )
 }
 MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
 
+lv_obj_t *pic = NULL;
 static void show_pic(int argc, char **args)
 {
     if ( argc == 1 )
         return;
-    lv_obj_t *background_img = lv_img_create( lv_scr_act(), NULL );
-    lv_img_set_src(background_img, args[1] );
-    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+    if ( pic != NULL )
+        lv_obj_del( pic );
+    pic = lv_img_create( lv_scr_act(), NULL );
+    lv_img_set_src(pic, args[1] );
+    lv_obj_align(pic, NULL, LV_ALIGN_CENTER, 0, 0);
 }
-MSH_CMD_EXPORT(show_pic, show pic. from memory device.);
+MSH_CMD_EXPORT(show_pic, show a picture in screen from memory device.);
 
 #endif
 
