@@ -129,8 +129,7 @@ int app_create_task( void )
         rt_thread_startup (*lvgl_tick_th);
     else
         return -1;
-    
-    
+
     /*  创建lvgl task线程 */
     err = rt_thread_init(  
         lvgl_task_th_s,                 

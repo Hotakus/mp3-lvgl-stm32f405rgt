@@ -22,8 +22,8 @@ static void lv_ex_label_1(void)
     lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
     lv_label_set_recolor(label2, true);
     lv_label_set_long_mode(label2, LV_LABEL_LONG_SROLL_CIRC); /*Circular scroll*/
-    lv_obj_set_width(label2, 120);
-    lv_label_set_text(label2, "#ff0000 Hello# #00ff00 world ! Suhouyu.#");
+    lv_obj_set_width(label2, 240);
+    lv_label_set_text(label2, "#ff0000 Hello# #00ff00 world !# Trisuborn.  #ff7700 Hello# #00ffff world !# Trisuborn.");
     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 0);
 }
 
@@ -49,6 +49,17 @@ static void lv_ex_spinner_1(void)
     lv_obj_t * preload5 = lv_spinner_create(lv_scr_act(), NULL);
     lv_obj_set_size(preload5, 50, 50);
     lv_obj_align(preload5, NULL, LV_ALIGN_CENTER, 0, 0);
+    
+    
+    
+    lv_obj_t * preload6 = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload6, 50, 50);
+    lv_obj_align(preload6, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+    
+    lv_obj_t * preload7 = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload7, 50, 50);
+    lv_obj_align(preload7, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
+    
     
 }
 
@@ -99,13 +110,13 @@ ui_register_stat app_ui_unregister( app_ui_t *ui )
 }
 
 /************************************************
- * @brief 创建已注册的ui
+ * @brief 从已注册的ui对象找到相应的ui对象后 
+ *        将ui对象装入ui层级管理块并创建 
  * 
  * @param ui 
  ************************************************/
 void app_create_ui( app_ui_t *ui )
 {
-    /* 从已注册的ui对象找到相应的ui对象后 将ui对象装入层级管理块并创建 */
     for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
         if ( aums.app_ui_s[i] == NULL )
             continue;
@@ -121,15 +132,24 @@ void app_create_ui( app_ui_t *ui )
 }
 
 /************************************************
- * @brief 根据ui名删除已注册的ui
+ * @brief 层级管理块返回上一层
  * 
- * @param ui_name 
+ * @param ui 
  ************************************************/
-void app_delete_ui( app_ui_t *ui )
+void app_ui_return( void )
 {
-    for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
-        
-    }
+    
+    if ( aums.next_ui_layer == 0 )
+        return;
+    if ( aums.cur_ui_layer == 0 )
+        return;
+    
+    aums.app_ui_layer[aums.cur_ui_layer]->ctl_h->remove();
+    aums.app_ui_layer[aums.cur_ui_layer] = NULL;
+    aums.next_ui_layer -= 1;
+    aums.cur_ui_layer  -= 1;
+    aums.app_ui_layer[aums.cur_ui_layer]->ctl_h->create();     // 创建上一层界面
+
 }
 
 /************************************************

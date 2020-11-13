@@ -73,7 +73,7 @@ RT_WEAK void *rt_heap_end_get(void)
 void rt_hw_board_init()
 {
     
-    rt_usart_conf( USART1, 2000000 );
+    rt_usart_conf( USART1, 115200 );
     
     /* System Clock Update */
     SystemCoreClockUpdate();

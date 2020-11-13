@@ -30,7 +30,7 @@ void app_create_example(void);
 #endif
 
 void app_create_ui( app_ui_t *ui );
-void app_delete_ui( app_ui_t *ui );
+void app_ui_return( void );
 
 ui_register_stat app_ui_register( app_ui_t *ui );
 ui_register_stat app_ui_unregister( app_ui_t *ui );

@@ -80,7 +80,7 @@ void lv_port_disp_init(void)
      *      copying the pixels.
      * */
 
-#define EXAMPLE 2
+#define EXAMPLE 1
     
 #if  ( EXAMPLE == 1 )
     /* Example for 1) */

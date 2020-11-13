@@ -30,10 +30,10 @@ extern "C" {
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
 // USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
-#define USE_SCR_IPS_133_INCH                0
+#define USE_SCR_IPS_ST7789_ST7789              0
 #define USE_SCR_LCD_2_INCH                  1
 #define USE_SCR_LCD_144_ST7735              2
-#define USER_USE_SCR      USE_SCR_LCD_144_ST7735
+#define USER_USE_SCR                        USE_SCR_IPS_ST7789_ST7789
 
 /* 延时函数时钟源 */
 #define DELAY_SRC_SYSTICK  0
@@ -62,7 +62,7 @@ extern "C" {
 /* app */
 #include "app_main.h"
 #if USER_USE_LVGL == 1
-#define USE_LV_EX   0
+#define USE_LV_EX   1
 #endif
 #endif
 
@@ -73,7 +73,7 @@ extern "C" {
 
 #if USER_USE_RTTHREAD == 1
 #include <rtthread.h>
-#define APP_THREAD_NUM  5       // 定义APP最大线程
+#define APP_THREAD_NUM  10       // 定义APP最大线程
 #define APP_INIT_STK_SIZE   (4<<10)         // 应用栈大小
 
 #define RT_PRINT        rt_kprintf

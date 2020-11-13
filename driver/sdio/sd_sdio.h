@@ -344,7 +344,7 @@ typedef struct
 /**
   * @brief  SD FLASH SDIO Interface
   */
-#define SD_DETECT_PIN                    GPIO_Pin_3                 /* PH.13 */
+#define SD_DETECT_PIN                    GPIO_Pin_4                 /* PH.13 */
 #define SD_DETECT_GPIO_PORT              GPIOA                       /* GPIOH */
 #define SD_DETECT_GPIO_CLK               RCC_AHB1Periph_GPIOA
    
