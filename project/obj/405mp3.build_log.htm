@@ -22,17 +22,26 @@ Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
 D:\project\stm32\STM32F405\mp3\405mp3.uvprojx
-Project File Date:  11/14/2020
+Project File Date:  11/15/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\SOFTWARE\keil\ARM\ARMCC\Bin'
 Build target 'f405mp3'
 compiling cmd.c...
-compiling diskio.c...
+compiling screen_conf.c...
+compiling main.c...
+compiling lcd_st7789.c...
+driver\screen\lcd_st7789\lcd_st7789.c(224): warning:  #177-D: function "lcd_st7789_send"  was declared but never referenced
+  static void lcd_st7789_send( u8 byte, ST7789_DC_OPT opt )
+driver\screen\lcd_st7789\lcd_st7789.c: 1 warning, 0 errors
+compiling board.c...
+compiling lv_port_indev.c...
+compiling user_cmd.c...
+compiling lv_port_disp.c...
 linking...
-Program Size: Code=160728 RO-data=78044 RW-data=7648 ZI-data=77636  
+Program Size: Code=160840 RO-data=78044 RW-data=7648 ZI-data=77636  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 0 Warning(s).
+".\project\obj\405mp3.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -45,7 +54,7 @@ Package Vendor: Keil
   D:\SOFTWARE\keil\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

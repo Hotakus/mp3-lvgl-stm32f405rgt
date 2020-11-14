@@ -156,3 +156,4 @@
 .\project\obj\lv_port_disp.o: inc\arm_math.h
 .\project\obj\lv_port_disp.o: inc\core_cm4.h
 .\project\obj\lv_port_disp.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
+.\project\obj\lv_port_disp.o: .\driver\screen\lcd_st7789\lcd_st7789.h

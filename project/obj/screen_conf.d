@@ -155,4 +155,4 @@
 .\project\obj\screen_conf.o: inc\arm_math.h
 .\project\obj\screen_conf.o: inc\core_cm4.h
 .\project\obj\screen_conf.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
-.\project\obj\screen_conf.o: .\driver\screen\ips_st7789\ips_st7789.h
+.\project\obj\screen_conf.o: .\driver\screen\lcd_st7789\lcd_st7789.h

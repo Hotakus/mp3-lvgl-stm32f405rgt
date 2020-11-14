@@ -19,6 +19,7 @@ extern "C" {
 #include "pro_conf.h"
 #include "stm32f4xx_conf.h"
 #include "lcd_144_st7735.h"
+#include "lcd_st7789.h"
 
 /* function */
 typedef struct {

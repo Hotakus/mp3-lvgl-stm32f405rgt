@@ -192,16 +192,34 @@ static void lvgl_reboot( int argc, char **args )
 }
 MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
 
-lv_obj_t *pic = NULL;
+
 static void show_pic(int argc, char **args)
 {
+    ALIGN(4) static lv_obj_t *pic = NULL;
+    
     if ( argc == 1 )
         return;
-    if ( pic != NULL )
-        lv_obj_del( pic );
-    pic = lv_img_create( lv_scr_act(), NULL );
+    
+    if ( STRCMP( args[1], "free" ) == 0 && pic != NULL ) {
+        lv_res_t res;
+        u8 retry = 5;
+        do {
+            res = lv_obj_del( pic );
+        } while ( --retry && res != LV_RES_INV );
+        if ( res != LV_RES_INV ) {
+            rt_kprintf( "delete obj error.\n" );
+        }
+        pic = NULL;
+        return;
+    }
+    
+    if ( pic == NULL ) {
+        pic = lv_img_create( lv_scr_act(), NULL );
+    }
+    
     lv_img_set_src(pic, args[1] );
     lv_obj_align(pic, NULL, LV_ALIGN_CENTER, 0, 0);
+
 }
 MSH_CMD_EXPORT(show_pic, show a picture in screen from memory device.);
 

@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,ARM_MATH_CM4,ARM_MATH_ROUNDING,__TARGET_FPU_VFP,</Define>
               <Undefine></Undefine>
-              <IncludePath>core;inc;lib\inc;main;driver\dma;driver\nvic;driver\sdio;driver\systicks;driver\tim;driver\usart;driver\led;driver\spi;driver\w25qxx;driver\rtc;.\driver\screen;.\driver\screen\ips_st7789;.\driver\screen\lcd_144_st7735;.\app;.\app\app_ui;third_party\ff14\source;.\third_party\rt-thread-sorted\finsh;.\third_party\rt-thread-sorted\include;.\third_party\rt-thread-sorted\include\libc;.\third_party\rt-thread-sorted;.\third_party\lvgl;.\third_party\lvgl\lvgl;.\third_party\lvgl\lvgl\porting;.\third_party\lvgl\lvgl\src\lv_core;.\third_party\lvgl\lvgl\src\lv_draw;.\third_party\lvgl\lvgl\src\lv_font;.\third_party\lvgl\lvgl\src\lv_gpu;.\third_party\lvgl\lvgl\src\lv_hal;.\third_party\lvgl\lvgl\src\lv_misc;.\third_party\lvgl\lvgl\src\lv_themes;.\third_party\lvgl\lvgl\src\lv_widgets;.\driver\file_thrans_with_fatfs</IncludePath>
+              <IncludePath>core;inc;lib\inc;main;driver\dma;driver\nvic;driver\sdio;driver\systicks;driver\tim;driver\usart;driver\led;driver\spi;driver\w25qxx;driver\rtc;.\driver\screen;.\driver\screen\lcd_st7789;.\driver\screen\lcd_144_st7735;.\app;.\app\app_ui;third_party\ff14\source;.\third_party\rt-thread-sorted\finsh;.\third_party\rt-thread-sorted\include;.\third_party\rt-thread-sorted\include\libc;.\third_party\rt-thread-sorted;.\third_party\lvgl;.\third_party\lvgl\lvgl;.\third_party\lvgl\lvgl\porting;.\third_party\lvgl\lvgl\src\lv_core;.\third_party\lvgl\lvgl\src\lv_draw;.\third_party\lvgl\lvgl\src\lv_font;.\third_party\lvgl\lvgl\src\lv_gpu;.\third_party\lvgl\lvgl\src\lv_hal;.\third_party\lvgl\lvgl\src\lv_misc;.\third_party\lvgl\lvgl\src\lv_themes;.\third_party\lvgl\lvgl\src\lv_widgets;.\driver\file_thrans_with_fatfs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -947,9 +947,9 @@
               <FilePath>.\driver\tim\tim.c</FilePath>
             </File>
             <File>
-              <FileName>ips_st7789.c</FileName>
+              <FileName>lcd_st7789.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\driver\screen\ips_st7789\ips_st7789.c</FilePath>
+              <FilePath>.\driver\screen\lcd_st7789\lcd_st7789.c</FilePath>
             </File>
           </Files>
         </Group>

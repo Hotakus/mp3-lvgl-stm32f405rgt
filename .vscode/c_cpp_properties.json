@@ -18,7 +18,7 @@
                 "d:\\project\\stm32\\STM32F405\\mp3\\driver\\w25qxx",
                 "d:\\project\\stm32\\STM32F405\\mp3\\driver\\rtc",
                 "d:\\project\\stm32\\STM32F405\\mp3\\driver\\screen",
-                "d:\\project\\stm32\\STM32F405\\mp3\\driver\\screen\\ips_st7789",
+                "d:\\project\\stm32\\STM32F405\\mp3\\driver\\screen\\lcd_st7789",
                 "d:\\project\\stm32\\STM32F405\\mp3\\driver\\screen\\lcd_144_st7735",
                 "d:\\project\\stm32\\STM32F405\\mp3\\app",
                 "d:\\project\\stm32\\STM32F405\\mp3\\app\\app_ui",

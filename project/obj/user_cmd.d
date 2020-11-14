@@ -155,6 +155,7 @@
 .\project\obj\user_cmd.o: inc\arm_math.h
 .\project\obj\user_cmd.o: inc\core_cm4.h
 .\project\obj\user_cmd.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
+.\project\obj\user_cmd.o: .\driver\screen\lcd_st7789\lcd_st7789.h
 .\project\obj\user_cmd.o: .\third_party\rt-thread-sorted\include\rthw.h
 .\project\obj\user_cmd.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\obj\user_cmd.o: third_party\ff14\source\ff_user.h

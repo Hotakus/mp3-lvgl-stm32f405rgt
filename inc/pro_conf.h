@@ -30,10 +30,10 @@ extern "C" {
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
 // USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
-#define USE_SCR_IPS_ST7789_ST7789              0
-#define USE_SCR_LCD_2_INCH                  1
+#define USE_SCR_LCD_ST7789_130              0
+#define USE_SCR_LCD_ST7789_200              1
 #define USE_SCR_LCD_144_ST7735              2
-#define USER_USE_SCR                        USE_SCR_IPS_ST7789_ST7789
+#define USER_USE_SCR                        USE_SCR_LCD_ST7789_130
 
 /* 延时函数时钟源 */
 #define DELAY_SRC_SYSTICK  0

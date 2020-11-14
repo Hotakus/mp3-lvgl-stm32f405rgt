@@ -163,5 +163,6 @@
 .\project\obj\main.o: third_party\ff14\source\ff_user.h
 .\project\obj\main.o: .\driver\screen\screen_conf.h
 .\project\obj\main.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
+.\project\obj\main.o: .\driver\screen\lcd_st7789\lcd_st7789.h
 .\project\obj\main.o: .\driver\file_thrans_with_fatfs\file_trans.h
 .\project\obj\main.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -1280,8 +1280,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\driver\screen\ips_st7789\ips_st7789.c</PathWithFileName>
-      <FilenameWithoutPath>ips_st7789.c</FilenameWithoutPath>
+      <PathWithFileName>.\driver\screen\lcd_st7789\lcd_st7789.c</PathWithFileName>
+      <FilenameWithoutPath>lcd_st7789.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

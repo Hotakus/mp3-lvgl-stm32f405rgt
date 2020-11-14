@@ -155,6 +155,7 @@
 .\project\obj\board.o: inc\arm_math.h
 .\project\obj\board.o: inc\core_cm4.h
 .\project\obj\board.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\math.h
+.\project\obj\board.o: .\driver\screen\lcd_st7789\lcd_st7789.h
 .\project\obj\board.o: .\third_party\rt-thread-sorted\include\rthw.h
 .\project\obj\board.o: D:\SOFTWARE\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\obj\board.o: driver\usart\usart.h
