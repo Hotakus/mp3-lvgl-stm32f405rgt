@@ -20,17 +20,17 @@ GPIO_InitTypeDef spix_gpio;
 void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR ) {
     
     u32 pin = 0;
-    
+
     if ( SPIx == SPI1 ) {
         RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
         RCC_APB2PeriphClockCmd( RCC_APB2Periph_SPI1, ENABLE );
         pin = SPI1_SCLK;
         GPIO_PinAFConfig( GPIOA, GPIO_PinSource5, GPIO_AF_SPI1 );
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
+        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
             GPIO_PinAFConfig( GPIOA, GPIO_PinSource6, GPIO_AF_SPI1 );
             pin |= SPI1_MISO;
         }
-        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
+        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_Tx ||SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
             GPIO_PinAFConfig( GPIOA, GPIO_PinSource7, GPIO_AF_SPI1 );
             pin |= SPI1_MOSI;
         }
@@ -39,7 +39,7 @@ void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR ) {
         RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI2, ENABLE );
         GPIO_PinAFConfig( GPIOB, GPIO_PinSource13, GPIO_AF_SPI2 );
         pin = SPI2_SCLK;
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
+        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
             GPIO_PinAFConfig( GPIOB, GPIO_PinSource14, GPIO_AF_SPI2 );
             pin |= SPI2_MISO;
         }
@@ -52,19 +52,18 @@ void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR ) {
         RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI3, ENABLE );
         pin = SPI3_SCLK;
         GPIO_PinAFConfig( GPIOB, GPIO_PinSource3, GPIO_AF_SPI3 );
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
+        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
             GPIO_PinAFConfig( GPIOB, GPIO_PinSource4, GPIO_AF_SPI3 );
             pin |= SPI3_MISO;
         }
-        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
+        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_Tx ||SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
             GPIO_PinAFConfig( GPIOB, GPIO_PinSource5, GPIO_AF_SPI3 );
             pin |= SPI3_MOSI;
         }
     }
     
     /* SPI conf */
-    u8 t_mode = mode;
-    switch ( t_mode ) {
+    switch ( mode ) {
         case SPI_MODE_1:
             spi_s.SPI_CPOL      = SPI_CPOL_Low;
             spi_s.SPI_CPHA      = SPI_CPHA_1Edge;

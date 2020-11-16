@@ -1,5 +1,6 @@
 #include "iic_conf.h"
 #include "usart.h"
+#include "pro_conf.h"
 
 static I2C_InitTypeDef  i2c_s;
 static GPIO_InitTypeDef i2cg_s;
@@ -35,7 +36,4 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     i2cg_s.GPIO_PuPd            = GPIO_PuPd_UP;
     i2cg_s.GPIO_Speed           = GPIO_Speed_100MHz;
     GPIO_Init( GPIOB, &i2cg_s );
-
 }
-
-

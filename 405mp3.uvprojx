@@ -951,6 +951,11 @@
               <FileType>1</FileType>
               <FilePath>.\driver\screen\lcd_st7789\lcd_st7789.c</FilePath>
             </File>
+            <File>
+              <FileName>iic_conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\iic\iic_conf.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

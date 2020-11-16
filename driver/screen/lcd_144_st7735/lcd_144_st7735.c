@@ -10,6 +10,7 @@
  ************************************************/
 #include "lcd_144_st7735.h"
 #include "pro_conf.h"
+#include "spi_conf.h"
 
 void lcd_gpio( void ) {
     GPIO_InitTypeDef lcd_144_io_s;
@@ -39,26 +40,27 @@ void lcd_gpio( void ) {
     GPIO_Init( GPIOC, &lcd_144_io_s );
     
     /* SPI conf */
-    spi_s.SPI_CPOL      = SPI_CPOL_High;
-    spi_s.SPI_CPHA      = SPI_CPHA_2Edge;
+//    spi_s.SPI_CPOL      = SPI_CPOL_High;
+//    spi_s.SPI_CPHA      = SPI_CPHA_2Edge;
+//    spi_s.SPI_Mode              = SPI_Mode_Master;
+//    spi_s.SPI_FirstBit          = SPI_FirstBit_MSB;
+//    spi_s.SPI_Direction         = SPI_Direction_Tx;
+//    spi_s.SPI_DataSize          = SPI_DataSize_8b;
+//    spi_s.SPI_NSS               = SPI_NSS_Soft;
+//    spi_s.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2; 
+//    SPI_Init( LCD_144_ST7735_SPI, &spi_s );
+//    SPI_Cmd( LCD_144_ST7735_SPI, ENABLE );
+//    
+//    spig_s.GPIO_Pin          = LCD_144_ST7735_SPI_PIN;
+//    spig_s.GPIO_Mode         = GPIO_Mode_AF;
+//    spig_s.GPIO_OType        = GPIO_OType_PP;
+//    spig_s.GPIO_PuPd         = GPIO_PuPd_UP;
+//    spig_s.GPIO_Speed        = GPIO_Speed_100MHz;
+//    GPIO_Init( GPIOB, &spig_s );
 
-    spi_s.SPI_Mode              = SPI_Mode_Master;
-    spi_s.SPI_FirstBit          = SPI_FirstBit_MSB;
-    spi_s.SPI_Direction         = SPI_Direction_Tx;
-    spi_s.SPI_DataSize          = SPI_DataSize_8b;
-    spi_s.SPI_NSS               = SPI_NSS_Soft;
-    spi_s.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2; 
-    SPI_Init( LCD_144_ST7735_SPI, &spi_s );
-    SPI_Cmd( LCD_144_ST7735_SPI, ENABLE );
+    spi_conf( LCD_144_ST7735_SPI, SPI_BaudRatePrescaler_2, SPI_MODE_4, SPI_Direction_Tx );
     
-    spig_s.GPIO_Pin          = LCD_144_ST7735_SPI_PIN;
-    spig_s.GPIO_Mode         = GPIO_Mode_AF;
-    spig_s.GPIO_OType        = GPIO_OType_PP;
-    spig_s.GPIO_PuPd         = GPIO_PuPd_UP;
-    spig_s.GPIO_Speed        = GPIO_Speed_100MHz;
-    GPIO_Init( GPIOB, &spig_s );
     LCD_144_ST7735_CS_SET;
-    
     LCD_144_ST7735_BLK_SET;
     
 }

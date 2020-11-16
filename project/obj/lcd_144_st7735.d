@@ -154,3 +154,4 @@
 .\project\obj\lcd_144_st7735.o: .\third_party\rt-thread-sorted\finsh\finsh_api.h
 .\project\obj\lcd_144_st7735.o: driver\sdio\sd_sdio_conf.h
 .\project\obj\lcd_144_st7735.o: driver\sdio\sd_sdio.h
+.\project\obj\lcd_144_st7735.o: driver\spi\spi_conf.h

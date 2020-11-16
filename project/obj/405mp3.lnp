@@ -61,6 +61,7 @@
 ".\project\obj\file_trans.o"
 ".\project\obj\tim.o"
 ".\project\obj\lcd_st7789.o"
+".\project\obj\iic_conf.o"
 ".\project\obj\app_main.o"
 ".\project\obj\app_task.o"
 ".\project\obj\app_ui.o"
