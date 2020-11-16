@@ -1,0 +1,11 @@
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\lv_debug.c
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\lv_debug.h
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\../lv_conf_internal.h
+.\project\obj\lv_debug.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\../../../lv_conf.h
+.\project\obj\lv_debug.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\lv_mem.h
+.\project\obj\lv_debug.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\lv_log.h
+.\project\obj\lv_debug.o: third_party\lvgl\lvgl\src\lv_misc\lv_types.h
+.\project\obj\lv_debug.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\string.h

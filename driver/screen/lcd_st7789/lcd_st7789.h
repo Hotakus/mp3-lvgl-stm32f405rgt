@@ -57,8 +57,8 @@ extern "C" {
 #define ST7789_RST_HIGH    GPIOA->BSRRL |= ST7789_RST
 #define ST7789_RST_LOW     GPIOA->BSRRH |= ST7789_RST
 
-#define LCD_LEDK_HIGH      GPIOA->BSRRL |= LCD_LEDK
-#define LCD_LEDK_LOW       GPIOA->BSRRH |= LCD_LEDK
+#define ST7789_BLK_HIGH    GPIOA->BSRRL |= LCD_LEDK
+#define ST7789_BLK_LOW     GPIOA->BSRRH |= LCD_LEDK
 #endif
 
 #elif  (USER_USE_SCR == USE_SCR_LCD_ST7789_200)
@@ -84,8 +84,8 @@ extern "C" {
 #define LCD_ST7789_DAT_7            GPIO_Pin_15 // PB
 #define LCD_ST7789_DAT_PIN          ( LCD_ST7789_DAT_0 | LCD_ST7789_DAT_1 | LCD_ST7789_DAT_2 | LCD_ST7789_DAT_3 | \
                                       LCD_ST7789_DAT_4 | LCD_ST7789_DAT_5 | LCD_ST7789_DAT_6 | LCD_ST7789_DAT_7 )
-#define ST7789_CTL_GPIO     GPIOA
-#define ST7789_DAT_GPIO     GPIOB
+#define ST7789_CTL_GPIO             GPIOA
+#define ST7789_DAT_GPIO             GPIOB
 
 #define ST7789_CS_HIGH              GPIOA->BSRR |= ST7789_CS
 #define ST7789_CS_LOW               GPIOA->BRR  |= ST7789_CS
@@ -104,6 +104,14 @@ extern "C" {
 
 #define ST7789_BLK_HIGH             GPIOA->BSRR |= LCD_LEDK
 #define ST7789_BLK_LOW              GPIOA->BRR  |= LCD_LEDK
+
+#else       // 处理不使用屏幕的情况
+
+#define ST7789_BLK_HIGH    
+#define ST7789_BLK_LOW     
+
+#define ST7789_RST_HIGH             
+#define ST7789_RST_LOW              
 
 #endif
 

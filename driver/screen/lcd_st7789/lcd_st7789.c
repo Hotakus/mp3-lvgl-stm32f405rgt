@@ -287,12 +287,12 @@ void lcd_st7789_hw_reset( void )
 void lcd_st7789_displayOn( void )
 {
     lcd_st7789_powerUp();
-    LCD_LEDK_HIGH;
+    ST7789_BLK_HIGH;
 }
 
 void lcd_st7789_displayOff( void )
 {
-    LCD_LEDK_LOW;
+    ST7789_BLK_LOW;
     lcd_st7789_powerDown();
 }
 
