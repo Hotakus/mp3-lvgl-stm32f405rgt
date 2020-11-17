@@ -46,28 +46,6 @@ static void lv_ex_spinner_1(void)
     lv_obj_set_size(preload4, 50, 50);
     lv_obj_align(preload4, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);
     
-    lv_obj_t * preload5 = lv_spinner_create(lv_scr_act(), NULL);
-    lv_obj_set_size(preload5, 50, 50);
-    lv_obj_align(preload5, NULL, LV_ALIGN_CENTER, 0, 0);
-    
-    
-    
-    lv_obj_t * preload6 = lv_spinner_create(lv_scr_act(), NULL);
-    lv_obj_set_size(preload6, 50, 50);
-    lv_obj_align(preload6, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
-    
-    lv_obj_t * preload7 = lv_spinner_create(lv_scr_act(), NULL);
-    lv_obj_set_size(preload7, 50, 50);
-    lv_obj_align(preload7, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
-    
-    lv_obj_t * preload8 = lv_spinner_create(lv_scr_act(), NULL);
-    lv_obj_set_size(preload8, 50, 50);
-    lv_obj_align(preload8, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0);
-    
-    lv_obj_t * preload9 = lv_spinner_create(lv_scr_act(), NULL);
-    lv_obj_set_size(preload9, 50, 50);
-    lv_obj_align(preload9, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
-    
 }
 
 #if USE_LV_EX == 1

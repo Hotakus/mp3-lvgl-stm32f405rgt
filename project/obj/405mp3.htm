@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\project\obj\405mp3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\project\obj\405mp3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Nov 17 00:59:08 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Nov 18 04:13:58 2020
 <BR><P>
 <H3>Maximum Stack Usage =      10140 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -23,9 +23,6 @@ Mutually Recursive functions
  <LI><a href="#[3e4]">obj_del_core</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[3e4]">obj_del_core</a><BR>
  <LI><a href="#[1f0]">apply_theme</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1f0]">apply_theme</a><BR>
  <LI><a href="#[311]">update_style_cache_children</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[311]">update_style_cache_children</a><BR>
- <LI><a href="#[1b3]">_lv_obj_get_style_opa</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b1]">update_style_cache</a><BR>
- <LI><a href="#[3ff]">lv_obj_get_style_bg_grad_dir</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
- <LI><a href="#[3ea]">lv_obj_get_style_bg_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[1b1]">update_style_cache</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[1b5]">_lv_obj_get_style_ptr</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b1]">update_style_cache</a><BR>
  <LI><a href="#[413]">lv_obj_get_style_value_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
@@ -44,6 +41,7 @@ Mutually Recursive functions
  <LI><a href="#[406]">lv_obj_get_style_pad_bottom</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[3fa]">lv_obj_get_style_outline_width</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[405]">lv_obj_get_style_outline_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
+ <LI><a href="#[1b3]">_lv_obj_get_style_opa</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b1]">update_style_cache</a><BR>
  <LI><a href="#[404]">lv_obj_get_style_line_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[402]">lv_obj_get_style_image_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[3e5]">lv_obj_get_style_clip_corner</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
@@ -51,6 +49,8 @@ Mutually Recursive functions
  <LI><a href="#[400]">lv_obj_get_style_border_side</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[3ed]">lv_obj_get_style_border_post</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[3eb]">lv_obj_get_style_border_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
+ <LI><a href="#[3ff]">lv_obj_get_style_bg_grad_dir</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
+ <LI><a href="#[3ea]">lv_obj_get_style_bg_blend_mode</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b0]">_lv_obj_get_style_int</a><BR>
  <LI><a href="#[416]">refresh_children_style</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[416]">refresh_children_style</a><BR>
  <LI><a href="#[418]">report_style_mod_core</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[418]">report_style_mod_core</a><BR>
  <LI><a href="#[292]">putc_bfd</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[292]">putc_bfd</a><BR>
@@ -829,9 +829,9 @@ Global Symbols
 <P><STRONG><a name="[e4]"></a>strtol</STRONG> (Thumb, 112 bytes, Stack size 32 bytes, strtol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = strtol &rArr; _strtoul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
+<BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 </UL>
@@ -1724,9 +1724,9 @@ Global Symbols
 <P><STRONG><a name="[4d8]"></a>sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)
 
 <P><STRONG><a name="[e3]"></a>__aeabi_errno_addr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, errno.o(i.__aeabi_errno_addr))
-<BR><BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
-<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
+<BR><BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
 </UL>
 
 <P><STRONG><a name="[4d9]"></a>__rt_errno_addr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, errno.o(i.__aeabi_errno_addr), UNUSED)
@@ -1798,8 +1798,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_inv_area
 <LI><a href="#[277]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_shadow
 <LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pattern
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[429]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_refr_get_top_obj
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 </UL>
 
@@ -2248,8 +2248,8 @@ Global Symbols
 <LI><a href="#[237]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decompress
 <LI><a href="#[399]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_indexed
 <LI><a href="#[397]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_alpha
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_disp_refr_task
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 </UL>
 
@@ -2270,8 +2270,8 @@ Global Symbols
 <LI><a href="#[237]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decompress
 <LI><a href="#[399]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_indexed
 <LI><a href="#[397]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_decoder_built_in_line_alpha
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_disp_refr_task
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 </UL>
 
@@ -2392,8 +2392,6 @@ Global Symbols
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
 </UL>
 <BR>[Called By]<UL><LI><a href="#[395]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_set_src
-<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
-<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
 <LI><a href="#[3da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_state
 <LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_line_dsc
@@ -2432,6 +2430,8 @@ Global Symbols
 <LI><a href="#[400]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_side
 <LI><a href="#[3ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_post
 <LI><a href="#[3eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_blend_mode
+<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
+<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
 <LI><a href="#[2ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_pad_top
 <LI><a href="#[2c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_pad_right
 <LI><a href="#[2c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_pad_left
@@ -2466,8 +2466,7 @@ Global Symbols
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_list
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_line_dsc
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_label_dsc
 <LI><a href="#[3a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_img_dsc
@@ -2478,6 +2477,7 @@ Global Symbols
 <LI><a href="#[3fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_outline_opa
 <LI><a href="#[3ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_opa_scale
 <LI><a href="#[403]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_image_recolor_opa
+<LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 </UL>
 
@@ -4372,8 +4372,8 @@ Global Symbols
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_border
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_bg
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_line_skew
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[350]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_arc
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 </UL>
 
@@ -4479,13 +4479,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_line
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_label
 <LI><a href="#[36a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_error
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[350]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_arc
 <LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_quarter_3
 <LI><a href="#[275]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_quarter_2
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_quarter_1
 <LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_quarter_0
 <LI><a href="#[427]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_refr_area_part
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_arc_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_design
@@ -4499,9 +4499,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_line
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_label
 <LI><a href="#[36a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_error
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[350]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_arc
 <LI><a href="#[427]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_refr_area_part
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_arc_design
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_design
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_design
@@ -5970,10 +5970,7 @@ Global Symbols
 <P><STRONG><a name="[34d]"></a>lv_obj_init_draw_rect_dsc</STRONG> (Thumb, 842 bytes, Stack size 40 bytes, lv_obj.o(i.lv_obj_init_draw_rect_dsc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 528<LI>Call Chain = lv_obj_init_draw_rect_dsc &rArr; lv_obj_get_style_value_ofs_y &rArr; _lv_obj_get_style_int &rArr; update_style_cache &rArr;  _lv_obj_get_style_int (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
-<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
-<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
-<LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_src_get_type
+<BR>[Calls]<UL><LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_img_src_get_type
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_opa
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 <LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_color
@@ -6004,6 +6001,9 @@ Global Symbols
 <LI><a href="#[401]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_width
 <LI><a href="#[400]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_side
 <LI><a href="#[3eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_blend_mode
+<LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
+<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
+<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_arc_design
@@ -8075,8 +8075,8 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_create_example
 </UL>
 
-<P><STRONG><a name="[1e8]"></a>lv_ex_spinner_1</STRONG> (Thumb, 368 bytes, Stack size 48 bytes, app_ui.o(i.lv_ex_spinner_1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 864<LI>Call Chain = lv_ex_spinner_1 &rArr; lv_spinner_create &rArr; lv_arc_create &rArr; lv_arc_set_value &rArr; lv_arc_set_start_angle &rArr; inv_arc_area &rArr; lv_obj_get_draw_rect_ext_pad_size &rArr; lv_obj_get_style_value_ofs_y &rArr; _lv_obj_get_style_int &rArr; update_style_cache &rArr;  _lv_obj_get_style_int (Cycle)
+<P><STRONG><a name="[1e8]"></a>lv_ex_spinner_1</STRONG> (Thumb, 168 bytes, Stack size 32 bytes, app_ui.o(i.lv_ex_spinner_1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 848<LI>Call Chain = lv_ex_spinner_1 &rArr; lv_spinner_create &rArr; lv_arc_create &rArr; lv_arc_set_value &rArr; lv_arc_set_start_angle &rArr; inv_arc_area &rArr; lv_obj_get_draw_rect_ext_pad_size &rArr; lv_obj_get_style_value_ofs_y &rArr; _lv_obj_get_style_int &rArr; update_style_cache &rArr;  _lv_obj_get_style_int (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[382]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_spinner_create
 <LI><a href="#[342]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
@@ -9302,11 +9302,11 @@ Local Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_coords
 <LI><a href="#[2bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_invalidate
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_is_visible
 <LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_invalidate_area
 <LI><a href="#[33c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_create
 <LI><a href="#[3de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_area_is_visible
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3fe]"></a>lv_area_get_height</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, lv_obj.o(i.lv_area_get_height))
@@ -9338,9 +9338,7 @@ Local Symbols
 <P><STRONG><a name="[9c]"></a>lv_obj_design</STRONG> (Thumb, 556 bytes, Stack size 128 bytes, lv_obj.o(i.lv_obj_design))
 <BR><BR>[Stack]<UL><LI>Max Depth = 904<LI>Call Chain = lv_obj_design &rArr; lv_draw_rect &rArr; draw_border &rArr; draw_full_border &rArr; _lv_mem_buf_get &rArr; lv_debug_log_error &rArr; _lv_memcpy
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
-<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
-<LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_area_copy
+<BR>[Calls]<UL><LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_area_copy
 <LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_rect_dsc_init
 <LI><a href="#[273]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_rect
 <LI><a href="#[3a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_mask_remove_custom
@@ -9357,6 +9355,8 @@ Local Symbols
 <LI><a href="#[3e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_clip_corner
 <LI><a href="#[3ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_post
 <LI><a href="#[3eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_blend_mode
+<LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
+<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> lv_obj.o(i.lv_obj_create)
 </UL>
@@ -9366,9 +9366,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3ff]"></a>lv_obj_get_style_bg_grad_dir</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_bg_grad_dir))
@@ -9386,9 +9386,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_opa
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3eb]"></a>lv_obj_get_style_border_blend_mode</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_border_blend_mode))
@@ -9397,9 +9397,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3ed]"></a>lv_obj_get_style_border_post</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_border_post))
@@ -9408,8 +9408,8 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[400]"></a>lv_obj_get_style_border_side</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_border_side))
@@ -9438,8 +9438,8 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[402]"></a>lv_obj_get_style_image_blend_mode</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_image_blend_mode))
@@ -9477,13 +9477,13 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_opa
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_line_dsc
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_label_dsc
 <LI><a href="#[3a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_img_dsc
 <LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache_children
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[405]"></a>lv_obj_get_style_outline_blend_mode</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_outline_blend_mode))
@@ -9594,9 +9594,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
+<BR>[Called By]<UL><LI><a href="#[34d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_init_draw_rect_dsc
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[40d]"></a>lv_obj_get_style_shadow_blend_mode</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_shadow_blend_mode))
@@ -9715,9 +9715,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_draw_rect_ext_pad_size
+<BR>[Called By]<UL><LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_draw_rect_ext_pad_size
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3e7]"></a>lv_obj_get_style_transform_width</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_transform_width))
@@ -9726,9 +9726,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
-<LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_draw_rect_ext_pad_size
+<BR>[Called By]<UL><LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_draw_rect_ext_pad_size
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_style_cache
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_design
 </UL>
 
 <P><STRONG><a name="[3f7]"></a>lv_obj_get_style_value_align</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, lv_obj.o(i.lv_obj_get_style_value_align))
@@ -9866,9 +9866,9 @@ Local Symbols
 <LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_parent
 <LI><a href="#[3e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_disp
 <LI><a href="#[335]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_del
-<LI><a href="#[45b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_event_mark_deleted
 <LI><a href="#[3e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;trans_del
 <LI><a href="#[3e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obj_del_core
+<LI><a href="#[45b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_event_mark_deleted
 </UL>
 <BR>[Called By]<UL><LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_del
 <LI><a href="#[3e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;obj_del_core
@@ -9919,14 +9919,14 @@ Local Symbols
 <P><STRONG><a name="[9d]"></a>trans_anim_cb</STRONG> (Thumb, 228 bytes, Stack size 32 bytes, lv_obj.o(i.trans_anim_cb))
 <BR><BR>[Stack]<UL><LI>Max Depth = 600<LI>Call Chain = trans_anim_cb &rArr; lv_obj_refresh_style &rArr; invalidate_style_cache &rArr; update_style_cache_children &rArr;  update_style_cache_children (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_color_mix
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_set_ptr
+<BR>[Calls]<UL><LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_set_ptr
 <LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_set_opa
 <LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_set_int
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_set_color
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_style_list_get_transition_style
 <LI><a href="#[34b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_refresh_style
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_list
+<LI><a href="#[4b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_color_mix
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> lv_obj.o(i.lv_obj_set_state)
 </UL>
@@ -9997,10 +9997,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 424 + In Cycle
 <LI>Call Chain = update_style_cache &rArr;  _lv_obj_get_style_int (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
-<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
-<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
-<LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_list
+<BR>[Calls]<UL><LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_list
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_int
 <LI><a href="#[30f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;style_prop_is_cacheble
 <LI><a href="#[3f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_value_str
@@ -10032,6 +10029,9 @@ Local Symbols
 <LI><a href="#[400]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_side
 <LI><a href="#[3ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_post
 <LI><a href="#[3eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_border_blend_mode
+<LI><a href="#[3e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_opa
+<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_grad_dir
+<LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_style_bg_blend_mode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_ptr
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_lv_obj_get_style_opa
