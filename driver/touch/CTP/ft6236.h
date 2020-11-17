@@ -7,9 +7,10 @@
 
 
 /* definations */
-
+#define FT6236_RST      GPIO_Pin_0  // PA
+#define FT6236_INT      GPIO_Pin_1  // PA
 
 /* functions */
-
+void ctp_ft6236_init( void );
 
 #endif

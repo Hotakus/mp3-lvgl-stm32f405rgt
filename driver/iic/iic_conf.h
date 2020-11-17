@@ -15,6 +15,7 @@ extern "C" {
 
 /* functions */
 void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr );
+ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout );
 
 #ifdef __cplusplus
 }

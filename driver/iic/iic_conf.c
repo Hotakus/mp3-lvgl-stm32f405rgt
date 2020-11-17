@@ -37,3 +37,12 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     i2cg_s.GPIO_Speed           = GPIO_Speed_100MHz;
     GPIO_Init( GPIOB, &i2cg_s );
 }
+
+ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout )
+{
+    ErrorStatus err = ERROR;
+    do {
+        err = I2C_CheckEvent( I2Cx, i2c_event );
+    } while ( --timeout && err != SUCCESS );
+    return err;
+}
