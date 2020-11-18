@@ -13,8 +13,8 @@
 u8 cur_char;
 
 void USART1_IRQHandler( void ) {
-#if USER_USE_UCOS == 1
-    OSIntEnter();
+#if USER_USE_OS == 1
+    OS_INT_ENTER();
 #endif
     if ( USART_GetITStatus( USART1, USART_IT_RXNE ) ) {
         cur_char = my_getc();
@@ -26,8 +26,8 @@ void USART1_IRQHandler( void ) {
         USART_ClearFlag( USART1, USART_FLAG_ORE );
     }
     
-#if USER_USE_UCOS == 1
-    OSIntExit();
+#if USER_USE_OS == 1
+    OS_INT_EXIT();
 #endif
 }
 
@@ -35,21 +35,22 @@ void USART1_IRQHandler( void ) {
 *   USART1 DMA TX ISR function
 */
 void DMA2_Stream7_IRQHandler( void ) {
-#if USER_USE_UCOS == 1
-    OSIntEnter();
+#if USER_USE_OS == 1
+    OS_INT_ENTER();
 #endif
     if( DMA_GetITStatus(DMA2_Stream7,DMA_IT_TCIF7) ) {  
         DMA_ClearITPendingBit( DMA2_Stream7, DMA_IT_TCIF7 );  
         DMA_Cmd( DMA2_Stream7, DISABLE );
         //dma_off(DMA2_Stream7);
     }
-#if USER_USE_UCOS == 1
-    OSIntExit();
+#if USER_USE_OS == 1
+    OS_INT_EXIT();
 #endif
 }
 
 
 void TIM4_IRQHandler( void ) {
+
     if ( TIM_GetITStatus( TIM4, TIM_IT_Update ) != RESET ) {
         ticks_decrease();
         TIM_ClearITPendingBit( TIM4, TIM_IT_Update );
@@ -58,21 +59,21 @@ void TIM4_IRQHandler( void ) {
 
 void SDIO_IRQHandler(void)
 {
-#if USER_USE_RTTHREAD == 1
-    rt_interrupt_enter();
-#endif 
+#if USER_USE_OS == 1
+    OS_INT_ENTER();
+#endif
     SD_ProcessIRQSrc();  
-#if USER_USE_RTTHREAD == 1
-  rt_interrupt_leave();
-#endif 
+#if USER_USE_OS == 1
+    OS_INT_EXIT();
+#endif
 }   
 void SD_SDIO_DMA_IRQHANDLER(void)
 {
-#if USER_USE_RTTHREAD == 1
-    rt_interrupt_enter();
-#endif 
+#if USER_USE_OS == 1
+    OS_INT_ENTER();
+#endif
     SD_ProcessDMAIRQ();  
-#if USER_USE_RTTHREAD == 1
-  rt_interrupt_leave();
-#endif 
+#if USER_USE_OS == 1
+    OS_INT_EXIT();
+#endif
 } 

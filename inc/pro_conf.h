@@ -15,44 +15,52 @@
 extern "C" {
 #endif
 
-/* USER USE */
-#define USER_USE_RTTHREAD   1
-#define USER_USE_LVGL       1
-#define USER_USE_UCOS       0
-#define USER_USE_FATFS      1
+/* USER USE OS */
+#define USER_USE_OS         1u
+#if USER_USE_OS == (1u)
+#define USER_USE_RTTHREAD   1u
+#define USER_USE_UCOS       0u
+#if USER_USE_RTTHREAD == (1u)
+#define RT_OS_INT_ENTER     rt_interrupt_enter
+#define RT_OS_INT_EXIT      rt_interrupt_leave
+#define OS_INT_ENTER        RT_OS_INT_ENTER
+#define OS_INT_EXIT         RT_OS_INT_EXIT
+#elif USER_USE_UCOS == (1u)
+#define RT_OS_INT_ENTER     
+#define RT_OS_INT_EXIT      
+#define OS_INT_ENTER        
+#define OS_INT_ENTER        
+#endif
+#endif
 
-#define USER_USE_APP        1
+#define USER_USE_LVGL       1u
+#define USER_USE_FATFS      1u
+#define USER_USE_APP        1u
 
 /* FatFs thread-safe conf */
-#define THREAD_SAFE_SW      0
+#define THREAD_SAFE_SW      0u
 
 /* USER USE screen */
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
 // USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
-#define USE_SCR_IC_ST7789                   1
-#define USE_SCR_IC_ST7735                   1
-#define USE_SCR_LCD_ST7789_130              0
-#define USE_SCR_LCD_ST7789_200              1
-#define USE_SCR_LCD_144_ST7735              2
+#define USE_SCR_LCD_ST7789_130              0u
+#define USE_SCR_LCD_ST7789_200              1u
+#define USE_SCR_LCD_144_ST7735              2u
 #define USER_USE_SCR                        USE_SCR_LCD_144_ST7735
 
-/* 延时函数时钟源 */
-#define DELAY_SRC_SYSTICK  0
-#define DELAY_SRC_TIM      1
-#define DELAY_SRC   DELAY_SRC_TIM
 
 /* VS10XX_SINTEST SWITCH */
-#define VS10XX_SINTEST  1
+#define VS10XX_SINTEST  1u
 
 
 /* incldues */
-#if USER_USE_UCOS == 1
+#if USER_USE_UCOS == 1u
 /* ucos */
 #include "ucos_inc.h"
 #endif
 
-#if USER_USE_LVGL == 1
+#if USER_USE_LVGL == 1u
 /* lvgl */
 #include "lvgl.h"
 #include "lv_port_disp.h"
@@ -63,19 +71,19 @@ extern "C" {
 #if USER_USE_APP == 1
 /* app */
 #include "app_main.h"
-#if USER_USE_LVGL == 1
-#define USE_LV_EX   1
+#if USER_USE_LVGL == 1u
+#define USE_LV_EX   1u
 #endif
 #endif
 
-#if USER_USE_FATFS == 1
+#if USER_USE_FATFS == 1u
 /* file system */
 #include "ff.h"
 #endif
 
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_RTTHREAD == 1u
 #include <rtthread.h>
-#define APP_THREAD_NUM  10       // 定义APP最大线程
+#define APP_THREAD_NUM      10u         // 定义APP最大线程
 #define APP_INIT_STK_SIZE   (4<<10)         // 应用栈大小
 
 #define RT_PRINT        rt_kprintf
@@ -85,10 +93,6 @@ extern "C" {
 #define RT_MALLOC       rt_malloc
 #define RT_FREE         rt_free
 
-#elif USER_USE_RTTHREAD == 0
-#define SECTION(x) __attribute__((section(x)))
-#endif
-
 #define DEBUG_PRINT     RT_PRINT
 #define DELAY           RT_DELAY
 #define STRCMP          RT_STRCMP
@@ -96,11 +100,24 @@ extern "C" {
 #define MALLOC          RT_MALLOC
 #define FREE            RT_FREE
 
+#elif USER_USE_RTTHREAD == 0
+#define SECTION(x) __attribute__((section(x)))
+
+#define DEBUG_PRINT     printf
+#define DELAY           delay_ms
+#define STRCMP          strcmp
+#define STRCAT          strcat
+#define MALLOC          malloc
+#define FREE            free
+
+#endif
+
+
 /* SD configuration */
-#define USER_ON_SD          1
-#define USER_USE_SD_NUM     1
-#define USER_USE_SD_SPI     0
-#define USER_USE_SD_SDIO    1
+#define USER_ON_SD          1u
+#define USER_USE_SD_NUM     1u
+#define USER_USE_SD_SPI     0u
+#define USER_USE_SD_SDIO    1u
 #if USER_ON_SD == 1
 #if USER_USE_SD_NUM == 1
 #define USER_USE_SD1         USER_USE_SD_SDIO
@@ -109,9 +126,9 @@ extern "C" {
 #define USER_USE_SD2         USER_USE_SD_SPI
 #endif
 
-#if USER_USE_SD_NUM == 1
+#if USER_USE_SD_NUM == 1u
 #include "sd_sdio_conf.h"
-#elif USER_USE_SD_NUM == 2
+#elif USER_USE_SD_NUM == 2u
 #include "sd_spi.h"
 #include "sd_sdio_conf.h"
 #endif
