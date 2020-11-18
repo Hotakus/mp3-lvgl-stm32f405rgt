@@ -28,9 +28,6 @@ typedef enum {
 /* functions */
 void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr );
 
-void oled_i2c_start( I2C_TypeDef * I2Cx );
-void oled_i2c_stop( I2C_TypeDef * I2Cx );
-
 void oled_i2c_send_byte( u8 byte );
 void oled_send( u8 slave_addr, u8 dat, OLED_OPT opt );
 

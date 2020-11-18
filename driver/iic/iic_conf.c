@@ -1,3 +1,14 @@
+/************************************************
+ * @file iic_conf.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-18
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
+
 #include "iic_conf.h"
 #include "usart.h"
 #include "pro_conf.h"
@@ -6,6 +17,13 @@ static I2C_InitTypeDef  i2c_s;
 static GPIO_InitTypeDef i2cg_s;
 static u16 i2c_clk_m = 1000;
 
+/************************************************
+ * @brief I2C configure
+ * 
+ * @param I2Cx 
+ * @param i2c_clk 
+ * @param own_addr 
+ ************************************************/
 void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     
     if ( i2c_clk > 400 ) {
@@ -38,11 +56,148 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     GPIO_Init( GPIOB, &i2cg_s );
 }
 
+/************************************************
+ * @brief check i2c event
+ * 
+ * @param I2Cx 
+ * @param i2c_event 
+ * @param timeout 
+ * @return ErrorStatus 
+ ************************************************/
 ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout )
 {
     ErrorStatus err = ERROR;
     do {
         err = I2C_CheckEvent( I2Cx, i2c_event );
     } while ( --timeout && err != SUCCESS );
+    return err;
+}
+
+/************************************************
+ * @brief generate an i2c start condition
+ * 
+ * @param I2Cx 
+ * @param timeout 
+ * @return ErrorStatus 
+ ************************************************/
+ErrorStatus i2c_generate_start( I2C_TypeDef *I2Cx, uint32_t timeout )
+{
+    ErrorStatus err = ERROR;
+    uint8_t retry = I2C_RETRY_TIMES;
+
+    do {
+        I2C_GenerateSTART( I2Cx, ENABLE );
+        err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_MODE_SELECT, timeout );
+    } while ( --retry && err != SUCCESS );
+    if ( err != SUCCESS ) {
+        DEBUG_PRINT( "I2C generate start condition error.\n" );
+        i2c_generate_stop( I2Cx );
+        return err;
+    }
+    return err;
+}
+
+/************************************************
+ * @brief generate an i2c stop condition
+ * 
+ * @param I2Cx 
+ ************************************************/
+void i2c_generate_stop ( I2C_TypeDef *I2Cx )
+{
+    I2C_GenerateSTOP( I2Cx, ENABLE );
+}
+
+/************************************************
+ * @brief send a 7bit address
+ * 
+ * @param I2Cx 
+ * @param addr 
+ * @param timeout 
+ * @return ErrorStatus 
+ ************************************************/
+ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint8_t addr, uint32_t timeout )
+{
+    ErrorStatus err = ERROR;
+    uint8_t retry = I2C_RETRY_TIMES;
+
+    do {
+        I2Cx->DR = addr;
+        if ( !(addr&0x01) )
+            err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED, timeout );
+        else if ( addr&0x01 )
+            err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED, timeout );
+    } while ( --retry && err != SUCCESS );
+    if ( err != SUCCESS ) {
+        DEBUG_PRINT( "I2C send 7bit address error.\n" );
+        i2c_generate_stop( I2Cx );
+        return err;
+    }
+    return err;
+}
+
+/************************************************
+ * @brief i2c send byte
+ * 
+ * @param I2Cx 
+ * @param byte 
+ * @param timeout 
+ * @return ErrorStatus 
+ ************************************************/
+ErrorStatus i2c_send_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout )
+{
+    ErrorStatus err = ERROR;
+    uint8_t retry = I2C_RETRY_TIMES;
+    uint8_t *pd = byte;
+
+    if ( !len )
+        return ERROR;
+
+    do {
+        retry = I2C_RETRY_TIMES;
+        do {
+            I2Cx->DR = *pd;
+            err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING, timeout );
+        } while ( --retry && err != SUCCESS );
+        if ( err != SUCCESS ) {
+            i2c_generate_stop( I2Cx );
+            return err;
+        } else if ( err == SUCCESS && len != 1 )
+            pd += 1;
+    } while ( --len );
+
+    return err;
+}
+
+/************************************************
+ * @brief i2c receive n bytes
+ * 
+ * @param I2Cx 
+ * @param byte 
+ * @param len 
+ * @param timeout 
+ * @return ErrorStatus 
+ ************************************************/
+ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout )
+{
+    ErrorStatus err = ERROR;
+    uint8_t retry = I2C_RETRY_TIMES;
+    uint8_t *pd = byte;
+    
+    if ( !len )
+        return ERROR;
+
+    do {
+        retry = I2C_RETRY_TIMES;
+        do {
+            *byte = I2Cx->DR;
+            err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED, timeout );
+        } while ( --retry && err != SUCCESS );
+        if ( err != SUCCESS ) {
+            i2c_generate_stop( I2Cx );
+            return err;
+        } else if ( err == SUCCESS && len != 1 )
+            pd += 1;
+    } while ( --len );
+    
     return err;
 }

@@ -2,6 +2,7 @@
 #include "usart.h"
 #include "oledfont.h"
 #include "pro_conf.h"
+#include "iic_conf.h"
 
 /* OLED 显存 */
 u8 OLED_GRAM[8][128];
@@ -60,23 +61,6 @@ void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     oled_flush_with( (u8*)OLED_GRAM );
 }
 
-/***************************
-*   i2c_start
-****************************/
-void oled_i2c_start( I2C_TypeDef * I2Cx ) {
-    I2C_AcknowledgeConfig( I2Cx, ENABLE );
-    I2C_GenerateSTART( I2Cx, ENABLE );
-    if ( i2c_check_event( I2Cx, I2C_EVENT_MASTER_MODE_SELECT, 0xFFF ) == ERROR ) {
-        DEBUG_PRINT( "i2c start error\n\r" );
-        I2C_GenerateSTOP( I2Cx, ENABLE );
-    }
-}
-/***************************
-*   i2c_stop
-****************************/
-void oled_i2c_stop( I2C_TypeDef * I2Cx ) {
-    I2C_GenerateSTOP( I2Cx, ENABLE );
-}
 
 /***************************
 *   函数:       oled_i2c_send_byte
@@ -84,11 +68,7 @@ void oled_i2c_stop( I2C_TypeDef * I2Cx ) {
 *   byte:       字节
 ****************************/
 void oled_i2c_send_byte( u8 byte ) {
-    OLED_I2C->DR = byte;
-    if ( i2c_check_event( OLED_I2C, I2C_EVENT_MASTER_BYTE_TRANSMITTING, 0xFFF ) == ERROR ) {
-        DEBUG_PRINT( "i2c send byte error\n\r" );
-        I2C_GenerateSTOP( OLED_I2C, ENABLE );
-    }
+    i2c_send_bytes( OLED_I2C, &byte, 1, 0xFFF );
 }
 
 /***************************
@@ -99,14 +79,16 @@ void oled_i2c_send_byte( u8 byte ) {
 *   opt:        命令或数据opt
 ****************************/
 void oled_send( u8 slave_addr, u8 dat, OLED_OPT opt ) {
-    oled_i2c_start( OLED_I2C );
-    
-    I2C_Send7bitAddress( OLED_I2C, OLED_ADDR, I2C_Direction_Transmitter );
-    if ( i2c_check_event( OLED_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED, 0xFFF ) == ERROR ) {
-        //DEBUG_PRINT( "i2c send address error\n\r" );
-        I2C_GenerateSTOP( OLED_I2C, ENABLE );
+
+    ErrorStatus err = ERROR;
+
+    err = i2c_generate_start( OLED_I2C, 0xFFF );
+    if ( err != SUCCESS )
         return;
-    }
+
+    i2c_send_7bitAddr( OLED_I2C, OLED_ADDR, 0xFFF );
+    if ( err != SUCCESS )
+        return;
     
     if ( opt == OLED_CMD ) {
         oled_i2c_send_byte( 0x00 );
@@ -116,7 +98,7 @@ void oled_send( u8 slave_addr, u8 dat, OLED_OPT opt ) {
     
     oled_i2c_send_byte( dat );
     
-    oled_i2c_stop( OLED_I2C );
+    i2c_generate_stop( OLED_I2C );
 }
 
 

@@ -1,15 +1,12 @@
 #include "iic_conf.h"
 #include "ft6236.h"
+#include "pro_conf.h"
 
 /************************************************
  * @brief FUNCTION PROPOTYPE
  ************************************************/
 static void ctp_ft6236_gpio(void);
-static void ctp_ft6236_start(void);
-static void ctp_ft6236_stop (void);
-static void ctp_ft6236_stop (void);
-static void ctp_ft6236_send_addr( u8 addr );
-static void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len );
+static void ctp_ft6236_reset(void);
 
 /************************************************
  * @brief FUNCTION REALIZED
@@ -40,33 +37,90 @@ static void ctp_ft6236_gpio(void)
 void ctp_ft6236_init( void )
 {
     ctp_ft6236_gpio();
-    i2c_conf( I2C1, 100, 0x94 );
+    ctp_ft6236_reset();
+    i2c_conf( I2C1, 400, 0x94 );
+    
+    uint8_t val = 0x0;
+    
+    val = 0;
+    ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
+    val = 22;
+    ctp_ft6236_writ_reg( FT_ID_G_THGROUP, &val, 1 );
+    val = 12;
+    ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
     
     
     
+    ctp_ft6236_read_reg( 0x02, &val, 1 );
+    printf( "ft6236 reg read ok. ( %x )\n", val );
 }
 
 
-static void ctp_ft6236_start(void)
+void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
 {
+    ErrorStatus err = ERROR;
+
+    // 开始
+    err = i2c_generate_start( FT6236_I2C, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    // 发送写命令
+    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    // 发送要读的寄存器地址
+    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+
+    // 重复开始
+    err = i2c_generate_start( FT6236_I2C, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+
+    // 发送读命令
+    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_READ), 0xFFF );
+    if ( err != SUCCESS )
+        return;
+
+    i2c_read_bytes( FT6236_I2C, val, len, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+
+    i2c_generate_stop( FT6236_I2C );
     
 }
 
-static void ctp_ft6236_stop (void)
+void ctp_ft6236_writ_reg( u8 reg_addr, u8 *val, u32 len )
 {
+    ErrorStatus err = ERROR;
+
+    printf( "write 0x%02x to reg 0x%02x\n", *val, reg_addr );
     
+    // 开始
+    err = i2c_generate_start( FT6236_I2C, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    // 发送写命令
+    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    
+    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    
+    i2c_send_bytes( FT6236_I2C, val, len, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    
+    i2c_generate_stop( FT6236_I2C );
 }
 
-static void ctp_ft6236_send_addr( u8 addr )
+static void ctp_ft6236_reset(void)
 {
-    
+    FT6236_RST_LOW;
+    DELAY( 100 );
+    FT6236_RST_HIGH;
+    DELAY( 100 );
 }
-
-static void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
-{
-    
-}
-
-
-
-

@@ -20,6 +20,8 @@
 #include <string.h>
 #include "ff_user.h"
 #include "file_trans.h"
+#include "oled.h"
+#include "ft6236.h"
 
 /************************************************
  * @brief cmd for msh
@@ -224,6 +226,28 @@ static void show_pic(int argc, char **args)
 MSH_CMD_EXPORT(show_pic, show a picture in screen from memory device.);
 
 #endif
+
+
+static void oled_test(void)
+{
+    static uint8_t flag = 0;
+    if ( !flag )
+        oled_i2c_init(I2C1,400,0);
+    else {
+        extern u8 OLED_GRAM[8][128];
+        oled_clean();
+        show_str( (u8*)"Hello!!!", FONT_8x16, 0, 64-16 );
+        oled_flush_with( (u8*)OLED_GRAM );
+    }
+}
+MSH_CMD_EXPORT(oled_test , oled test);
+
+static void ft6236_test(void)
+{
+    ctp_ft6236_init();
+}
+MSH_CMD_EXPORT(ft6236_test , ft6236 test);
+
 
 static void reboot(int argc, char **args)
 {

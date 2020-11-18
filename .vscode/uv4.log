@@ -1,20 +1,15 @@
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
 Build target 'f405mp3'
-compiling ft6236.c...
-driver\touch\CTP\ft6236.c(50): warning:  #177-D: function "ctp_ft6236_start"  was declared but never referenced
-  static void ctp_ft6236_start(void)
-driver\touch\CTP\ft6236.c(55): warning:  #177-D: function "ctp_ft6236_stop"  was declared but never referenced
-  static void ctp_ft6236_stop (void)
-driver\touch\CTP\ft6236.c(60): warning:  #177-D: function "ctp_ft6236_send_addr"  was declared but never referenced
-  static void ctp_ft6236_send_addr( u8 addr )
-driver\touch\CTP\ft6236.c(65): warning:  #177-D: function "ctp_ft6236_read_reg"  was declared but never referenced
-  static void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
-driver\touch\CTP\ft6236.c: 4 warnings, 0 errors
-compiling oled.c...
-compiling iic_conf.c...
 compiling cmd.c...
+compiling iic_conf.c...
+driver\iic\iic_conf.c(97): warning:  #940-D: missing return statement at end of non-void function "i2c_generate_start" 
+  }
+driver\iic\iic_conf.c(132): warning:  #940-D: missing return statement at end of non-void function "i2c_send_7bitAddr" 
+  }
+driver\iic\iic_conf.c: 2 warnings, 0 errors
+compiling oled.c...
 linking...
-Program Size: Code=178216 RO-data=78120 RW-data=4520 ZI-data=77376  
+Program Size: Code=179914 RO-data=80326 RW-data=5556 ZI-data=78412  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 4 Warning(s).
-Build Time Elapsed:  00:00:04
+".\project\obj\405mp3.axf" - 0 Error(s), 2 Warning(s).
+Build Time Elapsed:  00:00:03

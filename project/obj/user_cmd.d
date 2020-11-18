@@ -161,3 +161,6 @@
 .\project\obj\user_cmd.o: third_party\ff14\source\ff_user.h
 .\project\obj\user_cmd.o: driver\usart\usart.h
 .\project\obj\user_cmd.o: .\driver\file_thrans_with_fatfs\file_trans.h
+.\project\obj\user_cmd.o: .\driver\oled\oled.h
+.\project\obj\user_cmd.o: .\driver\iic\iic_conf.h
+.\project\obj\user_cmd.o: .\driver\touch\CTP\ft6236.h
