@@ -40,7 +40,7 @@
 
 /* functions */
 void ctp_ft6236_init( void );
-void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len );
-void ctp_ft6236_writ_reg( u8 reg_addr, u8 *val, u32 len );
+void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len );
+void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len );
 
 #endif

@@ -24,7 +24,7 @@ static u16 i2c_clk_m = 1000;
  * @param i2c_clk 
  * @param own_addr 
  ************************************************/
-void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
+void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr ) {
     
     if ( i2c_clk > 400 ) {
         DEBUG_PRINT( "i2c clk error\n" );
@@ -85,15 +85,17 @@ ErrorStatus i2c_generate_start( I2C_TypeDef *I2Cx, uint32_t timeout )
     ErrorStatus err = ERROR;
     uint8_t retry = I2C_RETRY_TIMES;
 
+    I2C_AcknowledgeConfig( I2Cx, ENABLE );
+
     do {
         I2C_GenerateSTART( I2Cx, ENABLE );
         err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_MODE_SELECT, timeout );
+    
+        if ( err != SUCCESS ) {
+            DEBUG_PRINT( "I2C generate start condition error.\n" );
+            i2c_generate_stop( I2Cx );
+        }
     } while ( --retry && err != SUCCESS );
-    if ( err != SUCCESS ) {
-        DEBUG_PRINT( "I2C generate start condition error.\n" );
-        i2c_generate_stop( I2Cx );
-        return err;
-    }
     return err;
 }
 
@@ -122,10 +124,14 @@ ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint8_t addr, uint32_t timeout
 
     do {
         I2Cx->DR = addr;
-        if ( !(addr&0x01) )
+        if ( !(addr&0x01) ) {
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED, timeout );
-        else if ( addr&0x01 )
+            printf("1\n");
+        } else if ( addr&0x01 ) {
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED, timeout );
+            printf("2\n");
+        }
+            
     } while ( --retry && err != SUCCESS );
     if ( err != SUCCESS ) {
         DEBUG_PRINT( "I2C send 7bit address error.\n" );
@@ -189,7 +195,7 @@ ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint
     do {
         retry = I2C_RETRY_TIMES;
         do {
-            *byte = I2Cx->DR;
+            *byte = (uint8_t)I2Cx->DR;
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED, timeout );
         } while ( --retry && err != SUCCESS );
         if ( err != SUCCESS ) {

@@ -14,6 +14,7 @@ static void ctp_ft6236_reset(void);
 static void ctp_ft6236_gpio(void) 
 {
     GPIO_InitTypeDef ctp_g;
+    EXTI_InitTypeDef exti_touch;
     
     RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
     
@@ -31,9 +32,11 @@ static void ctp_ft6236_gpio(void)
     GPIO_Init( GPIOA, &ctp_g );
     
     
-    
 }
 
+/************************************************
+ * @brief ft6236 initialized function
+ ************************************************/
 void ctp_ft6236_init( void )
 {
     ctp_ft6236_gpio();
@@ -41,22 +44,30 @@ void ctp_ft6236_init( void )
     i2c_conf( I2C1, 400, 0x94 );
     
     uint8_t val = 0x0;
-    
+
     val = 0;
     ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
     val = 22;
     ctp_ft6236_writ_reg( FT_ID_G_THGROUP, &val, 1 );
     val = 12;
     ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
+    val = 0;
+    ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
     
     
-    
-    ctp_ft6236_read_reg( 0x02, &val, 1 );
-    printf( "ft6236 reg read ok. ( %x )\n", val );
+
+//    ctp_ft6236_read_reg( 0xA3, &val, 1 );
+//    printf("%x\n", val);
 }
 
-
-void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
+/************************************************
+ * @brief read x bytes from register indicated
+ * 
+ * @param reg_addr 
+ * @param val 
+ * @param len 
+ ************************************************/
+void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 {
     ErrorStatus err = ERROR;
 
@@ -79,7 +90,7 @@ void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
         return;
 
     // 发送读命令
-    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_READ), 0xFFF );
+    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_READ), 0xFFF ); 
     if ( err != SUCCESS )
         return;
 
@@ -91,7 +102,14 @@ void ctp_ft6236_read_reg( u8 reg_addr, u8 *val, u32 len )
     
 }
 
-void ctp_ft6236_writ_reg( u8 reg_addr, u8 *val, u32 len )
+/************************************************
+ * @brief write x bytes to register indicated
+ * 
+ * @param reg_addr 
+ * @param val 
+ * @param len 
+ ************************************************/
+void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 {
     ErrorStatus err = ERROR;
 
@@ -117,6 +135,9 @@ void ctp_ft6236_writ_reg( u8 reg_addr, u8 *val, u32 len )
     i2c_generate_stop( FT6236_I2C );
 }
 
+/************************************************
+ * @brief ft6236 reset
+ ************************************************/
 static void ctp_ft6236_reset(void)
 {
     FT6236_RST_LOW;

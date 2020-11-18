@@ -244,7 +244,21 @@ MSH_CMD_EXPORT(oled_test , oled test);
 
 static void ft6236_test(void)
 {
-    ctp_ft6236_init();
+    static uint8_t flag = 0;
+    if ( !flag ) {
+        ctp_ft6236_init();
+        flag = 1;
+    } else {
+        uint8_t val = 0x0;
+        val = 0;
+        ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
+        val = 22;
+        ctp_ft6236_writ_reg( FT_ID_G_THGROUP, &val, 1 );
+        val = 12;
+        ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
+        val = 0;
+        ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
+    }
 }
 MSH_CMD_EXPORT(ft6236_test , ft6236 test);
 

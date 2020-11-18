@@ -20,9 +20,12 @@ static void led_blink_thread( void *param )
     led_on( GPIOA, GPIO_Pin_8 );
     while ( 1 ) {
         led_on( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 500 );
+        rt_thread_mdelay( 200 );
         led_off( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 500 );
+        rt_thread_mdelay( 200 );
+        if ( !(GPIOA->IDR & (1<<1)) ) {
+            rt_kprintf( "touch\n" );
+        }
     }
 }
 

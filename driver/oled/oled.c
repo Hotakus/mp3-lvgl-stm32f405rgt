@@ -5,12 +5,12 @@
 #include "iic_conf.h"
 
 /* OLED 显存 */
-u8 OLED_GRAM[8][128];
+uint8_t OLED_GRAM[8][128];
 
 /***************************
 *   i2c init
 ****************************/
-void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
+void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr ) {
     i2c_conf( I2Cx, i2c_clk, own_addr );
 
     oled_off();
@@ -48,17 +48,17 @@ void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
     
     /* 初始化GRAM */
     memset( OLED_GRAM, 0x00, sizeof(OLED_GRAM) );
-    oled_flush_with( (u8*)OLED_GRAM );
+    oled_flush_with( (uint8_t*)OLED_GRAM );
 
-    show_char( (u8*)&zh_ch[0], 16, 16, 70, 48 );
-    show_char( (u8*)&zh_ch[1], 16, 16, 70+16, 48 );
-    show_char( (u8*)&zh_ch[2], 16, 16, 70+32, 48 );
+    show_char( (uint8_t*)&zh_ch[0], 16, 16, 70, 48 );
+    show_char( (uint8_t*)&zh_ch[1], 16, 16, 70+16, 48 );
+    show_char( (uint8_t*)&zh_ch[2], 16, 16, 70+32, 48 );
     
-    show_picture( (u8*)&IMG[0], 64, 32, 0, 0 );
+    show_picture( (uint8_t*)&IMG[0], 64, 32, 0, 0 );
     
-    show_str( (u8*)"Hello!!!", FONT_8x16, 0, 64-16 );
+    show_str( (uint8_t*)"Hello!!!", FONT_8x16, 0, 64-16 );
 
-    oled_flush_with( (u8*)OLED_GRAM );
+    oled_flush_with( (uint8_t*)OLED_GRAM );
 }
 
 
@@ -67,7 +67,7 @@ void oled_i2c_init( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr ) {
 *   功能:       往OLED发送字节
 *   byte:       字节
 ****************************/
-void oled_i2c_send_byte( u8 byte ) {
+void oled_i2c_send_byte( uint8_t byte ) {
     i2c_send_bytes( OLED_I2C, &byte, 1, 0xFFF );
 }
 
@@ -78,7 +78,7 @@ void oled_i2c_send_byte( u8 byte ) {
 *   dat:        命令或数据
 *   opt:        命令或数据opt
 ****************************/
-void oled_send( u8 slave_addr, u8 dat, OLED_OPT opt ) {
+void oled_send( uint8_t slave_addr, uint8_t dat, OLED_OPT opt ) {
 
     ErrorStatus err = ERROR;
 
@@ -107,7 +107,7 @@ void oled_send( u8 slave_addr, u8 dat, OLED_OPT opt ) {
 *   功能:       清除屏幕
 ****************************/
 void oled_clean( void ) {
-    u8 x, page;
+    uint8_t x, page;
     
     oled_send( OLED_ADDR, 0x00, OLED_CMD );
     oled_send( OLED_ADDR, 0x10, OLED_CMD );
@@ -125,8 +125,8 @@ void oled_clean( void ) {
 *   功能:       通过指定的OLED_GRAM刷新屏幕
 *   gram:       GRAM首地址
 ****************************/
-void oled_flush_with( u8 *gram ) {
-    u8 x, page;
+void oled_flush_with( uint8_t *gram ) {
+    uint8_t x, page;
 
     oled_send( OLED_ADDR, 0x00, OLED_CMD );
     oled_send( OLED_ADDR, 0x10, OLED_CMD );
@@ -146,12 +146,12 @@ void oled_flush_with( u8 *gram ) {
 *   y:          y坐标
 *   val:        写入的值，1 或 0
 ****************************/
-void oled_set_pos( u8 x, u8 y, u8 val ) {
+void oled_set_pos( uint8_t x, uint8_t y, uint8_t val ) {
     if ( x >= 128 && y >= 64 )
         return;
     
-    u8 page = y>>3;       // get page
-    u8 pd   = 1<<(y%8);  // one column page data
+    uint8_t page = y>>3;       // get page
+    uint8_t pd   = 1<<(y%8);  // one column page data
     
     if ( val ) {
         OLED_GRAM[page][x] |= pd;
@@ -168,9 +168,9 @@ void oled_set_pos( u8 x, u8 y, u8 val ) {
 *   y:          y坐标
 *   val:        写入的值，1 或 0
 ****************************/
-void oled_draw_point( u8 x, u8 y, u8 val ) {
+void oled_draw_point( uint8_t x, uint8_t y, uint8_t val ) {
     oled_set_pos( x, y, val );
-    oled_flush_with( (u8*)OLED_GRAM );
+    oled_flush_with( (uint8_t*)OLED_GRAM );
 }
 
 /***************************
@@ -181,11 +181,11 @@ void oled_draw_point( u8 x, u8 y, u8 val ) {
 *   x:          x坐标
 *   y:          y坐标
 ****************************/
-void show_char( u8 *font_buf, u8 width, u8 hight, u8 x, u8 y ) {
+void show_char( uint8_t *font_buf, uint8_t width, uint8_t hight, uint8_t x, uint8_t y ) {
     
-    u8 w, h;
+    uint8_t w, h;
     
-    u8 page = y>>3;       // get page
+    uint8_t page = y>>3;       // get page
     
     if ( page >= 8 )
         page = 7;
@@ -206,20 +206,20 @@ void show_char( u8 *font_buf, u8 width, u8 hight, u8 x, u8 y ) {
 *   x:          x坐标
 *   y:          y坐标
 ****************************/
-void show_str( u8 *str, FONT_TYPE font_type, u8 x, u8 y ) {
+void show_str( uint8_t *str, FONT_TYPE font_type, uint8_t x, uint8_t y ) {
     
-    u8 pos = 0;
+    uint8_t pos = 0;
 
     while ( str[pos] != '\0' ) {
         if ( font_type == FONT_6x8 ) {
-            show_char( (u8*)&F6x8[str[pos]-' '], 6, 8, x+(pos<<3), y );
+            show_char( (uint8_t*)&F6x8[str[pos]-' '], 6, 8, x+(pos<<3), y );
         } else if ( font_type == FONT_8x16 ) {
-            show_char( (u8*)&F8x16[str[pos]-' '], 8, 16, x+(pos<<3), y );
+            show_char( (uint8_t*)&F8x16[str[pos]-' '], 8, 16, x+(pos<<3), y );
         }
         pos++;
     }
     
-    oled_flush_with( (u8*)OLED_GRAM );
+    oled_flush_with( (uint8_t*)OLED_GRAM );
 }
 
 /***************************
@@ -231,7 +231,7 @@ void show_str( u8 *str, FONT_TYPE font_type, u8 x, u8 y ) {
 *   x:          x坐标
 *   y:          y坐标
 ****************************/
-void show_picture( u8 *pic, u8 width, u8 hight, u8 x, u8 y ) {
+void show_picture( uint8_t *pic, uint8_t width, uint8_t hight, uint8_t x, uint8_t y ) {
     show_char( pic, width, hight, x, y );
 }
 
@@ -255,7 +255,7 @@ void oled_off( void ) {
 *   函数:       oled_brightness
 *   功能:       调节OLED亮度
 ****************************/
-void oled_brightness( u8 lm ) {
+void oled_brightness( uint8_t lm ) {
     oled_send(OLED_ADDR, 0x81,OLED_CMD);    // set brightness
     oled_send(OLED_ADDR, lm  ,OLED_CMD);
 }

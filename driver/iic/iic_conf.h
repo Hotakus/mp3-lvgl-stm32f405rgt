@@ -16,7 +16,7 @@ extern "C" {
 #define I2C1_SDA    GPIO_Pin_7
 
 /* functions */
-void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, u8 own_addr );
+void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr );
 ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout );
 ErrorStatus i2c_generate_start( I2C_TypeDef *I2Cx, uint32_t timeout );
 void i2c_generate_stop ( I2C_TypeDef *I2Cx );
