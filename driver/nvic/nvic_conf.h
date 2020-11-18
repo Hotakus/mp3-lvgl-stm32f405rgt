@@ -13,7 +13,7 @@ extern "C" {
 
 /* functions */
 void nvic_conf( uint8_t IRQx, u8 pre_prio, u8 sub_prio, FunctionalState stat );
-
+void exti_conf( uint32_t EXTI_Linex, EXTITrigger_TypeDef trigger_method, FunctionalState stat );
 
 #ifdef __cplusplus
 }

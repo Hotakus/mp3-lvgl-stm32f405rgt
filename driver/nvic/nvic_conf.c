@@ -22,7 +22,6 @@ void exti_conf( uint32_t EXTI_Linex, EXTITrigger_TypeDef trigger_method, Functio
     exti.EXTI_Mode      = EXTI_Mode_Interrupt;
     exti.EXTI_Trigger   = trigger_method;
     exti.EXTI_LineCmd   = stat;
-    
     EXTI_Init( &exti );
 }
 
@@ -31,9 +30,10 @@ void EXTI1_IRQHandler (void)
 #if USER_USE_OS == 1
     OS_INT_ENTER();
 #endif
-    
-    DEBUG_PRINT( "exti touch.\n" );
-    
+    static uint32_t cnt = 0;
+    DEBUG_PRINT( "exti touch. (%04d)\n", cnt );
+    EXTI_ClearITPendingBit( EXTI_Line1 );
+    cnt++;
 #if USER_USE_OS == 1
     OS_INT_EXIT();
 #endif

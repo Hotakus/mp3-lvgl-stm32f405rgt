@@ -1,6 +1,7 @@
 #include "iic_conf.h"
 #include "ft6236.h"
 #include "pro_conf.h"
+#include "nvic_conf.h"
 
 /************************************************
  * @brief FUNCTION PROPOTYPE
@@ -14,8 +15,7 @@ static void ctp_ft6236_reset(void);
 static void ctp_ft6236_gpio(void) 
 {
     GPIO_InitTypeDef ctp_g;
-    EXTI_InitTypeDef exti_touch;
-    
+
     RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
     
     ctp_g.GPIO_Mode     = GPIO_Mode_OUT;
@@ -25,13 +25,14 @@ static void ctp_ft6236_gpio(void)
     ctp_g.GPIO_Speed    = GPIO_Speed_100MHz;
     GPIO_Init( GPIOA, &ctp_g );
     
-    ctp_g.GPIO_Mode     = GPIO_Mode_IN;
-    ctp_g.GPIO_Pin      = FT6236_INT;
-    ctp_g.GPIO_PuPd     = GPIO_PuPd_UP;
-    ctp_g.GPIO_Speed    = GPIO_Speed_100MHz;
-    GPIO_Init( GPIOA, &ctp_g );
-    
-    
+//    ctp_g.GPIO_Mode     = GPIO_Mode_IN;
+//    ctp_g.GPIO_Pin      = FT6236_INT;
+//    ctp_g.GPIO_PuPd     = GPIO_PuPd_UP;
+//    ctp_g.GPIO_Speed    = GPIO_Speed_100MHz;
+//    GPIO_Init( GPIOA, &ctp_g );
+
+    exti_conf( EXTI_Line1, EXTI_Trigger_Falling, ENABLE );
+    nvic_conf( EXTI1_IRQn, 1, 2, ENABLE );
 }
 
 /************************************************

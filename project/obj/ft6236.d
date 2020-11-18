@@ -151,3 +151,4 @@
 .\project\obj\ft6236.o: .\third_party\rt-thread-sorted\finsh\finsh_api.h
 .\project\obj\ft6236.o: driver\sdio\sd_sdio_conf.h
 .\project\obj\ft6236.o: driver\sdio\sd_sdio.h
+.\project\obj\ft6236.o: driver\nvic\nvic_conf.h
