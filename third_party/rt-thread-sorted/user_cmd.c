@@ -250,14 +250,8 @@ static void ft6236_test(void)
         flag = 1;
     } else {
         uint8_t val = 0x0;
-        val = 0;
-        ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
-        val = 22;
-        ctp_ft6236_writ_reg( FT_ID_G_THGROUP, &val, 1 );
-        val = 12;
-        ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
-        val = 0;
-        ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
+        ctp_ft6236_read_reg( 0xA3, &val, 1 );
+        printf("0xA3: %x\n", val);
     }
 }
 MSH_CMD_EXPORT(ft6236_test , ft6236 test);

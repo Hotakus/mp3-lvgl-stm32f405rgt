@@ -30,9 +30,6 @@ static void ctp_ft6236_gpio(void)
 //    ctp_g.GPIO_PuPd     = GPIO_PuPd_UP;
 //    ctp_g.GPIO_Speed    = GPIO_Speed_100MHz;
 //    GPIO_Init( GPIOA, &ctp_g );
-
-    exti_conf( EXTI_Line1, EXTI_Trigger_Falling, ENABLE );
-    nvic_conf( EXTI1_IRQn, 1, 2, ENABLE );
 }
 
 /************************************************
@@ -54,11 +51,9 @@ void ctp_ft6236_init( void )
     ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
     val = 0;
     ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
-    
-    
 
-//    ctp_ft6236_read_reg( 0xA3, &val, 1 );
-//    printf("%x\n", val);
+    exti_conf( EXTI_Line1, EXTI_Trigger_Falling, ENABLE );
+    nvic_conf( EXTI1_IRQn, 1, 2, ENABLE );
 }
 
 /************************************************
@@ -73,33 +68,33 @@ void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
     ErrorStatus err = ERROR;
 
     // 开始
-    err = i2c_generate_start( FT6236_I2C, 0xFFF );
+    err = i2c_generate_start( FT6236_I2C, 0xFFFF );
     if ( err != SUCCESS )
         return;
     // 发送写命令
-    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
+    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFFF );
     if ( err != SUCCESS )
         return;
     // 发送要读的寄存器地址
-    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFF );
+    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFFF );
     if ( err != SUCCESS )
         return;
-
-    // 重复开始
-    err = i2c_generate_start( FT6236_I2C, 0xFFF );
-    if ( err != SUCCESS )
-        return;
-
-    // 发送读命令
-    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_READ), 0xFFF ); 
-    if ( err != SUCCESS )
-        return;
-
-    i2c_read_bytes( FT6236_I2C, val, len, 0xFFF );
-    if ( err != SUCCESS )
-        return;
-
     i2c_generate_stop( FT6236_I2C );
+    
+    /*重新发送起始信号 */
+    i2c_generate_start( FT6236_I2C, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+    // 发送地址+读
+    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Receiver, FT6236_ADDR, 0xFFFF );
+    if ( err != SUCCESS )
+        return;
+    i2c_read_bytes( FT6236_I2C, val, 1, 0xFFF );
+    if ( err != SUCCESS )
+        return;
+	/*非应答*/
+	I2C_AcknowledgeConfig(I2C1, DISABLE);
+	i2c_generate_stop( FT6236_I2C );
     
 }
 
@@ -121,7 +116,7 @@ void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len )
     if ( err != SUCCESS )
         return;
     // 发送写命令
-    i2c_send_7bitAddr( FT6236_I2C, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
+    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
     if ( err != SUCCESS )
         return;
     

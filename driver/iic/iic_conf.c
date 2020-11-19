@@ -117,24 +117,21 @@ void i2c_generate_stop ( I2C_TypeDef *I2Cx )
  * @param timeout 
  * @return ErrorStatus 
  ************************************************/
-ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint8_t addr, uint32_t timeout )
+ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint32_t dir, uint8_t addr, uint32_t timeout )
 {
     ErrorStatus err = ERROR;
     uint8_t retry = I2C_RETRY_TIMES;
 
     do {
-        I2Cx->DR = addr;
-        if ( !(addr&0x01) ) {
+        I2C_Send7bitAddress( I2Cx, addr, dir );
+        if ( dir == I2C_Direction_Transmitter ) {
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED, timeout );
-            printf("1\n");
-        } else if ( addr&0x01 ) {
+        } else {
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED, timeout );
-            printf("2\n");
         }
-            
     } while ( --retry && err != SUCCESS );
     if ( err != SUCCESS ) {
-        DEBUG_PRINT( "I2C send 7bit address error.\n" );
+        DEBUG_PRINT( "I2C send 7bit address error. (0x%02x)\n", addr );
         i2c_generate_stop( I2Cx );
         return err;
     }
@@ -195,14 +192,15 @@ ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint
     do {
         retry = I2C_RETRY_TIMES;
         do {
-            *byte = (uint8_t)I2Cx->DR;
             err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED, timeout );
+            if ( err != SUCCESS ) {
+                i2c_generate_stop( I2Cx );
+                *byte = 0xFF;
+                return err;
+            } else
+                *byte = (uint8_t)I2Cx->DR;
         } while ( --retry && err != SUCCESS );
-        if ( err != SUCCESS ) {
-            i2c_generate_stop( I2Cx );
-            return err;
-        } else if ( err == SUCCESS && len != 1 )
-            pd += 1;
+        pd += 1;
     } while ( --len );
     
     return err;

@@ -86,7 +86,7 @@ void oled_send( uint8_t slave_addr, uint8_t dat, OLED_OPT opt ) {
     if ( err != SUCCESS )
         return;
 
-    i2c_send_7bitAddr( OLED_I2C, OLED_ADDR, 0xFFF );
+    i2c_send_7bitAddr( OLED_I2C, I2C_Direction_Transmitter, OLED_ADDR, 0xFFF );
     if ( err != SUCCESS )
         return;
     

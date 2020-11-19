@@ -20,7 +20,7 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr );
 ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout );
 ErrorStatus i2c_generate_start( I2C_TypeDef *I2Cx, uint32_t timeout );
 void i2c_generate_stop ( I2C_TypeDef *I2Cx );
-ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint8_t addr, uint32_t timeout );
+ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint32_t dir, uint8_t addr, uint32_t timeout );
 ErrorStatus i2c_send_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout );
 ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout );
 
