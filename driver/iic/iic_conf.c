@@ -43,7 +43,6 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr ) {
     i2c_s.I2C_DutyCycle             = I2C_DutyCycle_2;
     i2c_s.I2C_AcknowledgedAddress   = I2C_AcknowledgedAddress_7bit;
     i2c_s.I2C_OwnAddress1           = own_addr;
-    I2C_AcknowledgeConfig( I2Cx, ENABLE );
     I2C_Init( I2Cx, &i2c_s );
     I2C_Cmd( I2Cx, ENABLE );
     I2C1->CR1 |= 0x80;              // 解除限速

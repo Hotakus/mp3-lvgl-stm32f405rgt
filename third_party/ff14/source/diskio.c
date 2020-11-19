@@ -65,7 +65,7 @@ DSTATUS disk_initialize (
     
 	switch (pdrv) {
 	case DEV_SPIF :
-		w25qxx_init();
+        w25qxx_init();
         return !STA_NOINIT;
 	case DEV_SD_SDIO :
         /* initialize card */
@@ -111,16 +111,16 @@ DRESULT disk_read (
 	UINT count		/* Number of sectors to read */
 )
 {
-	int res;
     u8 retry = 5;
     SD_Error sd_err;
+    w25qxx_stat w25qxx_err;
 
 	switch (pdrv) {
 	case DEV_SPIF :
-		res = w25qxx_read_sector( buff, sector, count );
-        if ( res ) return RES_PARERR;
+        w25qxx_err = w25qxx_read_sector( buff, sector, count );
+        if ( w25qxx_err != W25QXX_STAT_OK )
+            return RES_ERROR;
 		return RES_OK;
-
 	case DEV_SD_SDIO :
     
         if ( count == 1 )
@@ -168,12 +168,13 @@ DRESULT disk_write (
 	int res;
     u8 retry = 5;
     SD_Error sd_err;
+    w25qxx_stat w25qxx_err;
     
 	switch (pdrv) {
 	case DEV_SPIF :
-        res = w25qxx_writ_sector( (u8*)buff, sector, count );
-        if ( res ) 
-            return RES_PARERR;
+        w25qxx_err = w25qxx_writ_sector( (uint8_t*)buff, sector, count );
+        if ( w25qxx_err != W25QXX_STAT_OK )
+            return RES_ERROR;
 		return RES_OK;
 	case DEV_SD_SDIO :
         if ( count == 1 )
@@ -206,8 +207,7 @@ DRESULT disk_write (
 /*-----------------------------------------------------------------------*/
 /* Miscellaneous Functions                                               */
 /*-----------------------------------------------------------------------*/
-
-extern w25qxx_feature w25qxx;
+extern w25qxx_feature_s w25qxx;
 
 DRESULT disk_ioctl (
 	BYTE pdrv,		/* Physical drive nmuber (0..) */
@@ -217,6 +217,7 @@ DRESULT disk_ioctl (
 {
 	switch (pdrv) {
 	case DEV_SPIF :
+        
         switch( cmd ) {
             case CTRL_SYNC:
                 return RES_OK;
@@ -224,7 +225,7 @@ DRESULT disk_ioctl (
                 *(DWORD*)buff = w25qxx.sect_cnt;
                 return RES_OK;
             case GET_SECTOR_SIZE:
-                *(DWORD*)buff = w25qxx.sect_size;
+                *(DWORD*)buff = 4096;
                 return RES_OK;
             case GET_BLOCK_SIZE:
                 *(DWORD*)buff = 1;

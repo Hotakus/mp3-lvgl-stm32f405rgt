@@ -109,36 +109,6 @@ void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 	/*非应答*/
 	I2C_AcknowledgeConfig(I2C1, DISABLE);
 	i2c_generate_stop( FT6236_I2C );
-
-//    I2C_AcknowledgeConfig(I2C1, ENABLE);
-//    /*①产生起始信号*/
-//	I2C_GenerateSTART(I2C1, ENABLE);
-//	/*检测EV5并清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
-//	/*②发送从机地址，写选通*/
-//	I2C_Send7bitAddress(I2C1, FT6236_ADDR, I2C_Direction_Transmitter);
-//	/*检测EV6并清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
-//	/*③发送要读取数据的地址*/
-//	I2C_SendData(I2C1, reg_addr);
-//	/*检测EV8并清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-//	/*④重新发送起始信号 */
-//	I2C_GenerateSTART(I2C1, ENABLE);
-//	/*检测EV5并清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
-//	/*⑤发送从机设备地址，读选通*/
-//	I2C_Send7bitAddress(I2C1, FT6236_ADDR, I2C_Direction_Receiver);
-//	/*检测EV6并清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
-//	/*⑥检测EV7，然后读取数据清除标志*/
-//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED)); 
-//	*val = I2C_ReceiveData(I2C1);
-//	/*⑦非应答*/
-//	I2C_AcknowledgeConfig(I2C1, DISABLE);
-//        /*⑧产生停止信号*/
-//	I2C_GenerateSTOP(I2C1, ENABLE);
-    
 }
 
 /************************************************
@@ -185,7 +155,9 @@ static void ctp_ft6236_reset(void)
     DELAY( 100 );
 }
 
-
+/************************************************
+ * @brief 扫描
+ ************************************************/
 void ctp_ft6236_scan( void )
 {
     uint8_t val = 0;
@@ -194,6 +166,9 @@ void ctp_ft6236_scan( void )
 
 }
 
+/************************************************
+ * @brief 获取触摸点坐标
+ ************************************************/
 void ctp_ft6236_get_coordinate( uint16_t *x, uint16_t *y, uint8_t TPx )
 {
 
@@ -225,6 +200,9 @@ void ctp_ft6236_get_coordinate( uint16_t *x, uint16_t *y, uint8_t TPx )
     
 }
 
+/************************************************
+ * @brief 获取姿态
+ ************************************************/
 touch_gesture_t cp_ft6236_get_gesture( void )
 {
     uint8_t gesture = 0;

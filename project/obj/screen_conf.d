@@ -150,7 +150,7 @@
 .\project\obj\screen_conf.o: driver\sdio\sd_sdio_conf.h
 .\project\obj\screen_conf.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\obj\screen_conf.o: driver\sdio\sd_sdio.h
-.\project\obj\screen_conf.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
+.\project\obj\screen_conf.o: .\driver\screen\lcd_st7735\lcd_st7735.h
 .\project\obj\screen_conf.o: driver\systicks\systick.h
 .\project\obj\screen_conf.o: inc\arm_math.h
 .\project\obj\screen_conf.o: inc\core_cm4.h

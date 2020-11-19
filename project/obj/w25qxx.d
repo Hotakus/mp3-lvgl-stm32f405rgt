@@ -43,7 +43,6 @@
 .\project\obj\w25qxx.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\math.h
 .\project\obj\w25qxx.o: driver\usart\usart.h
 .\project\obj\w25qxx.o: driver\spi\spi_conf.h
-.\project\obj\w25qxx.o: driver\dma\dma_conf.h
 .\project\obj\w25qxx.o: inc\pro_conf.h
 .\project\obj\w25qxx.o: .\third_party\lvgl\lvgl\lvgl.h
 .\project\obj\w25qxx.o: .\third_party\lvgl\lvgl\src/lv_misc/lv_log.h

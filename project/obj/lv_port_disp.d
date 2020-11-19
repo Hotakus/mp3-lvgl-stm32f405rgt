@@ -151,7 +151,7 @@
 .\project\obj\lv_port_disp.o: E:\software\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\obj\lv_port_disp.o: driver\sdio\sd_sdio.h
 .\project\obj\lv_port_disp.o: .\driver\screen\screen_conf.h
-.\project\obj\lv_port_disp.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
+.\project\obj\lv_port_disp.o: .\driver\screen\lcd_st7735\lcd_st7735.h
 .\project\obj\lv_port_disp.o: driver\systicks\systick.h
 .\project\obj\lv_port_disp.o: inc\arm_math.h
 .\project\obj\lv_port_disp.o: inc\core_cm4.h

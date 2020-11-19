@@ -150,7 +150,7 @@
 .\project\obj\user_cmd.o: .\third_party\rt-thread-sorted\include\rtthread.h
 .\project\obj\user_cmd.o: .\third_party\rt-thread-sorted\finsh\finsh_api.h
 .\project\obj\user_cmd.o: .\driver\screen\screen_conf.h
-.\project\obj\user_cmd.o: .\driver\screen\lcd_144_st7735\lcd_144_st7735.h
+.\project\obj\user_cmd.o: .\driver\screen\lcd_st7735\lcd_st7735.h
 .\project\obj\user_cmd.o: driver\systicks\systick.h
 .\project\obj\user_cmd.o: inc\arm_math.h
 .\project\obj\user_cmd.o: inc\core_cm4.h

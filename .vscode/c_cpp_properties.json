@@ -22,7 +22,7 @@
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\oled",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\touch\\CTP",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\screen\\lcd_st7789",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\screen\\lcd_144_st7735",
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\screen\\lcd_st7735",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\file_thrans_with_fatfs",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\app",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\app\\app_ui",

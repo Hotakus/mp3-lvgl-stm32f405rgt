@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2020
  * 
  ************************************************/
-#include "lcd_144_st7735.h"
+#include "lcd_st7735.h"
 #include "pro_conf.h"
 #include "spi_conf.h"
 
@@ -16,7 +16,6 @@ void lcd_gpio( void ) {
     GPIO_InitTypeDef lcd_144_io_s;
     GPIO_InitTypeDef spig_s;
     SPI_InitTypeDef  spi_s;
-    
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);

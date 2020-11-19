@@ -103,6 +103,14 @@ void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR ) {
     } else if ( SPIx == SPI3 ) {
         GPIO_Init( GPIOB, &spix_gpio );
     }
-    
 }
+
+uint8_t spi_full_duplex_trans_byte( SPI_TypeDef *SPIx, uint8_t byte )
+{
+    while ( !(SPIx->SR & SPI_I2S_FLAG_TXE) );
+    SPIx->DR = byte;
+    while ( !(SPIx->SR & SPI_I2S_FLAG_RXNE) );
+    return (uint8_t)SPIx->DR;
+}
+
 

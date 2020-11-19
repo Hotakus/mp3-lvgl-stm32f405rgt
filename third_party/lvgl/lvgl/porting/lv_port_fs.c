@@ -15,7 +15,6 @@
 /*********************
  *      DEFINES
  *********************/
-#define DEBUG_PRINTF 0
 
 /**********************
  *      TYPEDEFS
@@ -162,7 +161,6 @@ static void fs_init(void)
         DEBUG_PRINT( "spi flash mount successfully.\n\n" );
     }
     
-
     if ( fr_lv[SD_SDIO_INDEX] == FR_OK ) {
         SD_CardInfo sd_info;
         SD_GetCardInfo( &sd_info );
@@ -186,16 +184,6 @@ static void fs_init(void)
         );
     }
 
-    DEBUG_PRINT( "\n" );
-    
-    if ( fr_lv[SPIF_INDEX] == FR_OK ) {
-        extern w25qxx_feature w25qxx;
-        printf( "SPI FLASH info:\n" );
-        printf( "JEDECID    : %X\n", w25qxx.JEDECID );
-        printf( "Capacity   : %0.2f MiB\n", (double)w25qxx.capacity / 1024.0 / 1024.0 );
-    }
-    
-    DEBUG_PRINT( "\n" );
 }
 
 

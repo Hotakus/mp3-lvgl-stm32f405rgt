@@ -32,7 +32,7 @@ typedef enum {
 
 /* functions */
 void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR );
-void spi_set_speed( SPI_TypeDef* SPIx, u16 speed );
+uint8_t spi_full_duplex_trans_byte( SPI_TypeDef *SPIx, uint8_t byte );
 
 #ifdef __cplusplus
 }
