@@ -84,13 +84,13 @@ static void file_info(int argc, char **args)
 }
 MSH_CMD_EXPORT(file_info, get info which file);
 
-//u8 ch_buf[50] = {0};
+//uint8_t ch_buf[50] = {0};
 static void rtt_cat( int argc, char **args )
 {
     
     u32 btr = 0;
     u32 br = 0;
-    u8 *ch_buf = NULL;
+    uint8_t *ch_buf = NULL;
     
     if ( argc < 2 ) {
         rt_kprintf( "usage rtt_cat {file}\n" );
@@ -101,7 +101,7 @@ static void rtt_cat( int argc, char **args )
         btr = atoi(args[2]);
     }
     rt_kprintf( "btr: %d\n", btr );
-    ch_buf = (u8*)MALLOC( sizeof(u8)*btr );
+    ch_buf = (uint8_t*)MALLOC( sizeof(uint8_t)*btr );
     
     FRESULT cat_fres;
     FIL     cat_fil;
@@ -147,7 +147,7 @@ static void rtt_mkfs( int argc, char **args )
 
     FRESULT fres = FR_NOT_READY;
     
-    u8 *works = (u8*)MALLOC( sizeof(u8)*FF_MAX_SS );
+    uint8_t *works = (uint8_t*)MALLOC( sizeof(uint8_t)*FF_MAX_SS );
     
     if ( args[1][0] == 'F' ) {
         fres = f_mkfs( "SPIF:", 0, works, FF_MAX_SS );
@@ -204,7 +204,7 @@ static void show_pic(int argc, char **args)
     
     if ( STRCMP( args[1], "free" ) == 0 && pic != NULL ) {
         lv_res_t res;
-        u8 retry = 5;
+        uint8_t retry = 5;
         do {
             res = lv_obj_del( pic );
         } while ( --retry && res != LV_RES_INV );
@@ -234,10 +234,10 @@ static void oled_test(void)
     if ( !flag )
         oled_i2c_init(I2C1,400,0);
     else {
-        extern u8 OLED_GRAM[8][128];
+        extern uint8_t OLED_GRAM[8][128];
         oled_clean();
-        show_str( (u8*)"Hello!!!", FONT_8x16, 0, 64-16 );
-        oled_flush_with( (u8*)OLED_GRAM );
+        show_str( (uint8_t*)"Hello!!!", FONT_8x16, 0, 64-16 );
+        oled_flush_with( (uint8_t*)OLED_GRAM );
     }
 }
 MSH_CMD_EXPORT(oled_test , oled test);

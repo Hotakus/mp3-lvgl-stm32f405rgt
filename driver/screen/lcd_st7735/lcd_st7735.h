@@ -14,7 +14,7 @@ extern "C" {
 #define LCD_144_W   128
 #define LCD_144_H   128
 
-#define LCD_144_ST7735_SPI          SPI2
+#define LCD_ST7735_SPI          SPI2
 
 #define LCD_144_ST7735_MOSI         GPIO_Pin_15
 #define LCD_144_ST7735_MISO         NULL
@@ -45,24 +45,24 @@ typedef enum {
 } ST7735_DC_OPT;
 
 /* function */
-void lcd_144_init( void );
+void lcd_st7735_init( void );
 
-u8 lcd_144_trans_byte( u8 byte );
+uint8_t lcd_st7735_trans_byte( uint8_t byte );
 
-void lcd_144_send_cmd( u8 cmd );
-void lcd_144_send_dat( u8 dat );
-void lcd_144_send( u8 byte, ST7735_DC_OPT opt );
+void lcd_st7735_send_cmd( uint8_t cmd );
+void lcd_st7735_send_dat( uint8_t dat );
+void lcd_st7735_send( uint8_t byte, ST7735_DC_OPT opt );
 
-void lcd_144_hw_reset(void);
-void lcd_144_powerUp( void );
-void lcd_144_powerDown( void );
-void lcd_144_displayOn( void );
-void lcd_144_displayOff( void );
+void lcd_st7735_hw_reset(void);
+void lcd_st7735_powerUp( void );
+void lcd_st7735_powerDown( void );
+void lcd_st7735_displayOn( void );
+void lcd_st7735_displayOff( void );
 
-void lcd_144_set_region( u16 xs, u16 ys, u16 xe, u16 ye );
-void lcd_144_draw_pixel( u16 x, u16 y, u16 color );
-void lcd_144_send_pixel_dat( u16 color );
-void lcd_144_clear_with( u16 color );
+void lcd_st7735_set_region( uint16_t xs, uint16_t ys, uint16_t xe, uint16_t ye );
+void lcd_st7735_draw_pixel( uint16_t x, uint16_t y, uint16_t color );
+void lcd_st7735_send_pixel_dat( uint16_t color );
+void lcd_st7735_clear_with( uint16_t color );
 
 
 #ifdef __cplusplus

@@ -33,23 +33,23 @@ static scr_opr_handler scr_opr_s = {
     .SCR_X_MAX          = ST7789_SCR_X,
     .SCR_Y_MAX          = ST7789_SCR_X,
 #elif (USER_USE_SCR == USE_SCR_LCD_144_ST7735)
-    .init               = lcd_144_init,
+    .init               = lcd_st7735_init,
     
-    .set_region         = lcd_144_set_region,
+    .set_region         = lcd_st7735_set_region,
     
-    .draw_pixel         = lcd_144_draw_pixel,
-    .send_pixel_dat     = lcd_144_send_pixel_dat,
+    .draw_pixel         = lcd_st7735_draw_pixel,
+    .send_pixel_dat     = lcd_st7735_send_pixel_dat,
     
-    .clear              = lcd_144_clear_with,
+    .clear              = lcd_st7735_clear_with,
     
-    .hw_reset           = lcd_144_hw_reset,
+    .hw_reset           = lcd_st7735_hw_reset,
     .sw_reset           = NULL,
     
-    .display_on         = lcd_144_displayOn,
-    .display_off        = lcd_144_displayOff,
+    .display_on         = lcd_st7735_displayOn,
+    .display_off        = lcd_st7735_displayOff,
     
-    .power_down         = lcd_144_powerDown,
-    .power_up           = lcd_144_powerUp,
+    .power_down         = lcd_st7735_powerDown,
+    .power_up           = lcd_st7735_powerUp,
     
     .SCR_X_MAX          = 128,
     .SCR_Y_MAX          = 128,

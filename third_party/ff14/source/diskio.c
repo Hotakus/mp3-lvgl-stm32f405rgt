@@ -61,7 +61,7 @@ DSTATUS disk_initialize (
 {
     
     SD_Error sd_err;
-    u8 retry = 5;
+    uint8_t retry = 5;
     
 	switch (pdrv) {
 	case DEV_SPIF :
@@ -111,7 +111,7 @@ DRESULT disk_read (
 	UINT count		/* Number of sectors to read */
 )
 {
-    u8 retry = 5;
+    uint8_t retry = 5;
     SD_Error sd_err;
     w25qxx_stat w25qxx_err;
 
@@ -166,7 +166,7 @@ DRESULT disk_write (
 )
 {
 	int res;
-    u8 retry = 5;
+    uint8_t retry = 5;
     SD_Error sd_err;
     w25qxx_stat w25qxx_err;
     
@@ -178,10 +178,10 @@ DRESULT disk_write (
 		return RES_OK;
 	case DEV_SD_SDIO :
         if ( count == 1 )
-            sd_err = SD_ReadBlock( (u8*)buff, (sector<<9), card_info.CardBlockSize );
+            sd_err = SD_ReadBlock( (uint8_t*)buff, (sector<<9), card_info.CardBlockSize );
         else {
             sd_err = SD_WriteMultiBlocks(
-                (u8*)buff, \
+                (uint8_t*)buff, \
                 (sector<<9), \
                 card_info.CardBlockSize, \
                 count \

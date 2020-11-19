@@ -10,6 +10,8 @@ extern "C" {
 #include <stdio.h>
 
 /* definations */
+#define SPI_DUMMY_BYTE  0xFF
+
 typedef enum { 
     SPI_MODE_1  = 0,        // Mode 0: CPOL=0, CPHA=0 
     SPI_MODE_2     ,        // Mode 1: CPOL=0, CPHA=1

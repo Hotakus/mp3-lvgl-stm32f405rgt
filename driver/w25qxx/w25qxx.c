@@ -17,24 +17,24 @@
  ************************************************/
 static w25qxx_stat w25qxx_wait_busy( uint32_t timeout );
 static void w25qxx_gpio( void );
-static w25qxx_stat w25qxx_writ_enable( void );
-static w25qxx_stat w25qxx_writ_disable( void );
+static w25qxx_stat w25qxx_writ_enable( uint32_t timeout );
+static w25qxx_stat w25qxx_writ_disable( uint32_t timeout );
 
 /************************************************
  * @brief STATIC VARIABLE
  ************************************************/
 static uint8_t conf_flag = 0;
+
+
+/************************************************
+ * @brief GLOBAL VARIABLE
+ ************************************************/
 w25qxx_feature_s w25qxx = {
     .page_cnt = 0,
     .sect_cnt = 0,
     .capacity = 0,
     .JEDECID  = 0,
 };
-
-/************************************************
- * @brief GLOBAL VARIABLE
- ************************************************/
-
  
 /************************************************
  * @brief FUNCTION REALIZED
@@ -53,9 +53,6 @@ static void w25qxx_gpio( void )
     GPIO_Init( GPIOA, &w25qxx_g );
 }
 
-
-uint8_t buf[256] = {0};
-uint8_t sbuf[256] = {0};
 void w25qxx_init( void )
 {
     if ( !conf_flag ) {
@@ -70,18 +67,6 @@ void w25qxx_init( void )
     }
     w25qxx_powerUp();
 
-//    w25qxx_erase_sector( 0, 1 );
-
-//    for ( uint16_t i = 0; i < 256; i++ ) 
-//        sbuf[i] = 0x94;
-
-//    sbuf[0] = 'H';
-//    
-//    w25qxx_writ_page( sbuf, 0, 1 );
-
-//    w25qxx_read_page( buf, 0, 1 );
-//    for ( uint16_t i = 0; i < 256; i++ ) 
-//        DEBUG_PRINT( "%x ", buf[i] );
 }
 
 /************************************************
@@ -100,11 +85,11 @@ static uint8_t w25qxx_trans_byte( uint8_t byte )
  * 
  * @return w25qxx_stat 
  ************************************************/
-static w25qxx_stat w25qxx_writ_enable( void )
+static w25qxx_stat w25qxx_writ_enable( uint32_t timeout )
 {
     w25qxx_stat stat;
     
-    stat = w25qxx_wait_busy( 0xFFFF );
+    stat = w25qxx_wait_busy( timeout );
     if ( stat != W25QXX_STAT_OK )
         return stat;
     
@@ -120,11 +105,11 @@ static w25qxx_stat w25qxx_writ_enable( void )
  * 
  * @return w25qxx_stat 
  ************************************************/
-static w25qxx_stat w25qxx_writ_disable( void )
+static w25qxx_stat w25qxx_writ_disable( uint32_t timeout )
 {
     w25qxx_stat stat;
     
-    stat = w25qxx_wait_busy( 0xFFFF );
+    stat = w25qxx_wait_busy( timeout );
     if ( stat != W25QXX_STAT_OK )
         return stat;
     
@@ -148,7 +133,7 @@ static w25qxx_stat w25qxx_wait_busy( uint32_t timeout )
     do {
         W25QXX_CS_CLR;
         w25qxx_trans_byte( W25QXX_CMD_READ_STATUS1 );
-        status = w25qxx_trans_byte( 0xFF );
+        status = w25qxx_trans_byte( SPI_DUMMY_BYTE );
         W25QXX_CS_SET;
     } while ( --timeout && (status&0x01) );
     if ( !timeout ) 
@@ -170,9 +155,9 @@ void w25qxx_powerUp( void )
         for ( uint8_t i = 0; i < 3; i++ ) {
             w25qxx_trans_byte( 0xFF );
         }
-        status = w25qxx_trans_byte( 0xFF );
+        status = w25qxx_trans_byte( SPI_DUMMY_BYTE );
         W25QXX_CS_SET;
-    } while ( --retry && (status == 0xFF) );
+    } while ( --retry && (status == SPI_DUMMY_BYTE) );
     if ( !retry ) {
         DEBUG_PRINT( "W25QXX init failed.\n" );
         return;
@@ -202,7 +187,7 @@ void w25qxx_get_JEDECID( void )
     w25qxx_trans_byte( W25QXX_CMD_JEDECID );
     for ( uint8_t i = 0; i < 3; i++ ) {
         w25qxx.JEDECID <<= 8;
-        w25qxx.JEDECID |=  w25qxx_trans_byte( 0xFF );
+        w25qxx.JEDECID |=  w25qxx_trans_byte( SPI_DUMMY_BYTE );
     }
     W25QXX_CS_SET;
     if ( w25qxx.JEDECID>>16 != 0xEF ) {
@@ -252,7 +237,7 @@ w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num )
         return W25QXX_STAT_OK;
     
      while ( sect_num-- ) {
-        stat = w25qxx_writ_enable();
+        stat = w25qxx_writ_enable( 0xFFFF );
         if ( stat != W25QXX_STAT_OK )
             return stat;
 
@@ -264,7 +249,7 @@ w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num )
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         W25QXX_CS_SET;
 
-        stat = w25qxx_writ_disable();
+        stat = w25qxx_writ_disable( 0xFFFF );
         if ( stat != W25QXX_STAT_OK )
             return stat;
         ssect++;
@@ -285,7 +270,7 @@ w25qxx_stat w25qxx_erase_chip( void )
     if ( stat != W25QXX_STAT_OK ) 
         return stat;
     
-    w25qxx_writ_enable();        // 写使能
+    w25qxx_writ_enable( 0xFFFF );        // 写使能
     W25QXX_CS_CLR;
     w25qxx_trans_byte( W25QXX_CMD_ERASE_CHIP );
     W25QXX_CS_SET;
@@ -293,7 +278,7 @@ w25qxx_stat w25qxx_erase_chip( void )
     stat = w25qxx_wait_busy( 0xFFFFFFFF );
     if ( stat != W25QXX_STAT_OK ) 
         return stat;
-    w25qxx_writ_disable();       // 写失能
+    w25qxx_writ_disable( 0xFFFF );       // 写失能
     DEBUG_PRINT( "W25QXX chip erased.\n" );
     return W25QXX_STAT_OK;
 }
@@ -322,7 +307,7 @@ w25qxx_stat w25qxx_read_page( uint8_t* rec_buf , uint32_t page, uint32_t cnt )
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         w25qxx_trans_byte( 0xFF );                      // dummy byte
         for ( uint16_t i = 0; i < 256; i++ ) {
-            *rec_buf++ = w25qxx_trans_byte( 0xFF );
+            *rec_buf++ = w25qxx_trans_byte( SPI_DUMMY_BYTE );
         }
         W25QXX_CS_SET;
         page += 1;
@@ -347,7 +332,7 @@ w25qxx_stat w25qxx_writ_page( uint8_t* send_buf, uint32_t page, uint32_t cnt )
         return W25QXX_STAT_OK;
 
     while ( cnt-- ) {
-        stat = w25qxx_writ_enable();        // 写使能
+        stat = w25qxx_writ_enable( 0xFFFF );        // 写使能
         if ( stat != W25QXX_STAT_OK )
             return stat;
 
@@ -364,7 +349,7 @@ w25qxx_stat w25qxx_writ_page( uint8_t* send_buf, uint32_t page, uint32_t cnt )
         }
         W25QXX_CS_SET;
 
-        stat = w25qxx_writ_disable();
+        stat = w25qxx_writ_disable( 0xFFFF );
         if ( stat != W25QXX_STAT_OK )
             return stat;
         page += 1;
