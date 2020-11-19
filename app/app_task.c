@@ -21,9 +21,9 @@ static void led_blink_thread( void *param )
     extern uint8_t ft6236_init_flag;
     while ( 1 ) {
         led_on( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 200 );
+        rt_thread_mdelay( 50 );
         led_off( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 200 );
+        rt_thread_mdelay( 50 );
         if ( ft6236_init_flag )
             ctp_ft6236_scan();
     }

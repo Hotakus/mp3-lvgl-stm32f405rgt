@@ -1,0 +1,62 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=IK1BF-6EX3E-X7IRZ-JMX96-PU1XT-UN43B
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.31.0.0
+Toolchain Path:  E:\software\Keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.31.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      Segger\JL2CM3.dll V2.99.38.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+E:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\405mp3.uvprojx
+Project File Date:  11/19/2020
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
+Build target 'f405mp3'
+compiling cmd.c...
+compiling app_task.c...
+app\app_task.c(28): warning:  #223-D: function "ctp_ft6236_scan" declared implicitly
+              ctp_ft6236_scan();
+app\app_task.c: 1 warning, 0 errors
+compiling ft6236.c...
+driver\touch\CTP\ft6236.c(163): warning:  #177-D: variable "val"  was declared but never referenced
+      uint8_t val = 0;
+driver\touch\CTP\ft6236.c(206): warning:  #940-D: missing return statement at end of non-void function "cp_ft6236_get_gesture" 
+  }
+driver\touch\CTP\ft6236.c(15): warning:  #177-D: variable "touch_point"  was declared but never referenced
+  static touch_coordinate_s touch_point[FT6236_MAX_TOUCH_NUM];
+driver\touch\CTP\ft6236.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=143578 RO-data=80318 RW-data=5504 ZI-data=78432  
+FromELF: creating hex file...
+".\project\obj\405mp3.axf" - 0 Error(s), 4 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.14.0.pack
+                Keil.STM32F4xx_DFP.2.14.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

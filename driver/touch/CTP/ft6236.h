@@ -48,6 +48,7 @@
 #define FT_ID_G_THDIFF          0x85        
 #define FT_ID_G_PERIODACTIVE	0x88   		// 激活状态周期设置寄存器  
  
+#define	FT_ID_G_AUTO_CLB_MODE   0xA0		// 自动校准
 #define	FT_ID_G_LIB_VERSIONH    0xA1		// 版本H4
 #define	FT_ID_G_LIB_VERSIONL	0xA2		// 版本L4
 #define FT_ID_G_CIPHER          0xA3        // 芯片ID
