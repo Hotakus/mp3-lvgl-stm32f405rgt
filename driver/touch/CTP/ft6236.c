@@ -10,6 +10,17 @@ static void ctp_ft6236_gpio(void);
 static void ctp_ft6236_reset(void);
 
 /************************************************
+ * @brief STATIC VARIABLE
+ ************************************************/
+static touch_coordinate_s touch_point[FT6236_MAX_TOUCH_NUM];
+
+/************************************************
+ * @brief GLOBAL VARIABLE
+ ************************************************/
+uint8_t ft6236_init_flag = 0;
+uint8_t ft6236_error_times;
+
+/************************************************
  * @brief FUNCTION REALIZED
  ************************************************/
 static void ctp_ft6236_gpio(void) 
@@ -37,11 +48,13 @@ static void ctp_ft6236_gpio(void)
  ************************************************/
 void ctp_ft6236_init( void )
 {
+    uint8_t val = 0x0;
+    
+    ft6236_init_flag = 0;
+    
     ctp_ft6236_gpio();
     ctp_ft6236_reset();
     i2c_conf( I2C1, 400, 0x94 );
-    
-    uint8_t val = 0x0;
 
     val = 0;
     ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
@@ -52,8 +65,9 @@ void ctp_ft6236_init( void )
     val = 0;
     ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
 
-    exti_conf( EXTI_Line1, EXTI_Trigger_Falling, ENABLE );
-    nvic_conf( EXTI1_IRQn, 1, 2, ENABLE );
+    ft6236_init_flag = 1;
+
+    
 }
 
 /************************************************
@@ -82,19 +96,48 @@ void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
     i2c_generate_stop( FT6236_I2C );
     
     /*重新发送起始信号 */
-    i2c_generate_start( FT6236_I2C, 0xFFF );
+    i2c_generate_start( FT6236_I2C, 0xFFFF );
     if ( err != SUCCESS )
         return;
     // 发送地址+读
     i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Receiver, FT6236_ADDR, 0xFFFF );
     if ( err != SUCCESS )
         return;
-    i2c_read_bytes( FT6236_I2C, val, 1, 0xFFF );
+    i2c_read_bytes( FT6236_I2C, val, 1, 0xFFFF );
     if ( err != SUCCESS )
         return;
 	/*非应答*/
 	I2C_AcknowledgeConfig(I2C1, DISABLE);
 	i2c_generate_stop( FT6236_I2C );
+
+//    I2C_AcknowledgeConfig(I2C1, ENABLE);
+//    /*①产生起始信号*/
+//	I2C_GenerateSTART(I2C1, ENABLE);
+//	/*检测EV5并清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+//	/*②发送从机地址，写选通*/
+//	I2C_Send7bitAddress(I2C1, FT6236_ADDR, I2C_Direction_Transmitter);
+//	/*检测EV6并清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+//	/*③发送要读取数据的地址*/
+//	I2C_SendData(I2C1, reg_addr);
+//	/*检测EV8并清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+//	/*④重新发送起始信号 */
+//	I2C_GenerateSTART(I2C1, ENABLE);
+//	/*检测EV5并清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+//	/*⑤发送从机设备地址，读选通*/
+//	I2C_Send7bitAddress(I2C1, FT6236_ADDR, I2C_Direction_Receiver);
+//	/*检测EV6并清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+//	/*⑥检测EV7，然后读取数据清除标志*/
+//	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED)); 
+//	*val = I2C_ReceiveData(I2C1);
+//	/*⑦非应答*/
+//	I2C_AcknowledgeConfig(I2C1, DISABLE);
+//        /*⑧产生停止信号*/
+//	I2C_GenerateSTOP(I2C1, ENABLE);
     
 }
 
@@ -112,19 +155,19 @@ void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len )
     printf( "write 0x%02x to reg 0x%02x\n", *val, reg_addr );
     
     // 开始
-    err = i2c_generate_start( FT6236_I2C, 0xFFF );
+    err = i2c_generate_start( FT6236_I2C, 0xFFFF );
     if ( err != SUCCESS )
         return;
     // 发送写命令
-    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFF );
+    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFFF );
     if ( err != SUCCESS )
         return;
     
-    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFF );
+    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFFF );
     if ( err != SUCCESS )
         return;
     
-    i2c_send_bytes( FT6236_I2C, val, len, 0xFFF );
+    i2c_send_bytes( FT6236_I2C, val, len, 0xFFFF );
     if ( err != SUCCESS )
         return;
     
@@ -141,3 +184,53 @@ static void ctp_ft6236_reset(void)
     FT6236_RST_HIGH;
     DELAY( 100 );
 }
+
+
+void ctp_ft6236_scan( void )
+{
+    uint8_t val = 0;
+    uint16_t x, y;
+    ctp_ft6236_get_coordinate( &x, &y, FT_TP1 );
+
+}
+
+void ctp_ft6236_get_coordinate( uint16_t *x, uint16_t *y, uint8_t TPx )
+{
+
+    uint8_t xh, xl;
+    uint8_t yh, yl;
+    
+    ctp_ft6236_read_reg( TPx  , &xh, 1 );  // 读触摸点状态和x高4位
+    DELAY(1);
+    ctp_ft6236_read_reg( TPx+1, &xl, 1 );  // 读x低8位
+    DELAY(1);
+    ctp_ft6236_read_reg( TPx+2, &yh, 1 );  // 读y高4位
+    DELAY(1);
+    ctp_ft6236_read_reg( TPx+3, &yl, 1 );  // 读y低8位
+
+    
+    *x  = (xh&0x0F)<<8;
+    *x |= xl;
+    
+    *y  = (yh&0x0F)<<8;
+    *y |= yl;
+
+    // 判断是否误读
+    if ( *x > FT6236_MAX_X )
+        *x = FT6236_MAX_X;
+    if ( *y > FT6236_MAX_X )
+        *y = FT6236_MAX_Y;
+
+    DEBUG_PRINT( "x : %03d y : %03d\n", *x, *y );
+    
+}
+
+touch_gesture_t cp_ft6236_get_gesture( void )
+{
+    uint8_t gesture = 0;
+    ctp_ft6236_read_reg( FT_GEST_ID, &gesture, 1 );
+    return (touch_gesture_t)gesture;
+}
+
+
+

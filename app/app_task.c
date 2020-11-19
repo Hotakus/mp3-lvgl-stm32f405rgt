@@ -9,7 +9,7 @@ static struct rt_thread u_static_threadx[APP_THREAD_NUM];
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
-#define LED_BLINK_STACK_SIZE    256                  // 线程栈大小
+#define LED_BLINK_STACK_SIZE    1024                  // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      10                  // 线程优先级
 static rt_thread_t *led_blink_th = &u_threadx[0];      // 从线程堆分配线程
@@ -18,11 +18,14 @@ static void led_blink_thread( void *param )
     param = param;
     led_conf( GPIOA, GPIO_Pin_8 );
     led_on( GPIOA, GPIO_Pin_8 );
+    extern uint8_t ft6236_init_flag;
     while ( 1 ) {
         led_on( GPIOA, GPIO_Pin_8 );
         rt_thread_mdelay( 200 );
         led_off( GPIOA, GPIO_Pin_8 );
         rt_thread_mdelay( 200 );
+        if ( ft6236_init_flag )
+            ctp_ft6236_scan();
     }
 }
 

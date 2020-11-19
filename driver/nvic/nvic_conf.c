@@ -31,10 +31,7 @@ void EXTI1_IRQHandler (void)
 #if USER_USE_OS == 1
     OS_INT_ENTER();
 #endif
-    static uint32_t cnt = 0;
-    DEBUG_PRINT( "exti touch. (%04d)\n", cnt );
     EXTI_ClearITPendingBit( EXTI_Line1 );
-    cnt++;
 #if USER_USE_OS == 1
     OS_INT_EXIT();
 #endif

@@ -250,7 +250,7 @@ static void ft6236_test(void)
         flag = 1;
     } else {
         uint8_t val = 0x0;
-        ctp_ft6236_read_reg( 0xA3, &val, 1 );
+        ctp_ft6236_read_reg( FT_ID_G_FT6236ID, &val, 1 );
         printf("0xA3: %x\n", val);
     }
 }
