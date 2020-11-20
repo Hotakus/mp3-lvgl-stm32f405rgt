@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_indev.h"
 #include "main.h"
-//#include "key.h"
+#include "ft6236.h"
 
 /*********************
  *      DEFINES
@@ -24,7 +24,7 @@
 *   Encoder     ：3
 *   Button      ：4
 */
-#define INPUT_DEVICE    2
+#define INPUT_DEVICE    0
 
 
 
@@ -88,6 +88,11 @@ static lv_indev_state_t encoder_state;
  *   GLOBAL FUNCTIONS
  **********************/
 
+/************************************************
+ * @brief 获取 indev_group
+ * 
+ * @return lv_group_t* 
+ ************************************************/
 lv_group_t *lv_get_indev_group(void)
 {
     return indev_group;
@@ -217,7 +222,7 @@ void lv_port_indev_init(void)
 /*Initialize your touchpad*/
 static void touchpad_init(void)
 {
-    /*Your code comes here*/
+    ctp_ft6236_init();
 }
 
 /* Will be called by the library to read the touchpad */
@@ -246,6 +251,14 @@ static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 static bool touchpad_is_pressed(void)
 {
     /*Your code comes here*/
+    uint8_t val = 0;
+
+    /* 读取FT6236 的 TD STATUS寄存器 */
+    ctp_ft6236_read_reg( FT_TD_STATUS, &val, 1 );
+
+    /* 如果TD STATUS寄存器不为0，也就是有点触摸 返回true */
+    if ( val != 0 )
+        return true;
 
     return false;
 }
@@ -254,9 +267,10 @@ static bool touchpad_is_pressed(void)
 static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
 {
     /*Your code comes here*/
+    touch_coordinate_s *tp = ctp_ft6236_get_coordinate( FT_TP1 );
 
-    (*x) = 0;
-    (*y) = 0;
+    (*x) = tp->x;
+    (*y) = tp->y;
 }
 #endif
 

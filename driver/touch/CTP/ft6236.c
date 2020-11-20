@@ -1,3 +1,13 @@
+/************************************************
+ * @file ft6236.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-20
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "iic_conf.h"
 #include "ft6236.h"
 #include "pro_conf.h"
@@ -56,20 +66,30 @@ void ctp_ft6236_init( void )
     ctp_ft6236_reset();
     i2c_conf( I2C1, 400, 0x94 );
 
+    /* gesture 配置 */
+    val = 0x0A;
+    ctp_ft6236_writ_reg( RADIAN_VALUE, &val, 1 );
+    val = 0x19;
+    ctp_ft6236_writ_reg( OFFSET_LEFT_RIGHT, &val, 1 );
+    ctp_ft6236_writ_reg( OFFSET_UP_DOWN, &val, 1 );
+    ctp_ft6236_writ_reg( DISTANCE_LEFT_RIGHT, &val, 1 );
+    ctp_ft6236_writ_reg( DISTANCE_UP_DOWN, &val, 1 );
+    val = 0x32;
+    ctp_ft6236_writ_reg( DISTANCE_ZONE, &val, 1 );
+
+    /* 初始化配置 */
+    val = 22;
+    ctp_ft6236_writ_reg( FT_THGROUP, &val, 1 );
+    val = 12;
+    ctp_ft6236_writ_reg( FT_PERIODACTIVE, &val, 1 );
+    val = 0;
+    ctp_ft6236_writ_reg( FT_MODE, &val, 1 );
     val = 0;
     ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
-    val = 0;
-    ctp_ft6236_writ_reg( FT_ID_G_AUTO_CLB_MODE, &val, 1 );
-    val = 22;
-    ctp_ft6236_writ_reg( FT_ID_G_THGROUP, &val, 1 );
-    val = 12;
-    ctp_ft6236_writ_reg( FT_ID_G_PERIODACTIVE, &val, 1 );
-    val = 0;
-    ctp_ft6236_writ_reg( FT_ID_G_MODE, &val, 1 );
-
-    ft6236_init_flag = 1;
-
     
+    ft6236_init_flag = 1;
+    
+    DEBUG_PRINT( "FT6236 configured done.\n" );
 }
 
 /************************************************
@@ -150,9 +170,9 @@ void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 static void ctp_ft6236_reset(void)
 {
     FT6236_RST_LOW;
-    DELAY( 100 );
+    DELAY( 50 );
     FT6236_RST_HIGH;
-    DELAY( 100 );
+    DELAY( 50 );
 }
 
 /************************************************
@@ -161,38 +181,41 @@ static void ctp_ft6236_reset(void)
 void ctp_ft6236_scan( void )
 {
     uint8_t val = 0;
-    uint16_t x, y;
-    ctp_ft6236_get_coordinate( &x, &y, FT_TP1 );
-    cp_ft6236_get_gesture();
+    ctp_ft6236_get_coordinate( FT_TP1 );
+    DEBUG_PRINT( "x : %d y : %d \n", touch_point[0].x, touch_point[0].y );
+    //cp_ft6236_get_gesture();
 }
 
 /************************************************
  * @brief 获取触摸点坐标
+ * 
+ * @param TPx 
+ * @return touch_coordinate_s* 
  ************************************************/
-void ctp_ft6236_get_coordinate( uint16_t *x, uint16_t *y, uint8_t TPx )
+touch_coordinate_s *ctp_ft6236_get_coordinate( uint8_t TPx )
 {
     uint8_t xh, xl;
     uint8_t yh, yl;
+    uint8_t tp;
     
     ctp_ft6236_read_reg( TPx  , &xh, 1 );  // 读触摸点状态和x高4位
     ctp_ft6236_read_reg( TPx+1, &xl, 1 );  // 读x低8位
     ctp_ft6236_read_reg( TPx+2, &yh, 1 );  // 读y高4位
     ctp_ft6236_read_reg( TPx+3, &yl, 1 );  // 读y低8位
     
-    *x  = (xh&0x0F)<<8;
-    *x |= xl;
-    
-    *y  = (yh&0x0F)<<8;
-    *y |= yl;
+    if ( TPx == FT_TP1 )
+        tp = 0;
+    else if ( TPx == FT_TP2 )
+        tp = 1;
 
-//    // 判断是否误读
-//    if ( *x > FT6236_MAX_X )
-//        *x = FT6236_MAX_X;
-//    if ( *y > FT6236_MAX_X )
-//        *y = FT6236_MAX_Y;
-
-    DEBUG_PRINT( "x : %03d y : %03d\n", *x, *y );
+    touch_point[tp].event_flag = xh>>6;
+    touch_point[tp].x  = (xh&0x0F)<<8;
+    touch_point[tp].x |= xl;
     
+    touch_point[tp].y  = (yh&0x0F)<<8;
+    touch_point[tp].y |= yl;
+
+    return &touch_point[tp];
 }
 
 /************************************************
@@ -202,7 +225,8 @@ touch_gesture_t cp_ft6236_get_gesture( void )
 {
     uint8_t gesture = 0;
     ctp_ft6236_read_reg( FT_GEST_ID, &gesture, 1 );
-    DEBUG_PRINT( "gesture : %02d\n", gesture );
+    if ( gesture != 0 )
+        DEBUG_PRINT( "gesture : %02d\n", gesture );
 }
 
 
