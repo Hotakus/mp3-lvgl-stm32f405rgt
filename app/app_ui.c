@@ -4,18 +4,32 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
- static void lv_ex_label_1(void);
- static void lv_ex_spinner_1(void);
- 
  
 /**********************
  *  STATIC VARIABLE
  **********************/
+/************************************************
+ * @brief 层级管理块
+ ************************************************/
 static app_ui_managed_t aums = {
     .reg_ui_num     = 0,
     .cur_ui_layer   = 0,
     .next_ui_layer  = 0,
 };
+
+#if USE_LV_EX == 1
+static void event_handler(lv_obj_t * obj, lv_event_t event);
+static void lv_ex_label_1(void);
+static void lv_ex_spinner_1(void);
+
+static void event_handler(lv_obj_t * obj, lv_event_t event)
+{
+    if(event == LV_EVENT_CLICKED) {
+        printf("Clicked\n");
+    } else if(event == LV_EVENT_VALUE_CHANGED) {
+        printf("Toggled\n");
+    }
+}
 
 static void lv_ex_label_1(void)
 {
@@ -48,40 +62,21 @@ static void lv_ex_spinner_1(void)
     
 }
 
-
-
-static void event_handler(lv_obj_t * obj, lv_event_t event)
-{
-    if(event == LV_EVENT_CLICKED) {
-        printf("Clicked\n");
-    } else if(event == LV_EVENT_VALUE_CHANGED) {
-        printf("Toggled\n");
-    }
-}
-
 void lv_ex_btn_1(void)
 {
-    lv_obj_t * label;
-    lv_obj_t * btn1 = lv_btn_create(lv_scr_act(), NULL);
-    lv_obj_set_event_cb(btn1, event_handler);
-    lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, 0, -40);
-    label = lv_label_create(btn1, NULL);
-    lv_label_set_text(label, "Button");
     lv_obj_t * btn2 = lv_btn_create(lv_scr_act(), NULL);
     lv_obj_set_event_cb(btn2, event_handler);
-    lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 0, 40);
     lv_btn_set_checkable(btn2, true);
+    lv_obj_set_size( btn2, 50, 50 );
     lv_btn_toggle(btn2);
-    lv_btn_set_fit2(btn2, LV_FIT_NONE, LV_FIT_TIGHT);
+    lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 0, 0);
+    
+    lv_obj_t * label;
     label = lv_label_create(btn2, NULL);
-    lv_label_set_text(label, "Toggled");
+    lv_label_set_recolor( label, true );
+    lv_label_set_text(label, "#ff0000 Togg##00ff00 led#");
 }
 
-
-
-
-
-#if USE_LV_EX == 1
 void app_create_example(void)
 {
 //    lv_ex_label_1();
@@ -117,6 +112,12 @@ ui_register_stat app_ui_register( app_ui_t *ui )
     return APP_UI_REGISTER_OK;
 }
 
+/************************************************
+ * @brief 注销ui
+ * 
+ * @param ui 
+ * @return ui_register_stat 
+ ************************************************/
 ui_register_stat app_ui_unregister( app_ui_t *ui )
 {
     for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
@@ -194,9 +195,11 @@ void app_ui_init(void)
 }
 
 /************************************************
- * @brief 获取app_ui_managed_t aums
+ * @brief 获取ui层级管理块 app_ui_managed_t aums
+ * 
+ * @return app_ui_managed_t* 
  ************************************************/
-app_ui_managed_t *app_get_ui_layer(void)
+app_ui_managed_t *app_get_ui_layer_b(void)
 {
     return &aums;
 }

@@ -1,12 +1,27 @@
 #include "app_main.h"
 #include "pro_conf.h"
 
+/************************************************
+ * @brief EXTERN VARIABLE
+ ************************************************/
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
 
+/************************************************
+ * @brief STATIC VARIABLE
+ ************************************************/
 static struct rt_thread app_init_thread;
 ALIGN(4) static u8 app_init_stk[APP_INIT_STK_SIZE]; 
 
+/************************************************
+ * @brief FUNCTION PROPOTYPE
+ ************************************************/
+static void lvgl_init( void );
+
+
+/************************************************
+ * @brief FUNCTION REALIZED
+ ************************************************/
 static void lvgl_init( void ) 
 {
     lv_init();
@@ -16,6 +31,11 @@ static void lvgl_init( void )
     
 }
 
+/************************************************
+ * @brief APP 入口函数
+ * 
+ * @param param 
+ ************************************************/
 void app_init( void *param )
 {
     lvgl_init();

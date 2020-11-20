@@ -23,7 +23,7 @@ typedef enum {
 
 /* functions */
 void app_ui_init(void);
-app_ui_managed_t *app_get_ui_layer(void);
+app_ui_managed_t *app_get_ui_layer_b(void);
 
 #if USE_LV_EX == 1
 void app_create_example(void);
