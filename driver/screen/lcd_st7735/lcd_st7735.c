@@ -84,6 +84,9 @@ void lcd_st7735_init( void )
     
     lcd_st7735_send(0x11, ST7735_CMD);//Sleep exit
 		
+    lcd_st7735_send(0x36, ST7735_CMD);
+    lcd_st7735_send(ST7735_DIRECTION, ST7735_DAT);
+
 	//ST7735R Frame Rate
 	lcd_st7735_send(0xB1, ST7735_CMD); 
 	lcd_st7735_send(0x01, ST7735_DAT); 
@@ -128,8 +131,8 @@ void lcd_st7735_init( void )
 	lcd_st7735_send(0xC5, ST7735_CMD); //VCOM 
 	lcd_st7735_send(0x0E, ST7735_DAT); 
 	
-	lcd_st7735_send(0x36, ST7735_CMD); //MX, MY, RGB mode 
-	lcd_st7735_send(0xC8, ST7735_DAT); //ÊúÆÁC8 ºáÆÁ08 A8	
+	// lcd_st7735_send(0x36, ST7735_CMD); //MX, MY, RGB mode 
+	// lcd_st7735_send(0xC8, ST7735_DAT); //ÊúÆÁC8 ºáÆÁ08 A8	
 	
 	//ST7735R Gamma Sequence
 	lcd_st7735_send(0xe0, ST7735_CMD); 
@@ -175,7 +178,7 @@ void lcd_st7735_init( void )
 	
 	lcd_st7735_send(0x3A, ST7735_CMD); //65k mode 
 	lcd_st7735_send(0x05, ST7735_DAT); 
-	
+
 	lcd_st7735_powerUp();
     
     lcd_st7735_clear_with( 0xffff );
@@ -284,5 +287,3 @@ void lcd_st7735_clear_with( u16 color )
         }
     }
 }
-
-

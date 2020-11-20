@@ -160,7 +160,7 @@ void app_create_ui( app_ui_t *ui )
  ************************************************/
 void app_ui_return( void )
 {
-    
+    /* 防止顶层UI被删除 */
     if ( aums.next_ui_layer == 0 )
         return;
     if ( aums.cur_ui_layer == 0 )
@@ -184,13 +184,14 @@ void app_ui_init(void)
         aums.app_ui_s[i] = NULL;
     }
 
+    app_ui_t *ui = NULL;
+
     /* 创建mainmenu */
-    app_ui_register( mainmenu_ui_get() );
-    app_create_ui( mainmenu_ui_get() );
+    ui = mainmenu_ui_get();
+    app_ui_register( ui );
+    app_create_ui( ui );
+
     
-    DEBUG_PRINT( "%s\n", aums.app_ui_layer[aums.cur_ui_layer]->ui_name );
-    
-    //lv_ex_spinner_1();
 
 }
 

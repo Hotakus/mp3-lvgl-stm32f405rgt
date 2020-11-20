@@ -29,6 +29,10 @@ static app_ui_t app_mainmenu = {
  **********************/
 lv_obj_t *background_img;
 lv_obj_t *background_img_2;
+
+/************************************************
+ * @brief 创建mainmenu
+ ************************************************/
 static void mainmenu_create(void)
 {
     LV_IMG_DECLARE( sd );
@@ -37,6 +41,9 @@ static void mainmenu_create(void)
 //    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 }
 
+/************************************************
+ * @brief 移除mainmenu
+ ************************************************/
 static void mainmenu_remove(void)
 {
 

@@ -11,10 +11,15 @@ extern "C" {
 
 
 /* definations */
+#define ST7789_NOMAL            0xC8u
+#define ST7789_RIGHT_TO_LEFT    0x68u
+#define ST7789_LEFT_TO_RIGHT    0xA8u
+#define ST7789_UPSIDE_DOWN      0x08u
+#define ST7789_DIRECTION        ST7789_NOMAL
 
 #if (USER_USE_SCR == USE_SCR_LCD_ST7789_130)
 /* Screen's display direction */
-#define USE_HORIZONTAL 0
+#define ST7789_USE_HORIZONTAL 0
 
 #define ST7789_SCR_X    240
 #define ST7789_SCR_Y    240

@@ -84,16 +84,7 @@ void lcd_st7789_init( void ) {
     lcd_st7789_hw_reset();
 
     lcd_st7789_send_cmd(0x36);
-    
-#if USE_HORIZONTAL == 0
-    lcd_st7789_send_dat(0x00);
-#elif USE_HORIZONTAL == 1
-    lcd_st7789_send_dat(0xC0);
-#elif USE_HORIZONTAL == 2
-    lcd_st7789_send_dat(0xC0);
-#elif USE_HORIZONTAL ==3 
-    lcd_st7789_send_dat(0xA0);
-#endif
+    lcd_st7789_send_dat(ST7789_DIRECTION);
     
     lcd_st7789_send_cmd(0x3A); 
     lcd_st7789_send_dat(0x05);

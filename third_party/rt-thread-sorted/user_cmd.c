@@ -26,14 +26,38 @@
 /************************************************
  * @brief cmd for msh
  ************************************************/
+ 
+ static void lcd_test(int argc, char **args)
+{
+    scr_opr_handler *scr = scr_get_opr_handler();
+    
+    if ( argc == 2 ) {
+        switch ( *args[1] ) {
+        case 'r':
+            scr->clear( 0xF800 );
+            break;
+        case 'g':
+            scr->clear( 0x07F0 );
+            break;
+        case 'b':
+            scr->clear( 0x001F );
+            break;
+        default:
+            scr->clear( 0xF800 );
+            break;
+        }
+    } else
+        scr->clear( 0xF800 );
+    
+}
+MSH_CMD_EXPORT(lcd_test, lcd test);
+ 
 #if USER_USE_FATFS == 1
 /* declared in "lv_port_fs.c" */
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
-
 char *sd_buf   = "SD_SDIO:/file_trans.c";
 char *spif_buf = "SPIF:";
-
 static void fatfs( int argc, char **args )
 {
     FIL fil;
@@ -185,7 +209,6 @@ MSH_CMD_EXPORT( rtt_cp, copy file );
 #if USER_USE_LVGL == 1
 static void lvgl_reboot( int argc, char **args )
 {
-    lv_init();
     lv_port_disp_init();        // 显示器初始化
     lv_port_indev_init();       // 输入设备初始化
 #if USER_USE_FATFS == 1
@@ -241,21 +264,6 @@ static void oled_test(void)
     }
 }
 MSH_CMD_EXPORT(oled_test , oled test);
-
-static void ft6236_test(void)
-{
-    static uint8_t flag = 0;
-    if ( !flag ) {
-        ctp_ft6236_init();
-        flag = 1;
-    } else {
-        uint8_t val = 0x0;
-        ctp_ft6236_read_reg( FOCALTECH_ID, &val, 1 );
-        printf("0xA3: %x\n", val);
-    }
-}
-MSH_CMD_EXPORT(ft6236_test , ft6236 test);
-
 
 static void reboot(int argc, char **args)
 {

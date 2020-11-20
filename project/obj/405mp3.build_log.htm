@@ -27,16 +27,23 @@ Project File Date:  11/19/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
 Build target 'f405mp3'
-compiling app_main.c...
-app\app_main.c(52): error:  #147-D: declaration is incompatible with "int app_create_init_thread(void)"  (declared at line 14 of "app\app_main.h")
-  uint32_t app_create_init_thread(void)
-app\app_main.c(68): warning:  #68-D: integer conversion resulted in a change of sign
-          return -1;
-app\app_main.c(72): warning:  #144-D: a value of type "uint32_t (*)(void)" cannot be used to initialize an entity of type "const init_fn_t"
-  INIT_APP_EXPORT(app_create_init_thread);  // 导出为APP，rtthread启动时会自动调用这个函数执行
-app\app_main.c: 2 warnings, 1 error
+compiling screen_conf.c...
+compiling main.c...
+compiling lcd_st7735.c...
+driver\screen\lcd_st7735\lcd_st7735.c(17): warning:  #177-D: variable "spig_s"  was declared but never referenced
+      GPIO_InitTypeDef spig_s;
+driver\screen\lcd_st7735\lcd_st7735.c(18): warning:  #177-D: variable "spi_s"  was declared but never referenced
+      SPI_InitTypeDef  spi_s;
+driver\screen\lcd_st7735\lcd_st7735.c: 2 warnings, 0 errors
 compiling cmd.c...
-".\project\obj\405mp3.axf" - 1 Error(s), 2 Warning(s).
+compiling board.c...
+compiling user_cmd.c...
+compiling lv_port_disp.c...
+compiling lv_port_indev.c...
+linking...
+Program Size: Code=139178 RO-data=80222 RW-data=5496 ZI-data=78440  
+FromELF: creating hex file...
+".\project\obj\405mp3.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -49,8 +56,7 @@ Package Vendor: Keil
   E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Target not created.
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
