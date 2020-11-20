@@ -53,24 +53,22 @@ static void lcd_st7789_gpio( void )
 
     GPIO_InitTypeDef lcd_st7789_mcu_g;
     
-    RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
-    RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOB, ENABLE );
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE );
     
-    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_OUT;
+    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_Out_PP;
     lcd_st7789_mcu_g.GPIO_Pin   = ST7789_CS | ST7789_DC | ST7789_WR | ST7789_RD | LCD_LEDK;
-    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_100MHz;
-    lcd_st7789_mcu_g.GPIO_OType = GPIO_OType_PP;
-    lcd_st7789_mcu_g.GPIO_PuPd  = GPIO_PuPd_UP;
+    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init( ST7789_CTL_GPIO, &lcd_st7789_mcu_g );
     
-    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_OUT;
+    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_Out_PP;
     lcd_st7789_mcu_g.GPIO_Pin   = LCD_ST7789_DAT_PIN;
-    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_100MHz;
+    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init( ST7789_DAT_GPIO, &lcd_st7789_mcu_g );
     
-    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_OUT;
+    lcd_st7789_mcu_g.GPIO_Mode  = GPIO_Mode_Out_PP;
     lcd_st7789_mcu_g.GPIO_Pin   = ST7789_RST;
-    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_100MHz;
+    lcd_st7789_mcu_g.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init( GPIOB, &lcd_st7789_mcu_g );
 
 #endif
@@ -219,7 +217,7 @@ static void lcd_st7789_send( u8 byte, ST7789_DC_OPT opt )
     else if ( opt == ST7789_DAT )
         lcd_st7789_send_dat( byte );
     else
-        printf( "send opt error.\n" );
+        DEBUG_PRINT( "send opt error.\n" );
 }
 
 void lcd_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye )

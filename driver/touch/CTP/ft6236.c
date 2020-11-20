@@ -10,8 +10,7 @@
  ************************************************/
 #include "iic_conf.h"
 #include "ft6236.h"
-#include "pro_conf.h"
-#include "nvic_conf.h"
+#include "main.h"
 
 /************************************************
  * @brief FUNCTION PROPOTYPE
@@ -37,13 +36,13 @@ static void ctp_ft6236_gpio(void)
 {
     GPIO_InitTypeDef ctp_g;
 
-    RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
+    RCC_APB2PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
     
     ctp_g.GPIO_Mode     = GPIO_Mode_OUT;
     ctp_g.GPIO_Pin      = FT6236_RST;
     ctp_g.GPIO_OType    = GPIO_OType_PP;
     ctp_g.GPIO_PuPd     = GPIO_PuPd_UP;
-    ctp_g.GPIO_Speed    = GPIO_Speed_100MHz;
+    ctp_g.GPIO_Speed    = GPIO_Speed_50MHz;
     GPIO_Init( GPIOA, &ctp_g );
     
 //    ctp_g.GPIO_Mode     = GPIO_Mode_IN;
@@ -227,6 +226,7 @@ touch_gesture_t cp_ft6236_get_gesture( void )
     ctp_ft6236_read_reg( FT_GEST_ID, &gesture, 1 );
     if ( gesture != 0 )
         DEBUG_PRINT( "gesture : %02d\n", gesture );
+    return FT_GEST_NO_GEST;
 }
 
 

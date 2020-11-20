@@ -54,10 +54,7 @@ MSH_CMD_EXPORT(lcd_test, lcd test);
  
 #if USER_USE_FATFS == 1
 /* declared in "lv_port_fs.c" */
-extern FATFS   fs_lv[2];
-extern FRESULT fr_lv[2];
-char *sd_buf   = "SD_SDIO:/file_trans.c";
-char *spif_buf = "SPIF:";
+
 static void fatfs( int argc, char **args )
 {
     FIL fil;

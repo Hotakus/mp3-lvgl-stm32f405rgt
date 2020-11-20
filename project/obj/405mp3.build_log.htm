@@ -27,23 +27,15 @@ Project File Date:  11/19/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
 Build target 'f405mp3'
-compiling screen_conf.c...
-compiling main.c...
-compiling lcd_st7735.c...
-driver\screen\lcd_st7735\lcd_st7735.c(17): warning:  #177-D: variable "spig_s"  was declared but never referenced
-      GPIO_InitTypeDef spig_s;
-driver\screen\lcd_st7735\lcd_st7735.c(18): warning:  #177-D: variable "spi_s"  was declared but never referenced
-      SPI_InitTypeDef  spi_s;
-driver\screen\lcd_st7735\lcd_st7735.c: 2 warnings, 0 errors
 compiling cmd.c...
-compiling board.c...
-compiling user_cmd.c...
-compiling lv_port_disp.c...
-compiling lv_port_indev.c...
+compiling ft6236.c...
+driver\touch\CTP\ft6236.c(182): warning:  #177-D: variable "val"  was declared but never referenced
+      uint8_t val = 0;
+driver\touch\CTP\ft6236.c: 1 warning, 0 errors
 linking...
 Program Size: Code=139178 RO-data=80222 RW-data=5496 ZI-data=78440  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 2 Warning(s).
+".\project\obj\405mp3.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +48,7 @@ Package Vendor: Keil
   E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
