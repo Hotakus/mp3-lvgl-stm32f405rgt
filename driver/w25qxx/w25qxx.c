@@ -183,7 +183,6 @@ void w25qxx_get_JEDECID( void )
         return;
     
     W25QXX_CS_CLR;
-
     w25qxx_trans_byte( W25QXX_CMD_JEDECID );
     for ( uint8_t i = 0; i < 3; i++ ) {
         w25qxx.JEDECID <<= 8;
@@ -237,7 +236,7 @@ w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num )
         return W25QXX_STAT_OK;
     
      while ( sect_num-- ) {
-        stat = w25qxx_writ_enable( 0xFFFF );
+        stat = w25qxx_writ_enable( 0xFFFFFFFF );
         if ( stat != W25QXX_STAT_OK )
             return stat;
 
@@ -249,7 +248,7 @@ w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num )
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         W25QXX_CS_SET;
 
-        stat = w25qxx_writ_disable( 0xFFFF );
+        stat = w25qxx_writ_disable( 0xFFFFFFFF );
         if ( stat != W25QXX_STAT_OK )
             return stat;
         ssect++;
@@ -266,19 +265,17 @@ w25qxx_stat w25qxx_erase_chip( void )
     w25qxx_stat stat;
     
     DEBUG_PRINT( "please wait a moment.\n" );
-    stat = w25qxx_wait_busy( 0xFFFFFFFF );
+    stat = w25qxx_writ_enable( 0xFFFF );        // 写使能
     if ( stat != W25QXX_STAT_OK ) 
         return stat;
     
-    w25qxx_writ_enable( 0xFFFF );        // 写使能
     W25QXX_CS_CLR;
     w25qxx_trans_byte( W25QXX_CMD_ERASE_CHIP );
     W25QXX_CS_SET;
 
-    stat = w25qxx_wait_busy( 0xFFFFFFFF );
+    stat = w25qxx_writ_disable( 0xFFFFFFFF );       // 写失能
     if ( stat != W25QXX_STAT_OK ) 
         return stat;
-    w25qxx_writ_disable( 0xFFFF );       // 写失能
     DEBUG_PRINT( "W25QXX chip erased.\n" );
     return W25QXX_STAT_OK;
 }
@@ -306,9 +303,8 @@ w25qxx_stat w25qxx_read_page( uint8_t* rec_buf , uint32_t page, uint32_t cnt )
         w25qxx_trans_byte( (addr>>8 )&0xFF );
         w25qxx_trans_byte( (addr>>0 )&0xFF );
         w25qxx_trans_byte( 0xFF );                      // dummy byte
-        for ( uint16_t i = 0; i < 256; i++ ) {
+        for ( uint16_t i = 0; i < 256; i++ )
             *rec_buf++ = w25qxx_trans_byte( SPI_DUMMY_BYTE );
-        }
         W25QXX_CS_SET;
         page += 1;
     }
@@ -344,9 +340,8 @@ w25qxx_stat w25qxx_writ_page( uint8_t* send_buf, uint32_t page, uint32_t cnt )
         w25qxx_trans_byte( (addr>>16)&0xFF );
         w25qxx_trans_byte( (addr>>8 )&0xFF );
         w25qxx_trans_byte( (addr>>0 )&0xFF );
-        for ( uint16_t i = 0; i < 256; i++ ) {
+        for ( uint16_t i = 0; i < 256; i++ )
             w25qxx_trans_byte( *send_buf++ );
-        }
         W25QXX_CS_SET;
 
         stat = w25qxx_writ_disable( 0xFFFF );

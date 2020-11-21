@@ -82,7 +82,25 @@ void app_create_example(void)
 //    lv_ex_label_1();
 //    lv_ex_spinner_1();
     
-    lv_ex_btn_1();
+//    lv_ex_btn_1();
+    
+    
+    LV_IMG_DECLARE( music_icon_rel );
+    LV_IMG_DECLARE( music_icon_pr );
+    LV_IMG_DECLARE( Calendar_icon_rel );
+    LV_IMG_DECLARE( Calendar_icon_pr );
+
+    lv_obj_t *imgbtn1 = lv_imgbtn_create( lv_scr_act(), NULL );
+    lv_imgbtn_set_src( imgbtn1, LV_BTN_STATE_RELEASED, &music_icon_rel );
+    lv_imgbtn_set_src( imgbtn1, LV_BTN_STATE_PRESSED, &music_icon_pr );
+    lv_obj_align(imgbtn1, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0);
+    
+    lv_obj_t *imgbtn2 = lv_imgbtn_create( lv_scr_act(), NULL );
+    lv_imgbtn_set_src( imgbtn2, LV_BTN_STATE_RELEASED, &Calendar_icon_rel );
+    lv_imgbtn_set_src( imgbtn2, LV_BTN_STATE_PRESSED, &Calendar_icon_pr );
+    lv_obj_align(imgbtn2, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+    
+    
     
 }
 #endif
@@ -95,16 +113,14 @@ void app_create_example(void)
  ************************************************/
 ui_register_stat app_ui_register( app_ui_t *ui )
 {
-
-    if ( aums.reg_ui_num == APP_UI_NUM )
+    // 如果已注册ui数量大于等于APP_UI_NUM则返回已满状态
+    if ( aums.reg_ui_num >= APP_UI_NUM )
         return APP_UI_REGISTER_UI_FULL;
     
     for ( u8 i = 0; i < APP_UI_NUM; i++ )  {
         if ( aums.app_ui_s[i] != NULL )
             continue;
-        
         aums.app_ui_s[i] = ui;
-        
         aums.reg_ui_num += 1;
         return APP_UI_REGISTER_OK;
     }
@@ -166,7 +182,7 @@ void app_ui_return( void )
     if ( aums.cur_ui_layer == 0 )
         return;
     
-    aums.app_ui_layer[aums.cur_ui_layer]->ctl_h->remove();
+    aums.app_ui_layer[aums.cur_ui_layer]->ctl_h->remove();     // 删除上一层界面
     aums.app_ui_layer[aums.cur_ui_layer] = NULL;
     aums.next_ui_layer -= 1;
     aums.cur_ui_layer  -= 1;
@@ -180,18 +196,21 @@ void app_ui_return( void )
 void app_ui_init(void)
 {
     
-    for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
+    for ( u8 i = 0; i < APP_UI_NUM; i++ )
         aums.app_ui_s[i] = NULL;
-    }
 
     app_ui_t *ui = NULL;
+    
+    /* 创建背景 */
+    
+    
+    /* 创建状态栏 */
+    
 
     /* 创建mainmenu */
     ui = mainmenu_ui_get();
     app_ui_register( ui );
     app_create_ui( ui );
-
-    
 
 }
 

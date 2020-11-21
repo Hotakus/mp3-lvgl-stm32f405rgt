@@ -203,8 +203,11 @@
 ".\project\obj\lv_port_disp.o"
 ".\project\obj\lv_port_fs.o"
 ".\project\obj\lv_port_indev.o"
-".\project\obj\sd.o"
-".\project\obj\spif.o"
+".\project\obj\music_icon_pr.o"
+".\project\obj\music_icon_rel.o"
+".\project\obj\calendar_icon_rel.o"
+".\project\obj\calendar_icon_pr.o"
+".\project\obj\mp3_demo.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

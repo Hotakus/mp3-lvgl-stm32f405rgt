@@ -179,7 +179,6 @@ static void ctp_ft6236_reset(void)
  ************************************************/
 void ctp_ft6236_scan( void )
 {
-    uint8_t val = 0;
     ctp_ft6236_get_coordinate( FT_TP1 );
     DEBUG_PRINT( "x : %d y : %d \n", touch_point[0].x, touch_point[0].y );
     //cp_ft6236_get_gesture();

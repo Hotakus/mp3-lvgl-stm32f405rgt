@@ -17,8 +17,8 @@ typedef enum {
     APP_UI_REGISTER_ERR         ,
     APP_UI_REGISTER_UI_FULL     ,
     
-    APP_UI_UNREGISTER_OK      = 0 ,
-    APP_UI_UNREGISTER_ERR         ,
+    APP_UI_UNREGISTER_OK    = 0 ,
+    APP_UI_UNREGISTER_ERR       ,
 } ui_register_stat;
 
 /* functions */

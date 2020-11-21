@@ -2204,14 +2204,29 @@
               <FilePath>.\third_party\lvgl\lvgl\lvgl.h</FilePath>
             </File>
             <File>
-              <FileName>sd.c</FileName>
+              <FileName>music_icon_pr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\sd.c</FilePath>
+              <FilePath>C:\Users\SU\Desktop\music_icon_pr.c</FilePath>
             </File>
             <File>
-              <FileName>spif.c</FileName>
+              <FileName>music_icon_rel.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\spif.c</FilePath>
+              <FilePath>C:\Users\SU\Desktop\music_icon_rel.c</FilePath>
+            </File>
+            <File>
+              <FileName>Calendar_icon_rel.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\SU\Desktop\Calendar_icon_rel.c</FilePath>
+            </File>
+            <File>
+              <FileName>Calendar_icon_pr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\SU\Desktop\Calendar_icon_pr.c</FilePath>
+            </File>
+            <File>
+              <FileName>mp3_demo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\SU\Desktop\mp3_demo.c</FilePath>
             </File>
           </Files>
         </Group>

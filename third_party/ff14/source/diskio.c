@@ -165,7 +165,6 @@ DRESULT disk_write (
 	UINT count			/* Number of sectors to write */
 )
 {
-	int res;
     uint8_t retry = 5;
     SD_Error sd_err;
     w25qxx_stat w25qxx_err;

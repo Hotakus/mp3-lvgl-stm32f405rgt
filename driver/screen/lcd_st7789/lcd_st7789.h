@@ -92,23 +92,23 @@ extern "C" {
 #define ST7789_CTL_GPIO             GPIOA
 #define ST7789_DAT_GPIO             GPIOB
 
-#define ST7789_CS_HIGH              GPIOA->BSRR |= ST7789_CS
-#define ST7789_CS_LOW               GPIOA->BRR  |= ST7789_CS
+#define ST7789_CS_HIGH              GPIOA->BSRRL  |= ST7789_CS
+#define ST7789_CS_LOW               GPIOA->BSRRH  |= ST7789_CS
 
-#define ST7789_DC_HIGH              GPIOA->BSRR |= ST7789_DC
-#define ST7789_DC_LOW               GPIOA->BRR  |= ST7789_DC
+#define ST7789_DC_HIGH              GPIOA->BSRRL  |= ST7789_DC
+#define ST7789_DC_LOW               GPIOA->BSRRH  |= ST7789_DC
 
-#define ST7789_WR_HIGH              GPIOA->BSRR |= ST7789_WR
-#define ST7789_WR_LOW               GPIOA->BRR  |= ST7789_WR
+#define ST7789_WR_HIGH              GPIOA->BSRRL  |= ST7789_WR
+#define ST7789_WR_LOW               GPIOA->BSRRH  |= ST7789_WR
 
-#define ST7789_RD_HIGH              GPIOA->BSRR |= ST7789_RD
-#define ST7789_RD_LOW               GPIOA->BRR  |= ST7789_RD
+#define ST7789_RD_HIGH              GPIOA->BSRRL  |= ST7789_RD
+#define ST7789_RD_LOW               GPIOA->BSRRH  |= ST7789_RD
 
-#define ST7789_RST_HIGH             GPIOB->BSRR |= ST7789_RST
-#define ST7789_RST_LOW              GPIOB->BRR  |= ST7789_RST
+#define ST7789_RST_HIGH             GPIOB->BSRRL  |= ST7789_RST
+#define ST7789_RST_LOW              GPIOB->BSRRH  |= ST7789_RST
 
-#define ST7789_BLK_HIGH             GPIOA->BSRR |= LCD_LEDK
-#define ST7789_BLK_LOW              GPIOA->BRR  |= LCD_LEDK
+#define ST7789_BLK_HIGH             GPIOA->BSRRL  |= LCD_LEDK
+#define ST7789_BLK_LOW              GPIOA->BSRRH  |= LCD_LEDK
 
 #else       // 处理不使用屏幕的情况
 

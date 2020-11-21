@@ -14,8 +14,6 @@
 
 void lcd_gpio( void ) {
     GPIO_InitTypeDef lcd_st7735_io_s;
-    GPIO_InitTypeDef spig_s;
-    SPI_InitTypeDef  spi_s;
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
@@ -39,6 +37,8 @@ void lcd_gpio( void ) {
     GPIO_Init( GPIOC, &lcd_st7735_io_s );
     
     /* SPI conf */
+//    GPIO_InitTypeDef spig_s;
+//    SPI_InitTypeDef  spi_s;
 //    spi_s.SPI_CPOL      = SPI_CPOL_High;
 //    spi_s.SPI_CPHA      = SPI_CPHA_2Edge;
 //    spi_s.SPI_Mode              = SPI_Mode_Master;
