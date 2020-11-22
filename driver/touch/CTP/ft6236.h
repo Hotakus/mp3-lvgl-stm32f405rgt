@@ -16,9 +16,21 @@
 #define FT6236_READ         0x01
 
 #define FT6236_MAX_TOUCH_NUM    2
-#define FT6236_MAX_X    240
-#define FT6236_MAX_Y    320
+#define FT6236_MAX_X            240
+#define FT6236_MAX_Y            320
 
+/************************************************
+ * @brief FT6236 坐标递增方向
+ ************************************************/
+#define FT6236_NOMAL            0       // 普通模式 原点在左上角
+#define FT6236_ROTATE_1         1       // 原点在右上角
+#define FT6236_ROTATE_2         2       // 原点在右下角
+#define FT6236_ROTATE_3         3       // 原点在左下角
+#define FT6236_DIRECTION        FT6236_ROTATE_1
+
+/************************************************
+ * @brief FT6236 I2C 接口定义
+ ************************************************/
 #define FT6236_I2C          I2C1
 #define FT6236_RST          GPIO_Pin_0  // PA
 #define FT6236_INT          GPIO_Pin_1  // PA
@@ -34,15 +46,15 @@
 
 #define FT_TP1_REG 				0X03	  	// 第一个触摸点高4位数据地址
 #define FT_TP2_REG 				0X09		// 第二个触摸点高4位数据地址
-#define FT_TP3_REG 				0X0F		// 第三个触摸点高4位数据地址
-#define FT_TP4_REG 				0X15		// 第四个触摸点高4位数据地址
-#define FT_TP5_REG 				0X1B		// 第五个触摸点高4位数据地址
+// #define FT_TP3_REG 				0X0F		// 第三个触摸点高4位数据地址
+// #define FT_TP4_REG 				0X15		// 第四个触摸点高4位数据地址
+// #define FT_TP5_REG 				0X1B		// 第五个触摸点高4位数据地址
 
 #define FT_TP1  FT_TP1_REG
 #define FT_TP2  FT_TP2_REG
-#define FT_TP3  FT_TP3_REG
-#define FT_TP4  FT_TP4_REG
-#define FT_TP5  FT_TP5_REG
+// #define FT_TP3  FT_TP3_REG
+// #define FT_TP4  FT_TP4_REG
+// #define FT_TP5  FT_TP5_REG
 
 #define FT_THGROUP			    0x80   		// 触摸有效值设置寄存器
 #define FT_THDIFF               0x85        

@@ -18,12 +18,28 @@ static void led_blink_thread( void *param )
     param = param;
     led_conf( GPIOA, GPIO_Pin_8 );
     led_on( GPIOA, GPIO_Pin_8 );
-    extern uint8_t ft6236_init_flag;
+    
+    LV_IMG_DECLARE( Calendar_icon_rel );
+//    static lv_obj_t *img;
+//    static uint16_t degree = 0;
+//    img = lv_img_create( lv_scr_act(), NULL );
+//    lv_img_set_src( img, &Calendar_icon_rel );
+//    lv_obj_set_pos( img, 35, 35 );
+//    lv_img_set_pivot( img, 64, 64 );
+//    
+
     while ( 1 ) {
         led_on( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 5 );
+        rt_thread_mdelay( 50 );
         led_off( GPIOA, GPIO_Pin_8 );
-        rt_thread_mdelay( 500 );
+        rt_thread_mdelay( 50 );
+//        if ( degree >= 3600 )
+//            degree = 50;
+//        else
+//            degree += 50;
+//        lv_img_set_angle( img, degree );
+////        lv_obj_align( img, NULL, LV_ALIGN_CENTER, 0, 0 );
+        
     }
 }
 
@@ -45,7 +61,7 @@ static void lvgl_tick_thread( void *param )
 
 /* lvgl task handler线程 */
 #define LVGL_TASK_THREAD_NAME   "lvgl_task"                         // 线程名
-#define LVGL_TASK_STACK_SIZE    (1U *1024U)                                // 线程栈大小
+#define LVGL_TASK_STACK_SIZE    (2U *1024U)                         // 线程栈大小
 #define LVGL_TASK_TIME_SLICE    10                                  // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                                  // 线程优先级
 ALIGN(RT_ALIGN_SIZE) static u8 lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈

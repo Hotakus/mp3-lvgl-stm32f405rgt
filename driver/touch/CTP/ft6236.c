@@ -196,6 +196,15 @@ touch_coordinate_s *ctp_ft6236_get_coordinate( uint8_t TPx )
     uint8_t yh, yl;
     uint8_t tp;
     
+    /* 参数错误检查 */
+    switch (TPx) {
+    case FT_TP1:
+    case FT_TP2:
+        break;
+    default:
+        return NULL;
+    }
+    
     ctp_ft6236_read_reg( TPx  , &xh, 1 );  // 读触摸点状态和x高4位
     ctp_ft6236_read_reg( TPx+1, &xl, 1 );  // 读x低8位
     ctp_ft6236_read_reg( TPx+2, &yh, 1 );  // 读y高4位
@@ -207,11 +216,22 @@ touch_coordinate_s *ctp_ft6236_get_coordinate( uint8_t TPx )
         tp = 1;
 
     touch_point[tp].event_flag = xh>>6;
+#if FT6236_DIRECTION == FT6236_NOMAL
     touch_point[tp].x  = (xh&0x0F)<<8;
     touch_point[tp].x |= xl;
-    
     touch_point[tp].y  = (yh&0x0F)<<8;
     touch_point[tp].y |= yl;
+#elif FT6236_DIRECTION == FT6236_ROTATE_1
+    touch_point[tp].y  = (xh&0x0F)<<8;
+    touch_point[tp].y |= xl;
+    touch_point[tp].y  =  FT6236_MAX_X - touch_point[tp].y;                // y坐标颠倒
+    touch_point[tp].x  = (yh&0x0F)<<8;
+    touch_point[tp].x |= yl;
+#elif FT6236_DIRECTION == FT6236_ROTATE_2
+
+#elif FT6236_DIRECTION == FT6236_ROTATE_3 
+
+#endif
 
     return &touch_point[tp];
 }

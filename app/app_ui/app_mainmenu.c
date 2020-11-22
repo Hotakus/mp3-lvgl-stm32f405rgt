@@ -39,6 +39,7 @@ static void mainmenu_create(void)
 //    background_img = lv_img_create( lv_scr_act(), NULL );
 //    lv_img_set_src(background_img, "S:/.mp3_icon/sd.bin" );
 //    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+    
 }
 
 /************************************************
@@ -46,7 +47,10 @@ static void mainmenu_create(void)
  ************************************************/
 static void mainmenu_remove(void)
 {
-
+    
+    
+    
+    app_ui_return();
 }
 
 app_ui_t *mainmenu_ui_get( void )

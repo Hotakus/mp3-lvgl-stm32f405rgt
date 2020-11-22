@@ -14,7 +14,7 @@ extern "C" {
 #define ST7735_RIGHT_TO_LEFT    0x68u
 #define ST7735_LEFT_TO_RIGHT    0xA8u
 #define ST7735_UPSIDE_DOWN      0x08u
-#define ST7735_DIRECTION        ST7735_NOMAL
+#define ST7735_DIRECTION        ST7735_RIGHT_TO_LEFT
 
 #define LCD_144_W   128
 #define LCD_144_H   128
