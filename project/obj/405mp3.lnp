@@ -214,6 +214,7 @@
 ".\project\obj\ariblk_14.o"
 ".\project\obj\msgothic_b_12_en.o"
 ".\project\obj\msgothic_b_14_en.o"
+".\project\obj\msgothic_b_12_cn.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

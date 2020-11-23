@@ -22,5 +22,6 @@
 /* functions */
 app_ui_t *status_bar_ui_get( void );
 void status_bar_update( void );
+void status_bar_attach_info_update( const char *attach_info );
 
 #endif

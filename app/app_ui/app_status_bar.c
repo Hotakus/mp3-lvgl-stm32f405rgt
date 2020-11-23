@@ -72,9 +72,9 @@ static void status_bar_create(void)
         attached_info_bar, 
         LV_LABEL_PART_MAIN, 
         LV_STATE_DEFAULT, 
-        &MSGOTHIC_B_12_EN
+        &MSGOTHIC_B_12_CN
     );
-    lv_label_set_text( attached_info_bar, "Cur Music 123 : % : 我 ぼかろころしあむ" );
+    status_bar_attach_info_update( "我" );
 
     
 }
@@ -87,6 +87,11 @@ static void status_bar_remove(void)
     
 }
 
+/************************************************
+ * @brief 获得status bar ui 
+ * 
+ * @return app_ui_t* 
+ ************************************************/
 app_ui_t *status_bar_ui_get( void )
 {
     return &app_status_bar;
@@ -115,3 +120,18 @@ void status_bar_update( void )
     lv_obj_align( time_bar, NULL, LV_ALIGN_IN_TOP_MID, 0, 0 );
 }
 
+/************************************************
+ * @brief 更新attach info
+ * 
+ * @param attach_info 
+ ************************************************/
+void status_bar_attach_info_update( const char *attach_info )
+{
+    char tbuf[20] = {0};
+    sprintf( 
+        tbuf, "Cur Music : %s", 
+        attach_info
+    );
+    lv_label_set_text( attached_info_bar, tbuf );
+    lv_obj_align( attached_info_bar, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0 );
+}

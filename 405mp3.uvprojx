@@ -2263,6 +2263,11 @@
               <FileType>1</FileType>
               <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_14_EN.c</FilePath>
             </File>
+            <File>
+              <FileName>MSGOTHIC_B_12_CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_CN.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
