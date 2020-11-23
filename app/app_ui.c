@@ -1,3 +1,13 @@
+/************************************************
+ * @file app_ui.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "app_ui.h"
 
 
@@ -16,6 +26,13 @@ static app_ui_managed_t aums = {
     .cur_ui_layer   = 0,
     .next_ui_layer  = 0,
 };
+
+static const char * mp3_sd_bg_path      = "S:/.mp3/mp3_bg.bin";
+static const char * mp3_spif_bg_path    = "F:/.mp3/mp3_bg.bin";
+static const char * btns[]              = {"Apply", "Close", ""};     // message box's btn
+static lv_obj_t * err_msg = NULL;
+static lv_obj_t * mp3_backgroud = NULL;
+
 
 #if USE_LV_EX == 1
 static void event_handler(lv_obj_t * obj, lv_event_t event);
@@ -145,6 +162,7 @@ void lv_ex_win_1(void)
     lv_obj_t * close_btn = lv_win_add_btn(win, LV_SYMBOL_CLOSE); /*Add␣
     ,!close button and use built-in close action*/
     lv_obj_set_event_cb(close_btn, lv_win_close_event_cb);
+    
     lv_win_add_btn(win, LV_SYMBOL_SETTINGS); /*Add a setup button*/
     /*Add some dummy content*/
     
@@ -163,7 +181,8 @@ void lv_ex_win_1(void)
     
     lv_label_set_long_mode( txt, LV_LABEL_LONG_SROLL );
     
-    lv_win_set_header_height( win, 15);
+    lv_win_set_header_height( win, 30);
+    lv_win_set_drag( win, true );
     
 }
 
@@ -195,7 +214,7 @@ void app_create_example(void)
     LV_IMG_DECLARE( mp3_demo );
 
 
-    lv_ex_tileview_1();
+    lv_ex_win_1();
 
 }
 #endif
@@ -297,10 +316,30 @@ void app_ui_init(void)
     app_ui_t *ui = NULL;
     
     /* 创建背景 */
-    
+    mp3_backgroud = lv_img_create( lv_scr_act(), NULL );
+    lv_fs_file_t lv_fil;
+    /* 检查SD卡有没有相应的图片文件，没有则使用spi flash的图片 */
+    lv_fs_res_t lv_res = lv_fs_open( &lv_fil, mp3_sd_bg_path, LV_FS_MODE_RD );
+    if ( lv_res != LV_FS_RES_OK ) {
+        lv_res = lv_fs_open( &lv_fil, mp3_spif_bg_path, LV_FS_MODE_RD );
+        if ( lv_res != LV_FS_RES_OK ) {
+            err_msg = lv_msgbox_create( lv_scr_act(), NULL );
+            lv_msgbox_set_recolor( err_msg, true );
+            lv_msgbox_set_text( err_msg, "Can't find picture of backgroud." );
+            lv_msgbox_add_btns( err_msg, btns );
+            lv_obj_align(err_msg, NULL, LV_ALIGN_CENTER, 0, 0);
+            lv_obj_del( mp3_backgroud );
+            return;
+        }
+    }
+    lv_fs_close( &lv_fil );
+    lv_img_set_src( mp3_backgroud, &LV_SYMBOL_CHARGE );
+    lv_obj_align(mp3_backgroud, NULL, LV_ALIGN_CENTER, 0, 0);
     
     /* 创建状态栏 */
-    
+//    ui = status_bar_ui_get();
+//    app_ui_register( ui );
+//    app_create_ui( ui );
 
     /* 创建mainmenu */
     ui = mainmenu_ui_get();

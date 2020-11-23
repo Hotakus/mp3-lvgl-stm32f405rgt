@@ -4,8 +4,8 @@
 /* includes */
 #include "stm32f4xx_conf.h"
 
-#define APP_UI_NUM      10      // app 的最大UI数量
-#define APP_UI_LAYER    5       // app 的最大UI层级
+#define APP_UI_NUM      50      // app 的最大UI数量
+#define APP_UI_LAYER    5       // app 的最大UI层级(深度)
 
 /* typedef */
 /* ui控制句柄 */

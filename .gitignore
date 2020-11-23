@@ -21,6 +21,7 @@
 *.a
 *.la
 *.lo
+*lnp
 
 # Shared objects (inc. Windows DLLs)
 *.dll

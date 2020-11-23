@@ -73,8 +73,8 @@ extern "C" {
 #if USER_USE_APP == 1
 /* app */
 #include "app_main.h"
-#if USER_USE_LVGL == 1u
-#define USE_LV_EX   1u
+#if USER_USE_LVGL ==    1u
+#define USE_LV_EX       0u
 #endif
 #endif
 

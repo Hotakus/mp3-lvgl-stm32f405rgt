@@ -996,6 +996,11 @@
               <FileType>1</FileType>
               <FilePath>.\app\app_ui\app_mainmenu.c</FilePath>
             </File>
+            <File>
+              <FileName>app_status_bar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_status_bar.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

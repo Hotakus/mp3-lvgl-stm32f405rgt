@@ -227,9 +227,7 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
         /* Add your code here*/
         opt_mode = FA_WRITE|FA_READ;
     }
-#if DEBUG_PRINTF==1   
-    printf( "pathBuf: %s\n", pathBuf );
-#endif
+
     /* 调用FatFs的函数 */
     if ( f_open( (FIL*)file_p, pathBuf, opt_mode ) != FR_OK ) {
 #if DEBUG_PRINTF==1        
@@ -254,14 +252,10 @@ static lv_fs_res_t fs_close (lv_fs_drv_t * drv, void * file_p)
     
     /* Add your code here*/
     if ( f_close( file_p ) != FR_OK ) {
-#if DEBUG_PRINTF==1        
-        printf( "f_close error (%d)\n", fres );
-#endif
+
         return LV_FS_RES_NOT_IMP;
     } else {
-#if DEBUG_PRINTF==1         
-        printf( "f_close done.\n" );
-#endif        
+      
         return LV_FS_RES_OK;
     }
 
@@ -282,14 +276,10 @@ static lv_fs_res_t fs_read (lv_fs_drv_t * drv, void * file_p, void * buf, uint32
 
     /* Add your code here*/
     if ( f_read( file_p, buf, btr, br ) != FR_OK ) {
-#if DEBUG_PRINTF==1           
-        printf( "f_read error (%d)\n", fres );
-#endif
+
         return LV_FS_RES_NOT_IMP;
     } else {
-#if DEBUG_PRINTF==1           
-        printf( "read done. (br:%d)\n", *br );
-#endif
+
         return LV_FS_RES_OK;
     }
 }
@@ -325,14 +315,10 @@ static lv_fs_res_t fs_seek (lv_fs_drv_t * drv, void * file_p, uint32_t pos)
 
     /* Add your code here*/
     if ( f_lseek( (FIL*)file_p, pos ) != FR_OK ) {
-#if DEBUG_PRINTF==1           
-        printf( "f_lseek error (%d) (pos:%d)\n", fres, pos );
-#endif
+
         return LV_FS_RES_NOT_IMP;
     } else {
-#if DEBUG_PRINTF==1  
-        printf( "lseek done. (pos:%d)\n", pos );
-#endif
+
         return LV_FS_RES_OK;
     }
 }

@@ -1,3 +1,13 @@
+/************************************************
+ * @file lcd_st7789.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "lcd_st7789.h"
 
 static void lcd_st7789_gpio( void );
