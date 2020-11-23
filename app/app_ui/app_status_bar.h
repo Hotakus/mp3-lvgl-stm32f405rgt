@@ -21,7 +21,18 @@
 
 /* functions */
 app_ui_t *status_bar_ui_get( void );
-void status_bar_update( void );
+
+void status_bar_time_update( void );
 void status_bar_attach_info_update( const char *attach_info );
+void status_bar_bat_info_update( void );
+
+void attach_info_create( void );
+void attach_info_delete( void );
+
+void time_info_create( void );
+void time_info_delete( void );
+
+void battery_info_create( void );
+void battery_info_delete( void );
 
 #endif

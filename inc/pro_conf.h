@@ -92,6 +92,7 @@ extern "C" {
 #define RT_DELAY        rt_thread_mdelay
 #define RT_STRCMP       rt_strcmp
 #define RT_STRCAT       rt_strcat
+#define RT_STRLEN       rt_strlen
 #define RT_MALLOC       rt_malloc
 #define RT_FREE         rt_free
 
@@ -99,6 +100,7 @@ extern "C" {
 #define DELAY           RT_DELAY
 #define STRCMP          RT_STRCMP
 #define STRCAT          RT_STRCAT
+#define STRLEN          RT_STRLEN
 #define MALLOC          RT_MALLOC
 #define FREE            RT_FREE
 

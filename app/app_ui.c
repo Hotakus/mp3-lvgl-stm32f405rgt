@@ -345,9 +345,9 @@ void app_ui_init(void)
     ui->ctl_h->create();        // 常驻ui不装入ui控制块
 
     /* 创建mainmenu */
-    app_ui_register( mainmenu_ui_get() );
-    app_create_ui( mainmenu_ui_get() );
-    DEBUG_PRINT( "%s\n", aums.app_ui_s[1]->ui_name );
+    ui = mainmenu_ui_get();
+    app_ui_register( ui );
+    app_create_ui( ui );
 
 }
 

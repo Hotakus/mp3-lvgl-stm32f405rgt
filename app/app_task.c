@@ -28,8 +28,29 @@ static void status_bar_update_thread( void *param )
 {
     param = param;
     while ( 1 ) {
-        status_bar_update();
+        status_bar_time_update();
         rt_thread_mdelay( 60 * RT_TICK_PER_SECOND );
+    }
+}
+
+/* 检测电量线程 */
+#define BATTERY_CHECK_THREAD_NAME   "battery_check"
+#define BATTERY_CHECK_STACK_SIZE    1024
+#define BATTERY_CHECK_PRIOROTY      10
+#define BATTERY_CHECK_TIME_SLICE    20
+static rt_thread_t *battert_check_th = &u_threadx[1];      // 从线程堆分配线程
+static void battert_check_thread( void *param )
+{
+    static uint32_t timestamp = 0;
+    param = param;
+    while ( 1 ) {
+        if ( timestamp == (60 * RT_TICK_PER_SECOND) ) {
+            status_bar_bat_info_update();
+            timestamp = 0;
+        } else {
+            timestamp += (6 * RT_TICK_PER_SECOND);
+        }
+        rt_thread_mdelay( 6 * RT_TICK_PER_SECOND );
     }
 }
 
@@ -39,7 +60,7 @@ static void status_bar_update_thread( void *param )
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      10                  // 线程优先级
 #define LED_PIN                 GPIO_Pin_8
-static rt_thread_t *led_blink_th = &u_threadx[1];      // 从线程堆分配线程
+static rt_thread_t *led_blink_th = &u_threadx[2];      // 从线程堆分配线程
 static void led_blink_thread( void *param )
 {
     param = param;
@@ -59,7 +80,7 @@ static void led_blink_thread( void *param )
 #define LVGL_TICK_STACK_SIZE    256                // 线程栈大小
 #define LVGL_TICK_TIME_SLICE    5                   // 线程时间片
 #define LVGL_TICK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *lvgl_tick_th = &u_threadx[2];      // 从线程堆分配线程
+static rt_thread_t *lvgl_tick_th = &u_threadx[3];      // 从线程堆分配线程
 static void lvgl_tick_thread( void *param )
 {
     param = param;
@@ -208,6 +229,20 @@ int app_create_task( void )
     );               
     if(status_bar_update_th !=RT_NULL)
         rt_thread_startup (*status_bar_update_th);
+    else
+        return -1;
+
+    /* 创建电量检测线程 */
+    *battert_check_th = rt_thread_create( 
+        BATTERY_CHECK_THREAD_NAME,          /*线程名字*/                    
+        battert_check_thread,               /*线程入口函数*/
+        RT_NULL,                            /*线程入口函数参数*/
+        BATTERY_CHECK_STACK_SIZE,           /*线程栈大小*/
+        BATTERY_CHECK_PRIOROTY ,            /*线程优先级*/
+        BATTERY_CHECK_TIME_SLICE            /*线程时间片*/
+    );               
+    if(battert_check_th !=RT_NULL)
+        rt_thread_startup (*battert_check_th);
     else
         return -1;
 

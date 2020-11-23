@@ -116,3 +116,1147 @@ Log at : 2020/11/23|12:35:06|GMT+0800
 
 Log at : 2020/11/23|13:22:24|GMT+0800
 
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
+Error: EPERM: operation not permitted, open 'e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\.vscode\c_cpp_properties.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.writeFileSync (fs.js:1265:35)
+    at a.Write (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:3479)
+    at I.updateCppProperties (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10334)
+    at I.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:11492)
+    at Generator.next (<anonymous>)
+    at c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4542
+    at new Promise (<anonymous>)
+    at r (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4287)
+    at I.load (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:10382)
+    at x.<anonymous> (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:8182)
+    at Generator.next (<anonymous>)
+    at a (c:\Users\SU\.vscode\extensions\cl.keil-assistant-1.6.2\dist\extension.js:1:4344)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:94:5) {
+  errno: -4048,
+  syscall: 'open',
+  code: 'EPERM',
+  path: 'e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\.vscode\\c_cpp_properties.json'
+}
