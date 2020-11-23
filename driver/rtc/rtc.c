@@ -1,7 +1,17 @@
+/************************************************
+ * @file rtc.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "rtc.h"
 #include "usart.h"
 
-static u8 rtc_conf_flag = 0;
+static uint8_t rtc_conf_flag = 0;
 
 void rtc_init( void ) 
 {
@@ -88,6 +98,29 @@ void rtc_obtain_alarm( RTC_INFO *rtc_data )
     RTC_GetAlarm(  RTC_Format_BIN, RTC_Alarm_B, &rtc_data->rtcAlarmStruct[1] );
 }
 
+const char *weekday_get( RTC_INFO *info )
+{
+    switch( info->rtcDateStruct.RTC_WeekDay ) {
+    case RTC_Weekday_Monday:
+        return "Mon";
+    case RTC_Weekday_Tuesday:
+        return "Tue";
+    case RTC_Weekday_Wednesday:
+        return "Wed";
+    case RTC_Weekday_Thursday:
+        return "Thur";
+    case RTC_Weekday_Friday:
+        return "Fri";
+    case RTC_Weekday_Saturday:
+        return "Sat";
+    case RTC_Weekday_Sunday:
+        return "Sun";
+    default:
+        return "Err";
+    }
+}
+
+#if USER_USE_FATFS == 1
 /* FatFs get_fattime(); */
 /*
 *   Return Value
@@ -109,8 +142,6 @@ void rtc_obtain_alarm( RTC_INFO *rtc_data )
 *       The get_fattime function shall return any valid time even if the system does not support a real time clock. 
 *       If a zero is returned, the file will not have a valid timestamp.
 */
-
-#if USER_USE_FATFS == 1
 DWORD get_fattime (void) {
     DWORD fatfs_time;
     RTC_INFO rtc_data;

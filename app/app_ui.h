@@ -8,6 +8,7 @@
 
 /* ui */
 #include "app_mainmenu.h"
+#include "app_status_bar.h"
 
 /* definations */
 
@@ -34,5 +35,7 @@ void app_ui_return( void );
 
 ui_register_stat app_ui_register( app_ui_t *ui );
 ui_register_stat app_ui_unregister( app_ui_t *ui );
+
+app_ui_t *app_find_ui( const char *ui_name );
 
 #endif

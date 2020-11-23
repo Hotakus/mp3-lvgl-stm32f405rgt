@@ -1,3 +1,13 @@
+/************************************************
+ * @file rtc.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #ifndef STMF4_RTC_H
 #define STMF4_RTC_H
 
@@ -36,6 +46,7 @@ RTC_STAT    rtc_check( void );
 RTC_STAT    rtc_config( void );
 void        rtc_obtain_time( RTC_INFO *rtc_data );
 void        rtc_obtain_alarm( RTC_INFO *rtc_data ) ;
+const char *weekday_get( RTC_INFO *info );
 
 #if USER_USE_FATFS == 1
 #if FF_FS_NORTC == 0

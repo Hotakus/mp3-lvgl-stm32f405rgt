@@ -9,6 +9,7 @@
  * 
  ************************************************/
 #include "app_status_bar.h"
+#include "rtc.h"
 
 /**********************
  *  DEFINE
@@ -34,6 +35,10 @@ static app_ui_t app_status_bar = {
     .ctl_h = &ctl_handler,
 };
 
+static lv_obj_t * sbb = NULL;                   // status bar 背景 
+static lv_obj_t * time_bar = NULL;              // status bar 时间栏 
+static lv_obj_t * attached_info_bar = NULL;     // status bar 附属信息栏 
+
  /**********************
  *  FUNCTIONS
  **********************/
@@ -42,7 +47,27 @@ static app_ui_t app_status_bar = {
  ************************************************/
 static void status_bar_create(void)
 {
-    
+    /* 创建 status bar 背景 */
+    LV_IMG_DECLARE(status_bar_bg);
+    sbb = lv_img_create( lv_scr_act(), NULL );
+    lv_img_set_src( sbb, &status_bar_bg );
+    lv_obj_align( sbb, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0 );
+
+    /* 创建 status bar 时间栏 */
+    time_bar = lv_label_create( lv_scr_act(), NULL );
+    lv_obj_set_style_local_text_font( 
+        time_bar, 
+        LV_LABEL_PART_MAIN, 
+        LV_STATE_DEFAULT, 
+        &ariblk_12 
+    );
+    status_bar_update();
+    /* 创建 status bar 附属信息栏 */
+    attached_info_bar = lv_label_create( lv_scr_act(), NULL );
+    lv_label_set_long_mode( attached_info_bar, LV_LABEL_LONG_SROLL_CIRC );
+    lv_obj_set_width( attached_info_bar, 80 );
+    lv_obj_set_pos( attached_info_bar, 0, 20 );
+    lv_label_set_text( attached_info_bar, "Cur Music : " );
 }
 
 /************************************************
@@ -56,5 +81,28 @@ static void status_bar_remove(void)
 app_ui_t *status_bar_ui_get( void )
 {
     return &app_status_bar;
+}
+
+/************************************************
+ * @brief 更新状态栏信息
+ ************************************************/
+void status_bar_update( void )
+{
+    char tbuf[20] = {0};
+    RTC_INFO rtc_info;
+    
+    rtc_init();
+    rtc_obtain_time( &rtc_info );
+
+    sprintf( 
+        tbuf, "%02d : %02d %s %d", 
+        rtc_info.rtcTimeStruct.RTC_Hours, 
+        rtc_info.rtcTimeStruct.RTC_Minutes,
+        weekday_get( &rtc_info ),
+        rtc_info.rtcDateStruct.RTC_Date
+    );
+
+    lv_label_set_text( time_bar, tbuf );
+    lv_obj_align( time_bar, NULL, LV_ALIGN_IN_TOP_MID, 0, 0 );
 }
 

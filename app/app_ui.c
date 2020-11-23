@@ -14,7 +14,8 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
- 
+ static void app_not_ui_handler(void);          // 无ui时跳转到这个handler
+
 /**********************
  *  STATIC VARIABLE
  **********************/
@@ -309,37 +310,39 @@ void app_ui_return( void )
  ************************************************/
 void app_ui_init(void)
 {
-    
-    for ( u8 i = 0; i < APP_UI_NUM; i++ )
-        aums.app_ui_s[i] = NULL;
-
     app_ui_t *ui = NULL;
+
+    for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
+        aums.app_ui_s[i]->ui_name = "no_ui";
+        aums.app_ui_s[i]->ctl_h->create = app_not_ui_handler;
+    }
+
     
     /* 创建背景 */
-    mp3_backgroud = lv_img_create( lv_scr_act(), NULL );
-    lv_fs_file_t lv_fil;
-    /* 检查SD卡有没有相应的图片文件，没有则使用spi flash的图片 */
-    lv_fs_res_t lv_res = lv_fs_open( &lv_fil, mp3_sd_bg_path, LV_FS_MODE_RD );
-    if ( lv_res != LV_FS_RES_OK ) {
-        lv_res = lv_fs_open( &lv_fil, mp3_spif_bg_path, LV_FS_MODE_RD );
-        if ( lv_res != LV_FS_RES_OK ) {
-            err_msg = lv_msgbox_create( lv_scr_act(), NULL );
-            lv_msgbox_set_recolor( err_msg, true );
-            lv_msgbox_set_text( err_msg, "Can't find picture of backgroud." );
-            lv_msgbox_add_btns( err_msg, btns );
-            lv_obj_align(err_msg, NULL, LV_ALIGN_CENTER, 0, 0);
-            lv_obj_del( mp3_backgroud );
-            return;
-        }
-    }
-    lv_fs_close( &lv_fil );
-    lv_img_set_src( mp3_backgroud, &LV_SYMBOL_CHARGE );
-    lv_obj_align(mp3_backgroud, NULL, LV_ALIGN_CENTER, 0, 0);
+    // mp3_backgroud = lv_img_create( lv_scr_act(), NULL );
+    // lv_fs_file_t lv_fil;
+    // /* 检查SD卡有没有相应的图片文件，没有则使用spi flash的图片 */
+    // lv_fs_res_t lv_res = lv_fs_open( &lv_fil, mp3_sd_bg_path, LV_FS_MODE_RD );
+    // if ( lv_res != LV_FS_RES_OK ) {
+    //     lv_res = lv_fs_open( &lv_fil, mp3_spif_bg_path, LV_FS_MODE_RD );
+    //     if ( lv_res != LV_FS_RES_OK ) {
+    //         err_msg = lv_msgbox_create( lv_scr_act(), NULL );
+    //         lv_msgbox_set_recolor( err_msg, true );
+    //         lv_msgbox_set_text( err_msg, "Can't find picture of backgroud." );
+    //         lv_msgbox_add_btns( err_msg, btns );
+    //         lv_obj_align(err_msg, NULL, LV_ALIGN_CENTER, 0, 0);
+    //         lv_obj_del( mp3_backgroud );
+    //         return;
+    //     }
+    // }
+    // lv_fs_close( &lv_fil );
+    // lv_img_set_src( mp3_backgroud, &LV_SYMBOL_CHARGE );
+    // lv_obj_align(mp3_backgroud, NULL, LV_ALIGN_CENTER, 0, 0);
     
     /* 创建状态栏 */
-//    ui = status_bar_ui_get();
-//    app_ui_register( ui );
-//    app_create_ui( ui );
+    ui = status_bar_ui_get();
+    app_ui_register( ui );
+    ui->ctl_h->create();        // 常驻ui不装入ui控制块
 
     /* 创建mainmenu */
     ui = mainmenu_ui_get();
@@ -358,3 +361,18 @@ app_ui_managed_t *app_get_ui_layer_b(void)
     return &aums;
 }
 
+/************************************************
+ * @brief 通过ui名找到已注册ui
+ * 
+ * @param ui_name 
+ * @return app_ui_t* 
+ ************************************************/
+app_ui_t *app_find_ui( const char *ui_name )
+{
+
+}
+
+void app_not_ui_handler(void)
+{
+    DEBUG_PRINT( "Not ui in this block.\n" );
+}

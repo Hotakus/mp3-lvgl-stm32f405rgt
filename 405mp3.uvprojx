@@ -2233,6 +2233,26 @@
               <FileType>1</FileType>
               <FilePath>C:\Users\SU\Desktop\mp3_demo.c</FilePath>
             </File>
+            <File>
+              <FileName>status_bar_bg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>C:\Users\SU\Desktop\status_bar_bg.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lvgl/font</GroupName>
+          <Files>
+            <File>
+              <FileName>ariblk_12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\ariblk_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>ariblk_14.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\ariblk_14.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

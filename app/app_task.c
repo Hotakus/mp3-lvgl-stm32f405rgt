@@ -1,45 +1,55 @@
+/************************************************
+ * @file app_task.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-23
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "app_task.h"
 #include "lvgl.h"
 #include "pro_conf.h"
 #include "stm32f4xx_conf.h"
 #include "led.h"
+#include "app_status_bar.h"
 
 static rt_thread_t u_threadx[APP_THREAD_NUM] = {RT_NULL};
 static struct rt_thread u_static_threadx[APP_THREAD_NUM];
 
+/* status bar update线程 */
+#define STATUS_BAR_UPDATE_THREAD_NAME   "status_update"
+#define STATUS_BAR_UPDATE_STACK_SIZE    512
+#define STATUS_BAR_UPDATE_PRIOROTY      10
+#define STATUS_BAR_UPDATE_TIME_SLICE    15
+static rt_thread_t *status_bar_update_th = &u_threadx[0];      // 从线程堆分配线程
+static void status_bar_update_thread( void *param )
+{
+    param = param;
+    while ( 1 ) {
+        status_bar_update();
+        rt_thread_mdelay( 60 * RT_TICK_PER_SECOND );
+    }
+}
+
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
-#define LED_BLINK_STACK_SIZE    1024                  // 线程栈大小
+#define LED_BLINK_STACK_SIZE    512                  // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *led_blink_th = &u_threadx[0];      // 从线程堆分配线程
+#define LED_PIN                 GPIO_Pin_8
+static rt_thread_t *led_blink_th = &u_threadx[1];      // 从线程堆分配线程
 static void led_blink_thread( void *param )
 {
     param = param;
-    led_conf( GPIOA, GPIO_Pin_8 );
-    led_on( GPIOA, GPIO_Pin_8 );
-    
-    LV_IMG_DECLARE( Calendar_icon_rel );
-//    static lv_obj_t *img;
-//    static uint16_t degree = 0;
-//    img = lv_img_create( lv_scr_act(), NULL );
-//    lv_img_set_src( img, &Calendar_icon_rel );
-//    lv_obj_set_pos( img, 35, 35 );
-//    lv_img_set_pivot( img, 64, 64 );
-//    
-
+    led_conf( GPIOA, LED_PIN );
+    led_on( GPIOA, LED_PIN );
     while ( 1 ) {
-        led_on( GPIOA, GPIO_Pin_8 );
+        led_on( GPIOA, LED_PIN );
         rt_thread_mdelay( 50 );
-        led_off( GPIOA, GPIO_Pin_8 );
+        led_off( GPIOA, LED_PIN );
         rt_thread_mdelay( 50 );
-//        if ( degree >= 3600 )
-//            degree = 50;
-//        else
-//            degree += 50;
-//        lv_img_set_angle( img, degree );
-////        lv_obj_align( img, NULL, LV_ALIGN_CENTER, 0, 0 );
-        
     }
 }
 
@@ -49,7 +59,7 @@ static void led_blink_thread( void *param )
 #define LVGL_TICK_STACK_SIZE    256                // 线程栈大小
 #define LVGL_TICK_TIME_SLICE    5                   // 线程时间片
 #define LVGL_TICK_PRIOROTY      10                  // 线程优先级
-static rt_thread_t *lvgl_tick_th = &u_threadx[1];      // 从线程堆分配线程
+static rt_thread_t *lvgl_tick_th = &u_threadx[2];      // 从线程堆分配线程
 static void lvgl_tick_thread( void *param )
 {
     param = param;
@@ -65,7 +75,7 @@ static void lvgl_tick_thread( void *param )
 #define LVGL_TASK_TIME_SLICE    10                                  // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                                  // 线程优先级
 ALIGN(RT_ALIGN_SIZE) static u8 lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈
-static struct rt_thread *lvgl_task_th_s = &u_static_threadx[3];     // 从线程堆分配线程
+static struct rt_thread *lvgl_task_th_s = &u_static_threadx[0];     // 从线程堆分配线程
 static void lvgl_task_thread( void *param )
 {
     param = param;
@@ -82,7 +92,7 @@ static void lvgl_task_thread( void *param )
 #define SD_DETECT_PRIOROTY      9                                   // 线程优先级
 #define SD_DETECT_TIMER_TIME    1000                                // 定时时间
 ALIGN(RT_ALIGN_SIZE) static u8 sd_detect_stk[SD_DETECT_STACK_SIZE]; // 线程栈
-static struct rt_thread *sd_detect_th_s = &u_static_threadx[4];     // 从线程堆分配线程
+static struct rt_thread *sd_detect_th_s = &u_static_threadx[1];     // 从线程堆分配线程
 u8 sd_detect_flag = 0;
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
@@ -114,11 +124,18 @@ static void sd_detect_thread( void *param )
     }
 }
 
+
+/************************************************
+ * @brief 线程初始化函数
+ * 
+ * @return int 
+ ************************************************/
 int app_create_task( void )
 {
     
     rt_err_t err = RT_ERROR;
     
+    /* misc thread */
     /*  创建led闪烁线程 */
     *led_blink_th = rt_thread_create( 
         LED_THREAD_NAME,        /*线程名字*/                    
@@ -179,5 +196,20 @@ int app_create_task( void )
     else
         rt_kprintf( "create thread \"%s\" error. (%d)\n", SD_DETECT_THREAD_NAME, err );
     
+    /* app thread */
+    /* 创建status bar update线程 */
+    *status_bar_update_th = rt_thread_create( 
+        STATUS_BAR_UPDATE_THREAD_NAME,          /*线程名字*/                    
+        status_bar_update_thread,               /*线程入口函数*/
+        RT_NULL,                                /*线程入口函数参数*/
+        STATUS_BAR_UPDATE_STACK_SIZE,           /*线程栈大小*/
+        STATUS_BAR_UPDATE_PRIOROTY ,            /*线程优先级*/
+        STATUS_BAR_UPDATE_TIME_SLICE            /*线程时间片*/
+    );               
+    if(status_bar_update_th !=RT_NULL)
+        rt_thread_startup (*status_bar_update_th);
+    else
+        return -1;
+
     return 0;
 }

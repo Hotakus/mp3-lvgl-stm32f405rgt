@@ -26,7 +26,7 @@ typedef struct {
     uint8_t     reg_ui_num;                  // 已注册ui数量
     uint8_t     cur_ui_layer;                // 当前显示的ui层级
     uint8_t     next_ui_layer;               // 下一个显示的ui层级
-    uint8_t     reserve;                     // 4Byte对其保留字节
+    uint8_t     reserve;                     // 1Byte对齐保留字节
     app_ui_t    *app_ui_s[APP_UI_NUM];       // 已注册ui块
     app_ui_t    *app_ui_layer[APP_UI_LAYER]; // ui层级管理块
 } app_ui_managed_t;
