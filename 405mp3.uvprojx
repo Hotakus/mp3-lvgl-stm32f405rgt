@@ -336,7 +336,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--locale=english</MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,ARM_MATH_CM4,ARM_MATH_ROUNDING,__TARGET_FPU_VFP,</Define>
               <Undefine></Undefine>
               <IncludePath>core;inc;lib\inc;main;driver\dma;driver\nvic;driver\sdio;driver\systicks;driver\tim;driver\usart;driver\led;driver\spi;driver\w25qxx;driver\rtc;.\driver\iic;.\driver\screen;.\driver\oled;.\driver\touch\CTP;.\driver\screen\lcd_st7789;.\driver\screen\lcd_st7735;.\driver\file_thrans_with_fatfs;.\app;.\app\app_ui;third_party\ff14\source;.\third_party\rt-thread-sorted\finsh;.\third_party\rt-thread-sorted\include;.\third_party\rt-thread-sorted\include\libc;.\third_party\rt-thread-sorted;.\third_party\lvgl;.\third_party\lvgl\lvgl;.\third_party\lvgl\lvgl\porting;.\third_party\lvgl\lvgl\src\lv_core;.\third_party\lvgl\lvgl\src\lv_draw;.\third_party\lvgl\lvgl\src\lv_font;.\third_party\lvgl\lvgl\src\lv_gpu;.\third_party\lvgl\lvgl\src\lv_hal;.\third_party\lvgl\lvgl\src\lv_misc;.\third_party\lvgl\lvgl\src\lv_themes;.\third_party\lvgl\lvgl\src\lv_widgets</IncludePath>
@@ -2252,6 +2252,16 @@
               <FileName>ariblk_14.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\third_party\lvgl\lvgl\font\ariblk_14.c</FilePath>
+            </File>
+            <File>
+              <FileName>MSGOTHIC_B_12_EN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_EN.c</FilePath>
+            </File>
+            <File>
+              <FileName>MSGOTHIC_B_14_EN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_14_EN.c</FilePath>
             </File>
           </Files>
         </Group>

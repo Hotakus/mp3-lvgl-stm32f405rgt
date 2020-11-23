@@ -27,18 +27,14 @@ static app_ui_t app_mainmenu = {
  /**********************
  *  FUNCTIONS
  **********************/
-lv_obj_t *background_img;
-lv_obj_t *background_img_2;
-
 /************************************************
  * @brief 创建mainmenu
  ************************************************/
 static void mainmenu_create(void)
 {
-    LV_IMG_DECLARE( sd );
-//    background_img = lv_img_create( lv_scr_act(), NULL );
-//    lv_img_set_src(background_img, "S:/.mp3_icon/sd.bin" );
-//    lv_obj_align(background_img, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+    lv_obj_t * preload = lv_spinner_create(lv_scr_act(), NULL);
+    lv_obj_set_size(preload, 50, 50);
+    lv_obj_align(preload, NULL, LV_ALIGN_CENTER, 0, 0);
     
 }
 

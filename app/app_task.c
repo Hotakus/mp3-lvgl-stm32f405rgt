@@ -20,7 +20,7 @@ static struct rt_thread u_static_threadx[APP_THREAD_NUM];
 
 /* status bar update线程 */
 #define STATUS_BAR_UPDATE_THREAD_NAME   "status_update"
-#define STATUS_BAR_UPDATE_STACK_SIZE    512
+#define STATUS_BAR_UPDATE_STACK_SIZE    1024
 #define STATUS_BAR_UPDATE_PRIOROTY      10
 #define STATUS_BAR_UPDATE_TIME_SLICE    15
 static rt_thread_t *status_bar_update_th = &u_threadx[0];      // 从线程堆分配线程

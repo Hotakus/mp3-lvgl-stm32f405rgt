@@ -278,10 +278,11 @@ void app_create_ui( app_ui_t *ui )
             aums.app_ui_layer[aums.next_ui_layer]->ctl_h->create();
             aums.cur_ui_layer = aums.next_ui_layer;
             aums.next_ui_layer += 1;
+            return;
         } else
-            DEBUG_PRINT( "No ui object: %s\n", ui->ui_name );
-        return;
+            continue;
     }
+    DEBUG_PRINT( "No ui object to create: %s\n", ui->ui_name );
 }
 
 /************************************************
@@ -313,8 +314,7 @@ void app_ui_init(void)
     app_ui_t *ui = NULL;
 
     for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
-        aums.app_ui_s[i]->ui_name = "no_ui";
-        aums.app_ui_s[i]->ctl_h->create = app_not_ui_handler;
+        aums.app_ui_s[i] = NULL;
     }
 
     
@@ -344,10 +344,10 @@ void app_ui_init(void)
     app_ui_register( ui );
     ui->ctl_h->create();        // 常驻ui不装入ui控制块
 
-    /* 创建mainmenu */
-    ui = mainmenu_ui_get();
-    app_ui_register( ui );
-    app_create_ui( ui );
+//    /* 创建mainmenu */
+    app_ui_register( mainmenu_ui_get() );
+    app_create_ui( mainmenu_ui_get() );
+    DEBUG_PRINT( "%s\n", aums.app_ui_s[1]->ui_name );
 
 }
 

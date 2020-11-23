@@ -59,15 +59,24 @@ static void status_bar_create(void)
         time_bar, 
         LV_LABEL_PART_MAIN, 
         LV_STATE_DEFAULT, 
-        &ariblk_12 
+        &lv_font_montserrat_14 
     );
     status_bar_update();
     /* 创建 status bar 附属信息栏 */
     attached_info_bar = lv_label_create( lv_scr_act(), NULL );
     lv_label_set_long_mode( attached_info_bar, LV_LABEL_LONG_SROLL_CIRC );
     lv_obj_set_width( attached_info_bar, 80 );
+    lv_obj_set_height( attached_info_bar, 32 );
     lv_obj_set_pos( attached_info_bar, 0, 20 );
-    lv_label_set_text( attached_info_bar, "Cur Music : " );
+    lv_obj_set_style_local_text_font( 
+        attached_info_bar, 
+        LV_LABEL_PART_MAIN, 
+        LV_STATE_DEFAULT, 
+        &MSGOTHIC_B_12_EN
+    );
+    lv_label_set_text( attached_info_bar, "Cur Music 123 : % : 我 ぼかろころしあむ" );
+
+    
 }
 
 /************************************************

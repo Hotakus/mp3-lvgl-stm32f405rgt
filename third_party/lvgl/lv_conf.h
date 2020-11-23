@@ -361,7 +361,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 
 /* Montserrat fonts with bpp = 4
  * https://fonts.google.com/specimen/Montserrat  */
-#define LV_FONT_MONTSERRAT_12    0
+#define LV_FONT_MONTSERRAT_12    1
 #define LV_FONT_MONTSERRAT_14    1
 #define LV_FONT_MONTSERRAT_16    0
 #define LV_FONT_MONTSERRAT_18    0
@@ -373,7 +373,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 #define LV_FONT_MONTSERRAT_30    0
 #define LV_FONT_MONTSERRAT_32    0
 #define LV_FONT_MONTSERRAT_34    0
-#define LV_FONT_MONTSERRAT_36    0
+#define LV_FONT_MONTSERRAT_36    1
 #define LV_FONT_MONTSERRAT_38    0
 #define LV_FONT_MONTSERRAT_40    0
 #define LV_FONT_MONTSERRAT_42    0
@@ -398,7 +398,11 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  *                                LV_FONT_DECLARE(my_font_2)
  */
 #define LV_FONT_CUSTOM_DECLARE  LV_FONT_DECLARE( ariblk_12 )            \
-                                LV_FONT_DECLARE( ariblk_14 )            
+                                LV_FONT_DECLARE( ariblk_14 )            \
+                                LV_FONT_DECLARE( MSGOTHIC_B_12_EN )     \
+                                LV_FONT_DECLARE( MSGOTHIC_B_14_EN )     \
+                                LV_FONT_DECLARE( MSGOTHIC_B_12_CN )     \
+                                LV_FONT_DECLARE( MSGOTHIC_B_14_CN )
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp
