@@ -252,9 +252,17 @@ static bool touchpad_is_pressed(void)
 {
     /*Your code comes here*/
     uint8_t val = 0;
+    static ErrorStatus err = SUCCESS;
 
     /* 读取FT6236 的 TD STATUS寄存器 */
-    ctp_ft6236_read_reg( FT_TD_STATUS, &val, 1 );
+    if ( err == SUCCESS )
+        err = ctp_ft6236_read_reg( FT_TD_STATUS, &val, 1 );
+    if ( err != SUCCESS ) {
+        DEBUG_PRINT( "reinit.\n" );
+        ctp_ft6236_init();
+        DEBUG_PRINT( "reinit done.\n" );
+        err = SUCCESS;
+    }
 
     /* 如果TD STATUS寄存器不为0，也就是有点触摸 返回true */
     if ( val != 0 )

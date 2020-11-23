@@ -58,12 +58,13 @@ static void ctp_ft6236_gpio(void)
 void ctp_ft6236_init( void )
 {
     uint8_t val = 0x0;
-    
-    ft6236_init_flag = 0;
-    
-    ctp_ft6236_gpio();
+
+    if ( !ft6236_init_flag ){
+        ctp_ft6236_gpio();
+        i2c_conf( I2C1, 400, 0x94 );
+        ft6236_init_flag = 1;
+    }
     ctp_ft6236_reset();
-    i2c_conf( I2C1, 400, 0x94 );
 
     /* gesture 配置 */
     val = 0x0A;
@@ -86,7 +87,7 @@ void ctp_ft6236_init( void )
     val = 0;
     ctp_ft6236_writ_reg( FT_DEVIDE_MODE, &val, 1 );
     
-    ft6236_init_flag = 1;
+    
     
     DEBUG_PRINT( "FT6236 configured done.\n" );
 }
@@ -97,39 +98,43 @@ void ctp_ft6236_init( void )
  * @param reg_addr 
  * @param val 
  * @param len 
+ * @return ErrorStatus 
  ************************************************/
-void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
+ErrorStatus ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 {
     ErrorStatus err = ERROR;
 
     // 开始
     err = i2c_generate_start( FT6236_I2C, 0xFFFF );
     if ( err != SUCCESS )
-        return;
+        return err;
     // 发送写命令
-    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFFF );
+    err = i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Transmitter, (FT6236_ADDR | FT6236_WRIT), 0xFFFF );
     if ( err != SUCCESS )
-        return;
+        return err;
     // 发送要读的寄存器地址
-    i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFFF );
+    err = i2c_send_bytes( FT6236_I2C, &reg_addr, 1, 0xFFFF );
     if ( err != SUCCESS )
-        return;
+        return err;
     i2c_generate_stop( FT6236_I2C );
     
     /*重新发送起始信号 */
-    i2c_generate_start( FT6236_I2C, 0xFFFF );
+    err = i2c_generate_start( FT6236_I2C, 0xFFFF );
     if ( err != SUCCESS )
-        return;
+        return err;
     // 发送地址+读
-    i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Receiver, FT6236_ADDR, 0xFFFF );
+    err = i2c_send_7bitAddr( FT6236_I2C, I2C_Direction_Receiver, FT6236_ADDR, 0xFFFF );
     if ( err != SUCCESS )
-        return;
-    i2c_read_bytes( FT6236_I2C, val, 1, 0xFFFF );
+        return err;
+    err = i2c_read_bytes( FT6236_I2C, val, 1, 0xFFFF );
     if ( err != SUCCESS )
-        return;
+        return err;
 	/*非应答*/
 	I2C_AcknowledgeConfig(I2C1, DISABLE);
 	i2c_generate_stop( FT6236_I2C );
+
+    return SUCCESS;
+
 }
 
 /************************************************
@@ -169,9 +174,9 @@ void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len )
 static void ctp_ft6236_reset(void)
 {
     FT6236_RST_LOW;
-    DELAY( 50 );
+    DELAY( 100 );
     FT6236_RST_HIGH;
-    DELAY( 50 );
+    DELAY( 100 );
 }
 
 /************************************************

@@ -31,11 +31,15 @@ void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr ) {
         return;
     }
     
+    RCC_APB1PeriphClockCmd( RCC_APB1Periph_I2C1, DISABLE );
     RCC_APB1PeriphClockCmd( RCC_APB1Periph_I2C1, ENABLE );
+    
     RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOB, ENABLE );
     
     GPIO_PinAFConfig( GPIOB, GPIO_PinSource6, GPIO_AF_I2C1 );
     GPIO_PinAFConfig( GPIOB, GPIO_PinSource7, GPIO_AF_I2C1 );
+    
+    I2C_DeInit( I2Cx );
     
     i2c_s.I2C_Mode                  = I2C_Mode_I2C;
     i2c_s.I2C_ClockSpeed            = i2c_clk_m * i2c_clk;

@@ -106,7 +106,7 @@ enum ft6236_gestrue_reg {
  * @brief FT6236 函数
  ************************************************/
 void ctp_ft6236_init( void );
-void ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len );
+ErrorStatus ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len );
 void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len );
 touch_coordinate_s *ctp_ft6236_get_coordinate( uint8_t TPx );
 touch_gesture_t cp_ft6236_get_gesture( void );
