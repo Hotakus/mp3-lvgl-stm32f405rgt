@@ -32,8 +32,8 @@
  * @brief FT6236 I2C 接口定义
  ************************************************/
 #define FT6236_I2C          I2C1
-#define FT6236_RST          GPIO_Pin_0  // PA
-#define FT6236_INT          GPIO_Pin_1  // PA
+#define FT6236_RST          GPIO_Pin_2  // PA
+#define FT6236_INT          GPIO_Pin_3  // PA
 #define FT6236_RST_HIGH     GPIOA->BSRRL  |= FT6236_RST
 #define FT6236_RST_LOW      GPIOA->BSRRH  |= FT6236_RST
 

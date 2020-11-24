@@ -41,22 +41,16 @@ static void status_bar_update_thread( void *param )
 static rt_thread_t *battert_check_th = &u_threadx[1];      // 从线程堆分配线程
 static void battert_check_thread( void *param )
 {
-    static uint32_t timestamp = 0;
     param = param;
     while ( 1 ) {
-        if ( timestamp == (60 * RT_TICK_PER_SECOND) ) {
-            status_bar_bat_info_update();
-            timestamp = 0;
-        } else {
-            timestamp += (6 * RT_TICK_PER_SECOND);
-        }
-        rt_thread_mdelay( 6 * RT_TICK_PER_SECOND );
+        status_bar_bat_info_update( 0 );
+        rt_thread_mdelay( (60/BATTERY_CALCULATE_CNT) * RT_TICK_PER_SECOND );
     }
 }
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
-#define LED_BLINK_STACK_SIZE    512                  // 线程栈大小
+#define LED_BLINK_STACK_SIZE    256                  // 线程栈大小
 #define LED_BLINK_TIME_SLICE    1                   // 线程时间片
 #define LED_BLINK_PRIOROTY      10                  // 线程优先级
 #define LED_PIN                 GPIO_Pin_8
@@ -92,7 +86,7 @@ static void lvgl_tick_thread( void *param )
 
 /* lvgl task handler线程 */
 #define LVGL_TASK_THREAD_NAME   "lvgl_task"                         // 线程名
-#define LVGL_TASK_STACK_SIZE    (2U *1024U)                         // 线程栈大小
+#define LVGL_TASK_STACK_SIZE    (4U *1024U)                         // 线程栈大小
 #define LVGL_TASK_TIME_SLICE    10                                  // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                                  // 线程优先级
 ALIGN(RT_ALIGN_SIZE) static u8 lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈

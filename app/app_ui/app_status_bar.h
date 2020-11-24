@@ -18,13 +18,17 @@
 #include "app_ui.h"
 
 /* definations */
+#define BATTERY_CALCULATE_CNT       10
+#define FULL_CHARGE                 2.05
+
+#define NO_BATTERY      1
 
 /* functions */
 app_ui_t *status_bar_ui_get( void );
 
 void status_bar_time_update( void );
 void status_bar_attach_info_update( const char *attach_info );
-void status_bar_bat_info_update( void );
+void status_bar_bat_info_update( uint8_t now );
 
 void attach_info_create( void );
 void attach_info_delete( void );
@@ -32,6 +36,7 @@ void attach_info_delete( void );
 void time_info_create( void );
 void time_info_delete( void );
 
+uint16_t battery_info_statistic( void );
 void battery_info_create( void );
 void battery_info_delete( void );
 

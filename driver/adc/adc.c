@@ -22,7 +22,7 @@ void adc_init( ADC_TypeDef *ADCx )
     RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_ADC1 , ENABLE );
 
-    adc_g.GPIO_Pin       = GPIO_Pin_0;
+    adc_g.GPIO_Pin       = GPIO_Pin_1;
     adc_g.GPIO_Mode      = GPIO_Mode_AN;
     adc_g.GPIO_OType     = GPIO_OType_OD;
     adc_g.GPIO_PuPd      = GPIO_PuPd_DOWN;

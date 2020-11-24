@@ -95,6 +95,7 @@ extern "C" {
 #define RT_STRLEN       rt_strlen
 #define RT_MALLOC       rt_malloc
 #define RT_FREE         rt_free
+#define RT_MEMSET       rt_memset
 
 #define DEBUG_PRINT     RT_PRINT
 #define DELAY           RT_DELAY
@@ -103,6 +104,7 @@ extern "C" {
 #define STRLEN          RT_STRLEN
 #define MALLOC          RT_MALLOC
 #define FREE            RT_FREE
+#define MEMSET          RT_MEMSET
 
 #elif USER_USE_RTTHREAD == 0
 #define SECTION(x) __attribute__((section(x)))
