@@ -82,7 +82,7 @@ void vs10xx_init( void )
     /* vs10xx sin test */
 #define SINTEST 1
 #if SINTEST == 1
-    vs10xx_sin_test( 2000 );
+    vs10xx_sin_test( 500 );
 #endif
 
     DEBUG_PRINT( "VS10xx init done.\n" );
@@ -131,6 +131,11 @@ void vs10xx_writ_reg( uint8_t reg, uint16_t dat )
     VS10xx_CS_HIGH;
 }
 
+/************************************************
+ * @brief sin测试
+ * 
+ * @param test_time 
+ ************************************************/
 void vs10xx_sin_test( uint16_t test_time ) 
 {
 
