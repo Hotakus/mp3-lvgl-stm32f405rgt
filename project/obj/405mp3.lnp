@@ -65,6 +65,7 @@
 ".\project\obj\oled.o"
 ".\project\obj\lcd_st7735.o"
 ".\project\obj\adc.o"
+".\project\obj\vs10xx.o"
 ".\project\obj\app_main.o"
 ".\project\obj\app_task.o"
 ".\project\obj\app_ui.o"

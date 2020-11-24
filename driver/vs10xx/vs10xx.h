@@ -1,3 +1,13 @@
+/************************************************
+ * @file vs10xx.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-24
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #ifndef VS10XX_H
 #define VS10XX_H
 
@@ -10,43 +20,28 @@
 #include "spi_conf.h"
 
 /* definition */
-#define VS10xx_USE_SPI      2
-#if VS10xx_USE_SPI == 1
-#define VS10xx_SPI        SPI1
-#define VS10xx_CS         GPIO_Pin_4    // PA
-#define VS10xx_SCLK       GPIO_Pin_5    // PA
-#define VS10xx_MISO       GPIO_Pin_6    // PA
-#define VS10xx_MOSI       GPIO_Pin_7    // PA
-#elif VS10xx_USE_SPI == 2
-#define VS10xx_SPI        SPI2
-#define VS10xx_CS         GPIO_Pin_12       // PB
-#define VS10xx_SCLK       GPIO_Pin_13       // PB
-#define VS10xx_MISO       GPIO_Pin_14       // PB
-#define VS10xx_MOSI       GPIO_Pin_15       // PB
-#endif
-
-#define VS10xx_DREQ       GPIO_Pin_10       // PB
-#define VS10xx_XDCS       GPIO_Pin_8        // PA
+#define VS10xx_SPI              SPI3
+#define VS10xx_XRESET           GPIO_Pin_0        // PC
+#define VS10xx_DREQ             GPIO_Pin_1        // PC
+#define VS10xx_XDCS             GPIO_Pin_2        // PC
+#define VS10xx_XCS              GPIO_Pin_3        // PC
 
 /* return DREQ's status */
-#define DREQ_STAT            ( GPIOB->IDR & VS10xx_DREQ )
+#define DREQ_STAT            ( GPIOC->IDR & VS10xx_DREQ )
 
+#define VS10xx_XRESET_HIGH      GPIOC->BSRRL |= VS10xx_XRESET
+#define VS10xx_XRESET_LOW       GPIOC->BSRRH |= VS10xx_XRESET
 
-#define VS10xx_XDCS_HIGH       GPIOA->BSRRL |= VS10xx_XDCS
-#define VS10xx_XDCS_LOW        GPIOA->BSRRH |= VS10xx_XDCS
-#if VS10xx_USE_SPI == 1
-#define VS10xx_CS_HIGH       GPIOA->BSRRL |= VS10xx_CS
-#define VS10xx_CS_LOW        GPIOA->BSRRH |= VS10xx_CS
-#elif VS10xx_USE_SPI == 2
-#define VS10xx_CS_HIGH       GPIOB->BSRRL |= VS10xx_CS
-#define VS10xx_CS_LOW        GPIOB->BSRRH |= VS10xx_CS
-#endif
+#define VS10xx_XDCS_HIGH        GPIOC->BSRRL |= VS10xx_XDCS
+#define VS10xx_XDCS_LOW         GPIOC->BSRRH |= VS10xx_XDCS
+
+#define VS10xx_CS_HIGH          GPIOC->BSRRL |= VS10xx_XCS
+#define VS10xx_CS_LOW           GPIOC->BSRRH |= VS10xx_XCS
+
 
 /* SCI optional commands */
 #define CMD_VS10xx_WRIT      0x02
 #define CMD_VS10xx_READ      0x03
-
-#define DUMMY                0xff
 
 /* Chip's version */
 #define VS1001               0
@@ -69,7 +64,7 @@
 #define SC_ADD2      0x1000
 #define SC_ADD3      0x1800
 
-/* vol definitions */
+/* 音量设置 */
 #define VOL_LEFT_MUL( volLevel )            ( volLevel<<8 )
 #define VOL_SETTING( left, right )          vs10xx_writ_reg( REG_VS10xx_SCI_VOL, ( VOL_LEFT_MUL((254-left)) + (254-right) ))
 
@@ -95,13 +90,9 @@ enum VS10xx_REG {
 
 /* functions */
 void vs10xx_init( void );
-void vs10xx_config( void );
 void vs10xx_reset( void );
 
-u8 vs10xx_trans_byte( u8 byte );
-u16 vs10xx_read_reg( u8 reg );
-void vs10xx_writ_reg( u8 reg, u16 dat );
-void vs10xx_sin_test( u8 test_time );
-void vs10xx_send_audio_dat( u8* dat, u16 len );
+void vs10xx_sin_test( uint16_t test_time );
+void vs10xx_send_audio_dat( uint8_t* dat, uint16_t len );
 
 #endif

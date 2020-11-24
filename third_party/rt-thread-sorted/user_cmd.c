@@ -22,6 +22,7 @@
 #include "file_trans.h"
 #include "oled.h"
 #include "ft6236.h"
+#include "vs10xx.h"
 
 /************************************************
  * @brief cmd for msh
@@ -214,7 +215,9 @@ static void lvgl_reboot( int argc, char **args )
 }
 MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
 
-
+/************************************************
+ * @brief 在当前屏幕显示一张来自存储设备的图片
+ ************************************************/
 static void show_pic(int argc, char **args)
 {
     ALIGN(4) static lv_obj_t *pic = NULL;
@@ -244,11 +247,12 @@ static void show_pic(int argc, char **args)
 
 }
 MSH_CMD_EXPORT(show_pic, show a picture in screen from memory device.);
-
 #endif
 
-
-static void oled_test(void)
+/************************************************
+ * @brief oled 测试
+ ************************************************/
+static void oled_test( int argc, char **args )
 {
     static uint8_t flag = 0;
     if ( !flag )
@@ -262,13 +266,28 @@ static void oled_test(void)
 }
 MSH_CMD_EXPORT(oled_test , oled test);
 
+/************************************************
+ * @brief vs10xx 测试
+ ************************************************/
+static void vs10xx_test( int argc, char **args )
+{
+    vs10xx_init();
+}
+MSH_CMD_EXPORT(vs10xx_test , vs10xx test);
+
+/************************************************
+ * @brief reboot cpu
+ ************************************************/
 static void reboot(int argc, char **args)
 {
     rt_hw_cpu_reset();
 }
 MSH_CMD_EXPORT(reboot, reboot cpu);
 
-static int clear(void)
+/************************************************
+ * @brief clear terminal
+ ************************************************/
+static int clear( int argc, char **args )
 {
     rt_kprintf("\x1b[2J\x1b[H");
     return 0;

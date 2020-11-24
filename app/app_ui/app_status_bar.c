@@ -210,7 +210,7 @@ uint16_t battery_info_statistic( void )
         adc_cnt = 0;
         MEMSET( bat_adc_val, 0, BATTERY_CALCULATE_CNT );
         /* 如果adc值低于10的数量大于等于2 则认为没有电池 */
-        if ( zero_cnt >= 2 ) {
+        if ( zero_cnt >= 1 ) {
             sum = 0;
             return NO_BATTERY;
         }
