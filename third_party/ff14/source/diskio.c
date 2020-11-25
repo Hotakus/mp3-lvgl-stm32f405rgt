@@ -90,7 +90,7 @@ DSTATUS disk_initialize (
                 return STA_NOINIT;
             printf( "SD get info successfully.\n" );
         }
-//        SD_HighSpeed();
+        SD_HighSpeed();
         return !STA_NOINIT;
 	case DEV_USB :
 		return STA_NOINIT;
@@ -126,10 +126,13 @@ DRESULT disk_read (
             do {
                 sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
             } while( --retry && sd_err != SD_OK );
+//            sd_err = SD_WaitReadOperation();
+//            while(SD_GetStatus() != SD_TRANSFER_OK);
             if ( sd_err != SD_OK ) {
                 printf( "SD read error (%d)\n\r", sd_err );
                 return RES_NOTRDY;
             }
+            
         }
         return RES_OK;
 	case DEV_USB :

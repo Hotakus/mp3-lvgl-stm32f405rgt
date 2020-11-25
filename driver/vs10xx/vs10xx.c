@@ -267,7 +267,7 @@ void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path )
 
     /* 创建文件 */
     uint32_t jpeg_size = jpeg_epos - jpeg_spos;
-    uint16_t jpeg_buf_size = 4096;
+    uint16_t jpeg_buf_size = 512;
     uint8_t *jpeg_buf = (uint8_t *)MALLOC( sizeof(uint8_t)*jpeg_buf_size );
 
     uint32_t tt    = jpeg_size / jpeg_buf_size;

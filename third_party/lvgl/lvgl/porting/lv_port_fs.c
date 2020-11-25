@@ -209,8 +209,6 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
     char pathBuf[128] = {0};
     u8 opt_mode = 0;
 
-    DEBUG_PRINT( "lvgl open : %s\n", path );
-
     // 根据传入的参数判断是什么存储设备
     switch ( drv->letter ) {
     case 'S':       // SD card
@@ -246,7 +244,6 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
 
     FRESULT fres = f_open( file_p, pathBuf, opt_mode );
 
-    
     if ( fres != FR_OK ) {
         printf( "f_open error (%d)\n", fres );
         return LV_FS_RES_NOT_IMP;

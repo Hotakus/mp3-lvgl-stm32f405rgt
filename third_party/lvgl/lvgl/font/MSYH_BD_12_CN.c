@@ -39,8 +39,7 @@ static x_header_t __g_xbf_hd = {
 };
 
 
-static uint8_t __g_font_buf[228];//如bin文件存在SPI FLASH可使用此buff
-
+static uint8_t __g_font_buf[224];//如bin文件存在SPI FLASH可使用此buff
 static FIL mp3_fil;
 static FRESULT res;
 
@@ -48,10 +47,9 @@ static uint8_t *__user_font_getdata(int offset, int size){
     //如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);
     //如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);
 
-   f_open( &mp3_fil, "SD_SDIO:/MSGOTHIC_B_12_CN.bin", FA_READ | FA_OPEN_EXISTING );
+   f_open( &mp3_fil, "SD_SDIO:/mp3_fonts/MSYH_BD_12_CN.bin", FA_READ | FA_OPEN_EXISTING );
    f_lseek( &mp3_fil, offset );
    f_read( &mp3_fil, __g_font_buf, size, NULL );
-
    f_close( &mp3_fil );
 
     return __g_font_buf;
@@ -93,13 +91,13 @@ static bool __user_font_get_glyph_dsc(const lv_font_t * font, lv_font_glyph_dsc_
 }
 
 
-//Yu Gothic,,-1
-//字模高度：19
+//Microsoft YaHei,,-1
+//字模高度：16
 //XBF字体,外部bin文件
-lv_font_t MSGOTHIC_B_12_CN = {
+lv_font_t MSYH_BD_12_CN = {
     .get_glyph_bitmap = __user_font_get_bitmap,
     .get_glyph_dsc = __user_font_get_glyph_dsc,
-    .line_height = 19,
+    .line_height = 16,
     .base_line = 0,
 };
 

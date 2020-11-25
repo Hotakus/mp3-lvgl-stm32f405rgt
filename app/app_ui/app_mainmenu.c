@@ -3,7 +3,15 @@
 /**********************
  *  DEFINE
  **********************/
-#define THIS_UI_NAME   "mainmenu"
+#define THIS_UI_NAME    "mainmenu"
+#define ICONS_ROW       2
+#define ICONS_COL       3
+
+#define ICONS_W  70
+#define ICONS_H  70
+
+#define ICONS_MARGIN_X  20
+#define ICONS_MARGIN_Y  30
 
 /**********************
  *  STATIC PROTOTYPES
@@ -24,11 +32,49 @@ static app_ui_t app_mainmenu = {
     .ctl_h = &ctl_handler,
 };
 
-static lv_point_t tileview_valid_pos[] = {
-    {0, 0}, 
-    {0, 1}
+/************************************************
+ * @brief icons_path[x][y]
+ * x : row
+ * y : col
+ ************************************************/
+static icon_t icons_path[ICONS_ROW][ICONS_COL] = {
+    /* row 1 */
+    {
+        {
+            .name     = "music",
+            .rel_path = "S:/mp3_icons/music_icon_rel.bin",
+            .pr_path  = "S:/mp3_icons/music_icon_pr.bin" ,
+        },
+        {
+            .name     = "calendar",
+            .rel_path = "S:/mp3_icons/Calendar_icon_rel.bin",
+            .pr_path  = "S:/mp3_icons/Calendar_icon_pr.bin" ,
+        },
+        {
+            .rel_path = NULL,
+            .pr_path  = NULL,
+        },
+    },
+    /* row 2 */
+    {
+        {
+            .rel_path = NULL,
+            .pr_path  = NULL,
+        },
+        {
+            .rel_path = NULL,
+            .pr_path  = NULL,
+        },
+        {
+            .rel_path = NULL,
+            .pr_path  = NULL,
+        },
+    },
+
 };
-static lv_obj_t * tileview = NULL;
+
+static lv_obj_t * icons_container = NULL;
+static lv_obj_t * icons_obj[ICONS_ROW][ICONS_COL];
 
  /**********************
  *  FUNCTIONS
@@ -38,6 +84,7 @@ static lv_obj_t * tileview = NULL;
  ************************************************/
 static void event_handler(lv_obj_t * obj, lv_event_t event)
 {
+    
     if(event == LV_EVENT_CLICKED) {
         printf("Clicked\n");
     } else if(event == LV_EVENT_VALUE_CHANGED) {
@@ -47,46 +94,27 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
 
 static void mainmenu_create(void)
 {
-    
-    tileview = lv_tileview_create( lv_scr_act(), NULL );
-    lv_obj_set_size( tileview, 128, 108 );
-    lv_obj_set_pos( tileview, 0, 20 );
-    lv_tileview_set_valid_positions( tileview, tileview_valid_pos, 2 );
-    lv_tileview_set_edge_flash(tileview, true);
-    
-    lv_obj_t * tile1 = lv_obj_create(tileview, NULL);
-    lv_obj_set_size(tile1, 128, 108);
-    lv_tileview_add_element(tileview, tile1);
-    
-    /*Tile1: just a label*/
-    lv_obj_t * label = lv_label_create(tile1, NULL);
-    lv_obj_set_style_local_text_font( 
-        label, 
-        LV_LABEL_PART_MAIN, 
-        LV_STATE_DEFAULT, 
-        &MSGOTHIC_B_12_CN
-    );
-    lv_label_set_text(label, "你好，修仙");
-    lv_obj_set_size( label, 128, 108 );
-    lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
-    
-//    lv_obj_t * list = lv_list_create(tileview, NULL);
-//    lv_obj_set_size( list, 128, 108 );
-//    lv_obj_set_pos(list, 0, 108);
-//    lv_list_set_scroll_propagation(list, true);
-//    lv_list_set_scrollbar_mode(list, LV_SCROLLBAR_MODE_DRAG);
-//    lv_list_add_btn(list, NULL, "One");
-//    lv_list_add_btn(list, NULL, "Two");
-//    lv_list_add_btn(list, NULL, "Three");
-    
-    lv_obj_t * preload = lv_spinner_create(tileview, NULL);
-    lv_obj_set_pos(preload, 0, 128);
-    lv_obj_set_size(preload, 50, 80);
 
 //    lv_obj_t * img = lv_img_create( lv_scr_act(), NULL );
 //    lv_img_set_src( img, "S:/earp.bin" );
 //    lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
 
+    
+    icons_container = lv_cont_create( lv_scr_act(), NULL );
+    /* 计算容器的size */
+    lv_obj_set_size( icons_container, 
+        ICONS_COL*ICONS_W + ICONS_MARGIN_X*(ICONS_COL-1), 
+        ICONS_ROW*ICONS_H + ICONS_MARGIN_Y*(ICONS_ROW-1) 
+    );
+    lv_obj_set_pos( icons_container, 35, 40 );
+    lv_obj_set_style_local_bg_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_style_local_border_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    
+    lv_obj_t * music_btn = lv_imgbtn_create( icons_container, NULL );
+    lv_imgbtn_set_src( music_btn, LV_BTN_STATE_RELEASED, icons_path[0][0].rel_path );
+    lv_imgbtn_set_src( music_btn, LV_BTN_STATE_PRESSED, icons_path[0][0].pr_path );
+    lv_obj_align(music_btn, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+    
 }
 
 /************************************************
@@ -94,10 +122,7 @@ static void mainmenu_create(void)
  ************************************************/
 static void mainmenu_remove(void)
 {
-    
-    
-    
-    
+    lv_obj_del( icons_container );
 }
 
 app_ui_t *mainmenu_ui_get( void )

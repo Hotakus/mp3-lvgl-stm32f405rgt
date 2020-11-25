@@ -399,10 +399,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  */
 #define LV_FONT_CUSTOM_DECLARE  LV_FONT_DECLARE( ariblk_12 )            \
                                 LV_FONT_DECLARE( ariblk_14 )            \
-                                LV_FONT_DECLARE( MSGOTHIC_B_12_EN )     \
-                                LV_FONT_DECLARE( MSGOTHIC_B_14_EN )     \
-                                LV_FONT_DECLARE( MSGOTHIC_B_12_CN )     \
-                                LV_FONT_DECLARE( MSGOTHIC_B_14_CN )
+                                LV_FONT_DECLARE(MSYH_BD_12_CN)
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp
@@ -530,7 +527,7 @@ typedef void * lv_font_user_data_t;
 
 #if LV_USE_USER_DATA
 /*Declare the type of the user data of object (can be e.g. `void *`, `int`, `struct`)*/
-typedef unsigned char lv_obj_user_data_t;
+typedef const char *lv_obj_user_data_t;
 /*Provide a function to free user data*/
 #define LV_USE_USER_DATA_FREE 0
 #if LV_USE_USER_DATA_FREE

@@ -322,7 +322,7 @@ static void mp3_get_jpeg( int argc, char **args )
     if ( argc == 1 )
         return;
     extract_mp3_pic_from( "SD_SDIO:/test.mp3","SD_SDIO:/test.jpg" );
-}
+} 
 MSH_CMD_EXPORT(mp3_get_jpeg , get jpeg from mp3 file);
 
 

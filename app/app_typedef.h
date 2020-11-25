@@ -7,6 +7,12 @@
 #define APP_UI_NUM      50      // app 的最大UI数量
 #define APP_UI_LAYER    5       // app 的最大UI层级(深度)
 
+typedef struct {
+    const char *name;       // icon名
+    const char *rel_path;   // 释放状态的icon
+    const char *pr_path;    // 按压状态的icon
+} icon_t;
+
 /* typedef */
 /* ui控制句柄 */
 /* 每个不同的ui都有自己的ui控制句柄 */

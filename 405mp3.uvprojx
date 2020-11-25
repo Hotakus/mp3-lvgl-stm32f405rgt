@@ -2219,31 +2219,6 @@
               <FilePath>.\third_party\lvgl\lvgl\lvgl.h</FilePath>
             </File>
             <File>
-              <FileName>music_icon_pr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\music_icon_pr.c</FilePath>
-            </File>
-            <File>
-              <FileName>music_icon_rel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\music_icon_rel.c</FilePath>
-            </File>
-            <File>
-              <FileName>Calendar_icon_rel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\Calendar_icon_rel.c</FilePath>
-            </File>
-            <File>
-              <FileName>Calendar_icon_pr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\Calendar_icon_pr.c</FilePath>
-            </File>
-            <File>
-              <FileName>mp3_demo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\mp3_demo.c</FilePath>
-            </File>
-            <File>
               <FileName>status_bar_bg.c</FileName>
               <FileType>1</FileType>
               <FilePath>C:\Users\SU\Desktop\status_bar_bg.c</FilePath>
@@ -2264,19 +2239,9 @@
               <FilePath>.\third_party\lvgl\lvgl\font\ariblk_14.c</FilePath>
             </File>
             <File>
-              <FileName>MSGOTHIC_B_12_EN.c</FileName>
+              <FileName>MSYH_BD_12_CN.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_EN.c</FilePath>
-            </File>
-            <File>
-              <FileName>MSGOTHIC_B_14_EN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_14_EN.c</FilePath>
-            </File>
-            <File>
-              <FileName>MSGOTHIC_B_12_CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_CN.c</FilePath>
+              <FilePath>.\third_party\lvgl\lvgl\font\MSYH_BD_12_CN.c</FilePath>
             </File>
           </Files>
         </Group>

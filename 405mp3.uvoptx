@@ -3095,66 +3095,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>C:\Users\SU\Desktop\music_icon_pr.c</PathWithFileName>
-      <FilenameWithoutPath>music_icon_pr.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>14</GroupNumber>
-      <FileNumber>233</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>C:\Users\SU\Desktop\music_icon_rel.c</PathWithFileName>
-      <FilenameWithoutPath>music_icon_rel.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>14</GroupNumber>
-      <FileNumber>234</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>C:\Users\SU\Desktop\Calendar_icon_rel.c</PathWithFileName>
-      <FilenameWithoutPath>Calendar_icon_rel.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>14</GroupNumber>
-      <FileNumber>235</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>C:\Users\SU\Desktop\Calendar_icon_pr.c</PathWithFileName>
-      <FilenameWithoutPath>Calendar_icon_pr.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>14</GroupNumber>
-      <FileNumber>236</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>C:\Users\SU\Desktop\mp3_demo.c</PathWithFileName>
-      <FilenameWithoutPath>mp3_demo.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>14</GroupNumber>
-      <FileNumber>237</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>C:\Users\SU\Desktop\status_bar_bg.c</PathWithFileName>
       <FilenameWithoutPath>status_bar_bg.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3170,7 +3110,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>238</FileNumber>
+      <FileNumber>233</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3182,7 +3122,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>239</FileNumber>
+      <FileNumber>234</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3194,37 +3134,13 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>240</FileNumber>
+      <FileNumber>235</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_EN.c</PathWithFileName>
-      <FilenameWithoutPath>MSGOTHIC_B_12_EN.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>15</GroupNumber>
-      <FileNumber>241</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_14_EN.c</PathWithFileName>
-      <FilenameWithoutPath>MSGOTHIC_B_14_EN.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>15</GroupNumber>
-      <FileNumber>242</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\third_party\lvgl\lvgl\font\MSGOTHIC_B_12_CN.c</PathWithFileName>
-      <FilenameWithoutPath>MSGOTHIC_B_12_CN.c</FilenameWithoutPath>
+      <PathWithFileName>.\third_party\lvgl\lvgl\font\MSYH_BD_12_CN.c</PathWithFileName>
+      <FilenameWithoutPath>MSYH_BD_12_CN.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
