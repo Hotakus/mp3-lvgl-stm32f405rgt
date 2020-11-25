@@ -90,7 +90,7 @@ DSTATUS disk_initialize (
                 return STA_NOINIT;
             printf( "SD get info successfully.\n" );
         }
-        SD_HighSpeed();
+//        SD_HighSpeed();
         return !STA_NOINIT;
 	case DEV_USB :
 		return STA_NOINIT;
@@ -111,7 +111,7 @@ DRESULT disk_read (
 	UINT count		/* Number of sectors to read */
 )
 {
-    uint8_t retry = 5;
+    uint8_t retry = 0xFF;
     SD_Error sd_err;
     w25qxx_stat w25qxx_err;
 
@@ -122,23 +122,13 @@ DRESULT disk_read (
             return RES_ERROR;
 		return RES_OK;
 	case DEV_SD_SDIO :
-    
-        if ( count == 1 )
-            sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
-        else {
+        while(count--) {
             do {
-                sd_err = SD_ReadMultiBlocks(
-                    buff, \
-                    (sector<<9), \
-                    card_info.CardBlockSize, \
-                    count \
-                );
-                sd_err = SD_WaitReadOperation();
+                sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
             } while( --retry && sd_err != SD_OK );
-            while(SD_GetStatus() != SD_TRANSFER_OK);
             if ( sd_err != SD_OK ) {
                 printf( "SD read error (%d)\n\r", sd_err );
-                return RES_PARERR;
+                return RES_NOTRDY;
             }
         }
         return RES_OK;
@@ -176,17 +166,13 @@ DRESULT disk_write (
             return RES_ERROR;
 		return RES_OK;
 	case DEV_SD_SDIO :
-        if ( count == 1 )
-            sd_err = SD_ReadBlock( (uint8_t*)buff, (sector<<9), card_info.CardBlockSize );
-        else {
-            sd_err = SD_WriteMultiBlocks(
-                (uint8_t*)buff, \
-                (sector<<9), \
-                card_info.CardBlockSize, \
-                count \
-            );
-            SD_WaitWriteOperation();
-        }
+        sd_err = SD_WriteMultiBlocks(
+            (uint8_t*)buff, \
+            (sector<<9), \
+            card_info.CardBlockSize, \
+            count \
+        );
+        SD_WaitWriteOperation();
         while(SD_GetStatus() != SD_TRANSFER_OK);
         if ( sd_err != SD_OK ) {
             printf( "SD writ retry %d. (%d)\n\r", retry, sd_err );

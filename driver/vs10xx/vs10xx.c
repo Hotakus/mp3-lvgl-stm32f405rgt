@@ -11,6 +11,9 @@
 #include "vs10xx.h"
 #include "usart.h"
 #include "pro_conf.h"
+#include "nvic_conf.h"
+#include "ff_user.h"
+#include "tim.h"
 
 /************************************************
  * @brief STATIC PROPOTYPE
@@ -19,7 +22,7 @@ static void vs10xx_config( void );
 static uint8_t vs10xx_trans_byte( uint8_t byte );
 static uint16_t vs10xx_read_reg( uint8_t reg );
 static void vs10xx_writ_reg( uint8_t reg, uint16_t dat );
-
+static ErrorStatus vs10xx_wait( uint32_t timeout );
 
 /************************************************
  * @brief STATIC VARIABLE
@@ -36,12 +39,13 @@ void vs10xx_config( void )
     GPIO_InitTypeDef vs10xx_g;
 
     RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOC, ENABLE );
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
     
     /* GPIO */
     vs10xx_g.GPIO_Pin               = VS10xx_DREQ;       // PB
     vs10xx_g.GPIO_Mode              = GPIO_Mode_IN;
     vs10xx_g.GPIO_OType             = GPIO_OType_OD;
-    vs10xx_g.GPIO_PuPd              = GPIO_PuPd_NOPULL;
+    vs10xx_g.GPIO_PuPd              = GPIO_PuPd_UP;
     vs10xx_g.GPIO_Speed             = GPIO_Speed_100MHz;
     GPIO_Init( GPIOC, &vs10xx_g );
 
@@ -58,9 +62,7 @@ void vs10xx_init( void )
 { 
     spi_conf( VS10xx_SPI, SPI_BaudRatePrescaler_256, SPI_MODE_1, SPI_Direction_2Lines_FullDuplex );
     vs10xx_config();
-    vs10xx_reset();
-    
-    while( !(DREQ_STAT) );
+    vs10xx_hw_reset();
 
     version = vs10xx_read_reg( REG_VS10xx_SCI_STATUS )>>4;
     if( version == 0x0f )
@@ -70,30 +72,47 @@ void vs10xx_init( void )
     
     vs10xx_writ_reg( REG_VS10xx_SCI_MODE, ( 1<<11 | 1<<6 | 1<<5 ) );        // stream mode and MSB first turn on
     vs10xx_writ_reg( REG_VS10xx_SCI_BASS, 0x7af6 );                         //configures BASS
-    vs10xx_writ_reg( REG_VS10xx_SCI_CLOCKF, (SC_MULT4 | SC_ADD3) );
+    vs10xx_writ_reg( REG_VS10xx_SCI_CLOCKF, (SC_MULT6 | SC_ADD0) );
 
-    VOL_SETTING( 160, 160 );    //initialize the vol left:-2dB, right:-2dB
+    VOL_SETTING( 150, 150 );    //initialize the vol left:-2dB, right:-2dB
     
     DEBUG_PRINT( "%x\n", vs10xx_read_reg( REG_VS10xx_SCI_MODE ) );
     DEBUG_PRINT( "%x\n", vs10xx_read_reg( REG_VS10xx_SCI_BASS ) );
     DEBUG_PRINT( "%x\n", vs10xx_read_reg( REG_VS10xx_SCI_CLOCKF ) );
     DEBUG_PRINT( "%x\n", vs10xx_read_reg( REG_VS10xx_SCI_VOL ) );
+
     
+//    spi_conf( VS10xx_SPI, SPI_BaudRatePrescaler_128, SPI_MODE_1, SPI_Direction_2Lines_FullDuplex );
+
     /* vs10xx sin test */
 #define SINTEST 1
 #if SINTEST == 1
-    vs10xx_sin_test( 500 );
+    vs10xx_sin_test( 200 );
 #endif
-
+    
     DEBUG_PRINT( "VS10xx init done.\n" );
 }
 
-void vs10xx_reset( void ) 
+static ErrorStatus vs10xx_wait( uint32_t timeout )
+{
+    while( !(DREQ_STAT) && timeout-- );
+    if ( !timeout )
+        return ERROR;
+    return SUCCESS;
+}
+
+void vs10xx_hw_reset( void ) 
 {
     VS10xx_XRESET_LOW;
-    DELAY(100);
+    DELAY(2);
     VS10xx_XRESET_HIGH;
-    DELAY(100);
+    DELAY(2);
+    vs10xx_wait( 0xFFFF );
+}
+
+void vs10xx_sw_reset( void )
+{
+    
 }
 
 uint8_t vs10xx_trans_byte( uint8_t byte ) 
@@ -141,6 +160,9 @@ void vs10xx_sin_test( uint16_t test_time )
 
     DEBUG_PRINT( "VS10xx test begin.\n" );
     
+    if (vs10xx_wait( 0xFFFF ) != SUCCESS)
+        return;
+
     VS10xx_XDCS_LOW;
     VS10xx_CS_HIGH;
 
@@ -155,4 +177,148 @@ void vs10xx_sin_test( uint16_t test_time )
     VS10xx_XDCS_HIGH;
     
     DEBUG_PRINT( "VS10xx test done.\n" );
+}
+
+struct mp3_IDxVxHeader
+{
+    unsigned char aucIDx[3];     /* 保存的值比如为"ID3"表示是ID3V2 */
+    unsigned char ucVersion;     /* 如果是ID3V2.3则保存3,如果是ID3V2.4则保存4 */
+    unsigned char ucRevision;    /* 副版本号 */
+    unsigned char ucFlag;        /* 存放标志的字节 */
+    unsigned char aucIDxSize[4]; /* 整个 IDxVx 的大小，除去本结构体的 10 个字节 */
+    /* 只有后面 7 位有用 */
+} mp3_header;
+
+uint8_t audio_buf[512] = {0};
+
+void vs10xx_play_mp3( const char *mp3_file_path )
+{
+    FIL mp3_fil;
+    FRESULT res = f_open( &mp3_fil, mp3_file_path, FA_OPEN_EXISTING | FA_READ );
+    if ( res != FR_OK ) {
+        DEBUG_PRINT( "open mp3 file : %s error.\n", mp3_file_path );
+        return;
+    }
+    DEBUG_PRINT( "%s\n", mp3_file_path );
+    f_read( &mp3_fil, &mp3_header, 10, NULL );
+    DEBUG_PRINT( "%s\n", mp3_header.aucIDx );
+    
+    uint32_t i = 0;
+
+    VS10xx_CS_HIGH;
+    VS10xx_XDCS_LOW;
+    f_lseek( &mp3_fil, 0 );
+    while(1) {
+        DEBUG_PRINT( "%d\n", i++ );
+        f_read( &mp3_fil, audio_buf, 256, NULL );
+        while(!(DREQ_STAT));
+        for ( uint16_t k = 0; k < 256; k++ ) {
+            vs10xx_trans_byte( audio_buf[k] );
+        }
+    
+    }
+    VS10xx_XDCS_HIGH;
+    
+    f_close( &mp3_fil );
+}
+
+void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path )
+{
+    FIL mp3_fil;
+    FRESULT res = f_open( &mp3_fil, mp3_file_path, FA_OPEN_EXISTING | FA_READ );
+    if ( res != FR_OK ) {
+        DEBUG_PRINT( "open mp3 file : %s error.\n", mp3_file_path );
+        return;
+    }
+
+    uint32_t i = 0;
+    uint32_t jpeg_spos = 0;     // JPEG头 偏移
+    uint32_t jpeg_epos = 0;     // JPEG尾 偏移
+    uint8_t  fbuf[2] = {0};
+
+    /* 找到JPEG文件头 */
+    while (1) {
+        f_lseek( &mp3_fil, jpeg_spos );
+        f_read( &mp3_fil, fbuf, 2, NULL );
+        if ( fbuf[0] == 0xFF ) {
+            if ( fbuf[1] == 0xD8 ) {
+                break;
+            }
+        }
+        jpeg_spos += 2;
+    }
+
+    jpeg_epos = jpeg_spos;
+    
+    /* 找到JPEG文件尾 */
+    while (1) {
+        f_lseek( &mp3_fil, jpeg_epos );
+        f_read( &mp3_fil, fbuf, 2, NULL );
+        if ( fbuf[0] == 0xFF ) {
+            if ( fbuf[1] == 0xD9 ) {
+                jpeg_epos += 2;
+                break;
+            }
+        }
+        jpeg_epos += 2;
+    }
+    f_close( &mp3_fil );
+    
+
+    /* 创建文件 */
+    uint32_t jpeg_size = jpeg_epos - jpeg_spos;
+    uint16_t jpeg_buf_size = 4096;
+    uint8_t *jpeg_buf = (uint8_t *)MALLOC( sizeof(uint8_t)*jpeg_buf_size );
+
+    uint32_t tt    = jpeg_size / jpeg_buf_size;
+    uint32_t sdatn = jpeg_size % jpeg_buf_size;
+    if ( sdatn )
+        tt += 1;
+
+    uint8_t retry = 0;
+
+    FIL out_fil;
+    FRESULT src_fres, dest_fres;
+
+    f_open( &mp3_fil, mp3_file_path, FA_READ | FA_OPEN_EXISTING );
+    f_open( &out_fil, out_path, FA_WRITE | FA_OPEN_ALWAYS );
+
+    f_lseek( &mp3_fil, jpeg_spos );
+    f_lseek( &out_fil, 0 );
+
+    Clock_Start();
+    do {
+        /* 传输 */
+        retry = 5;
+        do {
+            src_fres   = f_read( &mp3_fil, jpeg_buf, (tt==1)?(sdatn):(jpeg_buf_size), NULL );
+            dest_fres  = f_write( &out_fil, jpeg_buf, (tt==1)?(sdatn):(jpeg_buf_size), NULL );
+        } while ( (dest_fres || src_fres) && --retry );
+        if ( !retry ) {
+            DEBUG_PRINT( "2 : trans error! ( %d %d )\n", dest_fres, src_fres  );
+            goto trans_end;
+        }
+    } while ( --tt );
+
+    
+trans_end:
+    f_close( &mp3_fil );
+    f_close( &out_fil );
+    FREE( jpeg_buf );
+
+    double ttime = 0;
+    double sec   = 0;
+    double speed = 0;
+    
+    /* 计算传输速度 */
+    ttime = Clock_End();
+    sec   = ttime / 84000.0;
+    speed = (double)jpeg_size / sec;
+    printf( "\nsec         : %f s\n", sec  );
+    printf( "preriod     : %d s\n", (int)ttime  );
+    printf( "trans speed : %0.4f MiB/s\n", speed/(1<<20) );
+
+
+    DEBUG_PRINT( "%d %d\n", jpeg_spos, jpeg_epos );
+
 }

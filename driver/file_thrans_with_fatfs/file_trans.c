@@ -9,7 +9,7 @@
 #if DATA_BUF_SIZE > 4096
 #error "DATA_BUF_SIZE too big"
 #endif
-static u8 *dat_buf = NULL;
+static uint8_t *dat_buf = NULL;
 
 #if USER_USE_LVGL == 1
 #include "lv_port_fs.h"
@@ -35,8 +35,8 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     const char *file_name2 = get_file_name(dest_path);
     char spif_buf[50] = {0};
     TRANS_STAT err = TRANS_STAT_OK;
-    u32 dest_size = 0;
-    u32 src_size  = 0;
+    uint32_t dest_size = 0;
+    uint32_t src_size  = 0;
 
     FIL src_fil, dest_fil;
     FRESULT src_fres, dest_fres;
@@ -82,10 +82,10 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
 
     /* 开始传输 */
     /* 根据DATA BUF SIZE 计算要传输几次 和 余数 */
-    u32 ts    = src_size / DATA_BUF_SIZE;
-    u32 sdatn = src_size % DATA_BUF_SIZE;
-    u8 retry = TRANS_RETRY_TIME;
-    dat_buf = (u8*)MALLOC( sizeof(u8)*DATA_BUF_SIZE );
+    uint32_t ts    = src_size / DATA_BUF_SIZE;
+    uint32_t sdatn = src_size % DATA_BUF_SIZE;
+    uint8_t retry = TRANS_RETRY_TIME;
+    dat_buf = (uint8_t*)MALLOC( sizeof(uint8_t)*DATA_BUF_SIZE );
     
     double ttime = 0;
     double sec   = 0;

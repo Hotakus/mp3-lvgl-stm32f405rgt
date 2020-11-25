@@ -253,7 +253,7 @@ w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num )
             return stat;
         ssect++;
     }
-    DEBUG_PRINT( "erase sect : %d\n", ssect );
+    
     return W25QXX_STAT_OK;
 }
 
@@ -375,6 +375,7 @@ w25qxx_stat w25qxx_read_sector( uint8_t* rec_buf, uint32_t sector, uint32_t cnt 
  ************************************************/
 w25qxx_stat w25qxx_writ_sector( uint8_t* send_buf, uint32_t sector, uint32_t cnt )
 {
+    DEBUG_PRINT( "erase sect : %d to %d\n", sector, sector+cnt );
     w25qxx_erase_sector( sector, cnt );
     return w25qxx_writ_page( send_buf, (sector<<4), (cnt<<4) );
 }

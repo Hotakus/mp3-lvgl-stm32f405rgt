@@ -183,6 +183,15 @@ static void fs_init(void)
             (sd_info.SD_cid.ManufactDate>>4)&0x0f
         );
     }
+    
+    if ( fr_lv[SPIF_INDEX] == FR_OK ) {
+        extern w25qxx_feature_s w25qxx;
+        printf( "SPI FLASH:\n" );
+        printf( "Capacity : %d Bytes\nJEDECID  : %X\n" , 
+            w25qxx.capacity,
+            w25qxx.JEDECID
+        );
+    }
 
 }
 
@@ -199,6 +208,8 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
 {
     char pathBuf[128] = {0};
     u8 opt_mode = 0;
+
+    DEBUG_PRINT( "lvgl open : %s\n", path );
 
     // 根据传入的参数判断是什么存储设备
     switch ( drv->letter ) {
@@ -217,22 +228,27 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
     if(mode == LV_FS_MODE_WR) {
         /*Open a file for write*/
         /* Add your code here*/
+
         opt_mode = FA_OPEN_ALWAYS|FA_WRITE;
     } else if(mode == LV_FS_MODE_RD) {
         /*Open a file for read*/
         /* Add your code here*/
+
         opt_mode = FA_OPEN_EXISTING|FA_READ;
     } else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) {
         /*Open a file for read and write*/
         /* Add your code here*/
+
         opt_mode = FA_WRITE|FA_READ;
     }
 
     /* 调用FatFs的函数 */
-    if ( f_open( (FIL*)file_p, pathBuf, opt_mode ) != FR_OK ) {
-#if DEBUG_PRINTF==1        
+
+    FRESULT fres = f_open( file_p, pathBuf, opt_mode );
+
+    
+    if ( fres != FR_OK ) {
         printf( "f_open error (%d)\n", fres );
-#endif
         return LV_FS_RES_NOT_IMP;
     } else 
         return LV_FS_RES_OK;
@@ -275,8 +291,9 @@ static lv_fs_res_t fs_read (lv_fs_drv_t * drv, void * file_p, void * buf, uint32
 {
 
     /* Add your code here*/
-    if ( f_read( file_p, buf, btr, br ) != FR_OK ) {
-
+    FRESULT fres = f_read( (FIL*)file_p, buf, btr, br );
+    if ( fres != FR_OK ) {
+        printf( "f_read error (%d)\n", fres );
         return LV_FS_RES_NOT_IMP;
     } else {
 
@@ -296,9 +313,11 @@ static lv_fs_res_t fs_read (lv_fs_drv_t * drv, void * file_p, void * buf, uint32
 static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, const void * buf, uint32_t btw, uint32_t * bw)
 {
     /* Add your code here*/
-    if ( f_write( (FIL*)file_p, buf, btw, bw ) != FR_OK ) 
+    FRESULT fres = f_write( (FIL*)file_p, buf, btw, bw );
+    if ( fres != FR_OK ) {
+        printf( "f_read error (%d)\n", fres );
         return LV_FS_RES_NOT_IMP;
-    else 
+    } else 
         return LV_FS_RES_OK;
 }
 
@@ -314,8 +333,9 @@ static lv_fs_res_t fs_seek (lv_fs_drv_t * drv, void * file_p, uint32_t pos)
 {
 
     /* Add your code here*/
-    if ( f_lseek( (FIL*)file_p, pos ) != FR_OK ) {
-
+    FRESULT fres = f_lseek( (FIL*)file_p, pos );
+    if ( fres != FR_OK ) {
+        printf( "f_lseek error (%d)\n", fres );
         return LV_FS_RES_NOT_IMP;
     } else {
 

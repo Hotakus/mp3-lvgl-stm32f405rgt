@@ -20,14 +20,14 @@
 #include "spi_conf.h"
 
 /* definition */
-#define VS10xx_SPI              SPI3
+#define VS10xx_SPI              SPI1
 #define VS10xx_XRESET           GPIO_Pin_0        // PC
 #define VS10xx_DREQ             GPIO_Pin_1        // PC
 #define VS10xx_XDCS             GPIO_Pin_2        // PC
 #define VS10xx_XCS              GPIO_Pin_3        // PC
 
 /* return DREQ's status */
-#define DREQ_STAT            ( GPIOC->IDR & VS10xx_DREQ )
+#define DREQ_STAT               ( GPIOC->IDR & VS10xx_DREQ )
 
 #define VS10xx_XRESET_HIGH      GPIOC->BSRRL |= VS10xx_XRESET
 #define VS10xx_XRESET_LOW       GPIOC->BSRRH |= VS10xx_XRESET
@@ -90,9 +90,12 @@ enum VS10xx_REG {
 
 /* functions */
 void vs10xx_init( void );
-void vs10xx_reset( void );
+void vs10xx_hw_reset( void );
+void vs10xx_sw_reset( void );
 
 void vs10xx_sin_test( uint16_t test_time );
-void vs10xx_send_audio_dat( uint8_t* dat, uint16_t len );
+
+void vs10xx_play_mp3( const char *mp3_file_path );
+void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path );
 
 #endif

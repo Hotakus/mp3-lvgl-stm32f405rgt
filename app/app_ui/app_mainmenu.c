@@ -60,7 +60,13 @@ static void mainmenu_create(void)
     
     /*Tile1: just a label*/
     lv_obj_t * label = lv_label_create(tile1, NULL);
-    lv_label_set_text(label, "Scroll down");
+    lv_obj_set_style_local_text_font( 
+        label, 
+        LV_LABEL_PART_MAIN, 
+        LV_STATE_DEFAULT, 
+        &MSGOTHIC_B_12_CN
+    );
+    lv_label_set_text(label, "你好，修仙");
     lv_obj_set_size( label, 128, 108 );
     lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
     
@@ -76,6 +82,11 @@ static void mainmenu_create(void)
     lv_obj_t * preload = lv_spinner_create(tileview, NULL);
     lv_obj_set_pos(preload, 0, 128);
     lv_obj_set_size(preload, 50, 80);
+
+//    lv_obj_t * img = lv_img_create( lv_scr_act(), NULL );
+//    lv_img_set_src( img, "S:/earp.bin" );
+//    lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
+
 }
 
 /************************************************

@@ -227,13 +227,13 @@ void attach_info_create( void )
     lv_label_set_long_mode( attached_info_bar, LV_LABEL_LONG_SROLL_CIRC );
     lv_obj_set_width( attached_info_bar, 80 );
     lv_obj_set_height( attached_info_bar, 20 );
-    lv_obj_set_style_local_text_font( 
-        attached_info_bar, 
-        LV_LABEL_PART_MAIN, 
-        LV_STATE_DEFAULT, 
-        &MSGOTHIC_B_12_CN
-    );
-    status_bar_attach_info_update( "我Hello asdasda" );
+    // lv_obj_set_style_local_text_font( 
+    //     attached_info_bar, 
+    //     LV_LABEL_PART_MAIN, 
+    //     LV_STATE_DEFAULT, 
+    //     &MSGOTHIC_B_12_CN
+    // );
+    status_bar_attach_info_update( "asds" );
 }
 void attach_info_delete( void )
 {

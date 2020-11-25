@@ -92,6 +92,12 @@ static void fatfs( int argc, char **args )
 }
 MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
 
+/************************************************
+ * @brief 扫描目录下文件
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 static void scan_file(int argc, char **args)
 {
     
@@ -100,13 +106,24 @@ static void scan_file(int argc, char **args)
 }
 MSH_CMD_EXPORT(scan_file, list files in sd);
 
+/************************************************
+ * @brief 显示文件属性
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 static void file_info(int argc, char **args)
 {
     show_element_info( args[1] );
 }
 MSH_CMD_EXPORT(file_info, get info which file);
 
-//uint8_t ch_buf[50] = {0};
+/************************************************
+ * @brief 查看文件内容
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 static void rtt_cat( int argc, char **args )
 {
     
@@ -163,7 +180,12 @@ static void rtt_cat( int argc, char **args )
 }
 MSH_CMD_EXPORT( rtt_cat, show file content );
 
-
+/************************************************
+ * @brief 格式化存储设备
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 static void rtt_mkfs( int argc, char **args )
 {
 
@@ -192,6 +214,12 @@ static void rtt_mkfs( int argc, char **args )
 }
 MSH_CMD_EXPORT( rtt_mkfs, mkfs dev );
 
+/************************************************
+ * @brief 拷贝文件
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 void rtt_cp( int argc, char **args )
 {
     if ( argc != 3 )
@@ -205,6 +233,12 @@ MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
 
 #if USER_USE_LVGL == 1
+/************************************************
+ * @brief lvgl_reboot
+ * 
+ * @param argc 
+ * @param args 
+ ************************************************/
 static void lvgl_reboot( int argc, char **args )
 {
     lv_port_disp_init();        // 显示器初始化
@@ -274,6 +308,23 @@ static void vs10xx_test( int argc, char **args )
     vs10xx_init();
 }
 MSH_CMD_EXPORT(vs10xx_test , vs10xx test);
+
+static void vs10xx_play( int argc, char **args )
+{
+    if ( argc == 1 )
+        return;
+    vs10xx_play_mp3( "SPIF:/test.mp3" );
+}
+MSH_CMD_EXPORT(vs10xx_play , vs10xx play);
+
+static void mp3_get_jpeg( int argc, char **args )
+{
+    if ( argc == 1 )
+        return;
+    extract_mp3_pic_from( "SD_SDIO:/test.mp3","SD_SDIO:/test.jpg" );
+}
+MSH_CMD_EXPORT(mp3_get_jpeg , get jpeg from mp3 file);
+
 
 /************************************************
  * @brief reboot cpu

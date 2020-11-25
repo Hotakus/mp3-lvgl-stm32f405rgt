@@ -19,7 +19,7 @@ extern "C" {
 #define LCD_144_W   128
 #define LCD_144_H   128
 
-#define LCD_ST7735_SPI          SPI2
+#define LCD_ST7735_SPI              SPI2
 
 #define LCD_144_ST7735_MOSI         GPIO_Pin_15
 #define LCD_144_ST7735_MISO         NULL
