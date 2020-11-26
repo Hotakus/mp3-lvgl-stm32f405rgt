@@ -13,14 +13,18 @@
 
 /* includes */
 #include "stm32f4xx_conf.h"
+#include "lvgl.h"
 
 #define APP_UI_NUM      50      // app 的最大UI数量
 #define APP_UI_LAYER    5       // app 的最大UI层级(深度)
 
 typedef struct {
-    const char *name;       // icon名
+    const char *en_name;    // icon英文名
+    const char *cn_name;    // icon中文名
     const char *rel_path;   // 释放状态的icon
     const char *pr_path;    // 按压状态的icon
+    lv_obj_t * btn;         // lv_obj_t 按键对象
+    lv_obj_t * label;       // lv_obj_t 标签对象
 } icon_t;
 
 /* typedef */

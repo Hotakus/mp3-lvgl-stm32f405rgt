@@ -43,22 +43,24 @@ static app_ui_t app_mainmenu = {
 };
 
 /************************************************
- * @brief icons_path[x][y]
+ * @brief icons[x][y]
  * x : row
  * y : col
  ************************************************/
-static icon_t icons_path[ICONS_ROW][ICONS_COL] = {
+static icon_t icons[ICONS_ROW][ICONS_COL] = {
     /* row 1 */
     {
         {
-            .name     = "music",
+            .en_name  = "music",       
+            .cn_name  = "音乐",
             .rel_path = "S:/mp3_icons/music_icon_rel.bin",
             .pr_path  = "S:/mp3_icons/music_icon_pr.bin" ,
         },
         {
-            .name     = "calendar",
-            .rel_path = "S:/mp3_icons/Calendar_icon_rel.bin",
-            .pr_path  = "S:/mp3_icons/Calendar_icon_pr.bin" ,
+            .en_name  = "calendar",
+            .cn_name  = "日历",
+            .rel_path = "S:/mp3_icons/calendar_icon_rel.bin",
+            .pr_path  = "S:/mp3_icons/calendar_icon_pr.bin" ,
         },
         {
             .rel_path = NULL,
@@ -84,7 +86,6 @@ static icon_t icons_path[ICONS_ROW][ICONS_COL] = {
 };
 
 static lv_obj_t * icons_container = NULL;           // icons顶层容器
-static lv_obj_t * icons_obj[ICONS_ROW][ICONS_COL];
 
  /**********************
  *  FUNCTIONS
@@ -100,7 +101,7 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
 {
     switch (event) {
     case LV_EVENT_CLICKED:
-        DEBUG_PRINT( "btn : %s\n", obj->user_data );
+        DEBUG_PRINT( "clicked btn : %s\n", obj->user_data );
         break;
     
     default:
@@ -113,7 +114,7 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void mainmenu_create(void)
 {
-
+    /* 创建mainmenu的icons的容器 */
     icons_container = lv_cont_create( lv_scr_act(), NULL );
     /* 计算容器的size */
     lv_obj_set_size( icons_container, 
@@ -123,17 +124,32 @@ static void mainmenu_create(void)
     lv_obj_set_pos( icons_container, 35, 40 );
     lv_obj_set_style_local_bg_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
     lv_obj_set_style_local_border_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-
-    lv_obj_t * music_btn = lv_imgbtn_create( icons_container, NULL );
-    lv_imgbtn_set_src( music_btn, LV_BTN_STATE_RELEASED, icons_path[0][0].rel_path );
-    lv_imgbtn_set_src( music_btn, LV_BTN_STATE_PRESSED, icons_path[0][0].pr_path );
-    lv_obj_align(music_btn, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
-
-    // for ( uint8_t row = 0; col < ICONS_ROW; row++ ) {
-    //     for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
-
-    //     }
-    // }
+    
+    for ( uint8_t row = 0; row < ICONS_ROW; row++ ) {
+        for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
+            /* 找到合法成员 */
+            if( icons[row][col].rel_path == NULL || icons[row][col].pr_path == NULL )
+                continue;
+            /* 创建imgbtn并自动对齐 */
+            icons[row][col].btn = lv_imgbtn_create( icons_container, NULL );
+            icons[row][col].btn->user_data = icons[row][col].en_name;
+            lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_RELEASED, icons[row][col].rel_path );
+            lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_PRESSED, icons[row][col].pr_path );
+            lv_obj_set_pos( icons[row][col].btn, (ICONS_W+ICONS_MARGIN_X)*col, (ICONS_H+ICONS_MARGIN_Y)*row );
+            lv_obj_set_event_cb( icons[row][col].btn, event_handler );
+            /* 为每个icon创建标签 */
+            icons[row][col].label = lv_label_create( icons_container, NULL );
+            lv_obj_set_style_local_text_font( 
+                icons[row][col].label, 
+                LV_LABEL_PART_MAIN, 
+                LV_STATE_DEFAULT, 
+                &ariblk_14
+            );
+            lv_obj_set_style_local_text_color( icons[row][col].label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE );
+            lv_label_set_text( icons[row][col].label, icons[row][col].en_name );
+            lv_obj_align(icons[row][col].label, icons[row][col].btn, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
+        }
+    }
     
 }
 
