@@ -11,10 +11,10 @@
 #include "lcd_st7789.h"
 
 static void lcd_st7789_gpio( void );
-static void lcd_st7789_send_cmd( u8 cmd );
-static void lcd_st7789_send_dat( u8 dat );
-static void lcd_st7789_trans_byte( u8 byte );
-static void lcd_st7789_send( u8 byte, ST7789_DC_OPT opt );
+static void lcd_st7789_send_cmd( uint8_t cmd );
+static void lcd_st7789_send_dat( uint8_t dat );
+static void lcd_st7789_trans_byte( uint8_t byte );
+static void lcd_st7789_send( uint8_t byte, ST7789_DC_OPT opt );
 
 static void lcd_st7789_gpio( void ) 
 {
@@ -170,7 +170,7 @@ void lcd_st7789_init( void ) {
 }
 
 
-static void lcd_st7789_trans_byte( u8 byte )
+static void lcd_st7789_trans_byte( uint8_t byte )
 {
 #if (USER_USE_SCR == USE_SCR_LCD_ST7789_130)
     IPS_ST7789_SPI->DR = byte;
@@ -181,7 +181,7 @@ static void lcd_st7789_trans_byte( u8 byte )
 #endif
 }
 
-static void lcd_st7789_send_cmd( u8 cmd )
+static void lcd_st7789_send_cmd( uint8_t cmd )
 {
     
 #if (USER_USE_SCR == USE_SCR_LCD_ST7789_130)
@@ -201,7 +201,7 @@ static void lcd_st7789_send_cmd( u8 cmd )
 #endif
 }
 
-static void lcd_st7789_send_dat( u8 dat )
+static void lcd_st7789_send_dat( uint8_t dat )
 {
 #if (USER_USE_SCR == USE_SCR_LCD_ST7789_130)
     ST7789_DC_HIGH;
@@ -220,7 +220,7 @@ static void lcd_st7789_send_dat( u8 dat )
 #endif
 }
 
-static void lcd_st7789_send( u8 byte, ST7789_DC_OPT opt )
+static void lcd_st7789_send( uint8_t byte, ST7789_DC_OPT opt )
 {
     if ( opt == ST7789_CMD )
         lcd_st7789_send_cmd( byte );

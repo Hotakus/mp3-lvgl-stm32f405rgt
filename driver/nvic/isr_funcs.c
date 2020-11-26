@@ -10,7 +10,7 @@
 /*
 *   USART1 RX ISR function
 */
-u8 cur_char;
+uint8_t cur_char;
 
 void USART1_IRQHandler( void ) {
 #if USER_USE_OS == 1

@@ -11,7 +11,7 @@ extern FRESULT fr_lv[2];
  * @brief STATIC VARIABLE
  ************************************************/
 static struct rt_thread app_init_thread;
-ALIGN(4) static u8 app_init_stk[APP_INIT_STK_SIZE]; 
+ALIGN(4) static uint8_t app_init_stk[APP_INIT_STK_SIZE]; 
 
 /************************************************
  * @brief FUNCTION PROPOTYPE

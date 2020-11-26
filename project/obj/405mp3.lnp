@@ -71,6 +71,12 @@
 ".\project\obj\app_ui.o"
 ".\project\obj\app_mainmenu.o"
 ".\project\obj\app_status_bar.o"
+".\project\obj\app_music.o"
+".\project\obj\app_calendar.o"
+".\project\obj\app_folder.o"
+".\project\obj\app_calculator.o"
+".\project\obj\app_env.o"
+".\project\obj\app_setting.o"
 ".\project\obj\diskio.o"
 ".\project\obj\ff.o"
 ".\project\obj\ff_user.o"
@@ -210,6 +216,7 @@
 ".\project\obj\ariblk_12.o"
 ".\project\obj\ariblk_14.o"
 ".\project\obj\msyh_bd_12_cn.o"
+".\project\obj\mp3_bg.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

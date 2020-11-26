@@ -89,7 +89,7 @@ static void lvgl_tick_thread( void *param )
 #define LVGL_TASK_STACK_SIZE    (4U *1024U)                         // 线程栈大小
 #define LVGL_TASK_TIME_SLICE    10                                  // 线程时间片
 #define LVGL_TASK_PRIOROTY      10                                  // 线程优先级
-ALIGN(RT_ALIGN_SIZE) static u8 lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈
+ALIGN(RT_ALIGN_SIZE) static uint8_t lvgl_task_stk[LVGL_TASK_STACK_SIZE]; // 线程栈
 static struct rt_thread *lvgl_task_th_s = &u_static_threadx[0];     // 从线程堆分配线程
 static void lvgl_task_thread( void *param )
 {
@@ -106,9 +106,9 @@ static void lvgl_task_thread( void *param )
 #define SD_DETECT_TIME_SLICE    10                                  // 线程时间片
 #define SD_DETECT_PRIOROTY      9                                   // 线程优先级
 #define SD_DETECT_TIMER_TIME    1000                                // 定时时间
-ALIGN(RT_ALIGN_SIZE) static u8 sd_detect_stk[SD_DETECT_STACK_SIZE]; // 线程栈
+ALIGN(RT_ALIGN_SIZE) static uint8_t sd_detect_stk[SD_DETECT_STACK_SIZE]; // 线程栈
 static struct rt_thread *sd_detect_th_s = &u_static_threadx[1];     // 从线程堆分配线程
-u8 sd_detect_flag = 0;
+uint8_t sd_detect_flag = 0;
 extern FATFS   fs_lv[2];
 extern FRESULT fr_lv[2];
 static void sd_detect_thread( void *param )

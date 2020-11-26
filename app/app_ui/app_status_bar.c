@@ -61,11 +61,10 @@ static uint8_t date_info_sw   = 1;      // 日期信息开关, 默认开启
  ************************************************/
 static void status_bar_create(void)
 {
-    
     /* 创建 status bar 背景 */
     LV_IMG_DECLARE(status_bar_bg);
     sbb = lv_img_create( lv_scr_act(), NULL );
-    lv_img_set_src( sbb, &status_bar_bg );
+    lv_img_set_src( sbb, "S:/icons/status_bar_bg.bin" );
     lv_obj_align( sbb, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0 );
 
     /* 创建 status bar 时间栏 */

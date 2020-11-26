@@ -56,7 +56,7 @@ static lv_fs_res_t fs_dir_close (lv_fs_drv_t * drv, void * rddir_p);
 
 FATFS   fs_lv[2]    = {NULL, NULL};
 FRESULT fr_lv[2]    = {FR_NOT_READY, FR_NOT_READY};
-static u8 dev_conf_status[2] = {0};
+static uint8_t dev_conf_status[2] = {0};
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -207,7 +207,7 @@ static void fs_init(void)
 static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path, lv_fs_mode_t mode)
 {
     char pathBuf[128] = {0};
-    u8 opt_mode = 0;
+    uint8_t opt_mode = 0;
 
     // 根据传入的参数判断是什么存储设备
     switch ( drv->letter ) {

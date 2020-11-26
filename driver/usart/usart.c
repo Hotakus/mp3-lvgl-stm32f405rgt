@@ -64,13 +64,13 @@ void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate )
 }
 INIT_BOARD_EXPORT(rt_usart_conf);
 
-void my_putc( u8 ch ) 
+void my_putc( uint8_t ch ) 
 {
     while ( !( USART1->SR & USART_FLAG_TC ) );
     USART1->DR = ch;
 }
 
-u8 my_getc( void ) 
+uint8_t my_getc( void ) 
 {
     while ( !( USART1->SR & USART_FLAG_RXNE ) );
     return USART1->DR;
@@ -81,7 +81,7 @@ PUTCHAR_PROTOTYPE
     if ( ch == '\n' ) {
         my_putc( '\r' );
     }
-    my_putc( (u8)ch );
+    my_putc( (uint8_t)ch );
     return ch;
 }
 
@@ -90,7 +90,7 @@ GETCHAR_PROTOTYPE
     return my_getc();
 }
 
-void usart_dma_tx( u8 *buf ) {
+void usart_dma_tx( uint8_t *buf ) {
     dma_conf( 0, (u32)&(USART1->DR), DMA_Channel_4, DMA_DIR_MemoryToPeripheral, DMA_Priority_VeryHigh );
     dma_on( 0, DMA2_Stream7, buf, 0 );
 }

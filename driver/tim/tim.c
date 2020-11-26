@@ -3,8 +3,8 @@
 #include "usart.h"
 #include "pro_conf.h"
 
-static u8 flag = 0;
-u8 sflag = 0;
+static uint8_t flag = 0;
+uint8_t sflag = 0;
 
 void time_counter_init(void)
 {

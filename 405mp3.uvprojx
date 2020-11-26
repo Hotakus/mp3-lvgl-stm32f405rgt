@@ -1011,6 +1011,36 @@
               <FileType>1</FileType>
               <FilePath>.\app\app_ui\app_status_bar.c</FilePath>
             </File>
+            <File>
+              <FileName>app_music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_music.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_calendar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_calendar.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_folder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_folder.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_calculator.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_calculator.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_env.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_env.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_setting.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_ui\app_setting.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2242,6 +2272,11 @@
               <FileName>MSYH_BD_12_CN.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\third_party\lvgl\lvgl\font\MSYH_BD_12_CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>mp3_bg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\mp3_bg.c</FilePath>
             </File>
           </Files>
         </Group>

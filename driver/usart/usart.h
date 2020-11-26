@@ -23,9 +23,9 @@
 /* functions */
 void usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
 void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
-void my_putc( u8 ch );
-u8 my_getc( void );
-void usart_dma_tx( u8 *buf );
+void my_putc( uint8_t ch );
+uint8_t my_getc( void );
+void usart_dma_tx( uint8_t *buf );
 
 #define printf     printf
 

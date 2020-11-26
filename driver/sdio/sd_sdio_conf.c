@@ -4,7 +4,7 @@
 #include "pro_conf.h"
 #include "tim.h"
 
-u8 conf_flag = 0;
+uint8_t conf_flag = 0;
 
 static void sdio_nvic_configuration(void)
 {

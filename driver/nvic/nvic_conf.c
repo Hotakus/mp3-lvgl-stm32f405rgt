@@ -1,7 +1,7 @@
 #include "nvic_conf.h"
 #include "pro_conf.h"
 
-void nvic_conf( uint8_t IRQx, u8 pre_prio, u8 sub_prio, FunctionalState stat ) {
+void nvic_conf( uint8_t IRQx, uint8_t pre_prio, uint8_t sub_prio, FunctionalState stat ) {
     
     static NVIC_InitTypeDef nvic_s;
     

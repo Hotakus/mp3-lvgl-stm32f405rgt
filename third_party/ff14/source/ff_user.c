@@ -32,7 +32,7 @@ char pathBuf[512] = {0};
 FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt ) {
     
     static FILINFO fno;
-    static u8 root_flag = 0;
+    static uint8_t root_flag = 0;
     FRESULT fres = FR_OK;
     DIR dir;
     u16 tail = 0;
@@ -107,7 +107,7 @@ FRESULT show_element_info( TCHAR *path )
 #define TEST_DEV_NUM    5
 FATFS test_fs[TEST_DEV_NUM];
 FRESULT test_fr[TEST_DEV_NUM];
-u8 ws[FF_MAX_SS] = {0};
+uint8_t ws[FF_MAX_SS] = {0};
 void fatfs_test( char *dev )
 {
     char buf[10] = {0};
@@ -119,7 +119,7 @@ void fatfs_test( char *dev )
     if ( test_fr[0] != FR_OK ) {
         DEBUG_PRINT( "test dev mounted error. (%d)\n\r", test_fr[0] );
         DEBUG_PRINT( "you want to do mkfs ? ( y/n )\n\r" );
-        u8 input = 0;
+        uint8_t input = 0;
         fflush(stdout);
         fflush(stdin);
         input = getchar();
@@ -177,7 +177,7 @@ const char * get_file_name(const char * path)
     if ( path == NULL ) 
         return NULL;
     
-    u8 len = strlen(path);
+    uint8_t len = strlen(path);
     const char *pep = path+len-1;   // path end pointer
 
     if ( *pep == '/' || *pep == ':' )

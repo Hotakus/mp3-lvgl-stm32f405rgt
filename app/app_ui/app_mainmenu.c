@@ -10,6 +10,13 @@
  ************************************************/
 #include "app_mainmenu.h"
 
+#include "app_music.h"
+#include "app_calendar.h"
+#include "app_folder.h"
+#include "app_calculator.h"
+#include "app_env.h"
+#include "app_setting.h"
+
 /**********************
  *  DEFINE
  **********************/
@@ -17,8 +24,8 @@
 #define ICONS_ROW       2
 #define ICONS_COL       3
 
-#define ICONS_W  70
-#define ICONS_H  70
+#define ICONS_W         70
+#define ICONS_H         70
 
 #define ICONS_MARGIN_X  20
 #define ICONS_MARGIN_Y  30
@@ -53,18 +60,20 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
         {
             .en_name  = "music",       
             .cn_name  = "音乐",
-            .rel_path = "S:/mp3_icons/music_icon_rel.bin",
-            .pr_path  = "S:/mp3_icons/music_icon_pr.bin" ,
+            .rel_path = "S:/icons/mainmenu/music_icon_rel.bin",
+            .pr_path  = "S:/icons/mainmenu/music_icon_pr.bin" ,
         },
         {
             .en_name  = "calendar",
             .cn_name  = "日历",
-            .rel_path = "S:/mp3_icons/calendar_icon_rel.bin",
-            .pr_path  = "S:/mp3_icons/calendar_icon_pr.bin" ,
+            .rel_path = "S:/icons/mainmenu/calendar_icon_rel.bin",
+            .pr_path  = "S:/icons/mainmenu/calendar_icon_pr.bin" ,
         },
         {
-            .rel_path = NULL,
-            .pr_path  = NULL,
+            .en_name  = "folder",
+            .cn_name  = "文件夹",
+            .rel_path = "S:/icons/mainmenu/folder_icon_rel.bin",
+            .pr_path  = "S:/icons/mainmenu/folder_icon_pr.bin" ,
         },
     },
     /* row 2 */
@@ -85,14 +94,11 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
 
 };
 
-static lv_obj_t * icons_container = NULL;           // icons顶层容器
-
-static app_ui_managed_t *aums = NULL;
+static lv_obj_t * obj_container = NULL;           // icons顶层容器
 
  /**********************
  *  FUNCTIONS
  **********************/
-
 /************************************************
  * @brief 事件句柄
  * 
@@ -105,15 +111,28 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
     switch (event) {
     case LV_EVENT_CLICKED:
         if ( STRCMP( obj->user_data, "music" ) == 0 ) {
-            DEBUG_PRINT( "create music\n" );
-            // ui = music_ui_get();
-            // app_ui_register( ui );
-            // app_create_ui( ui );
+            ui = music_ui_get();
+        } else if ( STRCMP( obj->user_data, "calendar" ) == 0 ) {
+            ui = calendar_ui_get();
+        } else if ( STRCMP( obj->user_data, "folder" ) == 0 ) {
+            ui = folder_ui_get();
+        } else if ( STRCMP( obj->user_data, "calculator" ) == 0 ) {
+            ui = calculator_ui_get();
+        } else if ( STRCMP( obj->user_data, "evn" ) == 0 ) {
+            ui = env_ui_get();
+        } else if ( STRCMP( obj->user_data, "setting" ) == 0 ) {
+            ui = setting_ui_get();
         }
         break;
     default:
         break;
     }
+
+    if ( event == LV_EVENT_CLICKED && ui != NULL ) {
+        app_ui_register( ui );
+        app_create_ui( ui );
+    }
+    
 }
 
 /************************************************
@@ -121,19 +140,17 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void mainmenu_create(void)
 {
-    /* 获取层级管理块 */
-    aums = app_get_ui_layer_b();
 
     /* 创建mainmenu的icons的容器 */
-    icons_container = lv_cont_create( lv_scr_act(), NULL );
+    obj_container = lv_cont_create( lv_scr_act(), NULL );
     /* 计算容器的size */
-    lv_obj_set_size( icons_container, 
+    lv_obj_set_size( obj_container, 
         ICONS_COL*ICONS_W + ICONS_MARGIN_X*(ICONS_COL-1), 
         ICONS_ROW*ICONS_H + ICONS_MARGIN_Y*(ICONS_ROW-1) 
     );
-    lv_obj_set_pos( icons_container, 35, 40 );
-    lv_obj_set_style_local_bg_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-    lv_obj_set_style_local_border_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_pos( obj_container, 35, 40 );
+    lv_obj_set_style_local_bg_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_style_local_border_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
     
     for ( uint8_t row = 0; row < ICONS_ROW; row++ ) {
         for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
@@ -141,14 +158,14 @@ static void mainmenu_create(void)
             if( icons[row][col].rel_path == NULL || icons[row][col].pr_path == NULL )
                 continue;
             /* 创建imgbtn并自动对齐 */
-            icons[row][col].btn = lv_imgbtn_create( icons_container, NULL );
+            icons[row][col].btn = lv_imgbtn_create( obj_container, NULL );
             icons[row][col].btn->user_data = icons[row][col].en_name;
             lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_RELEASED, icons[row][col].rel_path );
             lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_PRESSED, icons[row][col].pr_path );
             lv_obj_set_pos( icons[row][col].btn, (ICONS_W+ICONS_MARGIN_X)*col, (ICONS_H+ICONS_MARGIN_Y)*row );
             lv_obj_set_event_cb( icons[row][col].btn, event_handler );
             /* 为每个icon创建标签 */
-            icons[row][col].label = lv_label_create( icons_container, NULL );
+            icons[row][col].label = lv_label_create( obj_container, NULL );
             lv_obj_set_style_local_text_font( 
                 icons[row][col].label, 
                 LV_LABEL_PART_MAIN, 
@@ -160,7 +177,6 @@ static void mainmenu_create(void)
             lv_obj_align(icons[row][col].label, icons[row][col].btn, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
         }
     }
-    
 }
 
 /************************************************
@@ -168,7 +184,18 @@ static void mainmenu_create(void)
  ************************************************/
 static void mainmenu_remove(void)
 {
-    lv_obj_del( icons_container );
+//    for ( uint8_t row = 0; row < ICONS_ROW; row++ ) {
+//        for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
+//            /* 找到合法成员 */
+//            if ( icons[row][col].btn != NULL ) {
+//                lv_obj_del( icons[row][col].btn );
+//                icons[row][col].btn->user_data = NULL;
+//            }
+//            if ( icons[row][col].label != NULL )
+//                lv_obj_del( icons[row][col].label );
+//        }
+//    }
+    lv_obj_del( obj_container );
 }
 
 app_ui_t *mainmenu_ui_get( void )
