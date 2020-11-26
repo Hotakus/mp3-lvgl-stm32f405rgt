@@ -133,7 +133,8 @@
                 "__vfp_status(x,y)=0"
             ],
             "intelliSenseMode": "${default}",
-            "cStandard": "c99"
+            "cStandard": "c99",
+            "compilerPath": "E:/software/MinGW/bin/gcc.exe"
         }
     ],
     "version": 4

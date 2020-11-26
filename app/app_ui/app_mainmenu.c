@@ -1,3 +1,13 @@
+/************************************************
+ * @file app_mainmenu.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-26
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "app_mainmenu.h"
 
 /**********************
@@ -73,33 +83,37 @@ static icon_t icons_path[ICONS_ROW][ICONS_COL] = {
 
 };
 
-static lv_obj_t * icons_container = NULL;
+static lv_obj_t * icons_container = NULL;           // icons顶层容器
 static lv_obj_t * icons_obj[ICONS_ROW][ICONS_COL];
 
  /**********************
  *  FUNCTIONS
  **********************/
+
 /************************************************
- * @brief 创建mainmenu
+ * @brief 事件句柄
+ * 
+ * @param obj       
+ * @param event 
  ************************************************/
 static void event_handler(lv_obj_t * obj, lv_event_t event)
 {
+    switch (event) {
+    case LV_EVENT_CLICKED:
+        DEBUG_PRINT( "btn : %s\n", obj->user_data );
+        break;
     
-    if(event == LV_EVENT_CLICKED) {
-        printf("Clicked\n");
-    } else if(event == LV_EVENT_VALUE_CHANGED) {
-        printf("Toggled\n");
+    default:
+        break;
     }
 }
 
+/************************************************
+ * @brief 创建mainmenu
+ ************************************************/
 static void mainmenu_create(void)
 {
 
-//    lv_obj_t * img = lv_img_create( lv_scr_act(), NULL );
-//    lv_img_set_src( img, "S:/earp.bin" );
-//    lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
-
-    
     icons_container = lv_cont_create( lv_scr_act(), NULL );
     /* 计算容器的size */
     lv_obj_set_size( icons_container, 
@@ -109,11 +123,17 @@ static void mainmenu_create(void)
     lv_obj_set_pos( icons_container, 35, 40 );
     lv_obj_set_style_local_bg_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
     lv_obj_set_style_local_border_opa( icons_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-    
+
     lv_obj_t * music_btn = lv_imgbtn_create( icons_container, NULL );
     lv_imgbtn_set_src( music_btn, LV_BTN_STATE_RELEASED, icons_path[0][0].rel_path );
     lv_imgbtn_set_src( music_btn, LV_BTN_STATE_PRESSED, icons_path[0][0].pr_path );
     lv_obj_align(music_btn, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+
+    // for ( uint8_t row = 0; col < ICONS_ROW; row++ ) {
+    //     for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
+
+    //     }
+    // }
     
 }
 

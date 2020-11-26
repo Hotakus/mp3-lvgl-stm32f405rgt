@@ -50,7 +50,7 @@ static lv_obj_t * battery_icon = NULL;          // battery
 
 /* 用户配置变量 */
 static uint8_t battery_per_sw = 0;      // 电量百分比显示开关, 默认关闭
-static uint8_t attach_info_sw = 1;      // 状态栏附属信息开关, 默认开启
+static uint8_t attach_info_sw = 0;      // 状态栏附属信息开关, 默认开启
 static uint8_t date_info_sw   = 1;      // 日期信息开关, 默认开启
 
  /**********************
@@ -252,6 +252,7 @@ void time_info_create( void )
         LV_STATE_DEFAULT, 
         &lv_font_montserrat_14 
     );
+    lv_obj_set_style_local_text_color( time_bar, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE );
     status_bar_time_update();
 }
 void time_info_delete( void )
