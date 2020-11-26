@@ -225,6 +225,8 @@ void app_create_example(void)
  ************************************************/
 ui_register_stat app_ui_register( app_ui_t *ui )
 {
+    if ( ui == NULL )
+        return APP_UI_REGISTER_ERR;
     // 如果已注册ui数量大于等于APP_UI_NUM则返回已满状态
     if ( aums.reg_ui_num >= APP_UI_NUM )
         return APP_UI_REGISTER_UI_FULL;
@@ -248,6 +250,8 @@ ui_register_stat app_ui_register( app_ui_t *ui )
  ************************************************/
 ui_register_stat app_ui_unregister( app_ui_t *ui )
 {
+    if ( ui == NULL )
+        return APP_UI_UNREGISTER_ERR;
     for ( u8 i = 0; i < APP_UI_NUM; i++ ) {
         if ( aums.app_ui_s[i] != ui )
             continue;

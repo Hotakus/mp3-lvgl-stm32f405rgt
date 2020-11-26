@@ -18,7 +18,7 @@
 #define APP_UI_NUM      50      // app 的最大UI数量
 #define APP_UI_LAYER    5       // app 的最大UI层级(深度)
 
-typedef struct {
+typedef struct icon_t{
     const char *en_name;    // icon英文名
     const char *cn_name;    // icon中文名
     const char *rel_path;   // 释放状态的icon
@@ -30,19 +30,19 @@ typedef struct {
 /* typedef */
 /* ui控制句柄 */
 /* 每个不同的ui都有自己的ui控制句柄 */
-typedef struct {
+typedef struct app_ui_ctl_handler{
     void (*create) (void);
     void (*remove) (void);
 } app_ui_ctl_handler;
 
 /* ui 属性结构体 */
-typedef struct {
+typedef struct app_ui_t{
     char *ui_name;
     app_ui_ctl_handler *ctl_h;
 } app_ui_t;
 
 /* UI管理块 */
-typedef struct {
+typedef struct app_ui_managed_t{
     uint8_t     reg_ui_num;                  // 已注册ui数量
     uint8_t     cur_ui_layer;                // 当前显示的ui层级
     uint8_t     next_ui_layer;               // 下一个显示的ui层级

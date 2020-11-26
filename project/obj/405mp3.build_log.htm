@@ -29,10 +29,20 @@ Project File Date:  11/26/2020
 Build target 'f405mp3'
 compiling cmd.c...
 compiling app_mainmenu.c...
-linking...
-Program Size: Code=145360 RO-data=108272 RW-data=5816 ZI-data=82316  
-FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 0 Warning(s).
+app\app_ui\app_mainmenu.c(109): warning:  #223-D: function "music_ui_get" declared implicitly
+              ui = music_ui_get();
+app\app_ui\app_mainmenu.c(109): error:  #513: a value of type "int" cannot be assigned to an entity of type "app_ui_t *"
+              ui = music_ui_get();
+app\app_ui\app_mainmenu.c(90): warning:  #550-D: variable "aums"  was set but never used
+  static app_ui_managed_t *aums = NULL;
+app\app_ui\app_mainmenu.c: 2 warnings, 1 error
+compiling app_ui.c...
+app\app_ui.c(354): warning:  #940-D: missing return statement at end of non-void function "app_find_ui" 
+  }
+app\app_ui.c(17): warning:  #177-D: function "app_not_ui_handler"  was declared but never referenced
+   static void app_not_ui_handler(void);          // ???ui??????????????????handler
+app\app_ui.c: 2 warnings, 0 errors
+".\project\obj\405mp3.axf" - 1 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -45,7 +55,8 @@ Package Vendor: Keil
   E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Target not created.
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

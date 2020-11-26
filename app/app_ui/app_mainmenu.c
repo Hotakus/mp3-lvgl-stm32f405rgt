@@ -87,6 +87,8 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
 
 static lv_obj_t * icons_container = NULL;           // icons顶层容器
 
+static app_ui_managed_t *aums = NULL;
+
  /**********************
  *  FUNCTIONS
  **********************/
@@ -99,11 +101,16 @@ static lv_obj_t * icons_container = NULL;           // icons顶层容器
  ************************************************/
 static void event_handler(lv_obj_t * obj, lv_event_t event)
 {
+    app_ui_t * ui = NULL;
     switch (event) {
     case LV_EVENT_CLICKED:
-        DEBUG_PRINT( "clicked btn : %s\n", obj->user_data );
+        if ( STRCMP( obj->user_data, "music" ) == 0 ) {
+            DEBUG_PRINT( "create music\n" );
+            // ui = music_ui_get();
+            // app_ui_register( ui );
+            // app_create_ui( ui );
+        }
         break;
-    
     default:
         break;
     }
@@ -114,6 +121,9 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void mainmenu_create(void)
 {
+    /* 获取层级管理块 */
+    aums = app_get_ui_layer_b();
+
     /* 创建mainmenu的icons的容器 */
     icons_container = lv_cont_create( lv_scr_act(), NULL );
     /* 计算容器的size */
