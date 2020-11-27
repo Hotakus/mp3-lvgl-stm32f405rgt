@@ -184,17 +184,7 @@ static void mainmenu_create(void)
  ************************************************/
 static void mainmenu_remove(void)
 {
-//    for ( uint8_t row = 0; row < ICONS_ROW; row++ ) {
-//        for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
-//            /* 找到合法成员 */
-//            if ( icons[row][col].btn != NULL ) {
-//                lv_obj_del( icons[row][col].btn );
-//                icons[row][col].btn->user_data = NULL;
-//            }
-//            if ( icons[row][col].label != NULL )
-//                lv_obj_del( icons[row][col].label );
-//        }
-//    }
+
     lv_obj_del( obj_container );
 }
 

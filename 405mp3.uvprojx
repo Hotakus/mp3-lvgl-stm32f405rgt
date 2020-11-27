@@ -2278,6 +2278,16 @@
               <FileType>1</FileType>
               <FilePath>.\third_party\lvgl\lvgl\font\mp3_bg.c</FilePath>
             </File>
+            <File>
+              <FileName>ariblk_36_num.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\ariblk_36_num.c</FilePath>
+            </File>
+            <File>
+              <FileName>ariblk_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\lvgl\lvgl\font\ariblk_16.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

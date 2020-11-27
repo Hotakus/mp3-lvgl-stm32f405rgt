@@ -9,6 +9,7 @@
  * 
  ************************************************/
 #include "app_calendar.h"
+#include "rtc.h"
 
 /**********************
  *  DEFINE
@@ -21,6 +22,8 @@
  **********************/
 static void calendar_create(void);
 static void calendar_remove(void);
+
+static void set_highlight_day( void );
 
  /**********************
  *  STATIC VARIABLE
@@ -37,7 +40,10 @@ static app_ui_t app_calendar = {
 
 
 static lv_obj_t * obj_container = NULL;             // 顶层容器
+
 static lv_obj_t * calendar = NULL;                  // 日历
+static lv_calendar_date_t today;
+static RTC_INFO rtc_info;
 
 static lv_obj_t * return_btn = NULL;                // 返回按键
 static lv_obj_t * return_label = NULL;              
@@ -59,7 +65,17 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
     app_ui_t * ui = NULL;
     switch (event) {
     case LV_EVENT_CLICKED:
-
+        if ( obj == festive_info ) {
+            DEBUG_PRINT( "festive_info\n" );
+        } else if ( obj == return_btn ) {
+            DEBUG_PRINT( "return\n" );
+            app_ui_return();
+        }
+        break;
+    case LV_EVENT_LONG_PRESSED:
+        if ( obj == calendar ) {
+            DEBUG_PRINT( "set calendar?\n" );
+        }
         break;
     default:
         break;
@@ -72,7 +88,6 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void calendar_create(void)
 {
-
     obj_container = lv_cont_create( lv_scr_act(), NULL );
     lv_obj_set_size( obj_container, 320, 220 );
     lv_obj_set_pos( obj_container, 0, 20 );
@@ -93,10 +108,19 @@ static void calendar_create(void)
     return_label = lv_label_create( return_btn, NULL );
     lv_label_set_text( return_label, "return."LV_SYMBOL_NEW_LINE ); 
 
+
     calendar = lv_calendar_create( obj_container, NULL );
     lv_obj_set_size( calendar, 220, 220 );
     lv_obj_set_pos( calendar, 0, 0 );
+    
+    rtc_obtain_time( &rtc_info );
+    today.year  = rtc_info.rtcDateStruct.RTC_Year + 2000;
+    today.month = rtc_info.rtcDateStruct.RTC_Month;
+    today.day   = rtc_info.rtcDateStruct.RTC_Date;
+    lv_calendar_set_today_date( calendar, &today );
+    lv_calendar_set_showed_date( calendar, &today );
 
+    set_highlight_day();
 
     lv_obj_set_event_cb( calendar, event_handler );
 }
@@ -114,3 +138,7 @@ app_ui_t *calendar_ui_get( void )
     return &app_calendar;
 }
 
+static void set_highlight_day( void )
+{
+
+}

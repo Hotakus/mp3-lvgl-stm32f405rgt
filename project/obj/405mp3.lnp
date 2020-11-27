@@ -217,6 +217,8 @@
 ".\project\obj\ariblk_14.o"
 ".\project\obj\msyh_bd_12_cn.o"
 ".\project\obj\mp3_bg.o"
+".\project\obj\ariblk_36_num.o"
+".\project\obj\ariblk_16.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

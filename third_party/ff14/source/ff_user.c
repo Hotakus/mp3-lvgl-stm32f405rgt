@@ -14,16 +14,19 @@ FRESULT exf_getfree( TCHAR *path, u32 *total, u32 *free ) {
     
     //得到磁盘信息及空闲簇数量
     res = f_getfree((const TCHAR*)path, &fre_clust, &fs1);
-    if(res==0) {
+    if( res == FR_OK) {
         tot_sect = (fs1->n_fatent-2)*fs1->csize;    //得到总扇区数
         fre_sect = fre_clust*fs1->csize;            //得到空闲扇区数
-#if FF_MAX_SS!=512                                  //扇区大小不是512字节,则转换为512字节
+#if FF_MAX_SS != 512                                //扇区大小不是512字节,则转换为512字节
         tot_sect *= fs1->ssize>>9;
         fre_sect *= fs1->ssize>>9;
 #endif
         *total = tot_sect>>1;    //单位为KB
         *free  = fre_sect>>1;    //单位为KB
-     }
+    } else {
+        *total = 0;
+        *free  = 0;
+    }
     return res;
 }
 

@@ -399,6 +399,8 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  */
 #define LV_FONT_CUSTOM_DECLARE  LV_FONT_DECLARE( ariblk_12 )            \
                                 LV_FONT_DECLARE( ariblk_14 )            \
+                                LV_FONT_DECLARE( ariblk_16 )            \
+                                LV_FONT_DECLARE( ariblk_36_num )        \
                                 LV_FONT_DECLARE(MSYH_BD_12_CN)
 
 /* Enable it if you have fonts with a lot of characters.

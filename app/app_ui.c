@@ -14,7 +14,6 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
- static void app_not_ui_handler(void);          // 无ui时跳转到这个handler
 
 /**********************
  *  STATIC VARIABLE
@@ -33,22 +32,28 @@ static lv_obj_t * mp3_backgroud = NULL;
 
 
 #if USE_LV_EX == 1
+void lv_ex_bar_1(void)
+{
+    lv_obj_t * bar1 = lv_bar_create(lv_scr_act(), NULL);
+    lv_obj_set_size(bar1, 128, 20);
+    lv_bar_set_range( bar1, 0, 10000 );
+    lv_bar_set_anim_time( bar1, 500 );
+    lv_obj_align(bar1, NULL, LV_ALIGN_CENTER, 0, 0);
+    lv_bar_set_value(bar1, 3215, LV_ANIM_ON);
+
+    lv_obj_set_style_local_bg_color( bar1, LV_BAR_PART_INDIC, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x88, 0xab, 0xba ) );
+    lv_obj_set_style_local_radius( bar1, LV_BAR_PART_BG, LV_STATE_DEFAULT, 7 );
+    lv_obj_set_style_local_radius( bar1, LV_BAR_PART_INDIC, LV_STATE_DEFAULT, 7 );
+}
 
 void app_create_example(void)
 {
-//    lv_ex_label_1();
-//    lv_ex_spinner_1();
-    
-//    lv_ex_btn_1();
 
-    LV_IMG_DECLARE( music_icon_rel );
-    LV_IMG_DECLARE( music_icon_pr );
-    LV_IMG_DECLARE( Calendar_icon_rel );
-    LV_IMG_DECLARE( Calendar_icon_pr );
-    LV_IMG_DECLARE( mp3_demo );
+    // lv_obj_t * label = lv_label_create( lv_scr_act(), NULL );
+    // lv_label_set_text( label, "fetive.\nfestive2d\nfestivsafxe3" );
+    // lv_label_set_align( label, LV_LABEL_ALIGN_CENTER );
 
-
-    lv_ex_win_1();
+    lv_ex_bar_1();
 
 }
 #endif
@@ -191,5 +196,5 @@ app_ui_managed_t *app_get_ui_layer_b(void)
  ************************************************/
 app_ui_t *app_find_ui( const char *ui_name )
 {
-
+    return NULL;
 }

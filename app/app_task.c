@@ -19,6 +19,7 @@ static rt_thread_t u_threadx[APP_THREAD_NUM] = {RT_NULL};
 static struct rt_thread u_static_threadx[APP_THREAD_NUM];
 
 /* status bar update线程 */
+#if USE_LV_EX == 0
 #define STATUS_BAR_UPDATE_THREAD_NAME   "status_update"
 #define STATUS_BAR_UPDATE_STACK_SIZE    1024
 #define STATUS_BAR_UPDATE_PRIOROTY      10
@@ -47,6 +48,7 @@ static void battert_check_thread( void *param )
         rt_thread_mdelay( (60/BATTERY_CALCULATE_CNT) * RT_TICK_PER_SECOND );
     }
 }
+#endif
 
 /* led闪烁线程 */
 #define LED_THREAD_NAME         "led_blink"         // 线程名
@@ -210,7 +212,8 @@ int app_create_task( void )
         rt_thread_startup (sd_detect_th_s);
     else
         rt_kprintf( "create thread \"%s\" error. (%d)\n", SD_DETECT_THREAD_NAME, err );
-    
+
+#if USE_LV_EX == 0
     /* app thread */
     /* 创建status bar update线程 */
     *status_bar_update_th = rt_thread_create( 
@@ -239,6 +242,7 @@ int app_create_task( void )
         rt_thread_startup (*battert_check_th);
     else
         return -1;
-
+#endif
+    
     return 0;
 }
