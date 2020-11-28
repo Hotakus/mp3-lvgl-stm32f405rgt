@@ -74,7 +74,7 @@ extern "C" {
 /* app */
 #include "app_main.h"
 #if USER_USE_LVGL ==    1u
-#define USE_LV_EX       1u
+#define USE_LV_EX       0u
 #endif
 #endif
 
@@ -96,6 +96,7 @@ extern "C" {
 #define RT_MALLOC       rt_malloc
 #define RT_FREE         rt_free
 #define RT_MEMSET       rt_memset
+#define RT_MEMCMP       rt_memcmp
 
 #define DEBUG_PRINT     RT_PRINT
 #define DELAY           RT_DELAY
@@ -105,6 +106,7 @@ extern "C" {
 #define MALLOC          RT_MALLOC
 #define FREE            RT_FREE
 #define MEMSET          RT_MEMSET
+#define MEMCMP          RT_MEMCMP
 
 #elif USER_USE_RTTHREAD == 0
 #define SECTION(x) __attribute__((section(x)))

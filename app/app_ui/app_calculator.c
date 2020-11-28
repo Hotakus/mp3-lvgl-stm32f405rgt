@@ -36,7 +36,7 @@ static app_ui_t app_calculator = {
 };
 
 
-static lv_obj_t * obj_container = NULL;           // icons顶层容器
+static lv_obj_t * obj_container = NULL;           // 顶层容器
 
  /**********************
  *  FUNCTIONS
@@ -65,8 +65,8 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void calculator_create(void)
 {
-
-
+    // LV_BTNMATRIX_PART_BTN
+    
 }
 
 /************************************************

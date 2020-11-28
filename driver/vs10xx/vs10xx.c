@@ -222,7 +222,13 @@ void vs10xx_play_mp3( const char *mp3_file_path )
     f_close( &mp3_fil );
 }
 
-void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path )
+/************************************************
+ * @brief 从mp3文件中提取专辑图片
+ * 
+ * @param mp3_file_path 
+ * @param out_path 
+ ************************************************/
+void extract_mp3_pic( const char *mp3_file_path, const char *out_path )
 {
     FIL mp3_fil;
     FRESULT res = f_open( &mp3_fil, mp3_file_path, FA_OPEN_EXISTING | FA_READ );
@@ -231,20 +237,20 @@ void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path )
         return;
     }
 
-    uint32_t i = 0;
     uint32_t jpeg_spos = 0;     // JPEG头 偏移
     uint32_t jpeg_epos = 0;     // JPEG尾 偏移
+    uint8_t  pattern_buf[2][2] = {
+        { 0xFF, 0xD8 },     // JPEG头
+        { 0xFF, 0xD9 }      // JPEG尾
+    };
     uint8_t  fbuf[2] = {0};
 
     /* 找到JPEG文件头 */
     while (1) {
         f_lseek( &mp3_fil, jpeg_spos );
         f_read( &mp3_fil, fbuf, 2, NULL );
-        if ( fbuf[0] == 0xFF ) {
-            if ( fbuf[1] == 0xD8 ) {
-                break;
-            }
-        }
+        if ( MEMCMP( pattern_buf[0], fbuf, 2 ) == 0 )
+            break;
         jpeg_spos += 2;
     }
 
@@ -254,12 +260,8 @@ void extract_mp3_pic_from( const char *mp3_file_path, const char *out_path )
     while (1) {
         f_lseek( &mp3_fil, jpeg_epos );
         f_read( &mp3_fil, fbuf, 2, NULL );
-        if ( fbuf[0] == 0xFF ) {
-            if ( fbuf[1] == 0xD9 ) {
-                jpeg_epos += 2;
-                break;
-            }
-        }
+        if ( MEMCMP( pattern_buf[1], fbuf, 2 ) == 0 )
+            break;
         jpeg_epos += 2;
     }
     f_close( &mp3_fil );
