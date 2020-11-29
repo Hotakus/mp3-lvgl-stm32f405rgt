@@ -50,7 +50,6 @@
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\lib",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\lib\\src",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\rt-thread-sorted\\src",
-                "C:\\Users\\SU\\Desktop",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\font"
             ],
             "defines": [

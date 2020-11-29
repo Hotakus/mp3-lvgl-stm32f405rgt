@@ -212,7 +212,6 @@
 ".\project\obj\lv_port_disp.o"
 ".\project\obj\lv_port_fs.o"
 ".\project\obj\lv_port_indev.o"
-".\project\obj\status_bar_bg.o"
 ".\project\obj\ariblk_12.o"
 ".\project\obj\ariblk_14.o"
 ".\project\obj\msyh_bd_12_cn.o"

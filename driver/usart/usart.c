@@ -36,13 +36,6 @@ void usart_conf( USART_TypeDef* USARTx, u32 baud_rate ) {
     nvic_conf( USART1_IRQn, 0, 0, ENABLE );
     USART_ITConfig( USARTx, USART_IT_RXNE, ENABLE );
     USART_Cmd( USARTx, ENABLE );
-    
-    /* USART TX DMA */
-    RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA2, ENABLE ); 
-    USART_DMACmd( USARTx, USART_DMAReq_Tx, ENABLE );
-    DMA_ITConfig( DMA2_Stream7, DMA_IT_TC, ENABLE );
-    nvic_conf( DMA2_Stream7_IRQn, 1, 1, ENABLE );
-
 }
 
 void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate )
@@ -89,10 +82,4 @@ GETCHAR_PROTOTYPE
 {
     return my_getc();
 }
-
-void usart_dma_tx( uint8_t *buf ) {
-    dma_conf( 0, (u32)&(USART1->DR), DMA_Channel_4, DMA_DIR_MemoryToPeripheral, DMA_Priority_VeryHigh );
-    dma_on( 0, DMA2_Stream7, buf, 0 );
-}
-
 

@@ -2248,11 +2248,6 @@
               <FileType>5</FileType>
               <FilePath>.\third_party\lvgl\lvgl\lvgl.h</FilePath>
             </File>
-            <File>
-              <FileName>status_bar_bg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>C:\Users\SU\Desktop\status_bar_bg.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

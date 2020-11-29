@@ -1,69 +1,104 @@
 #include "dma_conf.h"
+#include "pro_conf.h"
 #include <string.h>
 
-DMA_InitTypeDef dma_s[2];
 
-void dma_conf( uint8_t dma_num, u32 periph_addr, u32 ch, u32 dir, u32 prio ) {
-    
-    dma_s[dma_num].DMA_Channel               = ch;
-    dma_s[dma_num].DMA_DIR                   = dir;
-    dma_s[dma_num].DMA_Priority              = prio;
-    dma_s[dma_num].DMA_PeripheralBaseAddr    = periph_addr;
-    dma_s[dma_num].DMA_Mode                  = DMA_Mode_Normal;
-    dma_s[dma_num].DMA_PeripheralBurst       = DMA_PeripheralBurst_Single;
-    dma_s[dma_num].DMA_PeripheralInc         = DMA_PeripheralInc_Disable;
-    dma_s[dma_num].DMA_PeripheralDataSize    = DMA_PeripheralDataSize_Byte; 
-    dma_s[dma_num].DMA_MemoryDataSize        = DMA_MemoryDataSize_Byte;
-    dma_s[dma_num].DMA_MemoryBurst           = DMA_MemoryBurst_Single;
-    dma_s[dma_num].DMA_MemoryInc             = DMA_MemoryInc_Enable;  
-    dma_s[dma_num].DMA_FIFOMode              = DMA_FIFOMode_Disable;
-    dma_s[dma_num].DMA_FIFOThreshold         = DMA_FIFOThreshold_Full;
+static void dma_com_conf(void);
+
+
+static DMA_InitTypeDef dma_s;
+
+/************************************************
+ * @brief DMA 通用配置
+ ************************************************/
+static void dma_com_conf( void )
+{
+    dma_s.DMA_Mode                  = DMA_Mode_Normal;
+    dma_s.DMA_FIFOMode              = DMA_FIFOMode_Disable;
+    dma_s.DMA_FIFOThreshold         = DMA_FIFOThreshold_Full;
+    dma_s.DMA_MemoryBurst           = DMA_MemoryBurst_Single;
+    dma_s.DMA_PeripheralBurst       = DMA_PeripheralBurst_Single;
+    dma_s.DMA_MemoryDataSize        = DMA_MemoryDataSize_Byte;
+    dma_s.DMA_PeripheralDataSize    = DMA_PeripheralDataSize_Byte;
 }
 
 
-void dma_on( uint8_t dma_num, DMA_Stream_TypeDef *dma_stream, uint8_t* mem_buf, u32 bl ) {
-    u32 bl_t = 0;
-    if ( bl == 0 ) {
-        bl_t = strlen( (const char*)mem_buf );
-    }
-    
-    while( DMA_GetCmdStatus( dma_stream ) == ENABLE );
-    
-    dma_s[dma_num].DMA_Memory0BaseAddr       = (u32)mem_buf;
-    dma_s[dma_num].DMA_BufferSize            = (bl==0)?(bl_t):bl;
-    DMA_Init( dma_stream, &dma_s[dma_num] );
+/************************************************
+ * @brief 启动DMA memory to memory 传输
+ * 
+ * @param DMAx 
+ * @param src       源地址
+ * @param dst       目标地址
+ * @param stream    DMA 流
+ * @param size      DMA 传输size
+ * @param ch        DMA 传输通道
+ * @param prio      DMA 传输优先级
+ ************************************************/
+void dma_mem2mem ( 
+    DMA_TypeDef *DMAx, 
+    DMA_Stream_TypeDef *stream, 
+    uint32_t ch, 
+    uint32_t prio,
+    uint8_t *src, 
+    uint8_t *dst, 
+    uint32_t size
+)
+{
+    /* 等待当前DMA流传输完成 */
+    while (DMA_GetCmdStatus( stream ) == ENABLE);
 
-    DMA_Cmd( dma_stream, ENABLE );
+    if ( DMAx == DMA1 )
+        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA1, ENABLE );
+    else if ( DMAx == DMA2 )
+        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA2, ENABLE );
+
+    DMA_DeInit( stream );
+
+    dma_com_conf();
+
+    dma_s.DMA_Channel               = ch;
+    dma_s.DMA_Priority              = prio;
+    
+
+    dma_s.DMA_BufferSize            = size;
+    dma_s.DMA_Memory0BaseAddr       = (uint32_t)src;
+    dma_s.DMA_PeripheralBaseAddr    = (uint32_t)dst;
+
+    dma_s.DMA_DIR                   = DMA_DIR_MemoryToMemory;
+    dma_s.DMA_MemoryInc             = DMA_MemoryInc_Enable;
+    dma_s.DMA_PeripheralInc         = DMA_PeripheralInc_Enable;
+
+    DMA_Init( stream, &dma_s );
+    DMA_Cmd( stream, ENABLE );
 }
 
-void dma_off( DMA_Stream_TypeDef *dma_stream ) {
-    DMA_Cmd( dma_stream, DISABLE );
-    DMA_DeInit( dma_stream );
+
+void dma_test(void)
+{
+    uint8_t buf_src[512];
+    uint8_t buf_dst[512];
+
+    RCC_AHB2PeriphClockCmd( RCC_AHB2Periph_RNG, ENABLE );
+    RNG_Cmd( ENABLE );
+
+    for ( uint16_t i = 0; i < 512; i++ ) 
+        buf_src[i] = RNG_GetRandomNumber()%0xFF;
+
+    MEMSET( buf_dst, 0, sizeof(buf_dst) );
+
+    dma_mem2mem(
+        DMA1, DMA1_Stream0, DMA_Channel_1, 
+        DMA_Priority_VeryHigh,
+        buf_src, buf_dst, 512
+    );
+
+    while( DMA_GetCurrDataCounter( DMA1_Stream1 ) );
+    DMA_Cmd( DMA1_Stream1, DISABLE );
+
+    if ( MEMCMP( buf_src, buf_src, 512 ) == 0 ) {
+        DEBUG_PRINT( "DMA transmited ok\n" );
+    } else
+        DEBUG_PRINT( "DMA transmited error\n" );
+
 }
-
-
-void spi1_dma_trans( uint8_t *pSendBuf, uint8_t *pRecBuf, u32 bl ) {
-
-    DMA_DeInit( DMA2_Stream3 );
-    DMA_DeInit( DMA2_Stream0 );
-    
-    dma_conf( 0, (u32)&(SPI1->DR), DMA_Channel_3, DMA_DIR_MemoryToPeripheral, DMA_Priority_VeryHigh );
-    dma_conf( 1, (u32)&(SPI1->DR), DMA_Channel_3, DMA_DIR_PeripheralToMemory, DMA_Priority_VeryHigh );
-    
-    dma_s[0].DMA_Memory0BaseAddr       = (u32)pSendBuf;
-    dma_s[0].DMA_BufferSize            = bl;
-    
-    dma_s[1].DMA_Memory0BaseAddr       = (u32)pRecBuf;
-    dma_s[1].DMA_BufferSize            = bl;
-    
-    DMA_Init( DMA2_Stream3, &dma_s[0] );
-    DMA_Init( DMA2_Stream0, &dma_s[1] );
-    
-    DMA_Cmd( DMA2_Stream3, ENABLE );
-    DMA_Cmd( DMA2_Stream0, ENABLE );
-    
-    while( DMA_GetCmdStatus( DMA2_Stream3 ) == ENABLE );
-    while( DMA_GetCmdStatus( DMA2_Stream0 ) == ENABLE );
-    
-}
-
+MSH_CMD_EXPORT(dma_test, dma_test);

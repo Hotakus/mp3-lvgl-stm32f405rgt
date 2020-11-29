@@ -12,11 +12,12 @@ extern "C" {
 /* definations */
 
 /* functions */
-void dma_conf( uint8_t dma_num, u32 periph_addr, u32 ch, u32 dir, u32 prio );
-void dma_on( uint8_t dma_num, DMA_Stream_TypeDef *dma_stream, uint8_t* mem_buf, u32 bl );
+
+void dma_mem2mem( DMA_TypeDef *DMAx, DMA_Stream_TypeDef *stream, uint32_t ch, uint32_t prio,uint8_t *src, uint8_t *dst, uint32_t size );
+void dma_on( uint8_t dma_num, DMA_Stream_TypeDef *dma_stream, uint8_t* mem_buf, uint32_t bl );
 void dma_off( DMA_Stream_TypeDef *dma_stream );
 
-void spi1_dma_trans( uint8_t *pSendBuf, uint8_t *pRecBuf, u32 bl );
+void dma_test(void);
 
 #ifdef __cplusplus
 }
