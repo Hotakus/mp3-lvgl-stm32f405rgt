@@ -163,7 +163,6 @@ void app_ui_init(void)
     LV_IMG_DECLARE(mp3_bg);
     mp3_backgroud = lv_img_create( lv_scr_act(), NULL );
     lv_img_set_src( mp3_backgroud, mp3_sd_bg_path );
-    //lv_img_set_src( mp3_backgroud, &mp3_bg );
     lv_obj_align(mp3_backgroud, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
     
     /* 创建状态栏 */

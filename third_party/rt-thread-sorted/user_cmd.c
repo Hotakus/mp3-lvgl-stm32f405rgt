@@ -228,6 +228,7 @@ void rtt_cp( int argc, char **args )
     if ( file_trans( args[1] , args[2] ) != TRANS_STAT_OK )
         rt_kprintf( "trans error.\n" );
     rt_kprintf( "trans end.\n" );
+    
 }
 MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
@@ -344,3 +345,33 @@ static int clear( int argc, char **args )
     return 0;
 }
 MSH_CMD_EXPORT(clear,clear the terminal screen);
+
+void dma_test(void)
+{
+    uint8_t buf_src[512];
+    uint8_t buf_dst[512];
+
+    RCC_AHB2PeriphClockCmd( RCC_AHB2Periph_RNG, ENABLE );
+    RNG_Cmd( ENABLE );
+
+    for ( uint16_t i = 0; i < 512; i++ ) 
+        buf_src[i] = RNG_GetRandomNumber()%0xFF;
+
+    MEMSET( buf_dst, 0, sizeof(buf_dst) );
+
+    dma_mem2mem(
+        DMA1, DMA1_Stream0, DMA_Channel_1, 
+        DMA_Priority_VeryHigh,
+        buf_src, buf_dst, 512
+    );
+
+    while( DMA_GetCurrDataCounter( DMA1_Stream1 ) );
+    DMA_Cmd( DMA1_Stream1, DISABLE );
+
+    if ( MEMCMP( buf_src, buf_src, 512 ) == 0 ) {
+        DEBUG_PRINT( "DMA transmited ok\n" );
+    } else
+        DEBUG_PRINT( "DMA transmited error\n" );
+
+}
+MSH_CMD_EXPORT(dma_test, dma_test);

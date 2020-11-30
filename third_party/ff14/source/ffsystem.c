@@ -65,21 +65,14 @@ int ff_cre_syncobj (	/* 1:Function succeeded, 0:Could not create the sync object
 //	*sobj = acre_sem(&csem);
 //	return (int)(*sobj > 0);
 
-	/* uC/OS-III */
-#ifdef USER_USE_UCOS == 1
-    OS_ERR err;
-	OSMutexCreate( sobj, "thead-safe", &err );
-	return (int)(err == OS_ERR_NONE);
+#if USER_USE_RTTHREAD == 1
+    *sobj = rt_mutex_create( &vol, RT_IPC_FLAG_PRIO );
+    if ( sobj == RT_NULL )
+        return 0;
+    else 
+        return 1;
 #endif
-	
 
-	/* FreeRTOS */
-//	*sobj = xSemaphoreCreateMutex();
-//	return (int)(*sobj != NULL);
-
-	/* CMSIS-RTOS */
-//	*sobj = osMutexCreate(&Mutex[vol]);
-//	return (int)(*sobj != NULL);
 }
 
 
@@ -101,18 +94,14 @@ int ff_del_syncobj (	/* 1:Function succeeded, 0:Could not delete due to an error
 	/* uITRON */
 //	return (int)(del_sem(sobj) == E_OK);
 
-	/* uC/OS-III */
-#ifdef USER_USE_UCOS == 1
-	OS_ERR err;
-	OSMutexDel( &sobj, OS_OPT_DEL_ALWAYS, &err );
-	return (int)(err == OS_ERR_NONE);
+#if USER_USE_RTTHREAD == 1
+    rt_err_t err = rt_mutex_delete( sobj );
+    if ( err != RT_EOK )
+        return 0;
+    else 
+        return 1;
 #endif
-	/* FreeRTOS */
-//  vSemaphoreDelete(sobj);
-//	return 1;
 
-	/* CMSIS-RTOS */
-//	return (int)(osMutexDelete(sobj) == osOK);
 }
 
 
@@ -127,23 +116,21 @@ int ff_req_grant (	/* 1:Got a grant to access the volume, 0:Could not get a gran
 	FF_SYNC_t sobj	/* Sync object to wait */
 )
 {
-//	/* Win32 */
-//	return (int)(WaitForSingleObject(sobj, FF_FS_TIMEOUT) == WAIT_OBJECT_0);
-
-	/* uITRON */
-//	return (int)(wai_sem(sobj) == E_OK);
-
-	/* uC/OS-III */
-#ifdef USER_USE_UCOS == 1
-	OS_ERR err;
-	OSMutexPend( &sobj, FF_FS_TIMEOUT, OS_OPT_PEND_NON_BLOCKING, NULL, &err );
-	return (int)(err == OS_ERR_NONE);
-#endif
 	/* FreeRTOS */
 //	return (int)(xSemaphoreTake(sobj, FF_FS_TIMEOUT) == pdTRUE);
 
 	/* CMSIS-RTOS */
 //	return (int)(osMutexWait(sobj, FF_FS_TIMEOUT) == osOK);
+
+#if USER_USE_RTTHREAD == 1
+    rt_err_t err = rt_mutex_take( sobj, FF_FS_TIMEOUT );
+    if ( err != RT_EOK )
+        return 0;
+    else 
+        return 1;
+#endif
+    
+
 }
 
 
@@ -163,16 +150,11 @@ void ff_rel_grant (
 	/* uITRON */
 //	sig_sem(sobj);
 
-	/* uC/OS-II */
-#ifdef USER_USE_UCOS == 1
-    OS_ERR err;
-	OSMutexPost( &sobj, OS_OPT_POST_NO_SCHED, &err );
-#endif
-	/* FreeRTOS */
-//	xSemaphoreGive(sobj);
 
-	/* CMSIS-RTOS */
-//	osMutexRelease(sobj);
+#if USER_USE_RTTHREAD == 1
+    rt_mutex_release( sobj );
+#endif
+
 }
 
 #endif

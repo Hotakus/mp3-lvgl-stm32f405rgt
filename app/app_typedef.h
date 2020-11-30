@@ -42,6 +42,7 @@ typedef struct app_ui_t{
 } app_ui_t;
 
 /* UI管理块 */
+
 typedef struct app_ui_managed_t{
     uint8_t     reg_ui_num;                  // 已注册ui数量
     uint8_t     cur_ui_layer;                // 当前显示的ui层级

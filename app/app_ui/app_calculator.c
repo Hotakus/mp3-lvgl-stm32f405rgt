@@ -65,7 +65,13 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void calculator_create(void)
 {
-    // LV_BTNMATRIX_PART_BTN
+    obj_container = lv_cont_create( lv_scr_act(), NULL );
+    lv_obj_set_size( obj_container, 320, 220 );
+    lv_obj_set_pos( obj_container, 0, 20 );
+    lv_obj_set_style_local_radius( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 10 );
+    lv_obj_set_style_local_bg_color( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x90, 0x42, 0x42 ) );
+    lv_obj_set_style_local_border_width( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 2 );
+    lv_obj_set_style_local_border_color( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x4d, 0x16, 0x16 ) );
     
 }
 

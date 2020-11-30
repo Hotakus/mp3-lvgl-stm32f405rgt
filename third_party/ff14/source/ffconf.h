@@ -274,17 +274,13 @@
 
 
 /* #include <somertos.h>	// O/S definitions */
-#include "pro_conf.h"
-#if  (USER_USE_UCOS == 1) && (THREAD_SAFE_SW==1)
-#include    "ucos_inc.h"
+#include    "pro_conf.h"
+#if USER_USE_RTTHREAD == 1
+#include    <rtthread.h>
 #define     FF_FS_REENTRANT	    1
-#define     FF_SYNC_t		    OS_MUTEX
-#elif (THREAD_SAFE_SW==0)
-#define     FF_FS_REENTRANT	    0
-#define     FF_SYNC_t		    HANDLE
+#define     FF_SYNC_t		    rt_mutex_t
+#define     FF_FS_TIMEOUT	    0xFFFFUL
 #endif
-#define FF_FS_TIMEOUT	    0xFFFFUL
-
 /* The option FF_FS_REENTRANT switches the re-entrancy (thread safe) of the FatFs
 /  module itself. Note that regardless of this option, file access to different
 /  volume is always re-entrant and volume control functions, f_mount(), f_mkfs()

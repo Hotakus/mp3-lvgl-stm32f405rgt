@@ -72,33 +72,51 @@ void dma_mem2mem (
     DMA_Cmd( stream, ENABLE );
 }
 
-
-void dma_test(void)
+/************************************************
+ * @brief 启动DMA memory to periheral 传输
+ * 
+ * @param DMAx 
+ * @param stream 
+ * @param ch 
+ * @param prio 
+ * @param src 
+ * @param dst 
+ * @param size 
+ ************************************************/
+void dma_mem2periheral ( 
+    DMA_TypeDef *DMAx, 
+    DMA_Stream_TypeDef *stream, 
+    uint32_t ch, 
+    uint32_t prio,
+    uint8_t *src, 
+    uint8_t *dst, 
+    uint32_t size
+)
 {
-    uint8_t buf_src[512];
-    uint8_t buf_dst[512];
+    /* 等待当前DMA流传输完成 */
+    while (DMA_GetCmdStatus( stream ) == ENABLE);
 
-    RCC_AHB2PeriphClockCmd( RCC_AHB2Periph_RNG, ENABLE );
-    RNG_Cmd( ENABLE );
+    if ( DMAx == DMA1 )
+        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA1, ENABLE );
+    else if ( DMAx == DMA2 )
+        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_DMA2, ENABLE );
 
-    for ( uint16_t i = 0; i < 512; i++ ) 
-        buf_src[i] = RNG_GetRandomNumber()%0xFF;
+    DMA_DeInit( stream );
 
-    MEMSET( buf_dst, 0, sizeof(buf_dst) );
+    dma_com_conf();
 
-    dma_mem2mem(
-        DMA1, DMA1_Stream0, DMA_Channel_1, 
-        DMA_Priority_VeryHigh,
-        buf_src, buf_dst, 512
-    );
+    dma_s.DMA_Channel               = ch;
+    dma_s.DMA_Priority              = prio;
+    
 
-    while( DMA_GetCurrDataCounter( DMA1_Stream1 ) );
-    DMA_Cmd( DMA1_Stream1, DISABLE );
+    dma_s.DMA_BufferSize            = size;
+    dma_s.DMA_Memory0BaseAddr       = (uint32_t)src;
+    dma_s.DMA_PeripheralBaseAddr    = (uint32_t)dst;
 
-    if ( MEMCMP( buf_src, buf_src, 512 ) == 0 ) {
-        DEBUG_PRINT( "DMA transmited ok\n" );
-    } else
-        DEBUG_PRINT( "DMA transmited error\n" );
+    dma_s.DMA_DIR                   = DMA_DIR_MemoryToMemory;
+    dma_s.DMA_MemoryInc             = DMA_MemoryInc_Enable;
+    dma_s.DMA_PeripheralInc         = DMA_PeripheralInc_Enable;
 
+    DMA_Init( stream, &dma_s );
+    DMA_Cmd( stream, ENABLE );
 }
-MSH_CMD_EXPORT(dma_test, dma_test);
