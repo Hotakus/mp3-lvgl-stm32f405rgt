@@ -850,7 +850,7 @@ lv_res_t lv_event_send(lv_obj_t * obj, lv_event_t event, const void * data);
 
 /**
  * Send LV_EVENT_REFRESH event to an object
- * @param obj point to an obejct. (Can NOT be NULL)
+ * @param obj point to an object. (Can NOT be NULL)
  * @return LV_RES_OK: success, LV_RES_INV: to object become invalid (e.g. deleted) due to this event.
  */
 lv_res_t lv_event_send_refresh(lv_obj_t * obj);
@@ -1527,11 +1527,11 @@ bool lv_debug_check_obj_valid(const lv_obj_t * obj);
 #  if LV_USE_ASSERT_NULL /*Use at least LV_ASSERT_NULL if enabled*/
 #    define LV_ASSERT_OBJ(obj_p, obj_type) LV_ASSERT_NULL(obj_p)
 #  else
-#    define LV_ASSERT_OBJ(obj_p, obj_type) true
+#    define LV_ASSERT_OBJ(obj_p, obj_type)
 #  endif
 # endif
 #else
-# define LV_ASSERT_OBJ(obj, obj_type) true
+# define LV_ASSERT_OBJ(obj, obj_type)
 #endif
 
 

@@ -7,6 +7,7 @@
  *      INCLUDES
  *********************/
 #include "lv_gpu_stm32_dma2d.h"
+#include "../lv_core/lv_disp.h"
 #include "../lv_core/lv_refr.h"
 
 #if LV_USE_GPU_STM32_DMA2D
@@ -42,7 +43,7 @@
  *  STATIC PROTOTYPES
  **********************/
 static void invalidate_cache(void);
-static void dma2d_wait(void);
+static void wait_finish(void);
 
 /**********************
  *  STATIC VARIABLES
@@ -62,7 +63,16 @@ static void dma2d_wait(void);
 void lv_gpu_stm32_dma2d_init(void)
 {
     /* Enable DMA2D clock */
+#if defined(STM32F4) || defined(STM32F7)
     RCC->AHB1ENR |= RCC_AHB1ENR_DMA2DEN;
+#elif  defined(STM32H7)
+    RCC->AHB3ENR |= RCC_AHB3ENR_DMA2DEN;
+#else
+# warning "LVGL can't enable the clock of DMA2D"
+#endif
+
+    /* Wait for hardware access to complete */
+    __asm volatile("DSB\n");
 
     /* Delay after setting peripheral clock */
     volatile uint32_t temp = RCC->AHB1ENR;
@@ -94,7 +104,7 @@ void lv_gpu_stm32_dma2d_fill(lv_color_t * buf, lv_coord_t buf_w, lv_color_t colo
     /* start transfer */
     DMA2D->CR |= DMA2D_CR_START_Msk;
 
-    dma2d_wait();
+    wait_finish();
 }
 
 /**
@@ -139,7 +149,7 @@ void lv_gpu_stm32_dma2d_fill_mask(lv_color_t * buf, lv_coord_t buf_w, lv_color_t
     HAL_DMA2D_ConfigLayer(&hdma2d, 0);
     HAL_DMA2D_ConfigLayer(&hdma2d, 1);
     HAL_DMA2D_BlendingStart(&hdma2d, (uint32_t) mask, (uint32_t) buf, (uint32_t)buf, fill_w, fill_h);
-    dma2d_wait();
+    wait_finish();
 #endif
 }
 
@@ -169,7 +179,7 @@ void lv_gpu_stm32_dma2d_copy(lv_color_t * buf, lv_coord_t buf_w, const lv_color_
 
     /* start transfer */
     DMA2D->CR |= DMA2D_CR_START_Msk;
-    dma2d_wait();
+    wait_finish();
 }
 
 /**
@@ -207,7 +217,18 @@ void lv_gpu_stm32_dma2d_blend(lv_color_t * buf, lv_coord_t buf_w, const lv_color
 
     /* start transfer */
     DMA2D->CR |= DMA2D_CR_START_Msk;
-    dma2d_wait();
+    wait_finish();
+}
+
+void lv_gpu_stm32_dma2d_wait_cb(lv_disp_drv_t * drv)
+{
+    if(drv && drv->wait_cb) {
+        while(DMA2D->CR & DMA2D_CR_START_Msk) {
+            drv->wait_cb(drv);
+        }
+    } else {
+        while(DMA2D->CR & DMA2D_CR_START_Msk);
+    }
 }
 
 /**********************
@@ -216,16 +237,21 @@ void lv_gpu_stm32_dma2d_blend(lv_color_t * buf, lv_coord_t buf_w, const lv_color
 
 static void invalidate_cache(void)
 {
-#if __DCACHE_PRESENT
-    if(SCB->CCR & (uint32_t)SCB_CCR_DC_Msk) {
-        SCB_CleanInvalidateDCache();
-    }
+    lv_disp_t * disp = _lv_refr_get_disp_refreshing();
+    if(disp->driver.clean_dcache_cb) disp->driver.clean_dcache_cb(&disp->driver);
+    else {
+#if __CORTEX_M >= 0x07
+    	if((SCB->CCR) & (uint32_t)SCB_CCR_DC_Msk)
+    		SCB_CleanInvalidateDCache();
 #endif
+    }
 }
 
-static void dma2d_wait(void)
+static void wait_finish(void)
 {
     lv_disp_t * disp = _lv_refr_get_disp_refreshing();
+    if(disp->driver.gpu_wait_cb) return;
+
     while(DMA2D->CR & DMA2D_CR_START_Msk) {
         if(disp->driver.wait_cb) disp->driver.wait_cb(&disp->driver);
     }

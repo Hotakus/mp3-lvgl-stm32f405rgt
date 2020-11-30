@@ -1,7 +1,3 @@
-
-
-
-
 /**
  * @file lv_mask.c
  *
@@ -346,7 +342,7 @@ void lv_draw_mask_angle_init(lv_draw_mask_angle_param_t * param, lv_coord_t vert
     }
     else {
         LV_DEBUG_ASSERT(false, "Unexpected start_angle", start_angle);
-//        return;
+        return;
     }
 
     if(end_angle >= 0 && end_angle < 180) {
@@ -357,7 +353,7 @@ void lv_draw_mask_angle_init(lv_draw_mask_angle_param_t * param, lv_coord_t vert
     }
     else {
         LV_DEBUG_ASSERT(false, "Unexpected end_angle", end_angle);
-//        return;
+        return;
     }
 
     lv_draw_mask_line_angle_init(&param->start_line, vertex_x, vertex_y, start_angle, start_side);

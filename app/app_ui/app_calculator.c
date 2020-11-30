@@ -110,8 +110,6 @@ static void calculator_create(void)
     opr_ch_list = lv_page_create( com_btn_area, NULL );
     opr_ch_mode_alter( opr_ch_mode );
 
-
-
 }
 
 /************************************************
@@ -127,7 +125,11 @@ app_ui_t *calculator_ui_get( void )
     return &app_calculator;
 }
 
-
+/************************************************
+ * @brief 更改计算器模式
+ * 
+ * @param mode 
+ ************************************************/
 static void opr_ch_mode_alter( opr_ch_mode_t mode )
 {
 

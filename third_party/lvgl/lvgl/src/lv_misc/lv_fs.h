@@ -36,18 +36,18 @@ extern "C" {
  */
 enum {
     LV_FS_RES_OK = 0,
-    LV_FS_RES_HW_ERR,     /*(1)Low level hardware error*/
-    LV_FS_RES_FS_ERR,     /*(2)Error in the file system structure */
-    LV_FS_RES_NOT_EX,     /*(3)Driver, file or directory is not exists*/
-    LV_FS_RES_FULL,       /*(4)Disk full*/
-    LV_FS_RES_LOCKED,     /*(5)The file is already opened*/
-    LV_FS_RES_DENIED,     /*(6)Access denied. Check 'fs_open' modes and write protect*/
-    LV_FS_RES_BUSY,       /*(7)The file system now can't handle it, try later*/
-    LV_FS_RES_TOUT,       /*(8)Process time outed*/
-    LV_FS_RES_NOT_IMP,    /*(9)Requested function is not implemented*/
-    LV_FS_RES_OUT_OF_MEM, /*(10)Not enough memory for an internal operation*/
-    LV_FS_RES_INV_PARAM,  /*(11)Invalid parameter among arguments*/
-    LV_FS_RES_UNKNOWN,    /*(12)Other unknown error*/
+    LV_FS_RES_HW_ERR,     /*Low level hardware error*/
+    LV_FS_RES_FS_ERR,     /*Error in the file system structure */
+    LV_FS_RES_NOT_EX,     /*Driver, file or directory is not exists*/
+    LV_FS_RES_FULL,       /*Disk full*/
+    LV_FS_RES_LOCKED,     /*The file is already opened*/
+    LV_FS_RES_DENIED,     /*Access denied. Check 'fs_open' modes and write protect*/
+    LV_FS_RES_BUSY,       /*The file system now can't handle it, try later*/
+    LV_FS_RES_TOUT,       /*Process time outed*/
+    LV_FS_RES_NOT_IMP,    /*Requested function is not implemented*/
+    LV_FS_RES_OUT_OF_MEM, /*Not enough memory for an internal operation*/
+    LV_FS_RES_INV_PARAM,  /*Invalid parameter among arguments*/
+    LV_FS_RES_UNKNOWN,    /*Other unknown error*/
 };
 typedef uint8_t lv_fs_res_t;
 
