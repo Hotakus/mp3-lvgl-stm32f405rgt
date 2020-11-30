@@ -118,6 +118,7 @@ static void calculator_create(void)
 static void calculator_remove(void)
 {
     lv_obj_del( obj_container );
+    
 }
 
 app_ui_t *calculator_ui_get( void )

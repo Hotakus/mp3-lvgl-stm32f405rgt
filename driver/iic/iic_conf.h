@@ -10,7 +10,7 @@ extern "C" {
 #include <stdio.h>
 
 /* definations */
-#define I2C_RETRY_TIMES     5  
+#define I2C_RETRY_TIMES     0xFF  
 
 #define I2C1_SCL    GPIO_Pin_6
 #define I2C1_SDA    GPIO_Pin_7

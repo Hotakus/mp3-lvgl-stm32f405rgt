@@ -60,7 +60,7 @@ void lv_ex_btnmatrix_1(void)
     
     lv_obj_set_style_local_transform_height( btnm1, LV_BTNMATRIX_PART_BTN, LV_STATE_DEFAULT, 30 );
 
-}
+} 
 
 void app_create_example(void)
 {

@@ -175,7 +175,6 @@ ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint
 {
     ErrorStatus err = ERROR;
     uint8_t retry = I2C_RETRY_TIMES;
-    uint8_t *pd = byte;
     
     if ( !len )
         return ERROR;
@@ -185,10 +184,11 @@ ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint
         if ( err != SUCCESS ) {
             i2c_generate_stop( I2Cx );
             *byte = 0xFF;
+            DEBUG_PRINT( "i2c read error (%d)\n", len );
             return err;
         } else {
             *byte = (uint8_t)I2Cx->DR;
-            pd += 1;
+            byte += 1;
         }
     } while ( --len );
     
