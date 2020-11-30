@@ -2269,16 +2269,6 @@
               <FilePath>.\third_party\lvgl\lvgl\font\ariblk_14.c</FilePath>
             </File>
             <File>
-              <FileName>MSYH_BD_12_CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\MSYH_BD_12_CN.c</FilePath>
-            </File>
-            <File>
-              <FileName>mp3_bg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\third_party\lvgl\lvgl\font\mp3_bg.c</FilePath>
-            </File>
-            <File>
               <FileName>ariblk_36_num.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\third_party\lvgl\lvgl\font\ariblk_36_num.c</FilePath>

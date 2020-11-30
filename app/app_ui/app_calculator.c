@@ -109,7 +109,7 @@ static void calculator_create(void)
 
     opr_ch_list = lv_page_create( com_btn_area, NULL );
     opr_ch_mode_alter( opr_ch_mode );
-
+    
 }
 
 /************************************************

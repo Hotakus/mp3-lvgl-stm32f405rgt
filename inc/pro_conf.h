@@ -37,9 +37,6 @@ extern "C" {
 #define USER_USE_FATFS      1u
 #define USER_USE_APP        1u
 
-/* FatFs thread-safe conf */
-#define THREAD_SAFE_SW      0u
-
 /* USER USE screen */
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
@@ -74,7 +71,7 @@ extern "C" {
 /* app */
 #include "app_main.h"
 #if USER_USE_LVGL ==    1u
-#define USE_LV_EX       0u
+#define USE_LV_EX       1u
 #endif
 #endif
 

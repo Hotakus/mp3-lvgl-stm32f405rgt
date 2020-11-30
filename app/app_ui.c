@@ -46,32 +46,43 @@ void lv_ex_bar_1(void)
     lv_obj_set_style_local_radius( bar1, LV_BAR_PART_INDIC, LV_STATE_DEFAULT, 7 );
 }
 
-static const char * btnm_map[] = {  "1", "2", "3", "\n", 
-                                    "4", "5", "6", "\n", 
-                                    "7", "8", "9", "\n", 
-                                    "+/-", "0", ".", "\n", "" };
-void lv_ex_btnmatrix_1(void)
+void lv_ex_tabview_1(void)
 {
-    lv_obj_t * btnm1 = lv_btnmatrix_create(lv_scr_act(), NULL);
-    lv_btnmatrix_set_map(btnm1, btnm_map);
-    lv_btnmatrix_set_btn_width(btnm1, 10, 2);
-    lv_obj_set_size( btnm1, 128, 128 );
-    lv_obj_align(btnm1, NULL, LV_ALIGN_CENTER, 0, 0);
-    
-    lv_obj_set_style_local_transform_height( btnm1, LV_BTNMATRIX_PART_BTN, LV_STATE_DEFAULT, 30 );
+    /*Create a Tab view object*/
+    lv_obj_t *tabview;
+    tabview = lv_tabview_create(lv_scr_act(), NULL);
+    lv_obj_set_size( tabview, 128, 128 );
+    /*Add 3 tabs (the tabs are page (lv_page) and can be scrolled*/
+    lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "Tab 1");
+    lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "Tab 2");
+    lv_obj_t *tab3 = lv_tabview_add_tab(tabview, "Tab 3");
+    /*Add content to the tabs*/
+    lv_obj_t * label = lv_label_create(tab1, NULL);
+    lv_label_set_text(label, "This the first tab\n\n"
+                             "If the content\n"
+                             "of a tab\n"
+                             "become too long\n"
+                             "the it \n"
+                             "automatically\n"
+                             "become\n"
+                             "scrollable."
+                             );
 
-} 
+    label = lv_label_create(tab2, NULL);
+    lv_label_set_text(label, "Second tab");
+    label = lv_label_create(tab3, NULL);
+    lv_label_set_text(label, "Third tab");
+
+    lv_tabview_set_btns_pos( tabview, LV_TABVIEW_TAB_POS_BOTTOM );
+
+
+}
 
 void app_create_example(void)
 {
 
-    // lv_obj_t * label = lv_label_create( lv_scr_act(), NULL );
-    // lv_label_set_text( label, "fetive.\nfestive2d\nfestivsafxe3" );
-    // lv_label_set_align( label, LV_LABEL_ALIGN_CENTER );
-
-    lv_ex_bar_1();
-
-    // lv_ex_btnmatrix_1();
+    lv_ex_tabview_1();
+    
 
 }
 #endif

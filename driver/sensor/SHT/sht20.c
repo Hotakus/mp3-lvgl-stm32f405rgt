@@ -15,6 +15,8 @@
 static double RH = 0;
 static double TEMP = 0;
 
+static ErrorStatus sht_reset( void );
+
 /************************************************
  * @brief reset sht
  * 
@@ -35,6 +37,8 @@ static ErrorStatus sht_reset( void )
     if ( err != SUCCESS ) 
         return err;  
     i2c_generate_stop( SHT20_I2C );
+    
+    return err;
 }
 
 /************************************************
@@ -94,6 +98,8 @@ ErrorStatus sht_read_user_reg( uint8_t *dat )
     
     I2C_AcknowledgeConfig(SHT20_I2C, DISABLE);
 	i2c_generate_stop( SHT20_I2C );
+    
+    return err;
 }
 
 /************************************************
@@ -120,6 +126,8 @@ ErrorStatus sht_writ_user_reg( uint8_t *dat )
     if ( err != SUCCESS ) 
         return err;
     i2c_generate_stop( SHT20_I2C );
+    
+    return err;
 }
 
 
@@ -195,4 +203,6 @@ double sht_read_RH_TEMP( uint8_t which )
         printf( "TEMP : %0.2f ℃\n", TEMP );
         return TEMP;
     }
+    
+    return 0xFF;
 }

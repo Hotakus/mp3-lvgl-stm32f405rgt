@@ -215,8 +215,6 @@
 ".\project\obj\lv_port_indev.o"
 ".\project\obj\ariblk_12.o"
 ".\project\obj\ariblk_14.o"
-".\project\obj\msyh_bd_12_cn.o"
-".\project\obj\mp3_bg.o"
 ".\project\obj\ariblk_36_num.o"
 ".\project\obj\ariblk_16.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"

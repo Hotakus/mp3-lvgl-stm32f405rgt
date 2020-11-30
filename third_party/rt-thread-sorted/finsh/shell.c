@@ -758,6 +758,7 @@ void finsh_thread_entry(void *parameter)
             shell->line_position = 0;
             shell->line_curpos = 0;
         }
+        rt_thread_mdelay( 100 );
     } /* end of device read */
 }
 
