@@ -39,7 +39,7 @@ static app_ui_t app_calendar = {
 };
 
 
-static lv_obj_t * obj_container = NULL;             // 顶层容器
+static lv_obj_t * obj_cont = NULL;             // 顶层容器
 
 static lv_obj_t * calendar = NULL;                  // 日历
 static lv_calendar_date_t today;
@@ -88,20 +88,20 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void calendar_create(void)
 {
-    obj_container = lv_cont_create( lv_scr_act(), NULL );
-    lv_obj_set_size( obj_container, 320, 220 );
-    lv_obj_set_pos( obj_container, 0, 20 );
-    lv_obj_set_style_local_bg_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-    lv_obj_set_style_local_border_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    obj_cont = lv_cont_create( lv_scr_act(), NULL );
+    lv_obj_set_size( obj_cont, 320, 220 );
+    lv_obj_set_pos( obj_cont, 0, 20 );
+    lv_obj_set_style_local_bg_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_style_local_border_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
 
-    festive_info = lv_page_create( obj_container, NULL );
+    festive_info = lv_page_create( obj_cont, NULL );
     lv_obj_set_size( festive_info, 100, 170 );
     lv_obj_align( festive_info, NULL, LV_ALIGN_IN_TOP_RIGHT, 0, 0 );
     lv_obj_set_event_cb( festive_info, event_handler );
     festive_label = lv_label_create( festive_info, NULL );
     lv_label_set_text( festive_label, "festive." );
 
-    return_btn = lv_btn_create( obj_container, NULL );
+    return_btn = lv_btn_create( obj_cont, NULL );
     lv_obj_set_size( return_btn, 100, 50 );
     lv_obj_align( return_btn, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, 0, 0 );
     lv_obj_set_event_cb( return_btn, event_handler );
@@ -109,7 +109,7 @@ static void calendar_create(void)
     lv_label_set_text( return_label, "return."LV_SYMBOL_NEW_LINE ); 
 
 
-    calendar = lv_calendar_create( obj_container, NULL );
+    calendar = lv_calendar_create( obj_cont, NULL );
     lv_obj_set_size( calendar, 220, 220 );
     lv_obj_set_pos( calendar, 0, 0 );
     
@@ -130,7 +130,7 @@ static void calendar_create(void)
  ************************************************/
 static void calendar_remove(void)
 {
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
 }
 
 app_ui_t *calendar_ui_get( void )

@@ -42,7 +42,7 @@ static app_ui_t app_calculator = {
 };
 
 
-static lv_obj_t * obj_container = NULL;             // 顶层容器
+static lv_obj_t * obj_cont = NULL;             // 顶层容器
 static lv_obj_t * mode_dropdown = NULL;             // 模式选择下拉菜单
 
 /* 结果显示区 */
@@ -89,19 +89,19 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
  ************************************************/
 static void calculator_create(void)
 {
-    obj_container = lv_cont_create( lv_scr_act(), NULL );
-    lv_obj_set_size( obj_container, 320, 220 );
-    lv_obj_set_pos( obj_container, 0, 20 );
-    lv_obj_set_style_local_radius( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 10 );
-    lv_obj_set_style_local_bg_color( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x90, 0x42, 0x42 ) );
-    lv_obj_set_style_local_border_width( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 2 );
-    lv_obj_set_style_local_border_color( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x4d, 0x16, 0x16 ) );
+    obj_cont = lv_cont_create( lv_scr_act(), NULL );
+    lv_obj_set_size( obj_cont, 320, 220 );
+    lv_obj_set_pos( obj_cont, 0, 20 );
+    lv_obj_set_style_local_radius( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 10 );
+    lv_obj_set_style_local_bg_color( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x90, 0x42, 0x42 ) );
+    lv_obj_set_style_local_border_width( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 2 );
+    lv_obj_set_style_local_border_color( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE( 0x4d, 0x16, 0x16 ) );
 
-    res_show_area = lv_cont_create( obj_container, NULL );
+    res_show_area = lv_cont_create( obj_cont, NULL );
     res_history   = lv_label_create( res_show_area, NULL );
     res_current   = lv_label_create( res_show_area, NULL );
 
-    com_btn_area  = lv_cont_create( obj_container, NULL );
+    com_btn_area  = lv_cont_create( obj_cont, NULL );
     num_area      = lv_cont_create( com_btn_area, NULL );
     for ( uint8_t n = 0; n < (sizeof(num_obj)/sizeof(num_obj[0])); n++ ) {
         num_obj[n] = lv_btn_create( num_area, NULL );
@@ -117,7 +117,7 @@ static void calculator_create(void)
  ************************************************/
 static void calculator_remove(void)
 {
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
     
 }
 

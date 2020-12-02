@@ -69,4 +69,4 @@ int app_create_init_thread(void)
 
     return 0;
 }
-INIT_APP_EXPORT(app_create_init_thread);  // 导出为APP，rtthread启动时会自动调用这个函数执行
+//INIT_APP_EXPORT(app_create_init_thread);  // 导出为APP，rtthread启动时会自动调用这个函数执行

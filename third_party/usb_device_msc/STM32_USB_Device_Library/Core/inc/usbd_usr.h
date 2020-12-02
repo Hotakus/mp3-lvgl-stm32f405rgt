@@ -25,9 +25,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_ioreq.h"
-#if ! defined (USE_STM32446_EVAL) && ! defined (USE_STM32469I_EVAL)
-#include "lcd_log.h"
-#endif
+
 /** @addtogroup USBD_USER
   * @{
   */

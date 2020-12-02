@@ -94,7 +94,7 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
 
 };
 
-static lv_obj_t * obj_container = NULL;           // icons顶层容器
+static lv_obj_t * obj_cont = NULL;           // icons顶层容器
 
  /**********************
  *  FUNCTIONS
@@ -142,15 +142,15 @@ static void mainmenu_create(void)
 {
 
     /* 创建mainmenu的icons的容器 */
-    obj_container = lv_cont_create( lv_scr_act(), NULL );
+    obj_cont = lv_cont_create( lv_scr_act(), NULL );
     /* 计算容器的size */
-    lv_obj_set_size( obj_container, 
+    lv_obj_set_size( obj_cont, 
         ICONS_COL*ICONS_W + ICONS_MARGIN_X*(ICONS_COL-1), 
         ICONS_ROW*ICONS_H + ICONS_MARGIN_Y*(ICONS_ROW-1) 
     );
-    lv_obj_set_pos( obj_container, 35, 40 );
-    lv_obj_set_style_local_bg_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-    lv_obj_set_style_local_border_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_pos( obj_cont, 35, 40 );
+    lv_obj_set_style_local_bg_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_style_local_border_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
     
     for ( uint8_t row = 0; row < ICONS_ROW; row++ ) {
         for ( uint8_t col = 0; col < ICONS_COL; col++ ) {
@@ -158,14 +158,14 @@ static void mainmenu_create(void)
             if( icons[row][col].rel_path == NULL || icons[row][col].pr_path == NULL )
                 continue;
             /* 创建imgbtn并自动对齐 */
-            icons[row][col].btn = lv_imgbtn_create( obj_container, NULL );
+            icons[row][col].btn = lv_imgbtn_create( obj_cont, NULL );
             icons[row][col].btn->user_data = icons[row][col].en_name;
             lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_RELEASED, icons[row][col].rel_path );
             lv_imgbtn_set_src( icons[row][col].btn, LV_BTN_STATE_PRESSED, icons[row][col].pr_path );
             lv_obj_set_pos( icons[row][col].btn, (ICONS_W+ICONS_MARGIN_X)*col, (ICONS_H+ICONS_MARGIN_Y)*row );
             lv_obj_set_event_cb( icons[row][col].btn, event_handler );
             /* 为每个icon创建标签 */
-            icons[row][col].label = lv_label_create( obj_container, NULL );
+            icons[row][col].label = lv_label_create( obj_cont, NULL );
             lv_obj_set_style_local_text_font( 
                 icons[row][col].label, 
                 LV_LABEL_PART_MAIN, 
@@ -185,7 +185,7 @@ static void mainmenu_create(void)
 static void mainmenu_remove(void)
 {
 
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
 }
 
 app_ui_t *mainmenu_ui_get( void )

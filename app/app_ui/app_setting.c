@@ -36,7 +36,7 @@ static app_ui_t app_setting = {
 };
 
 
-static lv_obj_t * obj_container = NULL;           // icons顶层容器
+static lv_obj_t * obj_cont = NULL;           // icons顶层容器
 
  /**********************
  *  FUNCTIONS
@@ -74,7 +74,7 @@ static void setting_create(void)
  ************************************************/
 static void setting_remove(void)
 {
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
 }
 
 app_ui_t *setting_ui_get( void )

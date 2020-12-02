@@ -36,7 +36,7 @@ static app_ui_t app_music = {
 };
 
 
-static lv_obj_t * obj_container = NULL;           // icons顶层容器
+static lv_obj_t * obj_cont = NULL;           // icons顶层容器
 
  /**********************
  *  FUNCTIONS
@@ -74,7 +74,7 @@ static void music_create(void)
  ************************************************/
 static void music_remove(void)
 {
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
 }
 
 app_ui_t *music_ui_get( void )

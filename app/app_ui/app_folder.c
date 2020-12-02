@@ -38,7 +38,7 @@ static app_ui_t app_folder = {
 };
 
 
-static lv_obj_t * obj_container = NULL;           // 顶层容器
+static lv_obj_t * obj_cont = NULL;           // 顶层容器
 
 static icon_t sd_folder = {
     .en_name  = "SD Card",       
@@ -92,19 +92,19 @@ static void folder_create(void)
     
     char lab_buf[50] = {0};
 
-    obj_container = lv_cont_create( lv_scr_act(), NULL );
-    lv_obj_set_size( obj_container, 320, 220 );
-    lv_obj_set_pos( obj_container, 0, 20 );
-    lv_obj_set_style_local_bg_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
-    lv_obj_set_style_local_border_opa( obj_container, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    obj_cont = lv_cont_create( lv_scr_act(), NULL );
+    lv_obj_set_size( obj_cont, 320, 220 );
+    lv_obj_set_pos( obj_cont, 0, 20 );
+    lv_obj_set_style_local_bg_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
+    lv_obj_set_style_local_border_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
 
     /* SD卡目录 */
-    sd_folder.btn = lv_imgbtn_create( obj_container, NULL );
+    sd_folder.btn = lv_imgbtn_create( obj_cont, NULL );
     lv_imgbtn_set_src( sd_folder.btn, LV_BTN_STATE_RELEASED, sd_folder.rel_path );
     lv_imgbtn_set_src( sd_folder.btn, LV_BTN_STATE_PRESSED, sd_folder.pr_path );
     lv_obj_set_pos( sd_folder.btn, 30, 15 );
     lv_obj_set_event_cb( sd_folder.btn, event_handler );
-    sd_folder.label = lv_label_create( obj_container, NULL );
+    sd_folder.label = lv_label_create( obj_cont, NULL );
     lv_obj_align( sd_folder.label, sd_folder.btn, LV_ALIGN_OUT_BOTTOM_MID, 0, 0 );
     lv_obj_set_style_local_text_color( sd_folder.label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE );
     lv_obj_set_style_local_text_font( 
@@ -124,12 +124,12 @@ static void folder_create(void)
     lv_label_set_align( sd_folder.label, LV_LABEL_ALIGN_CENTER );
 
     /* SPI FLASH目录 */
-    spif_folder.btn = lv_imgbtn_create( obj_container, sd_folder.btn );
+    spif_folder.btn = lv_imgbtn_create( obj_cont, sd_folder.btn );
     lv_imgbtn_set_src( spif_folder.btn, LV_BTN_STATE_RELEASED, spif_folder.rel_path );
     lv_imgbtn_set_src( spif_folder.btn, LV_BTN_STATE_PRESSED,  spif_folder.pr_path );
     lv_obj_set_pos( spif_folder.btn, 190, 15 );
     lv_obj_set_event_cb( spif_folder.btn, event_handler );
-    spif_folder.label = lv_label_create( obj_container, sd_folder.label );
+    spif_folder.label = lv_label_create( obj_cont, sd_folder.label );
     lv_obj_align( spif_folder.label, spif_folder.btn, LV_ALIGN_OUT_BOTTOM_MID, 0, 0 );
     lv_fs_free_space( 'F', &spif_total, &spif_free );
     MEMSET( lab_buf, 0, sizeof(lab_buf)/sizeof(uint8_t) );
@@ -147,7 +147,7 @@ static void folder_create(void)
     sd_per   = (double)(sd_total-sd_free) / (double)sd_total;
     spif_per = (double)(spif_total-spif_free) / (double)spif_total;
 
-    sd_cap_bar = lv_bar_create( obj_container, NULL );
+    sd_cap_bar = lv_bar_create( obj_cont, NULL );
     lv_obj_set_size( sd_cap_bar, 128, 20 );
     lv_bar_set_range( sd_cap_bar, 0, 1000 );
     lv_bar_set_anim_time( sd_cap_bar, 500 );
@@ -157,7 +157,7 @@ static void folder_create(void)
     lv_obj_set_style_local_radius( sd_cap_bar, LV_BAR_PART_INDIC, LV_STATE_DEFAULT, 7 );
     lv_obj_align( sd_cap_bar, sd_folder.label, LV_ALIGN_OUT_BOTTOM_MID, 0, 0 );
 
-    spif_cap_bar = lv_bar_create( obj_container, sd_cap_bar );
+    spif_cap_bar = lv_bar_create( obj_cont, sd_cap_bar );
     lv_obj_set_size( spif_cap_bar, 128, 20 );
     lv_bar_set_range( spif_cap_bar, 0, 1000 );
     lv_bar_set_anim_time( spif_cap_bar, 500 );
@@ -171,7 +171,7 @@ static void folder_create(void)
  ************************************************/
 static void folder_remove(void)
 {
-    lv_obj_del( obj_container );
+    lv_obj_del( obj_cont );
 }
 
 app_ui_t *folder_ui_get( void )
