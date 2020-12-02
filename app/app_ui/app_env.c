@@ -58,7 +58,7 @@ static icon_t temp_rh_info;
  ************************************************/
 static void event_handler(lv_obj_t * obj, lv_event_t event)
 {
-    app_ui_t * ui = NULL;
+
     switch (event) {
     case LV_EVENT_CLICKED:
         lv_btn_set_state( obj, LV_BTN_STATE_CHECKED_RELEASED );

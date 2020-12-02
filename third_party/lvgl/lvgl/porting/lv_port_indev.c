@@ -24,47 +24,53 @@
 *   Encoder     ：3
 *   Button      ：4
 */
-#define INPUT_DEVICE    0
-
-
 
 /**********************
  *      TYPEDEFS
  **********************/
-
+#define LV_USE_INDEV_TOUCHPAD 	0x0u
+#define LV_USE_INDEV_MOUSE	 	0x1u
+#define LV_USE_INDEV_KEYPAD 	0x2u
+#define LV_USE_INDEV_ENCODER 	0x4u
+#define LV_USE_INDEV_BUTTON 	0x8u
+#define LV_USE_INDEV  	LV_USE_INDEV_TOUCHPAD
 
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-
-#if ( INPUT_DEVICE == 0 )
+#if ( LV_USE_INDEV & LV_USE_INDEV_TOUCHPAD ) == LV_USE_INDEV_TOUCHPAD
 static void touchpad_init(void);
 static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static bool touchpad_is_pressed(void);
 static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y);
 #endif
-#if ( INPUT_DEVICE == 1 )
+
+#if ( LV_USE_INDEV & LV_USE_INDEV_MOUSE ) == LV_USE_INDEV_MOUSE
 static void mouse_init(void);
 static bool mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static bool mouse_is_pressed(void);
 static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y);
 #endif
-#if ( INPUT_DEVICE == 2 )
+
+#if ( LV_USE_INDEV & LV_USE_INDEV_KEYPAD ) == LV_USE_INDEV_KEYPAD
 static void keypad_init(void);
 static bool keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static uint32_t keypad_get_key(void);
 #endif
-#if ( INPUT_DEVICE == 3 )
+
+#if ( LV_USE_INDEV & LV_USE_INDEV_ENCODER ) == LV_USE_INDEV_ENCODER
 static void encoder_init(void);
 static bool encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static void encoder_handler(void);
 #endif
-#if ( INPUT_DEVICE == 4 )
+
+#if ( LV_USE_INDEV & LV_USE_INDEV_BUTTON ) == LV_USE_INDEV_BUTTON
 static void button_init(void);
 static bool button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static int8_t button_get_pressed_id(void);
 static bool button_is_pressed(uint8_t id);
 #endif
+
 /**********************
  *  STATIC VARIABLES
  **********************/
@@ -76,10 +82,10 @@ lv_indev_t * indev_button;
 
 static lv_group_t *indev_group;
 
-#if ( INPUT_DEVICE == 3 )
 static int32_t encoder_diff;
 static lv_indev_state_t encoder_state;
-#endif
+
+
 /**********************
  *      MACROS
  **********************/
@@ -87,16 +93,6 @@ static lv_indev_state_t encoder_state;
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
-
-/************************************************
- * @brief 获取 indev_group
- * 
- * @return lv_group_t* 
- ************************************************/
-lv_group_t *lv_get_indev_group(void)
-{
-    return indev_group;
-}
 
 void lv_port_indev_init(void)
 {
@@ -111,12 +107,14 @@ void lv_port_indev_init(void)
      *  You should shape them according to your hardware
      */
 
+    // 不动
     lv_indev_drv_t indev_drv;
-    
+
+#if ( LV_USE_INDEV & LV_USE_INDEV_TOUCHPAD ) == LV_USE_INDEV_TOUCHPAD
     /*------------------
      * Touchpad
      * -----------------*/
-#if ( INPUT_DEVICE == 0 )
+
     /*Initialize your touchpad if you have*/
     touchpad_init();
 
@@ -126,11 +124,11 @@ void lv_port_indev_init(void)
     indev_drv.read_cb = touchpad_read;
     indev_touchpad = lv_indev_drv_register(&indev_drv);
 #endif
-
+#if ( LV_USE_INDEV & LV_USE_INDEV_MOUSE ) == LV_USE_INDEV_MOUSE
     /*------------------
      * Mouse
      * -----------------*/
-#if ( INPUT_DEVICE == 1 )
+
     /*Initialize your touchpad if you have*/
     mouse_init();
 
@@ -145,11 +143,11 @@ void lv_port_indev_init(void)
     lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
     lv_indev_set_cursor(indev_mouse, mouse_cursor);
 #endif
-
+#if ( LV_USE_INDEV & LV_USE_INDEV_KEYPAD ) == LV_USE_INDEV_KEYPAD
     /*------------------
      * Keypad
      * -----------------*/
-#if ( INPUT_DEVICE == 2 )
+
     /*Initialize your keypad or keyboard if you have*/
     keypad_init();
 
@@ -159,19 +157,16 @@ void lv_port_indev_init(void)
     indev_drv.read_cb = keypad_read;
     indev_keypad = lv_indev_drv_register(&indev_drv);
 
-    indev_group = lv_group_create();
-    lv_indev_set_group( indev_keypad, indev_group );
-
     /* Later you should create group(s) with `lv_group_t * group = lv_group_create()`,
      * add objects to the group with `lv_group_add_obj(group, obj)`
      * and assign this input device to group to navigate in it:
      * `lv_indev_set_group(indev_keypad, group);` */
 #endif
-
+#if ( LV_USE_INDEV & LV_USE_INDEV_ENCODER ) == LV_USE_INDEV_ENCODER
     /*------------------
      * Encoder
      * -----------------*/
-#if ( INPUT_DEVICE == 3 )
+
     /*Initialize your encoder if you have*/
     encoder_init();
 
@@ -186,11 +181,11 @@ void lv_port_indev_init(void)
      * and assign this input device to group to navigate in it:
      * `lv_indev_set_group(indev_encoder, group);` */
 #endif
-
+#if ( LV_USE_INDEV & LV_USE_INDEV_BUTTON ) == LV_USE_INDEV_BUTTON
     /*------------------
      * Button
      * -----------------*/
-#if ( INPUT_DEVICE == 4 )
+
     /*Initialize your button if you have*/
     button_init();
 
@@ -207,13 +202,12 @@ void lv_port_indev_init(void)
     };
     lv_indev_set_button_points(indev_button, btn_points);
 #endif
+
 }
 
 /**********************
  *   STATIC FUNCTIONS
  **********************/
-
-
 
 /*------------------
  * Touchpad

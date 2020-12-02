@@ -27,58 +27,19 @@ Project File Date:  12/02/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
 Build target 'f405mp3'
-compiling app_music.c...
-app\app_ui\app_music.c(52): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_music.c(50): warning:  #177-D: function "event_handler"  was declared but never referenced
-  static void event_handler(lv_obj_t * obj, lv_event_t event)
-app\app_ui\app_music.c: 2 warnings, 0 errors
-compiling app_mainmenu.c...
-compiling app_calendar.c...
-app\app_ui\app_calendar.c(65): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_calendar.c: 1 warning, 0 errors
-compiling app_folder.c...
-app\app_ui\app_folder.c(68): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_folder.c: 1 warning, 0 errors
-compiling app_calculator.c...
-app\app_ui\app_calculator.c(76): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_calculator.c(46): warning:  #177-D: variable "mode_dropdown"  was declared but never referenced
-  static lv_obj_t * mode_dropdown = NULL;             // ???????€????????????????
-app\app_ui\app_calculator.c(50): warning:  #550-D: variable "res_history"  was set but never used
-  static lv_obj_t * res_history = NULL;
-app\app_ui\app_calculator.c(51): warning:  #550-D: variable "res_current"  was set but never used
-  static lv_obj_t * res_current = NULL;
-app\app_ui\app_calculator.c(57): warning:  #550-D: variable "opr_ch_list"  was set but never used
-  static lv_obj_t * opr_ch_list = NULL;                   // ??????????????????
-app\app_ui\app_calculator.c(58): warning:  #177-D: variable "opr_ch_obj"  was declared but never referenced
-  static lv_obj_t * opr_ch_obj[4] = {NULL};               // ??????????????????
-app\app_ui\app_calculator.c(59): warning:  #177-D: variable "nor_ext_ch_obj"  was declared but never referenced
-  static lv_obj_t * nor_ext_ch_obj[4] = {NULL};           // ????€?????????????????????????
-app\app_ui\app_calculator.c(60): warning:  #177-D: variable "prog_ext_ch_obj"  was declared but never referenced
-  static lv_obj_t * prog_ext_ch_obj[4] = {NULL};          // ?????????????????????????????????
-app\app_ui\app_calculator.c(63): warning:  #550-D: variable "num_obj"  was set but never used
-  static lv_obj_t * num_obj[12] = {NULL};     // ????????????
-app\app_ui\app_calculator.c(74): warning:  #177-D: function "event_handler"  was declared but never referenced
-  static void event_handler(lv_obj_t * obj, lv_event_t event)
-app\app_ui\app_calculator.c: 10 warnings, 0 errors
-compiling app_env.c...
-app\app_ui\app_env.c(61): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_env.c: 1 warning, 0 errors
 compiling cmd.c...
-compiling app_setting.c...
-app\app_ui\app_setting.c(52): warning:  #177-D: variable "ui"  was declared but never referenced
-      app_ui_t * ui = NULL;
-app\app_ui\app_setting.c(50): warning:  #177-D: function "event_handler"  was declared but never referenced
-  static void event_handler(lv_obj_t * obj, lv_event_t event)
-app\app_ui\app_setting.c: 2 warnings, 0 errors
+compiling lv_port_indev.c...
+third_party\lvgl\lvgl\porting\lv_port_indev.c(83): warning:  #177-D: variable "indev_group"  was declared but never referenced
+  static lv_group_t *indev_group;
+third_party\lvgl\lvgl\porting\lv_port_indev.c(85): warning:  #177-D: variable "encoder_diff"  was declared but never referenced
+  static int32_t encoder_diff;
+third_party\lvgl\lvgl\porting\lv_port_indev.c(86): warning:  #177-D: variable "encoder_state"  was declared but never referenced
+  static lv_indev_state_t encoder_state;
+third_party\lvgl\lvgl\porting\lv_port_indev.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=103716 RO-data=80384 RW-data=1860 ZI-data=67084  
+Program Size: Code=154428 RO-data=80628 RW-data=1976 ZI-data=88512  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 17 Warning(s).
+".\project\obj\405mp3.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -91,7 +52,7 @@ Package Vendor: Keil
   E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
