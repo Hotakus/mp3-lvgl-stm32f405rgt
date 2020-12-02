@@ -51,11 +51,19 @@ void lv_ex_tabview_1(void)
     /*Create a Tab view object*/
     lv_obj_t *tabview;
     tabview = lv_tabview_create(lv_scr_act(), NULL);
+    lv_tabview_set_btns_pos( tabview, LV_TABVIEW_TAB_POS_LEFT );
     lv_obj_set_size( tabview, 128, 128 );
+
     /*Add 3 tabs (the tabs are page (lv_page) and can be scrolled*/
-    lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "Tab 1");
-    lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "Tab 2");
-    lv_obj_t *tab3 = lv_tabview_add_tab(tabview, "Tab 3");
+    lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "sys");
+    lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "env");
+
+    
+    // lv_obj_set_style_local_bg_color( tabview, LV_TABVIEW_PART_TAB_BG, LV_STATE_DEFAULT, LV_COLOR_BLUE );
+    lv_obj_set_style_local_pad_right( tabview, LV_TABVIEW_PART_TAB_BTN, LV_STATE_DEFAULT, 20 );
+    lv_obj_set_style_local_border_width( tabview, LV_TABVIEW_PART_TAB_BTN, LV_STATE_DEFAULT, 2 );
+    lv_obj_set_style_local_border_color( tabview, LV_TABVIEW_PART_TAB_BTN, LV_STATE_DEFAULT, LV_COLOR_RED );
+    
     /*Add content to the tabs*/
     lv_obj_t * label = lv_label_create(tab1, NULL);
     lv_label_set_text(label, "This the first tab\n\n"
@@ -70,11 +78,6 @@ void lv_ex_tabview_1(void)
 
     label = lv_label_create(tab2, NULL);
     lv_label_set_text(label, "Second tab");
-    label = lv_label_create(tab3, NULL);
-    lv_label_set_text(label, "Third tab");
-
-    lv_tabview_set_btns_pos( tabview, LV_TABVIEW_TAB_POS_BOTTOM );
-
 
 }
 

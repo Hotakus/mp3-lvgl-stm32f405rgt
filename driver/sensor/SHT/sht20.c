@@ -63,7 +63,6 @@ void sht_init( void )
     sht_read_RH_TEMP( 1 );
 
 }
-MSH_CMD_EXPORT(sht_init, sht_init);
 
 /************************************************
  * @brief 读sht的user寄存器

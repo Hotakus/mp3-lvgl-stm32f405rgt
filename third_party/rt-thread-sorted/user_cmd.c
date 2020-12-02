@@ -234,22 +234,16 @@ MSH_CMD_EXPORT( rtt_cp, copy file );
 #endif
 
 #if USER_USE_LVGL == 1
-/************************************************
- * @brief lvgl_reboot
- * 
- * @param argc 
- * @param args 
- ************************************************/
-static void lvgl_reboot( int argc, char **args )
+static void lvgl_mem(  )
 {
-    lv_port_disp_init();        // 显示器初始化
-    lv_port_indev_init();       // 输入设备初始化
-#if USER_USE_FATFS == 1
-    lv_port_fs_init();          // 文件系统设备初始化
-#endif
-}
-MSH_CMD_EXPORT( lvgl_reboot, lvgl_reboot );
+    lv_mem_monitor_t mem;
+    lv_mem_monitor( &mem );
 
+    DEBUG_PRINT( "lv free_size  : %d KiB\n", mem.free_size );
+    DEBUG_PRINT( "lv total_size : %d KiB\n", mem.total_size );
+    DEBUG_PRINT( "lv max_used   : %d KiB\n", mem.max_used );
+}
+MSH_CMD_EXPORT( lvgl_mem, lvgl_mem );
 /************************************************
  * @brief 在当前屏幕显示一张来自存储设备的图片
  ************************************************/
@@ -375,3 +369,4 @@ void dma_test(void)
 
 }
 MSH_CMD_EXPORT(dma_test, dma_test);
+

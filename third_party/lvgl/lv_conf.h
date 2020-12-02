@@ -87,7 +87,7 @@ typedef int16_t lv_coord_t;
 
 /* Set an address for the memory pool instead of allocating it as an array.
  * Can be in external SRAM too. SECTION("CCRAM") */
-#  define LV_MEM_ADR         (0x10010000-LV_MEM_SIZE)
+#  define LV_MEM_ADR         (0x10010000-LV_MEM_SIZE - 4)
 
 /* Automatically defrag. on free. Defrag. means joining the adjacent free cells. */
 #  define LV_MEM_AUTO_DEFRAG  1
@@ -206,7 +206,7 @@ typedef void * lv_fs_drv_user_data_t;
 #define LV_USE_USER_DATA        1
 
 /*1: Show CPU usage and FPS count in the right bottom corner*/
-#define LV_USE_PERF_MONITOR     1
+#define LV_USE_PERF_MONITOR     0
 
 /*1: Use the functions and types from the older API if possible */
 #define LV_USE_API_EXTENSION_V6  0
@@ -345,7 +345,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 #define LV_USE_ASSERT_OBJ       0
 
 /*Check if the styles are properly initialized. (Fast)*/
-#define LV_USE_ASSERT_STYLE     0
+#define LV_USE_ASSERT_STYLE     1
 
 #endif /*LV_USE_DEBUG*/
 
