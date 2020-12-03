@@ -1,3 +1,13 @@
+/************************************************
+ * @file usart.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-12-04
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "usart.h"
 #include "nvic_conf.h"
 #include "dma_conf.h"

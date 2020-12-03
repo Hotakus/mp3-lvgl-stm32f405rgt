@@ -1,3 +1,13 @@
+/************************************************
+ * @file usart.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-12-04
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #ifndef USART_H
 #define USART_H
 
@@ -25,8 +35,6 @@ void usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
 void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate );
 void my_putc( uint8_t ch );
 uint8_t my_getc( void );
-void usart_dma_tx( uint8_t *buf );
 
-#define printf     printf
 
 #endif

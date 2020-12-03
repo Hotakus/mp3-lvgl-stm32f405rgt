@@ -380,17 +380,7 @@ static lv_fs_res_t fs_tell (lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p)
  */
 static lv_fs_res_t fs_remove (lv_fs_drv_t * drv, const char *path)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-
-    /* Add your code here*/
-    fres = f_unlink( path );
-    if ( fres != FR_OK ) 
-        res = LV_FS_RES_NOT_IMP;
-    else 
-        res = LV_FS_RES_OK;
-
-    return res;
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -402,17 +392,7 @@ static lv_fs_res_t fs_remove (lv_fs_drv_t * drv, const char *path)
  */
 static lv_fs_res_t fs_trunc (lv_fs_drv_t * drv, void * file_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-    
-    /* Add your code here*/
-    fres = f_truncate( (FIL*)file_p );
-    if ( fres != FR_OK ) 
-        res = LV_FS_RES_NOT_IMP;
-    else 
-        res = LV_FS_RES_OK;
-
-    return res;
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -424,17 +404,7 @@ static lv_fs_res_t fs_trunc (lv_fs_drv_t * drv, void * file_p)
  */
 static lv_fs_res_t fs_rename (lv_fs_drv_t * drv, const char * oldname, const char * newname)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-    
-    /* Add your code here*/
-    fres = f_rename( oldname, newname );
-    if ( fres != FR_OK ) 
-        res = LV_FS_RES_NOT_IMP;
-    else 
-        res = LV_FS_RES_OK;
-    
-    return res;
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -490,31 +460,33 @@ static lv_fs_res_t fs_free (lv_fs_drv_t * drv, uint32_t * total_p, uint32_t * fr
  */
 static lv_fs_res_t fs_dir_open (lv_fs_drv_t * drv, void * rddir_p, const char *path)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-    char pathBuf[256] = {0};
+    // lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    // FRESULT fres = FR_INVALID_PARAMETER;
+    // char pathBuf[256] = {0};
 
-    /* Add your code here*/
-    // 根据传入的参数判断是什么存储设备
-    switch ( drv->letter ) {
-    case 'S':       // SD card
-        sprintf( pathBuf, "SD_SDIO:/%s", path );
-        break;
-    case 'F':       // SPI FALSH
-        sprintf( pathBuf, "SPIF:/%s", path );
-        break;
-    default:
-        printf( "No drive %c\n", drv->letter );
-        return LV_FS_RES_NOT_EX;
-    }
+    // /* Add your code here*/
+    // // 根据传入的参数判断是什么存储设备
+    // switch ( drv->letter ) {
+    // case 'S':       // SD card
+    //     sprintf( pathBuf, "SD_SDIO:/%s", path );
+    //     break;
+    // case 'F':       // SPI FALSH
+    //     sprintf( pathBuf, "SPIF:/%s", path );
+    //     break;
+    // default:
+    //     printf( "No drive %c\n", drv->letter );
+    //     return LV_FS_RES_NOT_EX;
+    // }
     
-    fres = f_opendir( (DIR*)rddir_p, pathBuf );
-    if ( fres != FR_OK ) 
-        res = LV_FS_RES_NOT_IMP;
-    else 
-        res = LV_FS_RES_OK;
+    // fres = f_opendir( (DIR*)rddir_p, pathBuf );
+    // if ( fres != FR_OK ) 
+    //     res = LV_FS_RES_NOT_IMP;
+    // else 
+    //     res = LV_FS_RES_OK;
 
-    return res;
+    // return res;
+
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -527,22 +499,24 @@ static lv_fs_res_t fs_dir_open (lv_fs_drv_t * drv, void * rddir_p, const char *p
  */
 static lv_fs_res_t fs_dir_read (lv_fs_drv_t * drv, void * rddir_p, char *fn)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-    FILINFO fno;
+    // lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    // FRESULT fres = FR_INVALID_PARAMETER;
+    // FILINFO fno;
 
-    /* Add your code here*/
-    fn = fn; 
+    // /* Add your code here*/
+    // fn = fn; 
 
-    fres = f_readdir( (DIR*)rddir_p, &fno );
-    if ( fres != FR_OK ) {
-        res = LV_FS_RES_NOT_IMP;
-    } else {
-        fn = fno.fname;
-        res = LV_FS_RES_OK;
-    }
+    // fres = f_readdir( (DIR*)rddir_p, &fno );
+    // if ( fres != FR_OK ) {
+    //     res = LV_FS_RES_NOT_IMP;
+    // } else {
+    //     fn = fno.fname;
+    //     res = LV_FS_RES_OK;
+    // }
 
-    return res;
+    // return res;
+
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -553,18 +527,20 @@ static lv_fs_res_t fs_dir_read (lv_fs_drv_t * drv, void * rddir_p, char *fn)
  */
 static lv_fs_res_t fs_dir_close (lv_fs_drv_t * drv, void * rddir_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
+    // lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    // FRESULT fres = FR_INVALID_PARAMETER;
 
-    /* Add your code here*/
-    fres = f_closedir( (DIR*)rddir_p );
-    if ( fres != FR_OK ) 
-        res = LV_FS_RES_NOT_IMP;
-    else {
-        res = LV_FS_RES_OK;
-    }
+    // /* Add your code here*/
+    // fres = f_closedir( (DIR*)rddir_p );
+    // if ( fres != FR_OK ) 
+    //     res = LV_FS_RES_NOT_IMP;
+    // else {
+    //     res = LV_FS_RES_OK;
+    // }
     
-    return res;
+    // return res;
+
+    return LV_FS_RES_OK;
 }
 
 #else /* Enable this file at the top */

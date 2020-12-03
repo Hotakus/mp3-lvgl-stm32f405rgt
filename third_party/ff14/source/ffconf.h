@@ -25,7 +25,7 @@
 /   3: f_lseek() function is removed in addition to 2. */
 
 
-#define FF_USE_STRFUNC	2
+#define FF_USE_STRFUNC	0
 /* This option switches string functions, f_gets(), f_putc(), f_puts() and f_printf().
 /
 /  0: Disable string functions.
@@ -150,7 +150,7 @@
 */
 
 
-#define FF_FS_RPATH		1
+#define FF_FS_RPATH		0
 /* This option configures support for relative path.
 /
 /   0: Disable relative path and remove related functions.
@@ -163,12 +163,12 @@
 / Drive/Volume Configurations
 /---------------------------------------------------------------------------*/
 
-#define FF_VOLUMES		4
+#define FF_VOLUMES		3
 /* Number of volumes (logical drives) to be used. (1-10) */
 
 
 #define FF_STR_VOLUME_ID	1
-#define FF_VOLUME_STRS		"SPIF","SD_SDIO","SD_SPI","USB2"
+#define FF_VOLUME_STRS		"SPIF","SD_SDIO","SD_SPI"
 /* FF_STR_VOLUME_ID switches support for volume ID in arbitrary strings.
 /  When FF_STR_VOLUME_ID is set to 1 or 2, arbitrary strings can be used as drive
 /  number in the path name. FF_VOLUME_STRS defines the volume ID strings for each
@@ -261,7 +261,7 @@
 */
 
 
-#define FF_FS_LOCK		0
+#define FF_FS_LOCK		8
 /* The option FF_FS_LOCK switches file lock function to control duplicated file open
 /  and illegal operation to open objects. This option must be 0 when FF_FS_READONLY
 /  is 1.
@@ -275,10 +275,22 @@
 
 /* #include <somertos.h>	// O/S definitions */
 #include    "pro_conf.h"
+#if USER_USE_OS == 1
+
 #if USER_USE_RTTHREAD == 1
 #include    <rtthread.h>
 #define     FF_FS_REENTRANT	    1
 #define     FF_SYNC_t		    rt_mutex_t
+#define     FF_FS_TIMEOUT	    0xFFFFUL
+#elif USER_USE_UCOS == 1
+#define     FF_FS_REENTRANT	    0
+#define     FF_SYNC_t		    0
+#define     FF_FS_TIMEOUT	    0xFFFFUL
+#endif
+
+#else
+#define     FF_FS_REENTRANT	    0
+#define     FF_SYNC_t		    0
 #define     FF_FS_TIMEOUT	    0xFFFFUL
 #endif
 /* The option FF_FS_REENTRANT switches the re-entrancy (thread safe) of the FatFs

@@ -54,44 +54,6 @@
 MSH_CMD_EXPORT(lcd_test, lcd test);
  
 #if USER_USE_FATFS == 1
-/* declared in "lv_port_fs.c" */
-
-static void fatfs( int argc, char **args )
-{
-    FIL fil;
-    FRESULT fres = FR_NOT_READY;
-    
-    if ( args[1][0] == 'F' ) {
-        fres = f_open( &fil, "SPIF:/spif.txt", FA_OPEN_ALWAYS | FA_WRITE );
-        if ( fres != FR_OK ) {
-            rt_kprintf( "f_open fres: %d\n", fres );
-            f_close( &fil );
-            return;
-        }
-        
-        f_lseek( &fil, 0 );
-        f_printf( &fil, "Hello spi flash." );
-        
-        f_close( &fil );
-        return;
-    } else if ( args[1][0] == 'S' ) {
-        fres = f_open( &fil, "SD_SDIO:/sd.txt", FA_OPEN_ALWAYS | FA_WRITE );
-        if ( fres != FR_OK ) {
-            rt_kprintf( "f_open fres: %d\n", fres );
-            f_close( &fil );
-            return;
-        }
-        
-        f_lseek( &fil, 0 );
-        f_printf( &fil, "Hello spi sd." );
-        
-        f_close( &fil );
-        return;
-    }
-
-}
-MSH_CMD_EXPORT( fatfs, fatfs test for sd and spi flash );
-
 /************************************************
  * @brief 扫描目录下文件
  * 

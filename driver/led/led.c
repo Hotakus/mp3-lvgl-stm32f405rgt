@@ -1,3 +1,13 @@
+/************************************************
+ * @file led.c
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-12-04
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #include "led.h"
 
 void led_conf( GPIO_TypeDef *GPIOx, u32 pin ) {
