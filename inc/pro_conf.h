@@ -41,6 +41,7 @@ extern "C" {
 // USER_USE_SCR == 0 : ips133
 // USER_USE_SCR == 1 : lcd_2_inch
 // USER_USE_SCR == 2 : LCD_144_ST7735_1.44_inch
+#include "screen_conf.h"
 #define USE_SCR_LCD_ST7789_130              0u
 #define USE_SCR_LCD_ST7789_200              1u
 #define USE_SCR_LCD_144_ST7735              2u

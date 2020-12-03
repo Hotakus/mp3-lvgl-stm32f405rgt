@@ -34,8 +34,6 @@ typedef struct {
 typedef my_source_mgr * my_src_ptr;
 #endif /* 0 */
 
-#define INPUT_BUF_SIZE  4096	/* choose an efficiently fread'able size */
-
 
 /*
  * Initialize source --- called by jpeg_read_header

@@ -2732,6 +2732,16 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>libjpeg/user</GroupName>
+          <Files>
+            <File>
+              <FileName>libjpeg_user.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\third_party\libjpeg\user\libjpeg_user.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>

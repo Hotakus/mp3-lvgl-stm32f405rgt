@@ -257,6 +257,7 @@
 ".\project\obj\jquant1.o"
 ".\project\obj\jquant2.o"
 ".\project\obj\jutils.o"
+".\project\obj\libjpeg_user.o"
 --library_type=microlib --strict --scatter ".\project\obj\405mp3.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

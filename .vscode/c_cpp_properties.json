@@ -53,7 +53,8 @@
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\lib\\src",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\rt-thread-sorted\\src",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\font",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\libjpeg\\source"
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\libjpeg\\source",
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\libjpeg\\user"
             ],
             "defines": [
                 "STM32F40_41xxx",

@@ -20,7 +20,7 @@
 
 /*Stdio is chosen for File storage*/
 #include <stdio.h>
-#include "pro_conf.h"
+#include "ff.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -28,6 +28,9 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
+/* if you use SDCard, you should be adjust the value to 512 or lower */
+#define INPUT_BUF_SIZE  512	/* choose an efficiently fread'able size */
 
 /*This defines the memory allocation methods.*/
 #define JMALLOC   malloc

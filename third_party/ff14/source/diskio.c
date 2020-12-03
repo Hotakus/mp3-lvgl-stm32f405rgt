@@ -126,24 +126,14 @@ DRESULT disk_read (
             do {
                 sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
             } while( --retry && sd_err != SD_OK );
-//            sd_err = SD_WaitReadOperation();
-//            while(SD_GetStatus() != SD_TRANSFER_OK);
+            sd_err = SD_WaitReadOperation();
+            while(SD_GetStatus() != SD_TRANSFER_OK);
             if ( sd_err != SD_OK ) {
                 printf( "SD read error (%d)\n\r", sd_err );
                 return RES_NOTRDY;
-            }
-            
+            } else
+                sector++;
         }
-        
-//        do {
-//            sd_err = SD_ReadMultiBlocks( buff, (sector<<9), card_info.CardBlockSize, count );
-//        } while( --retry && sd_err != SD_OK );
-//        sd_err = SD_WaitReadOperation();
-//        while(SD_GetStatus() != SD_TRANSFER_OK);
-//        if ( sd_err != SD_OK ) {
-//            printf( "SD read error (%d)\n\r", sd_err );
-//            return RES_NOTRDY;
-//        }
         return RES_OK;
 	case DEV_USB :
 		// translate the reslut code here
