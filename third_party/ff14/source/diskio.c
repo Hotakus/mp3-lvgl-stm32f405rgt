@@ -131,8 +131,10 @@ DRESULT disk_read (
             if ( sd_err != SD_OK ) {
                 printf( "SD read error (%d)\n\r", sd_err );
                 return RES_NOTRDY;
-            } else
+            } else {
+                buff += card_info.CardBlockSize;
                 sector++;
+            }
         }
         return RES_OK;
 	case DEV_USB :

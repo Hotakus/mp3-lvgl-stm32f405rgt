@@ -22,5 +22,6 @@
 /* functions */
 void rgb888_to_rgb565(unsigned char* rgb888_buf, int rgb888_size, uint16_t *rgb565_buf);
 int libjpeg_decompress( int argc, char **argv );
+bool is_jpeg( const char *src );
 
 #endif

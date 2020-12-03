@@ -30,7 +30,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 /* if you use SDCard, you should be adjust the value to 512 or lower */
-#define INPUT_BUF_SIZE  512	/* choose an efficiently fread'able size */
+#define INPUT_BUF_SIZE  4096	/* choose an efficiently fread'able size */
 
 /*This defines the memory allocation methods.*/
 #define JMALLOC   malloc

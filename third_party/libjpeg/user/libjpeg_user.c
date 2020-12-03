@@ -13,6 +13,13 @@
 #include "pro_conf.h"
 #include "stdlib.h"
 
+/************************************************
+ * @brief RGB888 转 RGB565
+ * 
+ * @param rgb888_buf 
+ * @param rgb888_size 
+ * @param rgb565_buf 
+ ************************************************/
 void rgb888_to_rgb565(unsigned char* rgb888_buf, int rgb888_size, uint16_t *rgb565_buf)
 {
     uint8_t  Red = 0 ;
@@ -33,6 +40,13 @@ void rgb888_to_rgb565(unsigned char* rgb888_buf, int rgb888_size, uint16_t *rgb5
     }
 }
 
+/************************************************
+ * @brief 解压并在当前屏幕显示jpeg文件
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ ************************************************/
 int libjpeg_decompress( int argc, char **argv )
 {
     if ( argc < 2 ) {
@@ -96,3 +110,25 @@ int libjpeg_decompress( int argc, char **argv )
     f_close( &in_file );
 }
 MSH_CMD_EXPORT( libjpeg_decompress, libjpeg_test );
+
+bool is_jpeg( const char *src )
+{
+    JFILE file;
+    FRESULT ifres = f_open( &file, src, FA_READ | FA_OPEN_EXISTING );
+    if ( ifres != FR_OK ) {
+        DEBUG_PRINT( "Open jpg file : %s error (%d)\n", src, ifres );
+        return -1;
+    }
+
+    const uint8_t h_pat[3] = {0xFF, 0xD8, 0xFF};  // 比较头数据
+    uint8_t h_buf[3] = {0};
+    bool res = false;
+    f_read( &file, h_buf, 3, NULL );
+    if ( MEMCMP( h_pat, h_buf, 3 ) == 0 )
+        res = true;
+    else
+        res = false;
+    f_close( &file );
+    
+    return res;
+}

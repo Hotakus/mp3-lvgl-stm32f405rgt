@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\project\obj\405mp3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\project\obj\405mp3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 04 05:18:51 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Dec 04 06:12:38 2020
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -805,8 +805,6 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[545]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;oled_i2c_init
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;finsh_thread_entry
 <LI><a href="#[363]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_push_history
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;quantize_ord_dither
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;quantize_fs_dither
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;access_virt_sarray
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;access_virt_barray
 <LI><a href="#[3b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;master_selection
@@ -817,15 +815,17 @@ Global Symbols
 <LI><a href="#[2d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_restart
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_pass_2_quant
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_pass_1_quant
+<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;quantize_ord_dither
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;quantize_fs_dither
 </UL>
 
 <P><STRONG><a name="[1b0]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;file_trans
 <LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SD_HighSpeed
 <LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_msh_exec_cmd
+<LI><a href="#[3be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_CreateDecompress
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_open
 <LI><a href="#[3ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_make_d_derived_tbl
-<LI><a href="#[3be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_CreateDecompress
 </UL>
 
 <P><STRONG><a name="[169]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
@@ -2903,7 +2903,7 @@ Global Symbols
 <LI><a href="#[2ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_partition
 </UL>
 
-<P><STRONG><a name="[2f1]"></a>disk_read</STRONG> (Thumb, 122 bytes, Stack size 0 bytes, diskio.o(i.disk_read))
+<P><STRONG><a name="[2f1]"></a>disk_read</STRONG> (Thumb, 124 bytes, Stack size 0 bytes, diskio.o(i.disk_read))
 <BR><BR>[Calls]<UL><LI><a href="#[2f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;w25qxx_read_sector
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SD_WaitReadOperation
 <LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SD_ReadBlock
@@ -3405,16 +3405,16 @@ Global Symbols
 <LI><a href="#[2bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initial_setup
 </UL>
 
-<P><STRONG><a name="[34f]"></a>jf_read</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, jaricom.o(i.jf_read))
+<P><STRONG><a name="[34f]"></a>jf_read</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, lvgl_user.o(i.jf_read))
 <BR><BR>[Calls]<UL><LI><a href="#[325]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_input_buffer
 </UL>
 
 <P><STRONG><a name="[3a9]"></a>jinit_1pass_quantizer</STRONG> (Thumb, 124 bytes, Stack size 0 bytes, jquant1.o(i.jinit_1pass_quantizer))
-<BR><BR>[Calls]<UL><LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colormap
-<LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colorindex
+<BR><BR>[Calls]<UL><LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colorindex
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_fs_workspace
+<LI><a href="#[2c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colormap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;master_selection
 </UL>
@@ -3543,8 +3543,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[31f]"></a>jpeg_destroy</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, jcomapi.o(i.jpeg_destroy))
-<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error_exit
-<LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_destroy_decompress
+<BR><BR>[Called By]<UL><LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_destroy_decompress
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;error_exit
 </UL>
 
 <P><STRONG><a name="[3c5]"></a>jpeg_destroy_decompress</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, jdapimin.o(i.jpeg_destroy_decompress))
@@ -3882,14 +3882,14 @@ Global Symbols
 <LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_free
 <LI><a href="#[323]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
 <LI><a href="#[326]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_close
-<LI><a href="#[3e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_std_error
 <LI><a href="#[3e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_stdio_src
-<LI><a href="#[3cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_start_decompress
-<LI><a href="#[3e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_read_scanlines
+<LI><a href="#[3e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_std_error
 <LI><a href="#[3cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_read_header
 <LI><a href="#[3c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_finish_decompress
 <LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_destroy_decompress
 <LI><a href="#[3be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_CreateDecompress
+<LI><a href="#[3cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_start_decompress
+<LI><a href="#[3e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jpeg_read_scanlines
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atoi
 <LI><a href="#[3e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rgb888_to_rgb565
 </UL>
@@ -13603,10 +13603,10 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[87]"></a>start_pass_1_quant</STRONG> (Thumb, 166 bytes, Stack size 0 bytes, jquant1.o(i.start_pass_1_quant))
-<BR><BR>[Calls]<UL><LI><a href="#[5ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_odither_tables
-<LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colorindex
+<BR><BR>[Calls]<UL><LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_colorindex
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_fs_workspace
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[5ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_odither_tables
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> jquant1.o(i.jinit_1pass_quantizer)
 </UL>
