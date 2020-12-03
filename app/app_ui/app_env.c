@@ -42,10 +42,10 @@ static app_ui_t app_env = {
 
 static lv_obj_t * obj_cont = NULL;           // icons顶层容器
 
-static lv_obj_t * info_cont = NULL;
+static lv_obj_t * info_tabv = NULL;
+lv_obj_t * sys_info_tab = NULL;
+lv_obj_t * tmp_rh_tab   = NULL;
 
-static icon_t system_info;
-static icon_t temp_rh_info;
 
  /**********************
  *  FUNCTIONS
@@ -61,12 +61,7 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
 
     switch (event) {
     case LV_EVENT_CLICKED:
-        lv_btn_set_state( obj, LV_BTN_STATE_CHECKED_RELEASED );
-        lv_btn_set_state( obj, LV_BTN_STATE_CHECKED_PRESSED );
-        if ( obj == system_info.btn )
-            show_system_info();
-        else if ( obj == temp_rh_info.btn )
-            show_temp_rh_info();
+
         break;
     default:
         break;
@@ -86,25 +81,14 @@ static void env_create(void)
     lv_obj_set_style_local_bg_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
     lv_obj_set_style_local_border_opa( obj_cont, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_0 );
 
-    system_info.btn = lv_btn_create( obj_cont, NULL );
-    lv_obj_set_size( system_info.btn, SIDE_BTN_WIDTH, LV_VER_RES_MAX/2 );
-    lv_btn_set_checkable( system_info.btn, true );
-    lv_obj_set_event_cb( system_info.btn, event_handler );
-    system_info.label = lv_label_create( obj_cont, NULL );
-
-    temp_rh_info.btn = lv_btn_create( obj_cont, system_info.btn );
-    lv_obj_set_size( temp_rh_info.btn, SIDE_BTN_WIDTH, LV_VER_RES_MAX/2 );
-    lv_btn_set_checkable( temp_rh_info.btn, true );
-    lv_obj_set_event_cb( temp_rh_info.btn, event_handler );
-    temp_rh_info.label = lv_label_create( obj_cont, NULL );
-
-    info_cont = lv_cont_create( obj_cont, NULL );
-    lv_obj_set_size( info_cont, LV_HOR_RES_MAX-SIDE_BTN_WIDTH, 220 );
-    lv_obj_set_pos( info_cont, SIDE_BTN_WIDTH, 20 );
-
+    info_tabv = lv_tabview_create( obj_cont, NULL );
+    lv_obj_set_size( info_tabv, 320, 220 );
+    lv_obj_set_pos( info_tabv, 0, 20 );
+    sys_info_tab = lv_tabview_add_tab( info_tabv, "S\ny\ns" );
+    tmp_rh_tab   = lv_tabview_add_tab( info_tabv, "E\nv\nn" );
+    lv_tabview_set_btns_pos( info_tabv, LV_TABVIEW_TAB_POS_LEFT );
 
     show_system_info();
-
 }
 
 /************************************************
@@ -120,11 +104,34 @@ app_ui_t *env_ui_get( void )
     return &app_env;
 }
 
+/************************************************
+ * @brief 显示system info
+ ************************************************/
 static void show_system_info( void )
 {
+    static icon_t cpu = {
+        .rel_path = "",
+        .pr_path  = "",
+    };
+    static icon_t mem = {
+        .rel_path = "",
+        .pr_path  = "",
+    };
 
+    cpu.btn = lv_imgbtn_create( sys_info_tab, NULL );
+    lv_imgbtn_set_src( cpu.btn, LV_BTN_STATE_RELEASED, cpu.rel_path );
+    lv_imgbtn_set_src( cpu.btn, LV_BTN_STATE_PRESSED, cpu.pr_path );
+    lv_obj_align( mem.btn, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10 );
+
+    mem.btn = lv_imgbtn_create( tmp_rh_tab, NULL );
+    lv_imgbtn_set_src( mem.btn, LV_BTN_STATE_RELEASED, mem.rel_path );
+    lv_imgbtn_set_src( mem.btn, LV_BTN_STATE_PRESSED, mem.pr_path );
+    lv_obj_align( mem.btn, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 10, -34 );
 }
 
+/************************************************
+ * @brief 显示温湿度信息
+ ************************************************/
 static void show_temp_rh_info( void )
 {
     

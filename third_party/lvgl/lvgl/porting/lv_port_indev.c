@@ -80,11 +80,14 @@ lv_indev_t * indev_keypad;
 lv_indev_t * indev_encoder;
 lv_indev_t * indev_button;
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_KEYPAD ) == LV_USE_INDEV_KEYPAD
 static lv_group_t *indev_group;
+#endif
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_ENCODER ) == LV_USE_INDEV_ENCODER
 static int32_t encoder_diff;
 static lv_indev_state_t encoder_state;
-
+#endif
 
 /**********************
  *      MACROS
@@ -209,10 +212,11 @@ void lv_port_indev_init(void)
  *   STATIC FUNCTIONS
  **********************/
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_TOUCHPAD ) == LV_USE_INDEV_TOUCHPAD
 /*------------------
  * Touchpad
  * -----------------*/
-#if ( INPUT_DEVICE == 0 )
+
 /*Initialize your touchpad*/
 static void touchpad_init(void)
 {
@@ -276,10 +280,10 @@ static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
 }
 #endif
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_MOUSE ) == LV_USE_INDEV_MOUSE
 /*------------------
  * Mouse
  * -----------------*/
-#if ( INPUT_DEVICE == 1 )
 /* Initialize your mouse */
 static void mouse_init(void)
 {
@@ -321,7 +325,7 @@ static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y)
 }
 #endif
 
-#if ( INPUT_DEVICE == 2 )
+#if ( LV_USE_INDEV & LV_USE_INDEV_KEYPAD ) == LV_USE_INDEV_KEYPAD
 /*------------------
  * Keypad
  * -----------------*/
@@ -413,10 +417,10 @@ static uint32_t keypad_get_key(void)
 }
 #endif
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_ENCODER ) == LV_USE_INDEV_ENCODER
 /*------------------
  * Encoder
  * -----------------*/
-#if ( INPUT_DEVICE == 3 )
 /* Initialize your keypad */
 static void encoder_init(void)
 {
@@ -444,10 +448,10 @@ static void encoder_handler(void)
 }
 #endif
 
+#if ( LV_USE_INDEV & LV_USE_INDEV_BUTTON ) == LV_USE_INDEV_BUTTON
 /*------------------
  * Button
  * -----------------*/
-#if ( INPUT_DEVICE == 4 )
 /* Initialize your buttons */
 static void button_init(void)
 {
@@ -504,8 +508,8 @@ static bool button_is_pressed(uint8_t id)
 }
 #endif
 
-#else /* Enable this file at the top */
 
+#else /* Enable this file at the top */
 /* This dummy typedef exists purely to silence -Wpedantic. */
 typedef int keep_pedantic_happy;
 #endif

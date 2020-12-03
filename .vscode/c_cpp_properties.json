@@ -45,17 +45,15 @@
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\src\\lv_misc",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\src\\lv_themes",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\src\\lv_widgets",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\usb_device_msc\\STM32_USB_Device_Library\\Class\\msc\\inc",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\usb_device_msc\\STM32_USB_Device_Library\\Core\\inc",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\usb_device_msc\\STM32_USB_OTG_Driver\\inc",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\usb_device_msc",
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\libjpeg\\include",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include\\rw",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\core\\startup",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\lib",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\lib\\src",
                 "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\rt-thread-sorted\\src",
-                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\font"
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\lvgl\\lvgl\\font",
+                "e:\\works\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\third_party\\libjpeg\\source"
             ],
             "defines": [
                 "STM32F40_41xxx",
