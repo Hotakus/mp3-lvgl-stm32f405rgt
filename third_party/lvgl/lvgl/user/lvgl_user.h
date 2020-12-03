@@ -18,6 +18,6 @@
 /* definations */
 
 /* functions */
-
+void lvgl_user_decoder_init( void );
 
 #endif

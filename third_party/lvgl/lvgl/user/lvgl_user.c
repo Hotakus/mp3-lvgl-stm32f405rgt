@@ -42,7 +42,7 @@ void lvgl_user_decoder_init( void )
 static lv_res_t jpeg_decoder_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header)
 {
     /*Check whether the type `src` is known by the decoder*/
-    if ( is_jpeg( (const uint8_t *)src ) != true )
+    if ( is_jpeg( (const char *)src ) != true )
         return LV_RES_INV;
 
     cinfo.err = jpeg_std_error(&jerr);
@@ -57,7 +57,7 @@ static lv_res_t jpeg_decoder_info(lv_img_decoder_t * decoder, const void * src, 
     jpeg_read_header(&cinfo, TRUE);
 
     /* Read the PNG header and find `width` and `height` */
-    header->cf = LV_IMG_CF_RAW_ALPHA;
+    header->cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
     header->w  = cinfo.image_width;
     header->h  = cinfo.image_height;
 
@@ -66,9 +66,10 @@ static lv_res_t jpeg_decoder_info(lv_img_decoder_t * decoder, const void * src, 
 
 static lv_res_t jpeg_decoder_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
 {
-    if ( is_jpeg( (const uint8_t *)dsc->src ) != true )
+    if ( is_jpeg( (const char *)dsc->src ) != true )
         return LV_RES_INV;
 
+    dsc->img_data = NULL;
 
     return LV_RES_OK;
 }
@@ -89,5 +90,5 @@ static lv_res_t jpeg_decoder_read_line(
     uint8_t * buf
 )
 {
-
+    jpeg_read_scanlines( &cinfo, &buf, 1 );
 }

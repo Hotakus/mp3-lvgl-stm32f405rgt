@@ -4,9 +4,9 @@
 #include "ff_user.h"
 #include "tim.h"
 
-#define DATA_BUF_SIZE      256
+#define DATA_BUF_SIZE      4096
 #define TRANS_RETRY_TIME   5
-#if DATA_BUF_SIZE > 256
+#if DATA_BUF_SIZE > 4096
 #error "DATA_BUF_SIZE too big"
 #endif
 static uint8_t *dat_buf = NULL;

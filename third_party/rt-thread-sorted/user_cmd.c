@@ -24,6 +24,8 @@
 #include "ft6236.h"
 #include "vs10xx.h"
 
+#if defined(RT_USING_FINSH)
+
 /************************************************
  * @brief cmd for msh
  ************************************************/
@@ -332,3 +334,4 @@ void dma_test(void)
 }
 MSH_CMD_EXPORT(dma_test, dma_test);
 
+#endif
