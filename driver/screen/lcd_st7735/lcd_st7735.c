@@ -181,7 +181,7 @@ void lcd_st7735_init( void )
 
 	lcd_st7735_powerUp();
     
-    lcd_st7735_clear_with( 0xffff );
+    lcd_st7735_clear_with( 0xf800 );
     
 }
 

@@ -62,7 +62,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
         dest_size = 0;
         dest_fres = f_open( &dest_fil, spif_buf, FA_CREATE_NEW );
         if ( dest_fres != FR_OK ) {
-            rt_kprintf( "dest create %s error.(%d)\n", file_name, dest_fres );
+            DEBUG_PRINT( "dest create %s error.(%d)\n", file_name, dest_fres );
             f_close( &dest_fil );
             return TRANS_STAT_OK;
         }

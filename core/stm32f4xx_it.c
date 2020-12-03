@@ -86,12 +86,8 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-#if USER_USE_UCOS == 0
-    ticks_decrease();
-#endif
-    
-}
 
+}
 #endif
 
 

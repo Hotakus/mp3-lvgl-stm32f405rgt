@@ -1,15 +1,9 @@
 /**
-  ******************************************************************************
-  * @file    jdata_conf.h
+ ******************************************************************************
+  * File Name          : jdata_conf.h
+  * Description        : This file provides header to "jdata_conf.h" module.
+  *                      It implements also file based read/write functions.
   *
-  * @author  MCD Application Team
-  * @brief   jdata_conf file template header file using FatFs API
-  *          This file should be copied to the application "Inc" folder and modified 
-  *          as follows:
-  *            - Rename it to 'jdata_conf.h'.
-  *            - update the  read/write functions defines (example of implementation is 
-  *              provided based on FatFs)
-  *          
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.
@@ -21,9 +15,12 @@
   *
   ******************************************************************************
 **/
-/* Includes ------------------------------------------------------------------*/
-#include "ff.h"
 
+/* Includes ------------------------------------------------------------------*/
+
+/*Stdio is chosen for File storage*/
+#include <stdio.h>
+#include "pro_conf.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -32,59 +29,31 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-/*
-  Example of implementation based on FatFS
-  
-  If JFREAD/JFWRITE prototypes are complient with the standard FatFS APIs (f_read/f_write) 
-  only APIs re-definition is needed and no need to wrapper APIs defined in "jdata_conf_template.c" file
+/*This defines the memory allocation methods.*/
+#define JMALLOC   malloc
+#define JFREE     free
 
-   #define JFREAD  f_read
-   #define JFWRITE f_write
+/*This defines the File data manager type.*/
+#define JFILE            FIL
 
-*/
+size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
 
-
-#define JFILE     FIL
-
-#define JMALLOC   MALLOC    
-#define JFREE     FREE  
-
-size_t read_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf);
-size_t write_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf);
-
-/************************************************
- * @brief 对接lib jpeg 的 read API
- * 
- * @param file 
- * @param buf 
- * @param sizeofbuf 
- * @return size_t 
- ************************************************/
-inline size_t read_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf)
+inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 {
     uint32_t br = 0;
     f_read( file, buf, sizeofbuf, &br );
     return br;
 }
 
-/************************************************
- * @brief 对接lib jpeg 的 write API
- * 
- * @param file 
- * @param buf 
- * @param sizeofbuf 
- * @return size_t 
- ************************************************/
-inline size_t write_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf)
+inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 {
     uint32_t bw = 0;
-    f_write( file, buf, sizeofbuf, &bw );
+    f_read( file, buf, sizeofbuf, &bw );
     return bw;
 }
 
-#define JFREAD(file,buf,sizeofbuf)  \
-   read_file( file, buf, sizeofbuf )
+#define JFREAD(file,buf,sizeofbuf)  jf_read(file,buf,sizeofbuf)
+#define JFWRITE(file,buf,sizeofbuf)  jf_writ(file,buf,sizeofbuf)
 
-#define JFWRITE(file,buf,sizeofbuf)  \
-   write_file (file,buf,sizeofbuf)
-
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

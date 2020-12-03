@@ -64,7 +64,6 @@ extern "C" {
 #include "lv_port_fs.h"
 #include "lv_port_indev.h"
 
-#define LV_CPU_USAGE_GET    (100 - lv_task_get_idle())
 #endif
 
 #if USER_USE_APP == 1
@@ -112,8 +111,11 @@ extern "C" {
 #define DELAY           delay_ms
 #define STRCMP          strcmp
 #define STRCAT          strcat
+#define STRLEN          RT_STRLEN
 #define MALLOC          malloc
 #define FREE            free
+#define MEMSET          memset
+#define MEMCMP          memcmp
 
 #endif
 
