@@ -66,10 +66,6 @@ extern "C" {
 #include "lv_port_fs.h"
 #include "lv_port_indev.h"
 
-#if USER_USE_LIBJPEG == 1
-#include "jpeglib.h"
-#endif
-
 #endif
 
 #if USER_USE_APP == 1
@@ -117,7 +113,7 @@ extern "C" {
 #define DELAY           delay_ms
 #define STRCMP          strcmp
 #define STRCAT          strcat
-#define STRLEN          RT_STRLEN
+#define STRLEN          strlen
 #define MALLOC          malloc
 #define FREE            free
 #define MEMSET          memset

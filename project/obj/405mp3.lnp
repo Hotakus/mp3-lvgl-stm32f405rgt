@@ -53,7 +53,6 @@
 ".\project\obj\adc.o"
 ".\project\obj\vs10xx.o"
 ".\project\obj\sht20.o"
-".\project\obj\mp3_decode.o"
 ".\project\obj\app_main.o"
 ".\project\obj\app_task.o"
 ".\project\obj\app_ui.o"
