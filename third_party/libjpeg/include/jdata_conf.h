@@ -9,6 +9,10 @@
  * @copyright Copyright (c) 2020
  * 
  ************************************************/
+#ifndef  JDATA_CONF_H
+#define  JDATA_CONF_H
+
+
 #include "ff.h"
 
 /* if you use SDCard, you should be adjust the value to 512 or lower */
@@ -24,14 +28,14 @@
 size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
 size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
 
-inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+__inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 {
     uint32_t br = 0;
     f_read( file, buf, sizeofbuf, &br );
     return br;
 }
 
-inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+__inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 {
     uint32_t bw = 0;
     f_read( file, buf, sizeofbuf, &bw );
@@ -40,3 +44,5 @@ inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 
 #define JFREAD(file,buf,sizeofbuf)  jf_read(file,buf,sizeofbuf)
 #define JFWRITE(file,buf,sizeofbuf)  jf_writ(file,buf,sizeofbuf)
+
+#endif // ! JDATA_CONF_H

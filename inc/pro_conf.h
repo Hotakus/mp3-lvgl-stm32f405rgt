@@ -81,6 +81,10 @@ extern "C" {
 #include "ff.h"
 #endif
 
+#if USER_USE_LIBJPEG == 1u
+#include "jpeglib.h"
+#endif
+
 #if USER_USE_RTTHREAD == 1u
 #include <rtthread.h>
 #define APP_THREAD_NUM      10u         // 定义APP最大线程
