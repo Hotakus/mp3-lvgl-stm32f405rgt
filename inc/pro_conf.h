@@ -36,6 +36,7 @@ extern "C" {
 #define USER_USE_LVGL       1u
 #define USER_USE_FATFS      1u
 #define USER_USE_APP        1u
+#define USER_USE_LIBJPEG    1u
 
 /* USER USE screen */
 // USER_USE_SCR == 0 : ips133
@@ -64,6 +65,10 @@ extern "C" {
 #include "lv_port_disp.h"
 #include "lv_port_fs.h"
 #include "lv_port_indev.h"
+
+#if USER_USE_LIBJPEG == 1
+#include "jpeglib.h"
+#endif
 
 #endif
 

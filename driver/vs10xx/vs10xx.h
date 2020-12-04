@@ -88,6 +88,7 @@ enum VS10xx_REG {
     REG_VS10xx_SCI_AICTRL3           ,
 };
 
+
 /* functions */
 void vs10xx_init( void );
 void vs10xx_hw_reset( void );

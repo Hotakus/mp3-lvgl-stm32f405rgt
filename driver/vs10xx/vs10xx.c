@@ -179,18 +179,12 @@ void vs10xx_sin_test( uint16_t test_time )
     DEBUG_PRINT( "VS10xx test done.\n" );
 }
 
-struct mp3_IDxVxHeader
-{
-    unsigned char aucIDx[3];     /* 保存的值比如为"ID3"表示是ID3V2 */
-    unsigned char ucVersion;     /* 如果是ID3V2.3则保存3,如果是ID3V2.4则保存4 */
-    unsigned char ucRevision;    /* 副版本号 */
-    unsigned char ucFlag;        /* 存放标志的字节 */
-    unsigned char aucIDxSize[4]; /* 整个 IDxVx 的大小，除去本结构体的 10 个字节 */
-    /* 只有后面 7 位有用 */
-} mp3_header;
 
-uint8_t audio_buf[512] = {0};
-
+/************************************************
+ * @brief 播放MP3
+ * 
+ * @param mp3_file_path 
+ ************************************************/
 void vs10xx_play_mp3( const char *mp3_file_path )
 {
     FIL mp3_fil;
@@ -199,26 +193,8 @@ void vs10xx_play_mp3( const char *mp3_file_path )
         DEBUG_PRINT( "open mp3 file : %s error.\n", mp3_file_path );
         return;
     }
-    DEBUG_PRINT( "%s\n", mp3_file_path );
-    f_read( &mp3_fil, &mp3_header, 10, NULL );
-    DEBUG_PRINT( "%s\n", mp3_header.aucIDx );
-    
-    uint32_t i = 0;
 
-    VS10xx_CS_HIGH;
-    VS10xx_XDCS_LOW;
-    f_lseek( &mp3_fil, 0 );
-    while(1) {
-        DEBUG_PRINT( "%d\n", i++ );
-        f_read( &mp3_fil, audio_buf, 256, NULL );
-        while(!(DREQ_STAT));
-        for ( uint16_t k = 0; k < 256; k++ ) {
-            vs10xx_trans_byte( audio_buf[k] );
-        }
-    
-    }
-    VS10xx_XDCS_HIGH;
-    
+
     f_close( &mp3_fil );
 }
 

@@ -57,7 +57,7 @@ static lv_res_t jpeg_decoder_info(lv_img_decoder_t * decoder, const void * src, 
     jpeg_read_header(&cinfo, TRUE);
 
     /* Read the PNG header and find `width` and `height` */
-    header->cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
+    header->cf = LV_IMG_CF_RAW_ALPHA;
     header->w  = cinfo.image_width;
     header->h  = cinfo.image_height;
 

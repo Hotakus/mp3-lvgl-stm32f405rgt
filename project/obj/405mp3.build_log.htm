@@ -31,14 +31,33 @@ compiling stm32f4xx_it.c...
 compiling main.c...
 compiling dma_conf.c...
 compiling isr_funcs.c...
-compiling rtc.c...
 compiling nvic_conf.c...
+compiling rtc.c...
 compiling sd_sdio_conf.c...
 compiling systick.c...
 compiling sd_sdio.c...
-compiling screen_conf.c...
 compiling w25qxx.c...
+compiling screen_conf.c...
 compiling file_trans.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+driver\file_thrans_with_fatfs\file_trans.c: 2 warnings, 7 errors
 compiling tim.c...
 compiling lcd_st7789.c...
 driver\screen\lcd_st7789\lcd_st7789.c(223): warning:  #177-D: function "lcd_st7789_send"  was declared but never referenced
@@ -54,10 +73,15 @@ compiling ft6236.c...
 compiling oled.c...
 compiling lcd_st7735.c...
 compiling vs10xx.c...
-driver\vs10xx\vs10xx.c(220): warning:  #111-D: statement is unreachable
-      VS10xx_XDCS_HIGH;
-driver\vs10xx\vs10xx.c: 1 warning, 0 errors
 compiling sht20.c...
+compiling mp3_decode.c...
+driver\vs10xx\decode\mp3_decode.c(55): warning:  #61-D: integer operation result is out of range
+      mp3_id3v2_size &= ~(0xF<<28); // ??????28???
+driver\vs10xx\decode\mp3_decode.c(49): warning:  #177-D: function "analyse_id3v2"  was declared but never referenced
+  static void analyse_id3v2(void)
+driver\vs10xx\decode\mp3_decode.c(62): warning:  #177-D: function "analyse_frame_header"  was declared but never referenced
+  static void analyse_frame_header( void )
+driver\vs10xx\decode\mp3_decode.c: 3 warnings, 0 errors
 compiling app_main.c...
 compiling app_task.c...
 compiling app_ui.c...
@@ -121,20 +145,75 @@ app\app_ui\app_setting.c(50): warning:  #177-D: function "event_handler"  was de
   static void event_handler(lv_obj_t * obj, lv_event_t event)
 app\app_ui\app_setting.c: 2 warnings, 0 errors
 compiling diskio.c...
+compiling ff.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+third_party\ff14\source\ff.c: 2 warnings, 7 errors
 compiling ff_user.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+third_party\ff14\source\ff_user.c: 2 warnings, 7 errors
 compiling ffsystem.c...
 third_party\ff14\source\ffsystem.c(69): warning:  #167-D: argument of type "BYTE *" is incompatible with parameter of type "const char *"
       *sobj = rt_mutex_create( &vol, RT_IPC_FLAG_PRIO );
 third_party\ff14\source\ffsystem.c: 1 warning, 0 errors
 compiling ffunicode.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+third_party\ff14\source\ffunicode.c: 2 warnings, 7 errors
 compiling board.c...
-compiling ff.c...
 compiling user_cmd.c...
 third_party\rt-thread-sorted\user_cmd.c(320): warning:  #223-D: function "dma_mem2mem" declared implicitly
       dma_mem2mem(
-third_party\rt-thread-sorted\user_cmd.c(337): warning:  #1-D: last line of file ends without a newline
-  #endif
-third_party\rt-thread-sorted\user_cmd.c: 2 warnings, 0 errors
+third_party\rt-thread-sorted\user_cmd.c: 1 warning, 0 errors
 compiling lv_port_disp.c...
 compiling lv_port_fs.c...
 compiling lv_port_indev.c...
@@ -147,65 +226,1118 @@ third_party\lvgl\lvgl\user\lvgl_user.c(28): warning:  #177-D: function "png_deco
   static lv_res_t png_decoder_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header);
 third_party\lvgl\lvgl\user\lvgl_user.c: 3 warnings, 0 errors
 compiling jaricom.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jaricom.c: 2 warnings, 9 errors
 compiling jcapimin.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcapimin.c: 2 warnings, 9 errors
 compiling jcapistd.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcapistd.c: 2 warnings, 9 errors
 compiling jcarith.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcarith.c: 2 warnings, 9 errors
 compiling jccoefct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jccoefct.c: 2 warnings, 9 errors
 compiling jccolor.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 third_party\libjpeg\source\jccolor.c(79): warning:  #47-D: incompatible redefinition of macro "TABLE_SIZE"  (declared at line 337 of "inc\arm_math.h")
   #define TABLE_SIZE	(8*(MAXJSAMPLE+1))
-third_party\libjpeg\source\jccolor.c: 1 warning, 0 errors
+third_party\libjpeg\source\jccolor.c: 3 warnings, 9 errors
 compiling jcdctmgr.c...
-compiling jcinit.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcdctmgr.c: 2 warnings, 9 errors
 compiling jchuff.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jchuff.c: 2 warnings, 9 errors
+compiling jcinit.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcinit.c: 2 warnings, 9 errors
 compiling jcmainct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcmainct.c: 2 warnings, 9 errors
 compiling jcmarker.c...
-compiling jcomapi.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcmarker.c: 2 warnings, 9 errors
 compiling jcmaster.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcmaster.c: 2 warnings, 9 errors
+compiling jcomapi.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcomapi.c: 2 warnings, 9 errors
 compiling jcparam.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcparam.c: 2 warnings, 9 errors
 compiling jcprepct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcprepct.c: 2 warnings, 9 errors
 compiling jcsample.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jcsample.c: 2 warnings, 9 errors
 compiling jctrans.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jctrans.c: 2 warnings, 9 errors
 compiling jdapimin.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdapimin.c: 2 warnings, 9 errors
 compiling jdapistd.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdapistd.c: 2 warnings, 9 errors
 compiling jdarith.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdarith.c: 2 warnings, 9 errors
 compiling jdatadst.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdatadst.c: 2 warnings, 9 errors
 compiling jdatasrc.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdatasrc.c: 2 warnings, 9 errors
+compiling jdcoefct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdcoefct.c: 2 warnings, 9 errors
 compiling jdcolor.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
 third_party\libjpeg\source\jdcolor.c(83): warning:  #47-D: incompatible redefinition of macro "TABLE_SIZE"  (declared at line 337 of "inc\arm_math.h")
   #define TABLE_SIZE	(3*(MAXJSAMPLE+1))
-third_party\libjpeg\source\jdcolor.c: 1 warning, 0 errors
-compiling jdcoefct.c...
+third_party\libjpeg\source\jdcolor.c: 3 warnings, 9 errors
 compiling jddctmgr.c...
-compiling jdmainct.c...
-compiling jdinput.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jddctmgr.c: 2 warnings, 9 errors
 compiling jdhuff.c...
-compiling jdmaster.c...
-compiling jdmerge.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdhuff.c: 2 warnings, 9 errors
+compiling jdinput.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdinput.c: 2 warnings, 9 errors
+compiling jdmainct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdmainct.c: 2 warnings, 9 errors
 compiling jdmarker.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdmarker.c: 2 warnings, 9 errors
+compiling jdmaster.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdmaster.c: 2 warnings, 9 errors
+compiling jdmerge.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdmerge.c: 2 warnings, 9 errors
 compiling jdpostct.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdpostct.c: 2 warnings, 9 errors
 compiling jdsample.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdsample.c: 2 warnings, 9 errors
 compiling jdtrans.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jdtrans.c: 2 warnings, 9 errors
 compiling jerror.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jerror.c: 2 warnings, 9 errors
 compiling jfdctflt.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jfdctflt.c: 2 warnings, 9 errors
 compiling jfdctfst.c...
-compiling jidctflt.c...
-compiling jidctfst.c...
-compiling jmemmgr.c...
-compiling jmemnobs.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jfdctfst.c: 2 warnings, 9 errors
 compiling jfdctint.c...
-compiling jquant1.c...
-compiling jquant2.c...
-compiling jutils.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jfdctint.c: 2 warnings, 9 errors
+compiling jidctflt.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jidctflt.c: 2 warnings, 9 errors
+compiling jidctfst.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jidctfst.c: 2 warnings, 9 errors
 compiling jidctint.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jidctint.c: 2 warnings, 9 errors
+compiling jmemnobs.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jmemnobs.c: 2 warnings, 9 errors
+compiling jmemmgr.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jmemmgr.c: 2 warnings, 9 errors
+compiling jquant1.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jquant1.c: 2 warnings, 9 errors
+compiling jquant2.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jquant2.c: 2 warnings, 9 errors
+compiling jutils.c...
+.\third_party\libjpeg\include\jdata_conf.h(42): error:  #20: identifier "FIL" is undefined
+  size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(43): error:  #20: identifier "FIL" is undefined
+  size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf);
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(48): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &br );
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #20: identifier "FIL" is undefined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(55): warning:  #223-D: function "f_read" declared implicitly
+      f_read( file, buf, sizeofbuf, &bw );
+.\third_party\libjpeg\include\jpeglib.h(955): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_dest JPP((j_compress_ptr cinfo, JFILE * outfile));
+.\third_party\libjpeg\include\jpeglib.h(956): error:  #20: identifier "FIL" is undefined
+  EXTERN(void) jpeg_stdio_src JPP((j_decompress_ptr cinfo, JFILE * infile));
+third_party\ff14\source\ff.h(306): error:  #159: declaration is incompatible with previous "f_read"  (declared at line 48 of ".\third_party\libjpeg\include\jdata_conf.h")
+  FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);			/* Read data from the file */
+.\third_party\libjpeg\include\jdata_conf.h(45): error:  #247: function "jf_read"  has already been defined
+  inline size_t jf_read(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+.\third_party\libjpeg\include\jdata_conf.h(52): error:  #247: function "jf_writ"  has already been defined
+  inline size_t jf_writ(JFILE *file, uint8_t *buf, uint32_t sizeofbuf)
+third_party\libjpeg\source\jutils.c: 2 warnings, 9 errors
 compiling libjpeg_user.c...
-third_party\libjpeg\user\libjpeg_user.c(111): warning:  #940-D: missing return statement at end of non-void function "libjpeg_decompress" 
+third_party\libjpeg\user\libjpeg_user.c(113): warning:  #940-D: missing return statement at end of non-void function "libjpeg_decompress" 
   }
 third_party\libjpeg\user\libjpeg_user.c: 1 warning, 0 errors
-linking...
-Program Size: Code=209774 RO-data=89094 RW-data=1988 ZI-data=88612  
-FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 35 Warning(s).
+".\project\obj\405mp3.axf" - 442 Error(s), 136 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -218,7 +1350,8 @@ Package Vendor: Keil
   E:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:15
+Target not created.
+Build Time Elapsed:  00:00:14
 </pre>
 </body>
 </html>

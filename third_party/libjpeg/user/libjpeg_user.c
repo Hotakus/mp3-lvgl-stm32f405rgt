@@ -13,6 +13,8 @@
 #include "pro_conf.h"
 #include "stdlib.h"
 
+#if USER_USE_LIBJPEG == 1
+
 /************************************************
  * @brief RGB888 转 RGB565
  * 
@@ -132,3 +134,5 @@ bool is_jpeg( const char *src )
     
     return res;
 }
+
+#endif
