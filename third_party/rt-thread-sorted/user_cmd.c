@@ -23,6 +23,7 @@
 #include "oled.h"
 #include "ft6236.h"
 #include "vs10xx.h"
+#include "mp3_decode.h"
 
 #if defined(RT_USING_FINSH)
 
@@ -267,14 +268,6 @@ static void vs10xx_test( int argc, char **args )
     vs10xx_init();
 }
 MSH_CMD_EXPORT(vs10xx_test , vs10xx test);
-
-static void vs10xx_play( int argc, char **args )
-{
-    if ( argc == 1 )
-        return;
-    vs10xx_play_mp3( "SPIF:/test.mp3" );
-}
-MSH_CMD_EXPORT(vs10xx_play , vs10xx play);
 
 static void mp3_get_jpeg( int argc, char **args )
 {

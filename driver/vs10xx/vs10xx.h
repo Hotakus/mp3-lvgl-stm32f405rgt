@@ -18,6 +18,7 @@
 #include "systick.h"
 #include <stdlib.h>
 #include "spi_conf.h"
+#include "mp3_decode.h"
 
 /* definition */
 #define VS10xx_SPI              SPI1
@@ -97,6 +98,6 @@ void vs10xx_sw_reset( void );
 void vs10xx_sin_test( uint16_t test_time );
 
 void vs10xx_play_mp3( const char *mp3_file_path );
-void extract_mp3_pic( const char *mp3_file_path, const char *out_path );
+
 
 #endif

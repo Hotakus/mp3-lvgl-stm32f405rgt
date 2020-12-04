@@ -107,51 +107,6 @@ FRESULT show_element_info( TCHAR *path )
     return fr;
 }
 
-#define TEST_DEV_NUM    5
-FATFS test_fs[TEST_DEV_NUM];
-FRESULT test_fr[TEST_DEV_NUM];
-uint8_t ws[FF_MAX_SS] = {0};
-void fatfs_test( char *dev )
-{
-    char buf[10] = {0};
-    strcat( buf, dev );
-    strcat( buf, ":" );
-    
-    test_fr[0] = f_mount( &test_fs[0], buf, 1 );
-
-    if ( test_fr[0] != FR_OK ) {
-        DEBUG_PRINT( "test dev mounted error. (%d)\n\r", test_fr[0] );
-        DEBUG_PRINT( "you want to do mkfs ? ( y/n )\n\r" );
-        uint8_t input = 0;
-        fflush(stdout);
-        fflush(stdin);
-        input = getchar();
-        DEBUG_PRINT( "input: %c.\n\r", input );
-        if ( input == 'y' ) {
-            DEBUG_PRINT( "mkfs start.\n\r" );
-            test_fr[0] = f_mkfs( buf, 0, ws, FF_MAX_SS );
-            if ( test_fr[0] != FR_OK ) {
-                DEBUG_PRINT( "test dev mkfs error. (%d)\n\r", test_fr[0] );
-                goto test_done;
-            } else {
-                DEBUG_PRINT( "test dev mkfs successfully.\n\r" );
-            }
-        } else if ( input == 'n' ) {
-            goto test_done;
-        }
-    }
-    
-    u32 total_size;
-    u32 free_size;
-    exf_getfree( buf, &total_size, &free_size );
-    DEBUG_PRINT( "total size: %d kb\n\r", total_size );
-    DEBUG_PRINT( "free size : %d kb\n\r", free_size );
-    
-test_done:
-    DEBUG_PRINT( "test done.\n\r" );
-}
-
-
 const char * get_real_path(const char * path)
 {
     /* Example path: "S:/folder/file.txt"
