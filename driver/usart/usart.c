@@ -65,7 +65,6 @@ void rt_usart_conf( USART_TypeDef* USARTx, u32 baud_rate )
     USART_Init( USARTx, &us_s );
     USART_Cmd( USARTx, ENABLE );
 }
-INIT_BOARD_EXPORT(rt_usart_conf);
 
 void my_putc( uint8_t ch ) 
 {
@@ -81,9 +80,9 @@ uint8_t my_getc( void )
 
 PUTCHAR_PROTOTYPE 
 {
-    if ( ch == '\n' ) {
-        my_putc( '\r' );
-    }
+    // if ( ch == '\n' ) {
+    //     my_putc( '\r' );
+    // }
     my_putc( (uint8_t)ch );
     return ch;
 }

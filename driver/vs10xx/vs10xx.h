@@ -28,7 +28,7 @@
 #define VS10xx_XCS              GPIO_Pin_3        // PC
 
 /* return DREQ's status */
-#define DREQ_STAT               ( GPIOC->IDR & VS10xx_DREQ )
+#define DREQ_STAT               ( ((GPIOC->IDR & VS10xx_DREQ)==VS10xx_DREQ)?(1):(0) )
 
 #define VS10xx_XRESET_HIGH      GPIOC->BSRRL |= VS10xx_XRESET
 #define VS10xx_XRESET_LOW       GPIOC->BSRRH |= VS10xx_XRESET

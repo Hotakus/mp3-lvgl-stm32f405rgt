@@ -75,6 +75,15 @@ void mp3_analyse_bitrate( mp3_info_t *mp3 )
         } else if ( mp3->fh.layer == 0x01 ) {
             inc_var = 8;
         }
+
+        /*计算sample rate */
+        if ( mp3->fh.sampling_frequency == 0 )
+            mp3->sample_rate = 441000;
+        if ( mp3->fh.sampling_frequency == 1 )
+            mp3->sample_rate = 480000;
+        if ( mp3->fh.sampling_frequency == 2 )
+            mp3->sample_rate = 320000;
+
     } else if ( mp3->fh.version == 0x02 || mp3->fh.version == 0x00 ) {
 
     } 
@@ -115,6 +124,8 @@ void mp3_analyse(const char *mp3_file_path, mp3_info_t *mp3 )
     f_read( mp3_fil, &mp3->fh, 4, NULL );
     mp3_analyse_frame_header( mp3 );
 
+    mp3->frame_spos = mp3->h_frame_pos;
+    mp3->frame_epos = mp3->frame_spos + mp3->file_size_splited;
     
     f_close( mp3_fil );
     FREE(mp3_fil);

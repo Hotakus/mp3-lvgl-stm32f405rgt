@@ -60,6 +60,9 @@ typedef struct mp3_info_t {
     size_t   file_size_splited; // 去除ID3V2和ID3V2后大小， 也就是所有帧大小
     size_t   id3v2_size;        // ID3V2 size
     size_t   h_frame_pos;       // 帧头偏移地址
+    size_t   frame_spos;        
+    size_t   frame_epos;
+    size_t   sample_rate;
     uint16_t bitrates;          // 比特率 kbps
     uint16_t play_times;        // 播放时间
     uint16_t frame_size;        // 单帧大小 byte

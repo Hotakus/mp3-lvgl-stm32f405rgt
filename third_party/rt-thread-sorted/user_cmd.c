@@ -269,6 +269,20 @@ static void vs10xx_test( int argc, char **args )
 }
 MSH_CMD_EXPORT(vs10xx_test , vs10xx test);
 
+static void play_mp3( int argc, char **args )
+{
+    if ( argc == 1 ) {
+        vs10xx_play_mp3( "SD_SDIO:/test.mp3" );
+        return;
+    } else if ( argc > 2 ) {
+        DEBUG_PRINT( "usage : %s <mp3 file path>\n", __FUNCTION__ );
+        return;
+    }
+
+    vs10xx_play_mp3( args[1] );
+}
+MSH_CMD_EXPORT(play_mp3 , paly mp3 by vs10xx);
+
 static void mp3_get_jpeg( int argc, char **args )
 {
     if ( argc == 1 )

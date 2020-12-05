@@ -84,15 +84,7 @@ void lv_ex_tabview_1(void)
 void app_create_example(void)
 {
 
-    // lv_ex_tabview_1();
-    
-    lv_obj_t * img = lv_img_create( lv_scr_act(), NULL );
-    lv_img_set_src( img, "S:/test.jpg" );
-
-    lv_obj_t * img2 = lv_img_create( lv_scr_act(), NULL );
-    lv_img_set_src( img2, "S:/folder.bin" );
-    
-    lv_obj_align( img2, NULL, LV_ALIGN_CENTER, 0, 0 );
+    lv_ex_tabview_1();
     
 }
 #endif

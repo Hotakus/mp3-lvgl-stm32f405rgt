@@ -79,7 +79,7 @@ RT_WEAK void *rt_heap_end_get(void)
 void rt_hw_board_init()
 {
     
-    rt_usart_conf( USART1, 115200 );
+    rt_usart_conf( USART1, 1500000 );
 
     cpu_usage_init();
 
