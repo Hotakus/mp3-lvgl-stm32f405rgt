@@ -22,21 +22,23 @@ Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
 e:\works\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\405mp3.uvprojx
-Project File Date:  12/04/2020
+Project File Date:  12/05/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
 Build target 'f405mp3'
-compiling mp3_decode.c...
-driver\vs10xx\decode\mp3_decode.c(221): warning:  #223-D: function "Clock_Start" declared implicitly
-      Clock_Start();
-driver\vs10xx\decode\mp3_decode.c(246): warning:  #223-D: function "Clock_End" declared implicitly
-      ttime = Clock_End();
-driver\vs10xx\decode\mp3_decode.c: 2 warnings, 0 errors
+compiling lvgl_user.c...
+third_party\lvgl\lvgl\user\lvgl_user.c(17): warning:  #177-D: variable "png_dec"  was declared but never referenced
+  static lv_img_decoder_t * png_dec = NULL;      // PNG??????decoder
+third_party\lvgl\lvgl\user\lvgl_user.c(19): warning:  #177-D: variable "jpeg_flag"  was declared but never referenced
+  static uint8_t jpeg_flag = 0;
+third_party\lvgl\lvgl\user\lvgl_user.c(29): warning:  #177-D: function "png_decoder_info"  was declared but never referenced
+  static lv_res_t png_decoder_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header);
+third_party\lvgl\lvgl\user\lvgl_user.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=210154 RO-data=89046 RW-data=1988 ZI-data=92872  
+Program Size: Code=187358 RO-data=88870 RW-data=1908 ZI-data=63856  
 FromELF: creating hex file...
-".\project\obj\405mp3.axf" - 0 Error(s), 2 Warning(s).
+".\project\obj\405mp3.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 

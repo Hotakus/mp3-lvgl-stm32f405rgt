@@ -117,7 +117,6 @@ void i2c_generate_stop ( I2C_TypeDef *I2Cx )
 ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint32_t dir, uint8_t addr, uint32_t timeout )
 {
     ErrorStatus err = ERROR;
-    uint8_t retry = I2C_RETRY_TIMES;
 
     I2C_Send7bitAddress( I2Cx, addr, dir );
     if ( dir == I2C_Direction_Transmitter ) {
@@ -174,8 +173,7 @@ ErrorStatus i2c_send_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint
 ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout )
 {
     ErrorStatus err = ERROR;
-    uint8_t retry = I2C_RETRY_TIMES;
-    
+
     if ( !len )
         return ERROR;
 

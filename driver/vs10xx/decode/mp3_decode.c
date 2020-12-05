@@ -214,7 +214,7 @@ void extract_mp3_pic( const char *mp3_file_path, const char *out_path )
     f_open( &out_fil, out_path, FA_WRITE | FA_OPEN_ALWAYS );
 
     f_lseek( &mp3_fil, pic_spos );
-    f_lseek( &out_fil, 0 );
+    f_lseek( &out_fil, 0 ); 
 
     Clock_Start();
     do {

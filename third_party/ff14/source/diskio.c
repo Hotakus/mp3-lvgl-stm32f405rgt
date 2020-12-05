@@ -126,7 +126,7 @@ DRESULT disk_read (
             do {
                 sd_err = SD_ReadBlock( buff, (sector<<9), card_info.CardBlockSize );
             } while( --retry && sd_err != SD_OK );
-            sd_err = SD_WaitReadOperation();
+            // sd_err = SD_WaitReadOperation();
             while(SD_GetStatus() != SD_TRANSFER_OK);
             if ( sd_err != SD_OK ) {
                 printf( "SD read error (%d)\n\r", sd_err );
@@ -171,6 +171,21 @@ DRESULT disk_write (
             return RES_ERROR;
 		return RES_OK;
 	case DEV_SD_SDIO :
+        // while(count--) {
+        //     do {
+        //         sd_err = SD_WriteBlock( (uint8_t*)buff, (sector<<9), card_info.CardBlockSize );
+        //     } while( --retry && sd_err != SD_OK );
+        //     // sd_err = SD_WaitWriteOperation();
+        //     while(SD_GetStatus() != SD_TRANSFER_OK);
+        //     if ( sd_err != SD_OK ) {
+        //         printf( "SD write error (%d)\n\r", sd_err );
+        //         return RES_NOTRDY;
+        //     } else {
+        //         buff += card_info.CardBlockSize;
+        //         sector++;
+        //     }
+        // }
+
         sd_err = SD_WriteMultiBlocks(
             (uint8_t*)buff, \
             (sector<<9), \

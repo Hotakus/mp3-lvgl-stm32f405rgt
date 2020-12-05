@@ -9,17 +9,8 @@
 #if DATA_BUF_SIZE > 4096
 #error "DATA_BUF_SIZE too big"
 #endif
-static uint8_t *dat_buf = NULL;
 
-#if USER_USE_LVGL == 1
-#include "lv_port_fs.h"
-#include "lv_fs.h"
-extern FATFS   fs_lv[2];
-extern FRESULT fr_lv[2];
-#else
-FATFS   fs_lv[2] = {NULL, NULL};
-FRESULT fr_lv[2] = {FR_NOT_READY, FR_NOT_READY};
-#endif
+static uint8_t *dat_buf = NULL;
 
 /************************************************
  * @brief copy src_path to dest_path
@@ -140,11 +131,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
 trans_end:
     f_close( &src_fil );
     f_close( &dest_fil );
-#if USER_USE_RTTHREAD == 1
-    rt_free( dat_buf );  
-#else
-    free( dat_buf );
-#endif
+    FREE( dat_buf );  
     
     /* 计算传输速度 */
     if ( err == TRANS_STAT_OK ) {

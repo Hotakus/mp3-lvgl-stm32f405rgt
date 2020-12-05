@@ -375,7 +375,6 @@ w25qxx_stat w25qxx_read_sector( uint8_t* rec_buf, uint32_t sector, uint32_t cnt 
  ************************************************/
 w25qxx_stat w25qxx_writ_sector( uint8_t* send_buf, uint32_t sector, uint32_t cnt )
 {
-    DEBUG_PRINT( "\n" );
     DEBUG_PRINT( "." );
     w25qxx_erase_sector( sector, cnt );
     return w25qxx_writ_page( send_buf, (sector<<4), (cnt<<4) );

@@ -855,13 +855,13 @@ ARM Macro Assembler    Page 14
   432 0000001C                 END
               00000000 
               00000000 
-Command Line: --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=interwor
-k --depend=.\project\obj\startup_stm32f40_41xxx.d -o.\project\obj\startup_stm32
-f40_41xxx.o -IE:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\D
-evice\ST\STM32F4xx\Include -IE:\software\Keil5\ARM\CMSIS\Include --predefine="_
-_MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 531" --predefine="STM32F4
-05xx SETA 1" --list=.\project\list\startup_stm32f40_41xxx.lst core\startup\star
-tup_stm32f40_41xxx.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\project\obj\startup_stm32f40_41xxx.d -o.\project\obj\start
+up_stm32f40_41xxx.o -IE:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers
+\CMSIS\Device\ST\STM32F4xx\Include -IE:\software\Keil5\ARM\CMSIS\Include --pred
+efine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 531" --predefine=
+"STM32F405xx SETA 1" --list=.\project\list\startup_stm32f40_41xxx.lst core\star
+tup\startup_stm32f40_41xxx.s
 
 
 

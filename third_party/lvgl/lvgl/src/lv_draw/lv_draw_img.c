@@ -289,6 +289,7 @@ LV_ATTRIBUTE_FAST_MEM static lv_res_t lv_img_draw_core(const lv_area_t * coords,
         uint8_t  * buf = _lv_mem_buf_get(lv_area_get_width(&mask_com) *
                                          LV_IMG_PX_SIZE_ALPHA_BYTE);  /*+1 because of the possible alpha byte*/
 
+        
         lv_area_t line;
         lv_area_copy(&line, &mask_com);
         lv_area_set_height(&line, 1);

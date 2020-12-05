@@ -362,12 +362,13 @@ ARM Macro Assembler    Page 6
               E000ED04 
               E000ED20 
               E000ED08 
-Command Line: --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=interwor
-k --depend=.\project\obj\context_rvds.d -o.\project\obj\context_rvds.o -IE:\sof
-tware\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\I
-nclude -IE:\software\Keil5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --
-predefine="__UVISION_VERSION SETA 531" --predefine="STM32F405xx SETA 1" --list=
-.\project\list\context_rvds.lst third_party\rt-thread-sorted\context_rvds.S
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\project\obj\context_rvds.d -o.\project\obj\context_rvds.o 
+-IE:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM
+32F4xx\Include -IE:\software\Keil5\ARM\CMSIS\Include --predefine="__MICROLIB SE
+TA 1" --predefine="__UVISION_VERSION SETA 531" --predefine="STM32F405xx SETA 1"
+ --list=.\project\list\context_rvds.lst third_party\rt-thread-sorted\context_rv
+ds.S
 
 
 

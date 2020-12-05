@@ -63,7 +63,7 @@ int libjpeg_decompress( int argc, char **argv )
 	jpeg_create_decompress(&cinfo);
 
     JFILE in_file;
-    FRESULT ifres = f_open( &in_file, argv[1], FA_READ | FA_OPEN_EXISTING );
+    lv_fs_res_t ifres = JFOPEN( &in_file, argv[1], LV_FS_MODE_RD );
     if ( ifres != FR_OK ) {
         DEBUG_PRINT( "Open jpg file : %s error (%d)\n", argv[1], ifres );
         return -1;
@@ -105,32 +105,34 @@ int libjpeg_decompress( int argc, char **argv )
         }
     }
 
-
     FREE( line_buf );
     jpeg_finish_decompress(&cinfo);
     jpeg_destroy_decompress(&cinfo);
-    f_close( &in_file );
+    JFCLOSE( &in_file );
 }
 MSH_CMD_EXPORT( libjpeg_decompress, libjpeg_test );
 
+
 bool is_jpeg( const char *src )
 {
-    JFILE file;
-    FRESULT ifres = f_open( &file, src, FA_READ | FA_OPEN_EXISTING );
-    if ( ifres != FR_OK ) {
-        DEBUG_PRINT( "Open jpg file : %s error (%d)\n", src, ifres );
+
+    lv_fs_file_t pic;
+    lv_fs_res_t lv_res = lv_fs_open( &pic, src, LV_FS_MODE_RD );
+    if ( lv_res != FR_OK ) {
+        DEBUG_PRINT( "Open jpg file : %s error (%d)\n", src, lv_res );
         return -1;
     }
 
     const uint8_t h_pat[3] = {0xFF, 0xD8, 0xFF};  // 比较头数据
     uint8_t h_buf[3] = {0};
     bool res = false;
-    f_read( &file, h_buf, 3, NULL );
+    lv_fs_read( &pic, h_buf, 3, NULL );
     if ( MEMCMP( h_pat, h_buf, 3 ) == 0 )
         res = true;
     else
         res = false;
-    f_close( &file );
+
+    lv_fs_close( &pic );
     
     return res;
 }
