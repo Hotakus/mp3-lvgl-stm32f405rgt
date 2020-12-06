@@ -61,7 +61,7 @@ FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt ) {
                 DEBUG_PRINT("%s/%s\n", path, fno.fname);
             else {
                 tail = STRLEN(path);
-                DEBUG_PRINT(&pathBuf[tail], "/%s", fno.fname);
+                sprintf(&pathBuf[tail], "/%s", fno.fname);
                 fres = scan_catalog( pathBuf , SCAN_OPT_NO_HIDEN );                    /* Enter the directory */
                 if ( fres != FR_OK ) break;
                 pathBuf[tail] = 0;
@@ -124,45 +124,100 @@ FRESULT show_file_info( TCHAR *path )
  * @param create_flag 是否要在目录下创建文件列表文件
  * 1 : create
  * 2 : no create
+ * @return uint16_t 返回符和条件的文件数量
  ************************************************/
-void list_indic_file( const char *dir_path, const char *file_type, uint8_t create_flag )
+uint16_t list_indic_file( const char *dir_path, const char *file_type, uint8_t create_flag )
 {
+
+    DIR *dir = NULL;
+    FILINFO *fno = NULL;
+    FIL *list_file = NULL;
+    FRESULT fres;
+    
+    char *buf = NULL;
+    char *p_buf = NULL;
+    uint16_t p_len = 0;
+    uint16_t file_cnt = 0;  // 检测到的指定文件的数量
+
     /* 判断是不是目录 */
-    if ( f_stat(dir_path, NULL ) == FR_OK ) {
+    fno = (FILINFO*)MALLOC(sizeof(FILINFO));
+    if ( f_stat(dir_path, fno ) == FR_OK ) {
         DEBUG_PRINT( "Your open is not a directory.\n" );
-        return;
+        FREE(fno);
+        return !file_cnt;
     }
 
-    DIR *dir = (DIR*)MALLOC(sizeof(DIR));
-    FILINFO *fno = (FILINFO*)MALLOC(sizeof(FILINFO));
-    FIL *list_file = (FIL*)MALLOC(sizeof(FIL));
-    FRESULT fres;
+    dir = (DIR*)MALLOC(sizeof(DIR));
+    list_file = (FIL*)MALLOC(sizeof(FIL));
 
-
+    /* 打开文件夹 */
     fres = f_opendir( dir, dir_path );
     if ( fres != FR_OK ) {
         DEBUG_PRINT( "Open dir occured an error. (%d)\n", fres );
         goto to_free;
     }
 
-    // if ( create_flag ) {
-    //     fres = f_open( list_file, "" )
-    // }
+    /* 如果 create_flag == 1 则创建list文件 */
+    if ( create_flag ) {
+        buf = (char*)MALLOC( sizeof(char)*(6 + STRLEN(file_type) + STRLEN(dir_path)) );
+        sprintf( buf, "%s/%s.list", dir_path, file_type );
 
-    while ( 1 ) {
-        fres = f_readdir( dir, fno );
-        if ( fres != FR_OK || !fno->fname )
-            break;
-        if ( create_flag ) {
+        DEBUG_PRINT( "%s\n", buf );
+        /* 清除上个list文件 */
+        if ( f_stat( buf, fno ) == FR_OK )
+            f_unlink( buf );
+        /* 创建list文件 */
+        fres = f_open( list_file, buf, FA_CREATE_ALWAYS );
+        if ( fres != FR_OK ) {
+            DEBUG_PRINT( "Create '%s' file list occured an error. (%d)\n", buf, fres );
+            goto to_free;
+        }
+        f_close(list_file);
+    }
 
+    /* 遍历目录 */
+    if ( create_flag ) {
+        fres = f_open( list_file, buf, FA_OPEN_EXISTING | FA_WRITE );
+        if ( fres != FR_OK ) {
+            DEBUG_PRINT( "open list file '%s' occured an error. (%d)\n", buf, fres );
+            goto to_free;
         }
     }
 
+    while ( 1 ) {
+        fres = f_readdir( dir, fno );
+        if ( fres != FR_OK || !fno->fname[0] )
+            break;
+        if ( fno->fattrib & AM_DIR )
+            continue;
+
+        if ( (MEMCMP(get_file_type(fno->fname), file_type, STRLEN(file_type) )==0) ) {
+            p_len = (STRLEN(dir_path) + STRLEN(fno->fname) + 3);
+            p_buf = (char*)MALLOC(sizeof(char) * p_len);
+            sprintf( p_buf, "%s/%s\n\r", dir_path, fno->fname );
+            f_write( list_file, p_buf, p_len, NULL );
+            FREE(p_buf);
+            file_cnt++;
+        }
+
+    }
+
+    if ( create_flag ) {
+        f_close(list_file);
+    }
+
+    DEBUG_PRINT( "file_cnt ： %d\n", file_cnt );
+
+    /* 释放资源 */
 to_free:
     f_closedir( dir );
     FREE(dir);
     FREE(fno);
+    
     FREE(list_file);
+    FREE( buf );
+
+    return file_cnt;
 }
 
 
@@ -200,10 +255,13 @@ void ptest( int argc, const char **argv )
     // DEBUG_PRINT( "%s\n", get_file_name( argv[1] ) );
     // DEBUG_PRINT( "%s\n", get_dev_name( argv[1] ) );
     // DEBUG_PRINT( "%s\n", get_file_type( argv[1] ) );
-    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_DEV_NAME ) );
-    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_NAME ) );
-    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_TYPE ) );
-    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_MAIN ) );
+    // DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_DEV_NAME ) );
+    // DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_NAME ) );
+    // DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_TYPE ) );
+    // DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_MAIN ) );
+
+    list_indic_file( "SD_SDIO:/", "mp3", 1 );
+
 }
 MSH_CMD_EXPORT( ptest, ptest );
 
@@ -282,7 +340,6 @@ const char * get_file_name(const char * path)
     
     uint16_t len = STRLEN(path);
     const char *pep = path+len-1;   // path end pointer
-    static char buf[128] = {0};
 
     if ( *pep == '/' || *pep == ':' )
         return NULL;
