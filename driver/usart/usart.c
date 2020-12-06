@@ -80,9 +80,9 @@ uint8_t my_getc( void )
 
 PUTCHAR_PROTOTYPE 
 {
-    // if ( ch == '\n' ) {
-    //     my_putc( '\r' );
-    // }
+    if ( ch == '\n' ) {
+        my_putc( '\r' );
+    }
     my_putc( (uint8_t)ch );
     return ch;
 }

@@ -97,7 +97,8 @@ void vs10xx_sw_reset( void );
 
 void vs10xx_sin_test( uint16_t test_time );
 
-void vs10xx_play_mp3( const char *mp3_file_path );
+void vs10xx_playback( const char *audio_path );
+void vs10xx_play_mp3( const char *path );
 
 
 #endif

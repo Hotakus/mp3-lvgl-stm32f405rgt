@@ -28,8 +28,6 @@ static void vs10xx_reset_decodeTime(void);
 /************************************************
  * @brief STATIC VARIABLE
  ************************************************/
-static uint8_t version = 0;
-
 /* sin test */
 static uint8_t sin_start[] = { 0x53, 0xEF, 0x6E, 0x6f, 0, 0, 0, 0 };
 static uint8_t sin_end[]   = { 0x45, 0x78, 0x69, 0x74, 0, 0, 0, 0 };
@@ -141,7 +139,7 @@ void vs10xx_sw_reset( void )
     /* 相关配置 */
     vs10xx_writ_reg( REG_VS10xx_SCI_BASS, 0x7af6 );                         //configures BASS
     vs10xx_writ_reg( REG_VS10xx_SCI_CLOCKF, (SC_MULT6 | SC_ADD3) );
-    VOL_SETTING( 150, 150 );    //initialize the vol left:-2dB, right:-2dB
+    VOL_SETTING( 180, 180 );    //initialize the vol left:-2dB, right:-2dB
 
     err = vs10xx_wait( 0xFFFFFFFF );  // 等配置结束
     if ( err != SUCCESS ) {
@@ -216,33 +214,68 @@ void vs10xx_sin_test( uint16_t test_time )
 
 
 /************************************************
+ * @brief 播放支持的音频
+ * 
+ * @param audio_path 
+ ************************************************/
+void vs10xx_playback( const char *audio_path )
+{
+    FIL *music_file = (FIL*)MALLOC(sizeof(FIL));
+    FRESULT fres;
+
+    fres = f_open( music_file, audio_path, FA_OPEN_EXISTING|FA_READ );
+    if ( fres != FR_OK ) {
+        DEBUG_PRINT( "playback open \"%s\" error. (%d)\n", audio_path, fres );
+        return;
+    }
+
+    uint8_t h_buf[4] = {0};
+    f_lseek( music_file, 0 );
+    f_read( music_file, h_buf, 4, NULL );
+
+    /* mem释放 */
+    f_close( music_file );
+    FREE( music_file );
+
+    /* 判断音频文件格式 */
+    /* MP3 */
+    if ( MEMCMP( "ID3", h_buf, 3 ) == 0 ) {
+        DEBUG_PRINT( "play MP3.\n" );
+        vs10xx_play_mp3( audio_path );
+    } 
+
+}
+
+/************************************************
  * @brief 播放MP3
  * 
  * @param mp3_file_path 
  ************************************************/
 #define BYTES_PER_TRANS     32
-void vs10xx_play_mp3( const char *mp3_file_path )
+void vs10xx_play_mp3( const char *path )
 {
 
     mp3_info_t mp3;
 
-    mp3_analyse( mp3_file_path, &mp3 );
+    mp3_analyse( path, &mp3 );
 
     DEBUG_PRINT( "mp3 size  : %d Bytes\n", mp3.file_size );
     DEBUG_PRINT( "mp3 times : %d:%d min.\n", mp3.play_times/60, mp3.play_times%60 );
 
     FIL mp3_fil;
-    FRESULT res = f_open( &mp3_fil, mp3_file_path, FA_OPEN_EXISTING | FA_READ );
+    FRESULT res = f_open( &mp3_fil, path, FA_OPEN_EXISTING | FA_READ );
     if ( res != FR_OK ) {
-        DEBUG_PRINT( "open mp3 file : %s error.\n", mp3_file_path );
+        DEBUG_PRINT( "open mp3 file : %s error.\n", path );
         return;
     }
 
     /* 得到首帧地址 */
+    // size_t cur_pos = mp3.frame_spos;
     size_t cur_pos = mp3.frame_spos;
     uint8_t *a_buf = (uint8_t*)MALLOC(sizeof(uint8_t) * BYTES_PER_TRANS);
 
     DEBUG_PRINT( "mp3.sample_rate  : %d \n", mp3.sample_rate );
+
 
     vs10xx_reset_decodeTime();
     VS10xx_CS_HIGH;
@@ -260,16 +293,10 @@ void vs10xx_play_mp3( const char *mp3_file_path )
         cur_pos += BYTES_PER_TRANS;
         VS10xx_XDCS_HIGH;
         uint16_t c_time = vs10xx_read_reg( REG_VS10xx_SCI_DECODETIME );
-        printf( "Cur time : %d : %d\r", c_time/60, c_time%60 );
+        printf( "Cur time : %d : %d", c_time/60, c_time%60 );
+        my_putc('\r');
     }
     
-
-    FREE(a_buf);
     f_close( &mp3_fil );
+    FREE(a_buf);
 }
-
-void read_dreq()
-{
-    DEBUG_PRINT( "DREQ : %d\n", DREQ_STAT );
-}
-MSH_CMD_EXPORT( read_dreq, read_dreq );

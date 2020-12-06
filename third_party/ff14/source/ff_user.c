@@ -5,7 +5,7 @@
 //total:总容量     （单位KB）
 //free:剩余容量     （单位KB）
 //返回值:0,正常.其他,错误代码
-FRESULT exf_getfree( TCHAR *path, u32 *total, u32 *free ) {
+FRESULT exf_getfree( TCHAR *path, uint32_t *total, uint32_t *free ) {
     FATFS *fs1;
     FRESULT res;
     DWORD fre_clust = 0;
@@ -60,7 +60,7 @@ FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt ) {
             if ( opt&SCAN_OPT_CUR_DIR || SCAN_OPT_ALL )
                 DEBUG_PRINT("%s/%s\n", path, fno.fname);
             else {
-                tail = strlen(path);
+                tail = STRLEN(path);
                 DEBUG_PRINT(&pathBuf[tail], "/%s", fno.fname);
                 fres = scan_catalog( pathBuf , SCAN_OPT_NO_HIDEN );                    /* Enter the directory */
                 if ( fres != FR_OK ) break;
@@ -78,7 +78,13 @@ FRESULT scan_catalog( TCHAR *path, SCAN_OPT opt ) {
     return fres;
 }
 
-FRESULT show_element_info( TCHAR *path ) 
+/************************************************
+ * @brief 显示指定文件的信息
+ * 
+ * @param path 
+ * @return FRESULT 
+ ************************************************/
+FRESULT show_file_info( TCHAR *path ) 
 {
     FRESULT fr;
     FILINFO fno;
@@ -107,12 +113,151 @@ FRESULT show_element_info( TCHAR *path )
     return fr;
 }
 
+
+
+/************************************************
+ * @brief 根据指定的文件格式，列出指定目录下所有的
+ * 此类文件
+ * 
+ * @param dir_path 要扫描的目录
+ * @param file_type 要提取的文件类型
+ * @param create_flag 是否要在目录下创建文件列表文件
+ * 1 : create
+ * 2 : no create
+ ************************************************/
+void list_indic_file( const char *dir_path, const char *file_type, uint8_t create_flag )
+{
+    /* 判断是不是目录 */
+    if ( f_stat(dir_path, NULL ) == FR_OK ) {
+        DEBUG_PRINT( "Your open is not a directory.\n" );
+        return;
+    }
+
+    DIR *dir = (DIR*)MALLOC(sizeof(DIR));
+    FILINFO *fno = (FILINFO*)MALLOC(sizeof(FILINFO));
+    FIL *list_file = (FIL*)MALLOC(sizeof(FIL));
+    FRESULT fres;
+
+
+    fres = f_opendir( dir, dir_path );
+    if ( fres != FR_OK ) {
+        DEBUG_PRINT( "Open dir occured an error. (%d)\n", fres );
+        goto to_free;
+    }
+
+    // if ( create_flag ) {
+    //     fres = f_open( list_file, "" )
+    // }
+
+    while ( 1 ) {
+        fres = f_readdir( dir, fno );
+        if ( fres != FR_OK || !fno->fname )
+            break;
+        if ( create_flag ) {
+
+        }
+    }
+
+to_free:
+    f_closedir( dir );
+    FREE(dir);
+    FREE(fno);
+    FREE(list_file);
+}
+
+
+
+/************************************************
+ * @brief 得到path的某个元素
+ * 
+ * @param path 
+ * @param pt 
+ * @return const char* 元素的首地址
+ ************************************************/
+const char *path_get( const char *path, PATH_TYPE pt )
+{
+    switch (pt) {
+    case PATH_DEV_NAME:
+        return get_dev_name(path);
+    case PATH_MAIN:
+        return get_real_path(path);
+    case PATH_FILE_NAME:
+        return get_file_name(path);
+    case PATH_FILE_TYPE:
+        return get_file_type(path);
+    default:
+        return NULL;
+    }
+}
+
+void ptest( int argc, const char **argv )
+{
+    // DEBUG_PRINT( "%s\n", get_real_path( "SD_SDIO:/test.jpg" ) );
+    // DEBUG_PRINT( "%s\n", get_file_name( "SD_SDIO:/test.jpg" ) );
+    // DEBUG_PRINT( "%s\n", get_dev_name( "SD_SDIO:/test.jpg" ) );
+    // DEBUG_PRINT( "%s\n", get_file_type( "SD_SDIO:/test.jpg" ) );
+    // DEBUG_PRINT( "%s\n", get_real_path( argv[1] ) );
+    // DEBUG_PRINT( "%s\n", get_file_name( argv[1] ) );
+    // DEBUG_PRINT( "%s\n", get_dev_name( argv[1] ) );
+    // DEBUG_PRINT( "%s\n", get_file_type( argv[1] ) );
+    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_DEV_NAME ) );
+    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_NAME ) );
+    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_FILE_TYPE ) );
+    DEBUG_PRINT( "%s\n", path_get( argv[1], PATH_MAIN ) );
+}
+MSH_CMD_EXPORT( ptest, ptest );
+
+const char * get_dev_name(const char * path)
+{
+    if ( path == NULL ) 
+        return NULL;
+
+    const char *psp = path;
+    const char *name_sp = path;
+    uint8_t name_len = 0;
+    static char *buf = NULL;
+    
+    while (1) {
+        if ( *psp != ':' ){
+            psp++;
+            name_len++;
+        } else if ( *psp == ':' )
+            break;
+    }
+
+    if ( buf != NULL )
+        FREE(buf);
+    buf = (char*)MALLOC(sizeof(char) * name_len);
+    for ( uint8_t i = 0; i < name_len; i++ )
+        buf[i] = *name_sp++;
+    return buf;
+}
+
+const char * get_file_type(const char * path)
+{
+    if ( path == NULL ) 
+        return NULL;
+    
+    uint16_t len = STRLEN(path);
+    const char* pep = path+len-1;
+
+    if ( *pep == '.' || *pep == '/' ) 
+        return NULL;
+
+    while ( 1 ) {
+        if ( *pep == '.' ) {
+            return ++pep;
+        } else
+            pep--;
+        if ( *pep == '/' || *pep == ':' || *pep == *path )  // 如果没有type
+            return NULL;
+    }
+}
+
 const char * get_real_path(const char * path)
 {
     /* Example path: "S:/folder/file.txt"
      * Leave the letter and the : / \ characters*/
-
-    
     if ( path == NULL ) 
         return NULL;
     /*Ignore the driver letter*/
@@ -135,8 +280,9 @@ const char * get_file_name(const char * path)
     if ( path == NULL ) 
         return NULL;
     
-    uint8_t len = strlen(path);
+    uint16_t len = STRLEN(path);
     const char *pep = path+len-1;   // path end pointer
+    static char buf[128] = {0};
 
     if ( *pep == '/' || *pep == ':' )
         return NULL;

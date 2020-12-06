@@ -23,7 +23,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
 {
     
     const char *file_name;
-    const char *file_name2 = get_file_name(dest_path);
+    const char *file_name2 = path_get(dest_path, PATH_FILE_NAME);
     char spif_buf[50] = {0};
     TRANS_STAT err = TRANS_STAT_OK;
     uint32_t dest_size = 0;
@@ -34,7 +34,7 @@ TRANS_STAT file_trans( const char *src_path, const char *dest_path )
     FILINFO t_fno[2];
     
     if ( file_name2 == NULL )
-        file_name = get_file_name(src_path);
+        file_name = path_get(src_path, PATH_FILE_NAME);
     else 
         file_name = file_name2;
     
