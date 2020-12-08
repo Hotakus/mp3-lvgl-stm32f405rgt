@@ -4,9 +4,9 @@
 #include "ff_user.h"
 #include "tim.h"
 
-#define DATA_BUF_SIZE      8192
-#define TRANS_RETRY_TIME   5
-#if DATA_BUF_SIZE > 8192
+#define DATA_BUF_SIZE      512
+#define TRANS_RETRY_TIME   0xFF
+#if DATA_BUF_SIZE > 4096
 #error "DATA_BUF_SIZE too big"
 #endif
 

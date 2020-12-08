@@ -1,94 +1,72 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F4xx_StdPeriph_Templates/stm32f4xx_it.c 
+  * @file    Templates/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.8.0
-  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
+  * Redistribution and use in source and binary forms, with or without modification,
+  * are permitted provided that the following conditions are met:
+  *   1. Redistributions of source code must retain the above copyright notice,
+  *      this list of conditions and the following disclaimer.
+  *   2. Redistributions in binary form must reproduce the above copyright notice,
+  *      this list of conditions and the following disclaimer in the documentation
+  *      and/or other materials provided with the distribution.
+  *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  *      may be used to endorse or promote products derived from this software
+  *      without specific prior written permission.
   *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_it.h"
-#include "systick.h"
+  /* Includes ------------------------------------------------------------------*/
 #include "pro_conf.h"
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx_it.h"
 
-/** @addtogroup Template_Project
+/** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+  /** @addtogroup Templates
+    * @{
+    */
 
-/******************************************************************************/
-/*            Cortex-M4 Processor Exceptions Handlers                         */
-/******************************************************************************/
+    /* Private typedef -----------------------------------------------------------*/
+    /* Private define ------------------------------------------------------------*/
+    /* Private macro -------------------------------------------------------------*/
+    /* Private variables ---------------------------------------------------------*/
+    /* Private function prototypes -----------------------------------------------*/
+    /* Private functions ---------------------------------------------------------*/
 
-/**
-  * @brief  This function handles NMI exception.
-  * @param  None
-  * @retval None
-  */
+    /******************************************************************************/
+    /*            Cortex-M4 Processor Exceptions Handlers                         */
+    /******************************************************************************/
+
+    /**
+      * @brief  This function handles NMI exception.
+      * @param  None
+      * @retval None
+      */
 void NMI_Handler(void)
 {
 }
-
-/**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
-#if USER_USE_RTTHREAD == 0
-void HardFault_Handler(void)
-{
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
-}
-
-/**
-  * @brief  This function handles PendSVC exception.
-  * @param  None
-  * @retval None
-  */
-void PendSV_Handler(void)
-{
-}
-
-/**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
-void SysTick_Handler(void)
-{
-
-}
-#endif
 
 
 /**
@@ -98,10 +76,9 @@ void SysTick_Handler(void)
   */
 void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while (1) {
+    }
 }
 
 /**
@@ -111,10 +88,9 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while (1) {
+    }
 }
 
 /**
@@ -124,10 +100,9 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while (1) {
+    }
 }
 
 /**
@@ -149,6 +124,39 @@ void DebugMon_Handler(void)
 }
 
 
+#if USER_USE_RTTHREAD == 0u
+/**
+  * @brief  This function handles PendSVC exception.
+  * @param  None
+  * @retval None
+  */
+void PendSV_Handler(void)
+{
+}
+
+/**
+  * @brief  This function handles SysTick Handler.
+  * @param  None
+  * @retval None
+  */
+void SysTick_Handler(void)
+{
+    HAL_IncTick();
+}
+
+/**
+  * @brief  This function handles Hard Fault exception.
+  * @param  None
+  * @retval None
+  */
+void HardFault_Handler(void)
+{
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while (1) {
+    }
+}
+#endif
+
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
@@ -161,13 +169,53 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-/*void PPP_IRQHandler(void)
+  /*void PPP_IRQHandler(void)
+  {
+  }*/
+
+  /************************************************
+   * @brief SDIO
+   ************************************************/
+#include "sdio.h"
+void SDIO_IRQHandler(void)
 {
-}*/
 
-/**
-  * @}
-  */ 
+#if USER_USE_RTTHREAD == 1
+    OS_INT_ENTER();
+#endif
 
+    HAL_SD_IRQHandler(&hsd);
+
+#if USER_USE_RTTHREAD == 1
+    OS_INT_EXIT();
+#endif
+
+}
+
+void DMA2_Stream3_IRQHandler(void)
+{
+#if USER_USE_RTTHREAD == 1
+    OS_INT_ENTER();
+#endif
+
+    HAL_DMA_IRQHandler(&hdma_sdio_rx);
+
+#if USER_USE_RTTHREAD == 1
+    OS_INT_EXIT();
+#endif
+}
+
+void DMA2_Stream6_IRQHandler(void)
+{
+#if USER_USE_RTTHREAD == 1
+    OS_INT_ENTER();
+#endif
+
+    HAL_DMA_IRQHandler(&hdma_sdio_tx);
+
+#if USER_USE_RTTHREAD == 1
+    OS_INT_EXIT();
+#endif
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

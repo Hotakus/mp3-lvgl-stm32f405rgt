@@ -8,7 +8,7 @@ extern "C" {
 /* includes */
 #include <stdio.h>
 #include <stdlib.h>
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 
 /* definations */
 typedef enum SD2SPIF_CHECK{

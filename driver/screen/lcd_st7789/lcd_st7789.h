@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 #include "pro_conf.h"
 
 
@@ -133,10 +133,10 @@ typedef enum {
 /* 初始函数 */
         void lcd_st7789_init( void );
 /* 绘图函数 */
-        void lcd_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye );
-        void lcd_st7789_draw_point( u16 x, u16 y, u16 color );
-        void lcd_st7789_send_pixel_dat( u16 color );
-        void lcd_st7789_clear_with( u16 color );
+        void lcd_st7789_set_region( uint16_t xs, uint16_t ys, uint16_t xe, uint16_t ye );
+        void lcd_st7789_draw_point( uint16_t x, uint16_t y, uint16_t color );
+        void lcd_st7789_send_pixel_dat( uint16_t color );
+        void lcd_st7789_clear_with( uint16_t color );
 /* 其他功能函数 */
         void lcd_st7789_sw_reset( void );
         void lcd_st7789_hw_reset( void );

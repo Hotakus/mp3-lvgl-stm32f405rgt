@@ -3,7 +3,7 @@
  * @author Trisuborn (ttowfive@gmail.com)
  * @brief 
  * @version 0.1
- * @date 2020-11-23
+ * @date 2020-12-08
  * 
  * @copyright Copyright (c) 2020
  * 
@@ -14,7 +14,6 @@ static void lcd_st7789_gpio( void );
 static void lcd_st7789_send_cmd( uint8_t cmd );
 static void lcd_st7789_send_dat( uint8_t dat );
 static void lcd_st7789_trans_byte( uint8_t byte );
-static void lcd_st7789_send( uint8_t byte, ST7789_DC_OPT opt );
 
 static void lcd_st7789_gpio( void ) 
 {
@@ -176,7 +175,7 @@ static void lcd_st7789_trans_byte( uint8_t byte )
     IPS_ST7789_SPI->DR = byte;
     while ( !( IPS_ST7789_SPI->SR & SPI_I2S_FLAG_TXE ) );
 #elif (USER_USE_SCR == USE_SCR_LCD_ST7789_200)
-    u16 dat = ((byte<<8)&0xFF00) | (GPIOB->IDR&0xFF);
+    uint16_t dat = ((byte<<8)&0xFF00) | (GPIOB->IDR&0xFF);
     ST7789_DAT_GPIO->ODR = dat;
 #endif
 }
@@ -220,17 +219,8 @@ static void lcd_st7789_send_dat( uint8_t dat )
 #endif
 }
 
-static void lcd_st7789_send( uint8_t byte, ST7789_DC_OPT opt )
-{
-    if ( opt == ST7789_CMD )
-        lcd_st7789_send_cmd( byte );
-    else if ( opt == ST7789_DAT )
-        lcd_st7789_send_dat( byte );
-    else
-        DEBUG_PRINT( "send opt error.\n" );
-}
 
-void lcd_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye )
+void lcd_st7789_set_region( uint16_t xs, uint16_t ys, uint16_t xe, uint16_t ye )
 {
     lcd_st7789_send_cmd( 0x2a );
     lcd_st7789_send_pixel_dat( xs );
@@ -243,21 +233,21 @@ void lcd_st7789_set_region( u16 xs, u16 ys, u16 xe, u16 ye )
 	lcd_st7789_send_cmd( 0x2c );
 }
 
-void lcd_st7789_draw_point( u16 x, u16 y, u16 color )
+void lcd_st7789_draw_point( uint16_t x, uint16_t y, uint16_t color )
 {
     lcd_st7789_set_region( x, y, x, y );
     lcd_st7789_send_pixel_dat( color );
 }
 
-void lcd_st7789_send_pixel_dat( u16 color )
+void lcd_st7789_send_pixel_dat( uint16_t color )
 {
     lcd_st7789_send_dat( color >> 8 );
     lcd_st7789_send_dat( color&0xFF );
 }
 
-void lcd_st7789_clear_with( u16 color )
+void lcd_st7789_clear_with( uint16_t color )
 {
-    u16 x, y;
+    uint16_t x, y;
     lcd_st7789_set_region( 0, 0, 240-1, 320-1 );
     for ( y = 0; y < 320; y++ ) {
         for ( x = 0; x < 240; x++ ) {

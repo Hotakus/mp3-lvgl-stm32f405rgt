@@ -17,7 +17,7 @@ extern "C" {
 
 /* includes */
 #include "pro_conf.h"
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 #include "lcd_st7735.h"
 #include "lcd_st7789.h"
 
@@ -25,12 +25,12 @@ extern "C" {
 typedef struct {
     void        ( *init )            ( void );
     
-    void        ( *set_region )      ( u16 xs, u16 ys, u16 xe, u16 ye );
+    void        ( *set_region )      ( uint16_t xs, uint16_t ys, uint16_t xe, uint16_t ye );
 
-    void        ( *draw_pixel )      ( u16 x, u16 y, u16 color );
-    void        ( *send_pixel_dat )  ( u16 color );
+    void        ( *draw_pixel )      ( uint16_t x, uint16_t y, uint16_t color );
+    void        ( *send_pixel_dat )  ( uint16_t color );
     
-    void        ( *clear )           ( u16 color );
+    void        ( *clear )           ( uint16_t color );
     
     void        ( *hw_reset )        ( void );
     void        ( *sw_reset )        ( void );
@@ -41,8 +41,8 @@ typedef struct {
     void        ( *power_down )      ( void );
     void        ( *power_up )        ( void );
     
-    u16 SCR_X_MAX;
-    u16 SCR_Y_MAX;
+    uint16_t SCR_X_MAX;
+    uint16_t SCR_Y_MAX;
     
 } scr_opr_handler;
 

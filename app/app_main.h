@@ -2,7 +2,7 @@
 #define APP_MAIN_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "sys_conf.h"
 
 #include "app_task.h"
 #include "app_ui.h"

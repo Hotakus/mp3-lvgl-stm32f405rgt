@@ -197,9 +197,9 @@ void app_ui_init(void)
     lv_obj_align(mp3_backgroud, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
     
     /* 创建状态栏 */
-    ui = status_bar_ui_get();
-    app_ui_register( ui );
-    ui->ctl_h->create();        // 常驻ui不装入ui控制块
+//    ui = status_bar_ui_get();
+//    app_ui_register( ui );
+//    ui->ctl_h->create();        // 常驻ui不装入ui控制块
 
     /* 创建mainmenu */
     ui = mainmenu_ui_get();

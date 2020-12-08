@@ -5,8 +5,6 @@
 /************************************************
  * @brief EXTERN VARIABLE
  ************************************************/
-extern FATFS   fs_lv[2];
-extern FRESULT fr_lv[2];
 
 /************************************************
  * @brief STATIC VARIABLE
@@ -30,7 +28,7 @@ static void lvgl_init( void )
 //    lv_port_indev_init();       // 输入设备初始化
     lv_port_fs_init();          // 文件系统设备初始化
 
-    lvgl_user_decoder_init();
+//    lvgl_user_decoder_init();
 }
 
 /************************************************

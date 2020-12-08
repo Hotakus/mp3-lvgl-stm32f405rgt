@@ -2,7 +2,8 @@
 #define TIMER_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
+
 
 /* definations */
 /* 每周期 1000 us */
@@ -11,6 +12,6 @@
 
 /* functions */
 void Clock_Start(void);
-u32 Clock_End(void);
+uint32_t Clock_End(void);
 
 #endif

@@ -1,116 +1,122 @@
 /************************************************
  * @file spi_conf.c
  * @author Trisuborn (ttowfive@gmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2020-11-09
- * 
+ *
  * @copyright Copyright (c) 2020
- * 
+ *
  ************************************************/
 #include "spi_conf.h"
+#include "pro_conf.h"
 
-SPI_InitTypeDef  spi_s;
 GPIO_InitTypeDef spix_gpio;
 
-// SPI_MODE_1: CPOL=0, CPHA=0 
-// SPI_MODE_2: CPOL=0, CPHA=1
-// SPI_MODE_3: CPOL=1, CPHA=0
-// SPI_MODE_4: CPOL=1, CPHA=1
-void spi_conf( SPI_TypeDef* SPIx, u16 speed, SPI_MODE mode, u32 SPI_DIR ) {
-    
-    u32 pin = 0;
+/************************************************
+ * @brief 根据用户输入信息配置SPI
+ *
+ * @param h_spix->Instance 哪个spi
+ * @param speed spi速度
+ * SPI_MODE_1: CPOL=0, CPHA=0
+ * SPI_MODE_2: CPOL=0, CPHA=1
+ * SPI_MODE_3: CPOL=1, CPHA=0
+ * SPI_MODE_4: CPOL=1, CPHA=1
+ * @param mode spi的四种模式
+ * @param spi_dir spi方向
+ ************************************************/
+void spi_conf(SPI_HandleTypeDef* h_spix,
+              uint32_t speed,
+              SPI_MODE mode,
+              uint32_t spi_dir) {
+    uint32_t pin = 0;
 
-    if ( SPIx == SPI1 ) {
-        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOA, ENABLE );
-        RCC_APB2PeriphClockCmd( RCC_APB2Periph_SPI1, ENABLE );
+    if (h_spix->Instance == SPI1) {
+        __HAL_RCC_SPI1_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
         pin = SPI1_SCLK;
-        GPIO_PinAFConfig( GPIOA, GPIO_PinSource5, GPIO_AF_SPI1 );
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
-            GPIO_PinAFConfig( GPIOA, GPIO_PinSource6, GPIO_AF_SPI1 );
+        if (spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI1_MISO;
-        }
-        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_Tx ||SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
-            GPIO_PinAFConfig( GPIOA, GPIO_PinSource7, GPIO_AF_SPI1 );
+        if (spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI1_MOSI;
-        }
-    } else if ( SPIx == SPI2 ) {
-        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOB, ENABLE );
-        RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI2, ENABLE );
-        GPIO_PinAFConfig( GPIOB, GPIO_PinSource13, GPIO_AF_SPI2 );
+    } else if (h_spix->Instance == SPI2) {
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+        __HAL_RCC_SPI2_CLK_ENABLE();
         pin = SPI2_SCLK;
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
-            GPIO_PinAFConfig( GPIOB, GPIO_PinSource14, GPIO_AF_SPI2 );
+        if (spi_dir == SPI_DIRECTION_2LINES_RXONLY ||
+            spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI2_MISO;
-        }
-        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_Tx || SPI_DIR == SPI_Direction_2Lines_FullDuplex  ) {
-            GPIO_PinAFConfig( GPIOB, GPIO_PinSource15, GPIO_AF_SPI2 );
+        if (spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI2_MOSI;
-        }
-    } else if ( SPIx == SPI3 ) {
-        RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOB, ENABLE );
-        RCC_APB1PeriphClockCmd( RCC_APB1Periph_SPI3, ENABLE );
+    } else if (h_spix->Instance == SPI3) {
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+        __HAL_RCC_SPI3_CLK_ENABLE();
         pin = SPI3_SCLK;
-        GPIO_PinAFConfig( GPIOB, GPIO_PinSource3, GPIO_AF_SPI3 );
-        if ( SPI_DIR == SPI_Direction_1Line_Rx || SPI_DIR == SPI_Direction_Rx || SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
-            GPIO_PinAFConfig( GPIOB, GPIO_PinSource4, GPIO_AF_SPI3 );
+        if (spi_dir == SPI_DIRECTION_2LINES_RXONLY ||
+            spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI3_MISO;
-        }
-        if ( SPI_DIR == SPI_Direction_1Line_Tx || SPI_DIR == SPI_Direction_Tx ||SPI_DIR == SPI_Direction_2Lines_FullDuplex ) {
-            GPIO_PinAFConfig( GPIOB, GPIO_PinSource5, GPIO_AF_SPI3 );
+        if (spi_dir == SPI_DIRECTION_1LINE || spi_dir == SPI_DIRECTION_2LINES)
             pin |= SPI3_MOSI;
-        }
     }
-    
+
     /* SPI conf */
-    switch ( mode ) {
+    switch (mode) {
         case SPI_MODE_1:
-            spi_s.SPI_CPOL      = SPI_CPOL_Low;
-            spi_s.SPI_CPHA      = SPI_CPHA_1Edge;
+            h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
+            h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
             break;
         case SPI_MODE_2:
-            spi_s.SPI_CPOL      = SPI_CPOL_Low;
-            spi_s.SPI_CPHA      = SPI_CPHA_2Edge;
+            h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
+            h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
             break;
         case SPI_MODE_3:
-            spi_s.SPI_CPOL      = SPI_CPOL_High;
-            spi_s.SPI_CPHA      = SPI_CPHA_1Edge;
+            h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
+            h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
             break;
         case SPI_MODE_4:
-            spi_s.SPI_CPOL      = SPI_CPOL_High;
-            spi_s.SPI_CPHA      = SPI_CPHA_2Edge;
+            h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
+            h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
             break;
-    }   
-    
-    spi_s.SPI_Mode              = SPI_Mode_Master;
-    spi_s.SPI_FirstBit          = SPI_FirstBit_MSB;
-    spi_s.SPI_Direction         = SPI_DIR;
-    spi_s.SPI_DataSize          = SPI_DataSize_8b;
-    spi_s.SPI_NSS               = SPI_NSS_Soft;
-    spi_s.SPI_BaudRatePrescaler = speed; 
-    SPI_Init( SPIx, &spi_s );
-    SPI_Cmd( SPIx, ENABLE );
-    
-    spix_gpio.GPIO_Pin          = pin;
-    spix_gpio.GPIO_Mode         = GPIO_Mode_AF;
-    spix_gpio.GPIO_OType        = GPIO_OType_PP;
-    spix_gpio.GPIO_PuPd         = GPIO_PuPd_UP;
-    spix_gpio.GPIO_Speed        = GPIO_Speed_100MHz;
-    if ( SPIx == SPI1 ) {
-        GPIO_Init( GPIOA, &spix_gpio );
-    } else if ( SPIx == SPI2 ) {
-        GPIO_Init( GPIOB, &spix_gpio );
-    } else if ( SPIx == SPI3 ) {
-        GPIO_Init( GPIOB, &spix_gpio );
+    }
+
+    spix_gpio.Pin = pin;
+    spix_gpio.Mode = GPIO_MODE_AF_PP;
+    spix_gpio.Pull = GPIO_PULLUP;
+    spix_gpio.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    if (h_spix->Instance == SPI1) {
+        spix_gpio.Alternate = GPIO_AF5_SPI1;
+        HAL_GPIO_Init(GPIOA, &spix_gpio);
+        h_spix->Instance = SPI1;
+    } else if (h_spix->Instance == SPI2) {
+        spix_gpio.Alternate = GPIO_AF5_SPI2;
+        HAL_GPIO_Init(GPIOB, &spix_gpio);
+        h_spix->Instance = SPI2;
+    } else if (h_spix->Instance == SPI3) {
+        spix_gpio.Alternate = GPIO_AF6_SPI3;
+        HAL_GPIO_Init(GPIOB, &spix_gpio);
+        h_spix->Instance = SPI3;
+    }
+
+    h_spix->Init.BaudRatePrescaler = speed;
+    h_spix->Init.Mode = SPI_MODE_MASTER;
+    h_spix->Init.NSS = SPI_NSS_SOFT;
+    h_spix->Init.FirstBit = SPI_FIRSTBIT_MSB;
+    h_spix->Init.DataSize = SPI_DATASIZE_8BIT;
+    h_spix->Init.Direction = spi_dir;
+    h_spix->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+    h_spix->Init.TIMode = SPI_TIMODE_DISABLE;
+    if (HAL_SPI_Init(h_spix) != HAL_OK) {
+        Error_Handler();
     }
 }
 
-uint8_t spi_full_duplex_trans_byte( SPI_TypeDef *SPIx, uint8_t byte )
-{
-    while ( !(SPIx->SR & SPI_I2S_FLAG_TXE) );
-    SPIx->DR = byte;
-    while ( !(SPIx->SR & SPI_I2S_FLAG_RXNE) );
-    return (uint8_t)SPIx->DR;
+#include "stm32f4xx_ll_spi.h"
+
+uint8_t spi_full_duplex_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte) {
+    HAL_SPI_Transmit(h_spix, &byte, 1, 0xFFFFFFFF);
+    return (uint8_t)h_spix->Instance->DR;
 }
 
-
+void spi_one_line_tx_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte) {
+    HAL_SPI_Transmit(h_spix, &byte, 1, 0xFFFFFFFF);
+}

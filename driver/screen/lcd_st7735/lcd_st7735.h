@@ -1,3 +1,13 @@
+/************************************************
+ * @file lcd_st7735.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2020-12-08
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ ************************************************/
 #ifndef LCD_144_ST7735_144_H
 #define LCD_144_ST7735_144_H
 
@@ -6,43 +16,42 @@ extern "C" {
 #endif
 
 /* includes */
-#include "stm32f4xx_conf.h"
-#include "systick.h"
+#include "stm32f4xx_hal.h"
 
 /* definations */
-#define ST7735_NOMAL            0xC8u
-#define ST7735_RIGHT_TO_LEFT    0x68u
-#define ST7735_LEFT_TO_RIGHT    0xA8u
-#define ST7735_UPSIDE_DOWN      0x08u
-#define ST7735_DIRECTION        ST7735_RIGHT_TO_LEFT
+#define ST7735_NOMAL                0xC8u
+#define ST7735_RIGHT_TO_LEFT        0x68u
+#define ST7735_LEFT_TO_RIGHT        0xA8u
+#define ST7735_UPSIDE_DOWN          0x08u
+#define ST7735_DIRECTION            ST7735_RIGHT_TO_LEFT
 
 #define LCD_144_W   128
 #define LCD_144_H   128
 
 #define LCD_ST7735_SPI              SPI2
 
-#define LCD_144_ST7735_MOSI         GPIO_Pin_15
+#define LCD_144_ST7735_MOSI         GPIO_PIN_15
 #define LCD_144_ST7735_MISO         NULL
-#define LCD_144_ST7735_CLK          GPIO_Pin_13
+#define LCD_144_ST7735_CLK          GPIO_PIN_13
 #define LCD_144_ST7735_SPI_PIN      LCD_144_ST7735_MOSI | LCD_144_ST7735_MISO | LCD_144_ST7735_CLK
 
-#define LCD_144_ST7735_CS           GPIO_Pin_12     // PB12
-#define LCD_144_ST7735_RST          GPIO_Pin_14     // PB14
-#define LCD_144_ST7735_DC           GPIO_Pin_6      // PC6
-#define LCD_144_ST7735_BLK          GPIO_Pin_7      // PC7
+#define LCD_144_ST7735_CS           GPIO_PIN_12     // PB12
+#define LCD_144_ST7735_RST          GPIO_PIN_14     // PB14
+#define LCD_144_ST7735_DC           GPIO_PIN_6      // PC6
+#define LCD_144_ST7735_BLK          GPIO_PIN_7      // PC7
 
 
-#define	LCD_144_ST7735_CS_SET  	    GPIOB->BSRRL |= LCD_144_ST7735_CS
-#define	LCD_144_ST7735_CS_CLR  	    GPIOB->BSRRH |= LCD_144_ST7735_CS
+#define	LCD_144_ST7735_CS_SET  	    GPIOB->BSRR |= (uint32_t)LCD_144_ST7735_CS
+#define	LCD_144_ST7735_CS_CLR  	    GPIOB->BSRR |= (uint32_t)LCD_144_ST7735_CS <<16
 
-#define	LCD_144_ST7735_RST_SET      GPIOB->BSRRL |= LCD_144_ST7735_RST
-#define	LCD_144_ST7735_RST_CLR  	GPIOB->BSRRH |= LCD_144_ST7735_RST
+#define	LCD_144_ST7735_RST_SET      GPIOB->BSRR |= (uint32_t)LCD_144_ST7735_RST
+#define	LCD_144_ST7735_RST_CLR  	GPIOB->BSRR |= (uint32_t)LCD_144_ST7735_RST <<16
 
-#define	LCD_144_ST7735_DC_SET  	    GPIOC->BSRRL |= LCD_144_ST7735_DC  
-#define	LCD_144_ST7735_DC_CLR  	    GPIOC->BSRRH |= LCD_144_ST7735_DC
+#define	LCD_144_ST7735_DC_SET  	    GPIOC->BSRR |= (uint32_t)LCD_144_ST7735_DC  
+#define	LCD_144_ST7735_DC_CLR  	    GPIOC->BSRR |= (uint32_t)LCD_144_ST7735_DC <<16
 
-#define	LCD_144_ST7735_BLK_SET  	GPIOC->BSRRL |= LCD_144_ST7735_BLK
-#define	LCD_144_ST7735_BLK_CLR  	GPIOC->BSRRH |= LCD_144_ST7735_BLK
+#define	LCD_144_ST7735_BLK_SET  	GPIOC->BSRR |= (uint32_t)LCD_144_ST7735_BLK
+#define	LCD_144_ST7735_BLK_CLR  	GPIOC->BSRR |= (uint32_t)LCD_144_ST7735_BLK <<16
 
 typedef enum {
     ST7735_CMD  = 0,
@@ -52,7 +61,7 @@ typedef enum {
 /* function */
 void lcd_st7735_init( void );
 
-uint8_t lcd_st7735_trans_byte( uint8_t byte );
+void lcd_st7735_trans_byte( uint8_t byte );
 
 void lcd_st7735_send_cmd( uint8_t cmd );
 void lcd_st7735_send_dat( uint8_t dat );

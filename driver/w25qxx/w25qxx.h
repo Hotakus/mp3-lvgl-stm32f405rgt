@@ -6,16 +6,16 @@ extern "C" {
 #endif
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "sys_conf.h"
 #include <stdio.h>
-#include "systick.h"
-#include "usart.h"
+#include "uart.h"
 
 /* definations */
 #define W25QXX_SPI          SPI3
-#define W25QXX_CS           GPIO_Pin_15
-#define W25QXX_CS_CLR       GPIOA->BSRRH |= W25QXX_CS
-#define W25QXX_CS_SET       GPIOA->BSRRL |= W25QXX_CS
+#define W25QXX_CS           GPIO_PIN_15
+#define W25QXX_CS_PORT      GPIOA
+#define W25QXX_CS_CLR       W25QXX_CS_PORT->BSRR = ((uint32_t)W25QXX_CS)<<16
+#define W25QXX_CS_SET       W25QXX_CS_PORT->BSRR = ((uint32_t)W25QXX_CS)
 
 /* w25qxx instructions */
 typedef enum {
@@ -55,6 +55,8 @@ typedef struct {
     uint32_t     capacity;        // bytes
     uint32_t     JEDECID;
 } w25qxx_feature_s;
+
+extern w25qxx_feature_s w25qxx;
 
 /* functions */
 void w25qxx_init( void );

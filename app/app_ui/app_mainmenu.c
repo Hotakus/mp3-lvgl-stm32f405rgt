@@ -113,7 +113,7 @@ static void event_handler(lv_obj_t * obj, lv_event_t event)
         if ( STRCMP( obj->user_data, "music" ) == 0 ) {
             ui = music_ui_get();
         } else if ( STRCMP( obj->user_data, "calendar" ) == 0 ) {
-            ui = calendar_ui_get();
+//            ui = calendar_ui_get();
         } else if ( STRCMP( obj->user_data, "folder" ) == 0 ) {
             ui = folder_ui_get();
         } else if ( STRCMP( obj->user_data, "calculator" ) == 0 ) {

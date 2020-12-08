@@ -367,8 +367,8 @@ interwork --depend=.\project\obj\context_rvds.d -o.\project\obj\context_rvds.o
 -IE:\software\Keil5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM
 32F4xx\Include -IE:\software\Keil5\ARM\CMSIS\Include --predefine="__MICROLIB SE
 TA 1" --predefine="__UVISION_VERSION SETA 531" --predefine="STM32F405xx SETA 1"
- --list=.\project\list\context_rvds.lst third_party\rt-thread-sorted\context_rv
-ds.S
+ --list=.\project\list\context_rvds.lst thirdParty\rt-thread-nano-sorted\contex
+t_rvds.S
 
 
 
@@ -379,7 +379,7 @@ Relocatable symbols
 
 Symbol: .text
    Definitions
-      At line 26 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 26 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
       None
 Comment: .text unused
@@ -387,49 +387,49 @@ HardFault_Handler 000000E2
 
 Symbol: HardFault_Handler
    Definitions
-      At line 222 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 222 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 221 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 221 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: HardFault_Handler used once
 PendSV_Handler 0000002E
 
 Symbol: PendSV_Handler
    Definitions
-      At line 88 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 88 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 89 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 89 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: PendSV_Handler used once
 _reswitch 00000020
 
 Symbol: _reswitch
    Definitions
-      At line 75 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 75 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 68 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 68 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: _reswitch used once
 pendsv_exit 00000090
 
 Symbol: pendsv_exit
    Definitions
-      At line 153 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 153 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 98 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 98 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: pendsv_exit used once
 rt_hw_context_switch 0000000E
 
 Symbol: rt_hw_context_switch
    Definitions
-      At line 61 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 61 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 62 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 62 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_context_switch used once
 rt_hw_context_switch_interrupt 0000000E
 
 Symbol: rt_hw_context_switch_interrupt
    Definitions
-      At line 59 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 59 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 60 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 60 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_context_switch_interrupt used once
 rt_hw_context_switch_to 0000009A
 
@@ -441,41 +441,41 @@ ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 166 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 166 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 167 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 167 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_context_switch_to used once
 rt_hw_interrupt_disable 00000000
 
 Symbol: rt_hw_interrupt_disable
    Definitions
-      At line 38 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 38 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 39 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 39 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_interrupt_disable used once
 rt_hw_interrupt_enable 00000008
 
 Symbol: rt_hw_interrupt_enable
    Definitions
-      At line 48 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 48 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 49 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 49 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_interrupt_enable used once
 rt_hw_interrupt_thread_switch 000000E0
 
 Symbol: rt_hw_interrupt_thread_switch
    Definitions
-      At line 215 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 215 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 216 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 216 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_interrupt_thread_switch used once
 switch_to_thread 0000006C
 
 Symbol: switch_to_thread
    Definitions
-      At line 129 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 129 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 106 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 106 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: switch_to_thread used once
 12 symbols
 
@@ -488,43 +488,43 @@ NVIC_INT_CTRL E000ED04
 
 Symbol: NVIC_INT_CTRL
    Definitions
-      At line 21 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 21 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 79 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 197 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 79 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 197 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 
 NVIC_PENDSVSET 10000000
 
 Symbol: NVIC_PENDSVSET
    Definitions
-      At line 24 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 24 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 80 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 198 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 80 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 198 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 
 NVIC_PENDSV_PRI 00FF0000
 
 Symbol: NVIC_PENDSV_PRI
    Definitions
-      At line 23 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 23 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 191 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 191 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: NVIC_PENDSV_PRI used once
 NVIC_SYSPRI2 E000ED20
 
 Symbol: NVIC_SYSPRI2
    Definitions
-      At line 22 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 22 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 190 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 190 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: NVIC_SYSPRI2 used once
 SCB_VTOR E000ED08
 
 Symbol: SCB_VTOR
    Definitions
-      At line 20 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 20 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 202 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 202 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: SCB_VTOR used once
 5 symbols
 
@@ -537,39 +537,39 @@ rt_hw_hard_fault_exception 00000000
 
 Symbol: rt_hw_hard_fault_exception
    Definitions
-      At line 220 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 220 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 242 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 242 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 Comment: rt_hw_hard_fault_exception used once
 rt_interrupt_from_thread 00000000
 
 Symbol: rt_interrupt_from_thread
    Definitions
-      At line 32 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 32 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 72 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 104 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 180 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 72 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 104 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 180 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 
 rt_interrupt_to_thread 00000000
 
 Symbol: rt_interrupt_to_thread
    Definitions
-      At line 33 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 33 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 76 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 130 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 169 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 76 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 130 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 169 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 
 rt_thread_switch_interrupt_flag 00000000
 
 Symbol: rt_thread_switch_interrupt_flag
    Definitions
-      At line 31 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 31 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
    Uses
-      At line 65 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 96 in file third_party\rt-thread-sorted\context_rvds.S
-      At line 185 in file third_party\rt-thread-sorted\context_rvds.S
+      At line 65 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 96 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
+      At line 185 in file thirdParty\rt-thread-nano-sorted\context_rvds.S
 
 4 symbols
 357 symbols in table
