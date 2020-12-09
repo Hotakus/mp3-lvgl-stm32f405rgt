@@ -25,7 +25,7 @@ SD_HandleTypeDef  hsd;
 DMA_HandleTypeDef hdma_sdio_rx;
 DMA_HandleTypeDef hdma_sdio_tx;
 
-void MX_SDIO_SD_Init(void)
+HAL_StatusTypeDef MX_SDIO_SD_Init(void)
 {
 
     GPIO_InitTypeDef pin;
@@ -34,7 +34,12 @@ void MX_SDIO_SD_Init(void)
     pin.Mode = GPIO_MODE_INPUT;
     pin.Pull = GPIO_PULLUP;
     pin.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    HAL_GPIO_Init( SD_DETECT_GPIO_PORT, &pin );
+    HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &pin);
+    
+    if (sd_detect() != SD_PRESENT) {
+        DEBUG_PRINT("No SD Card.\n");
+        return HAL_ERROR;
+    }
 
     hsd.Instance = SDIO;
     hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
@@ -44,12 +49,14 @@ void MX_SDIO_SD_Init(void)
     hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
     hsd.Init.ClockDiv = 0;
     if (HAL_SD_Init(&hsd) != HAL_OK) {
-        Error_Handler();
+        DEBUG_PRINT("SD Card init error.\n");
+        return HAL_ERROR;
     }
     if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK) {
-        Error_Handler();
+        DEBUG_PRINT("SD Card into HighSpeed failed.\n");
+        return HAL_ERROR;
     }
-
+    return HAL_OK;
 }
 
 void HAL_SD_MspInit(SD_HandleTypeDef* sdHandle)
@@ -191,7 +198,8 @@ HAL_StatusTypeDef sd_sdio_init(void)
 {
     HAL_StatusTypeDef status = HAL_ERROR;
 
-    MX_SDIO_SD_Init();
+    if (MX_SDIO_SD_Init() != HAL_OK)
+        return HAL_ERROR;
 
     status = HAL_SD_InitCard(&hsd);
     if (status != HAL_OK) {
@@ -261,10 +269,10 @@ void sd_show_card_info(void)
 }
 
 
-uint8_t sd_detect( void )
+uint8_t sd_detect(void)
 {
-    if ( HAL_GPIO_ReadPin( SD_DETECT_GPIO_PORT, SD_DETECT_PIN ) != GPIO_PIN_RESET )
+    if (HAL_GPIO_ReadPin(SD_DETECT_GPIO_PORT, SD_DETECT_PIN) != GPIO_PIN_RESET)
         return SD_NOT_PRESENT;
-    else 
+    else
         return SD_PRESENT;
 }

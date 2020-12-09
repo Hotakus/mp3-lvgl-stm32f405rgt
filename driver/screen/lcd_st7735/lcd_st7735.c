@@ -55,6 +55,7 @@ void lcd_gpio( void ) {
     if ( HAL_SPI_Init( &h_st7735_spi ) != HAL_OK ) {
         Error_Handler();
     }
+    __HAL_SPI_ENABLE(&h_st7735_spi);
     
     
     LCD_144_ST7735_CS_SET;

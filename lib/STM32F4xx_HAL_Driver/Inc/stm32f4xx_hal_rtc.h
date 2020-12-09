@@ -759,7 +759,7 @@ HAL_RTCStateTypeDef HAL_RTC_GetState(RTC_HandleTypeDef *hrtc);
                                             RTC_FLAG_ALRBWF | RTC_FLAG_ALRAWF | RTC_FLAG_TAMP1F | \
                                             RTC_FLAG_RECALPF | RTC_FLAG_SHPF))
 
-#define RTC_TIMEOUT_VALUE       1000
+#define RTC_TIMEOUT_VALUE       1000 * 10
 
 #define RTC_EXTI_LINE_ALARM_EVENT             ((uint32_t)EXTI_IMR_MR17)  /*!< External interrupt line 17 Connected to the RTC Alarm event */
 /**

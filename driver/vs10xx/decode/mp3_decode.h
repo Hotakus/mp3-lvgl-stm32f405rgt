@@ -12,7 +12,7 @@
 #define MP3_DECODE_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 #include "arm_math.h"
 #include <stdio.h>
 

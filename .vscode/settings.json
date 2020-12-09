@@ -1,11 +1,12 @@
 {
     "files.associations": {
         "string": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "utility": "c"
     },
 
-    "editor.formatOnSave": true,
-    "C_Cpp.clang_format_style": 
-    "{ BasedOnStyle: Chromium, IndentWidth: 4}",
+    // "editor.formatOnSave": true,
+    // "C_Cpp.clang_format_style": 
+    // "{ BasedOnStyle: Chromium, IndentWidth: 4}",
 
 }

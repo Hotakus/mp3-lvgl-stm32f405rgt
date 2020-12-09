@@ -143,6 +143,17 @@ void lv_port_fs_init(void)
  /* Initialize your Storage device and File system. */
 static void fs_init(void)
 {
+    DEBUG_PRINT("spif init.\n");
+
+    if (fr_lv[SPIF_INDEX] != FR_OK) {
+        fr_lv[SPIF_INDEX] = f_mount(&fs_lv[SPIF_INDEX], "SPIF:", 1);
+        if (fr_lv[SPIF_INDEX] != FR_OK) {
+            DEBUG_PRINT("spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX]);
+        }
+        DEBUG_PRINT("spi flash mount successfully.\n\n");
+    }
+
+    DEBUG_PRINT("sd init.\n");
     /*E.g. for FatFS initalize the SD card and FatFS itself*/
     /*You code here*/
     if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
@@ -155,13 +166,7 @@ static void fs_init(void)
             DEBUG_PRINT("sd card mount successfully.\n");
     }
 
-    if (fr_lv[SPIF_INDEX] != FR_OK) {
-        fr_lv[SPIF_INDEX] = f_mount(&fs_lv[SPIF_INDEX], "SPIF:", 1);
-        if (fr_lv[SPIF_INDEX] != FR_OK) {
-            DEBUG_PRINT("spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX]);
-        }
-        DEBUG_PRINT("spi flash mount successfully.\n\n");
-    }
+    
 
     if (fr_lv[SD_SDIO_INDEX] == FR_OK) {
         sd_show_card_info( );
@@ -175,6 +180,8 @@ static void fs_init(void)
             w25qxx.JEDECID
         );
     }
+
+    DEBUG_PRINT("done\n");
 
 }
 

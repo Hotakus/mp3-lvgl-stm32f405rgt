@@ -1,194 +1,114 @@
 /************************************************
  * @file iic_conf.c
  * @author Trisuborn (ttowfive@gmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2020-11-18
- * 
+ *
  * @copyright Copyright (c) 2020
- * 
+ *
  ************************************************/
 
 #include "iic_conf.h"
-#include "usart.h"
-#include "pro_conf.h"
+#include "uart.h"
 
-static I2C_InitTypeDef  i2c_s;
-static GPIO_InitTypeDef i2cg_s;
-static u16 i2c_clk_m = 1000;
+#define  I2C_NUM    3
+
+static uint16_t i2c_clk_m = 1000;
+
+
+void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
+{
+
+    GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+    if (i2cHandle->Instance == I2C1) {
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+        /**I2C1 GPIO Configuration
+        PB6     ------> I2C1_SCL
+        PB7     ------> I2C1_SDA
+        */
+        GPIO_InitStruct.Pin = I2C1_SCL | I2C1_SDA;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+        /* I2C1 clock enable */
+        __HAL_RCC_I2C1_CLK_ENABLE();
+    }
+}
+
+void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
+{
+
+    if (i2cHandle->Instance == I2C1) {
+
+        /* Peripheral clock disable */
+        __HAL_RCC_I2C1_CLK_DISABLE();
+
+        /**I2C1 GPIO Configuration
+        PB6     ------> I2C1_SCL
+        PB7     ------> I2C1_SDA
+        */
+        HAL_GPIO_DeInit(GPIOB, I2C1_SCL);
+        HAL_GPIO_DeInit(GPIOB, I2C1_SDA);
+    }
+}
 
 /************************************************
  * @brief I2C configure
  * 
- * @param I2Cx 
+ * @param h_i2c 
  * @param i2c_clk 
  * @param own_addr 
- ************************************************/
-void i2c_conf( I2C_TypeDef * I2Cx, u16 i2c_clk, uint8_t own_addr ) {
-    
-    if ( i2c_clk > 400 ) {
-        DEBUG_PRINT( "i2c clk error\n" );
+*************************************************/
+void i2c_conf(I2C_HandleTypeDef* h_i2c, uint16_t i2c_clk, uint8_t own_addr)
+{
+    if (i2c_clk > 400) {
+        DEBUG_PRINT("i2c clk error\n");
         return;
     }
-    
-    RCC_APB1PeriphClockCmd( RCC_APB1Periph_I2C1, DISABLE );
-    RCC_APB1PeriphClockCmd( RCC_APB1Periph_I2C1, ENABLE );
-    
-    RCC_AHB1PeriphClockCmd( RCC_AHB1Periph_GPIOB, ENABLE );
-    
-    GPIO_PinAFConfig( GPIOB, GPIO_PinSource6, GPIO_AF_I2C1 );
-    GPIO_PinAFConfig( GPIOB, GPIO_PinSource7, GPIO_AF_I2C1 );
-    
-    I2C_DeInit( I2Cx );
-    
-    i2c_s.I2C_Mode                  = I2C_Mode_I2C;
-    i2c_s.I2C_ClockSpeed            = i2c_clk_m * i2c_clk;
-    i2c_s.I2C_Ack                   = I2C_Ack_Enable;
-    i2c_s.I2C_DutyCycle             = I2C_DutyCycle_2;
-    i2c_s.I2C_AcknowledgedAddress   = I2C_AcknowledgedAddress_7bit;
-    i2c_s.I2C_OwnAddress1           = own_addr;
-    I2C_Init( I2Cx, &i2c_s );
-    I2C_Cmd( I2Cx, ENABLE );
-    I2C1->CR1 |= 0x80;              // 解除限速
-    
-    i2cg_s.GPIO_Mode            = GPIO_Mode_AF;
-    i2cg_s.GPIO_Pin             = I2C1_SCL | I2C1_SDA;
-    i2cg_s.GPIO_OType           = GPIO_OType_OD;
-    i2cg_s.GPIO_PuPd            = GPIO_PuPd_UP;
-    i2cg_s.GPIO_Speed           = GPIO_Speed_100MHz;
-    GPIO_Init( GPIOB, &i2cg_s );
-}
 
-/************************************************
- * @brief check i2c event
- * 
- * @param I2Cx 
- * @param i2c_event 
- * @param timeout 
- * @return ErrorStatus 
- ************************************************/
-ErrorStatus i2c_check_event( I2C_TypeDef *I2Cx, uint32_t i2c_event, uint32_t timeout )
-{
-    ErrorStatus err = ERROR;
-    do {
-        err = I2C_CheckEvent( I2Cx, i2c_event );
-    } while ( --timeout && err != SUCCESS );
-    return err;
-}
+    if ( h_i2c->Instance == NULL )
+        return;
 
-/************************************************
- * @brief generate an i2c start condition
- * 
- * @param I2Cx 
- * @param timeout 
- * @return ErrorStatus 
- ************************************************/
-ErrorStatus i2c_generate_start( I2C_TypeDef *I2Cx, uint32_t timeout )
-{
-    ErrorStatus err = ERROR;
+    HAL_I2C_DeInit(h_i2c);
 
-    I2C_GenerateSTART( I2Cx, ENABLE );
-    err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_MODE_SELECT, timeout );
-    if ( err != SUCCESS ) {
-        DEBUG_PRINT( "I2C generate start condition error.\n" );
-        i2c_generate_stop( I2Cx );
+    h_i2c->Init.ClockSpeed = i2c_clk * i2c_clk_m;
+    h_i2c->Init.OwnAddress1 = own_addr;
+    h_i2c->Init.DutyCycle = I2C_DUTYCYCLE_2;
+    h_i2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    h_i2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    h_i2c->Init.OwnAddress2 = 0;
+    h_i2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    h_i2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    if (HAL_I2C_Init(h_i2c) != HAL_OK) {
+        DEBUG_PRINT("I2C init Error.\n");
     }
-    return err;
+
 }
 
 /************************************************
- * @brief generate an i2c stop condition
+ * @brief I2Cx 发送
  * 
- * @param I2Cx 
- ************************************************/
-void i2c_generate_stop ( I2C_TypeDef *I2Cx )
+ * @param I2Cx 对应1...3
+ * @param dev_addr 
+ * @param send_buf 
+ * @param size 
+ * @return HAL_StatusTypeDef 
+*************************************************/
+HAL_StatusTypeDef i2c_send( I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t *send_buf, size_t size )
 {
-    I2C_GenerateSTOP( I2Cx, ENABLE );
+    if ( h_i2c->Instance == NULL )
+        return HAL_ERROR;
+    return HAL_I2C_Master_Transmit(h_i2c, dev_addr, send_buf, size, I2C_TIMEOUT );
 }
 
-/************************************************
- * @brief send a 7bit address
- * 
- * @param I2Cx 
- * @param addr 
- * @param timeout 
- * @return ErrorStatus 
- ************************************************/
-ErrorStatus i2c_send_7bitAddr( I2C_TypeDef *I2Cx, uint32_t dir, uint8_t addr, uint32_t timeout )
+
+HAL_StatusTypeDef i2c_read( I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t *rec_buf, size_t size )
 {
-    ErrorStatus err = ERROR;
-
-    I2C_Send7bitAddress( I2Cx, addr, dir );
-    if ( dir == I2C_Direction_Transmitter ) {
-        err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED, timeout );
-    } else {
-        err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED, timeout );
-    }
-    if ( err != SUCCESS ) {
-        DEBUG_PRINT( "I2C send 7bit address error. (0x%02x)\n", addr );
-        i2c_generate_stop( I2Cx );
-        return err;
-    }
-    return err;
-}
-
-/************************************************
- * @brief i2c send byte
- * 
- * @param I2Cx 
- * @param byte 
- * @param timeout 
- * @return ErrorStatus 
- ************************************************/
-ErrorStatus i2c_send_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout )
-{
-    ErrorStatus err = ERROR;
-    uint8_t *pd = byte;
-
-    if ( !len )
-        return ERROR;
-
-    do {
-        I2Cx->DR = *pd;
-        err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING, timeout );
-        if ( err != SUCCESS ) {
-            i2c_generate_stop( I2Cx );
-            return err;
-        } else if ( err == SUCCESS && len != 1 )
-            pd += 1;
-    } while ( --len );
-
-    return err;
-}
-
-/************************************************
- * @brief i2c receive n bytes
- * 
- * @param I2Cx 
- * @param byte 
- * @param len 
- * @param timeout 
- * @return ErrorStatus 
- ************************************************/
-ErrorStatus i2c_read_bytes( I2C_TypeDef *I2Cx, uint8_t *byte, uint32_t len, uint32_t timeout )
-{
-    ErrorStatus err = ERROR;
-
-    if ( !len )
-        return ERROR;
-
-    do {
-        err = i2c_check_event( I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED, timeout );
-        if ( err != SUCCESS ) {
-            i2c_generate_stop( I2Cx );
-            *byte = 0xFF;
-            DEBUG_PRINT( "i2c read error (%d)\n", len );
-            return err;
-        } else {
-            *byte = (uint8_t)I2Cx->DR;
-            byte += 1;
-        }
-    } while ( --len );
-    
-    return err;
+    if ( h_i2c->Instance == NULL )
+        return HAL_ERROR;
+    return HAL_I2C_Master_Receive(h_i2c, dev_addr, rec_buf, size, I2C_TIMEOUT );
 }

@@ -59,8 +59,12 @@ void w25qxx_init(void)
 {
     if (!conf_flag) {
         w25qxx_gpio();
-        spi_conf(&h_w25qxx_spi, SPI_BAUDRATEPRESCALER_2, SPI_MODE_4,
-            SPI_DIRECTION_2LINES);
+        spi_conf(
+            &h_w25qxx_spi,
+            SPI_BAUDRATEPRESCALER_2,
+            SPI_MODE_4,
+            SPI_DIRECTION_2LINES
+        );
         conf_flag = 1;
     }
     w25qxx_powerUp();
@@ -178,7 +182,7 @@ void w25qxx_get_JEDECID(void)
     if (w25qxx.JEDECID)
         return;
 
-    uint8_t jedecid_buf [4];
+    uint8_t jedecid_buf[4];
 
     W25QXX_CS_CLR;
     w25qxx_trans_byte(W25QXX_CMD_JEDECID);
@@ -273,7 +277,7 @@ w25qxx_stat w25qxx_erase_sector(uint32_t ssect, uint32_t sect_num)
         ssect++;
         DEBUG_PRINT(".");
     }
-        
+
     return W25QXX_STAT_OK;
 }
 

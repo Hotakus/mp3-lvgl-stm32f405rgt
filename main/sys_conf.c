@@ -1,13 +1,16 @@
 #include "sys_conf.h"
 #include "pro_conf.h"
 
+#define LED_PORT    GPIOA
+#define LED_PIN     GPIO_PIN_8
 
 void Error_Handler(void)
 {
-    /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
+    while (1) {
+        HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
+        DELAY(500);
+    }
 
-    /* USER CODE END Error_Handler_Debug */
 }
 
 /**
@@ -18,6 +21,7 @@ void SystemClock_Config(void)
 {
     RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
     RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
+    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = { 0 };
 
     /** Configure the main internal regulator output voltage
     */
@@ -26,15 +30,16 @@ void SystemClock_Config(void)
     /** Initializes the RCC Oscillators according to the specified parameters
     * in the RCC_OscInitTypeDef structure.
     */
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLM = 25;
     RCC_OscInitStruct.PLL.PLLN = 336;
     RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
     RCC_OscInitStruct.PLL.PLLQ = 7;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)   {
         Error_Handler();
     }
     /** Initializes the CPU, AHB and APB buses clocks
@@ -46,31 +51,26 @@ void SystemClock_Config(void)
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)   {
         Error_Handler();
     }
-    /** Enables the Clock Security System
-    */
-    HAL_RCC_EnableCSS();
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)   {
+        Error_Handler();
+    }
 }
 
-
-void HAL_Delay(uint32_t Delay)
-{
 #if USER_USE_OS == 1
 #if USER_USE_RTTHREAD == 1
+void HAL_Delay(uint32_t Delay)
+{
     DELAY(Delay);
-#else 
-    uint32_t tickstart = HAL_GetTick();
-    uint32_t wait = Delay;
-
-    /* Add a freq to guarantee minimum wait */
-    if (wait < HAL_MAX_DELAY) {
-        wait += (uint32_t)(uwTickFreq);
-    }
-
-    while ((HAL_GetTick() - tickstart) < wait) {
-    }
-#endif
-#endif
 }
+
+// uint32_t HAL_GetTick(void)
+// {
+//     return (uint32_t)rt_tick_get();
+// }
+#endif
+#endif

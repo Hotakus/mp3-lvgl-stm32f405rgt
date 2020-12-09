@@ -12,32 +12,31 @@
 #define VS10XX_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 #include "arm_math.h"
 #include <stdio.h>
-#include "systick.h"
 #include <stdlib.h>
 #include "spi_conf.h"
 #include "mp3_decode.h"
 
 /* definition */
 #define VS10xx_SPI              SPI1
-#define VS10xx_XRESET           GPIO_Pin_0        // PC
-#define VS10xx_DREQ             GPIO_Pin_1        // PC
-#define VS10xx_XDCS             GPIO_Pin_2        // PC
-#define VS10xx_XCS              GPIO_Pin_3        // PC
+#define VS10xx_XRESET           GPIO_PIN_0        // PC
+#define VS10xx_DREQ             GPIO_PIN_1        // PC
+#define VS10xx_XDCS             GPIO_PIN_2        // PC
+#define VS10xx_XCS              GPIO_PIN_3        // PC
 
 /* return DREQ's status */
 #define DREQ_STAT               ( ((GPIOC->IDR & VS10xx_DREQ)==VS10xx_DREQ)?(1):(0) )
 
-#define VS10xx_XRESET_HIGH      GPIOC->BSRRL |= VS10xx_XRESET
-#define VS10xx_XRESET_LOW       GPIOC->BSRRH |= VS10xx_XRESET
+#define VS10xx_XRESET_HIGH      GPIOC->BSRR = (uint32_t)VS10xx_XRESET
+#define VS10xx_XRESET_LOW       GPIOC->BSRR = (uint32_t)VS10xx_XRESET <<16
 
-#define VS10xx_XDCS_HIGH        GPIOC->BSRRL |= VS10xx_XDCS
-#define VS10xx_XDCS_LOW         GPIOC->BSRRH |= VS10xx_XDCS
+#define VS10xx_XDCS_HIGH        GPIOC->BSRR = (uint32_t)VS10xx_XDCS
+#define VS10xx_XDCS_LOW         GPIOC->BSRR = (uint32_t)VS10xx_XDCS <<16
 
-#define VS10xx_CS_HIGH          GPIOC->BSRRL |= VS10xx_XCS
-#define VS10xx_CS_LOW           GPIOC->BSRRH |= VS10xx_XCS
+#define VS10xx_CS_HIGH          GPIOC->BSRR = (uint32_t)VS10xx_XCS
+#define VS10xx_CS_LOW           GPIOC->BSRR = (uint32_t)VS10xx_XCS <<16
 
 
 /* SCI optional commands */
@@ -49,6 +48,7 @@
 #define VS1011               1
 #define VS1002               2
 #define VS1003               3
+#define VS1053               4
 
 /* CLOCK's definitions */
 #define SC_MULT0     0x0000         // XTALI * 0

@@ -12,7 +12,7 @@
 #define SHT20_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 #include "pro_conf.h"
 #include <stdio.h>
 
@@ -23,8 +23,8 @@
 
 /* functions */
 void sht_init( void );
-ErrorStatus sht_read_user_reg( uint8_t *dat );
-ErrorStatus sht_writ_user_reg( uint8_t *dat );
+HAL_StatusTypeDef sht_read_user_reg( uint8_t *dat );
+HAL_StatusTypeDef sht_writ_user_reg( uint8_t *dat );
 
 double sht_read_RH_TEMP( uint8_t which );
 

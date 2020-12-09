@@ -45,8 +45,6 @@ DSTATUS disk_status(
     return STA_NOINIT;
 }
 
-
-
 /*-----------------------------------------------------------------------*/
 /* Inidialize a Drive                                                    */
 /*-----------------------------------------------------------------------*/
@@ -116,24 +114,17 @@ DRESULT disk_read(
             return RES_ERROR;
         return RES_OK;
     case DEV_SD_SDIO:
-        // do {
-        //     sd_state = HAL_SD_ReadBlocks(&hsd, buff, sector, count, 0xFFFFFFFF);
-        // } while (--retry && sd_state != HAL_OK);
-        // if (sd_state != HAL_OK) {
-        //     DEBUG_PRINT("SD read error (%d)\n", sd_state);
-        //     return RES_ERROR;
-        // }
 
-        while (count--) {
+        // while (count--) 
+        {
             do {
-                // sd_state = HAL_SD_ReadBlocks(&hsd, buff, sector, 1, 0xFFFFFFFF);
-                sd_state = HAL_SD_ReadBlocks_IT(&hsd, buff, sector, 1);
+                sd_state = HAL_SD_ReadBlocks_IT(&hsd, buff, sector, count);
             } while (--retry && sd_state != HAL_OK);
             if (sd_state != HAL_OK) {
                 DEBUG_PRINT("SD read error (%d)\n", sd_state);
                 return RES_ERROR;
             } else {
-                while( HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY );
+                while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
                 sector++;
             }
         }
@@ -174,27 +165,18 @@ DRESULT disk_write(
         return RES_OK;
     case DEV_SD_SDIO:
 
-        // do {
-        //     sd_state = HAL_SD_WriteBlocks(&hsd, (uint8_t*)buff, sector, count, 0xFFFFFFFF);
-        // } while (--retry && sd_state != HAL_OK);
-        // if (sd_state != HAL_OK) {
-        //     DEBUG_PRINT("SD write error (%d)\n", sd_state);
-        //     return RES_ERROR;
-        // }
-
-        while (count--) {
+        //while (count--) 
+        {
             do {
-                // sd_state = HAL_SD_WriteBlocks(&hsd, (uint8_t*)buff, sector, 1, 0xFFFFFFFF);
-                sd_state = HAL_SD_WriteBlocks_IT(&hsd, (uint8_t*)buff, sector, 1);
+                sd_state = HAL_SD_WriteBlocks_IT(&hsd, (uint8_t*)buff, sector, count);
             } while (--retry && sd_state != HAL_OK);
             if (sd_state != HAL_OK) {
                 DEBUG_PRINT("SD write error (%d)\n", sd_state);
                 return RES_ERROR;
             } else {
-                while( HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY );
+                while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
                 sector++;
             }
-
         }
 
         return RES_OK;

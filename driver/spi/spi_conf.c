@@ -25,10 +25,13 @@ GPIO_InitTypeDef spix_gpio;
  * @param mode spi的四种模式
  * @param spi_dir spi方向
  ************************************************/
-void spi_conf(SPI_HandleTypeDef* h_spix,
-              uint32_t speed,
-              SPI_MODE mode,
-              uint32_t spi_dir) {
+void spi_conf(
+    SPI_HandleTypeDef* h_spix,
+    uint32_t speed,
+    SPI_MODE mode,
+    uint32_t spi_dir
+)
+{
     uint32_t pin = 0;
 
     if (h_spix->Instance == SPI1) {
@@ -61,22 +64,22 @@ void spi_conf(SPI_HandleTypeDef* h_spix,
 
     /* SPI conf */
     switch (mode) {
-        case SPI_MODE_1:
-            h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
-            h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
-            break;
-        case SPI_MODE_2:
-            h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
-            h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
-            break;
-        case SPI_MODE_3:
-            h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
-            h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
-            break;
-        case SPI_MODE_4:
-            h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
-            h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
-            break;
+    case SPI_MODE_1:
+        h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
+        h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
+        break;
+    case SPI_MODE_2:
+        h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
+        h_spix->Init.CLKPolarity = SPI_POLARITY_LOW;
+        break;
+    case SPI_MODE_3:
+        h_spix->Init.CLKPhase = SPI_PHASE_1EDGE;
+        h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
+        break;
+    case SPI_MODE_4:
+        h_spix->Init.CLKPhase = SPI_PHASE_2EDGE;
+        h_spix->Init.CLKPolarity = SPI_POLARITY_HIGH;
+        break;
     }
 
     spix_gpio.Pin = pin;
@@ -106,17 +109,21 @@ void spi_conf(SPI_HandleTypeDef* h_spix,
     h_spix->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     h_spix->Init.TIMode = SPI_TIMODE_DISABLE;
     if (HAL_SPI_Init(h_spix) != HAL_OK) {
-        Error_Handler();
+        DEBUG_PRINT( "SPI Config error.\n" );
     }
+    __HAL_SPI_ENABLE(h_spix);
 }
 
-#include "stm32f4xx_ll_spi.h"
-
-uint8_t spi_full_duplex_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte) {
-    HAL_SPI_Transmit(h_spix, &byte, 1, 0xFFFFFFFF);
-    return (uint8_t)h_spix->Instance->DR;
+uint8_t spi_full_duplex_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte)
+{
+    while ((h_spix->Instance->SR & SPI_FLAG_TXE)!=SPI_FLAG_TXE);
+    *((__IO uint8_t*) & h_spix->Instance->DR) = (byte);
+    while ((h_spix->Instance->SR & SPI_FLAG_RXNE)!=SPI_FLAG_RXNE);
+    return h_spix->Instance->DR;
 }
 
-void spi_one_line_tx_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte) {
-    HAL_SPI_Transmit(h_spix, &byte, 1, 0xFFFFFFFF);
+void spi_one_line_tx_trans_byte(SPI_HandleTypeDef* h_spix, uint8_t byte)
+{
+    while ((h_spix->Instance->SR & SPI_FLAG_TXE)!=SPI_FLAG_TXE);
+    *((__IO uint8_t*) & h_spix->Instance->DR) = (byte);
 }

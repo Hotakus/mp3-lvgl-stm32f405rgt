@@ -17,7 +17,8 @@ extern "C" {
 
 /* includes */
 #include "pro_conf.h"
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
+
 #if USER_USE_FATFS == 1
 /* file system */
 #include "ff.h"
@@ -33,20 +34,30 @@ typedef enum RTC_STAT{
 } RTC_STAT;
 
 typedef struct RTC_INFO {
-    RTC_TimeTypeDef  rtcTimeStruct;
-    RTC_DateTypeDef  rtcDateStruct;
-    RTC_AlarmTypeDef rtcAlarmStruct[2];
+    RTC_TimeTypeDef  time;
+    RTC_DateTypeDef  date;
 } RTC_INFO;
+
+
 
 #define RTC_CONFIG_FLAG 0x0807
 
+#define RTC_TIME_FORMAT_AM_PM 0
+#define RTC_TIME_FORMAT_NOMAL 1
+
+
 /* function */
 void        rtc_init( void );
-RTC_STAT    rtc_check( void );
-RTC_STAT    rtc_config( void );
-void        rtc_obtain_time( RTC_INFO *rtc_data );
-void        rtc_obtain_alarm( RTC_INFO *rtc_data ) ;
-const char *weekday_get( RTC_INFO *info );
+
+RTC_STAT rtc_config_date(uint8_t year, uint8_t mon, uint8_t date, uint8_t week);
+RTC_STAT rtc_config_time(uint8_t hour, uint8_t min, uint8_t sec, uint8_t tf);
+
+void rtc_obtain_info( RTC_INFO *rtc_info );
+void rtc_obtain_date( RTC_DateTypeDef *data );
+void rtc_obtain_time( RTC_TimeTypeDef *time );
+void rtc_obtain_alarm(RTC_AlarmTypeDef* alarm, uint32_t  w_alarm);
+
+const char* weekday_get(RTC_DateTypeDef* date);
 
 #if USER_USE_FATFS == 1
 #if FF_FS_NORTC == 0
