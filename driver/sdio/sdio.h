@@ -20,12 +20,7 @@
 #include "pro_conf.h"
 #include "uart.h"
 
-#include "ff.h"
-typedef struct  {
-  HAL_StatusTypeDef (*init) (void);
-  HAL_StatusTypeDef (*read) ( uint8_t *buff, LBA_t sector, UINT count );
-  HAL_StatusTypeDef (*write) ( uint8_t *buff, LBA_t sector, UINT count );
-} fatfs_dev_opr_t;
+
 
 extern DMA_HandleTypeDef hdma_sdio_rx;
 extern DMA_HandleTypeDef hdma_sdio_tx;

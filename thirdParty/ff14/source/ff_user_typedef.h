@@ -43,7 +43,11 @@ typedef struct list_file_t {
     const char *type;  // 列表文件类型
 } list_file_t;
 
-
+typedef struct  {
+  HAL_StatusTypeDef (*init) (void);
+  HAL_StatusTypeDef (*read) ( uint8_t *buff, LBA_t sector, UINT count );
+  HAL_StatusTypeDef (*write) ( uint8_t *buff, LBA_t sector, UINT count );
+} fatfs_dev_opr_t;
 
 #ifdef __cplusplus
 }
