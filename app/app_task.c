@@ -13,6 +13,9 @@
 #include "pro_conf.h"
 #include "sys_conf.h"
 #include "app_status_bar.h"
+#include "ff.h"
+#include "sdio.h"
+#include "lv_port_fs.h"
 
 static rt_thread_t u_threadx[APP_THREAD_NUM] = { RT_NULL };
 static struct rt_thread u_static_threadx[APP_THREAD_NUM];

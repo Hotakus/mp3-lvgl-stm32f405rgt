@@ -51,27 +51,13 @@ extern "C" {
 #endif
 
 
-#if USER_USE_LVGL == 1u
-/* lvgl */
-#include "lvgl.h"
-#include "lv_port_disp.h"
-#include "lv_port_fs.h"
-#include "lv_port_indev.h"
-
-#endif
-
 #if USER_USE_APP == 1
 /* app */
-#include "app_main.h"
 #if USER_USE_LVGL ==    1u
 #define USE_LV_EX       1u
 #endif
 #endif
 
-#if USER_USE_FATFS == 1u
-/* file system */
-#include "ff.h"
-#endif
 
 #if USER_USE_RTTHREAD == 1u
 #define APP_THREAD_NUM      10u         // 定义APP最大线程
@@ -126,16 +112,11 @@ extern "C" {
 #define USER_USE_SD2         USER_USE_SD_SPI
 #endif
 
-#if USER_USE_SD_NUM == 1u
-#include "sdio.h"
-#elif USER_USE_SD_NUM == 2u
-#include "sd_spi.h"
-#include "sd_sdio_conf.h"
-#endif
-#endif
-
 #ifdef __cplusplus
 }
 #endif
+
+#endif
+
 
 #endif

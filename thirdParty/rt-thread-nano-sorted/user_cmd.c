@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <rthw.h>
 #include <rtthread.h>
+#include <lvgl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

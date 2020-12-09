@@ -10,6 +10,8 @@ extern "C" {
 #include <stdio.h>
 #include "uart.h"
 
+
+
 /* definations */
 #define W25QXX_SPI          SPI3
 #define W25QXX_CS           GPIO_PIN_15

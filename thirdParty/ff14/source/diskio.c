@@ -10,7 +10,7 @@
 #include "pro_conf.h"
 #include "w25qxx.h"
 #include "uart.h"
-
+#include "sdio.h"
 #include "ff.h"
 #include "diskio.h"		/* Declarations of disk functions */
 
@@ -19,7 +19,7 @@
 #define DEV_SPIF        0	/* Example: Map SPI FLASH to physical drive 0 */
 #define DEV_SD_SDIO	    1	/* Example: Map MMC/SD card to physical drive 1 */
 #define DEV_SD_SPI	    2	/* Example: Map MMC/SD card to physical drive2 */
-#define DEV_USB		    3	/* Example: Map USB MSD to physical drive 3 */
+#define DEV_USB		      3	/* Example: Map USB MSD to physical drive 3 */
 
 HAL_SD_CardInfoTypeDef card_info = {
     .CardType = 0xFF,

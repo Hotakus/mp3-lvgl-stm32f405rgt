@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 /* includes */
-#include "pro_conf.h"
+#include "screen_conf.h"
 #include "stm32f4xx_hal.h"
 #include "lcd_st7735.h"
 #include "lcd_st7789.h"
