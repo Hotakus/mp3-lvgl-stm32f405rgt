@@ -1738,6 +1738,11 @@
               <FileType>5</FileType>
               <FilePath>.\thirdParty\ff14\source\ffconf.h</FilePath>
             </File>
+            <File>
+              <FileName>ff_devices.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\ff14\source\ff_devices.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

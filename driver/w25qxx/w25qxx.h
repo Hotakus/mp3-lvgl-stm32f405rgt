@@ -39,13 +39,6 @@ typedef enum {
 } w25qxx_instructions;
 
 
-/* w25qxx opt stat */
-typedef enum {
-    W25QXX_STAT_OK       = 0,
-    W25QXX_STAT_FAILED      ,
-    W25QXX_STAT_TIMEOUT     ,
-} w25qxx_stat;
-
 #define W25Q16      0xEF4015
 #define W25Q32      0xEF4016
 #define W25Q64      0xEF4017
@@ -61,19 +54,19 @@ typedef struct {
 extern w25qxx_feature_s w25qxx;
 
 /* functions */
-void w25qxx_init( void );
+HAL_StatusTypeDef w25qxx_init( void );
 void w25qxx_powerUp( void );
 void w25qxx_powerDown( void );
 void w25qxx_get_JEDECID( void );
 
-w25qxx_stat w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num );
-w25qxx_stat w25qxx_erase_chip( void );
+HAL_StatusTypeDef w25qxx_erase_sector( uint32_t ssect, uint32_t sect_num );
+HAL_StatusTypeDef w25qxx_erase_chip( void );
 
-w25qxx_stat w25qxx_read_page( uint8_t* rec_buf , uint32_t page, uint32_t cnt );
-w25qxx_stat w25qxx_writ_page( uint8_t* send_buf, uint32_t page, uint32_t cnt );
+HAL_StatusTypeDef w25qxx_read_page( uint8_t* rec_buf , uint32_t page, uint32_t cnt );
+HAL_StatusTypeDef w25qxx_writ_page( uint8_t* send_buf, uint32_t page, uint32_t cnt );
 
-w25qxx_stat w25qxx_read_sector( uint8_t* rec_buf, uint32_t sector, uint32_t cnt );
-w25qxx_stat w25qxx_writ_sector( uint8_t* send_buf, uint32_t sector, uint32_t cnt );
+HAL_StatusTypeDef w25qxx_read_sector( uint8_t* rec_buf, uint32_t sector, uint32_t cnt );
+HAL_StatusTypeDef w25qxx_writ_sector( uint8_t* send_buf, uint32_t sector, uint32_t cnt );
 
 #ifdef __cplusplus
 }

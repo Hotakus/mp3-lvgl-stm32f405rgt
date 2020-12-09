@@ -13,7 +13,14 @@
 #include "sdio.h"
 
 
+static HAL_StatusTypeDef sd_sdio_read(uint8_t* buff, LBA_t sector, UINT count);
+static HAL_StatusTypeDef sd_sdio_write(uint8_t* buff, LBA_t sector, UINT count);
 
+fatfs_dev_opr_t dev_sd = {
+  .init = sd_sdio_init,
+  .read = sd_sdio_read,
+  .write = sd_sdio_write,
+};
 
 SD_HandleTypeDef  hsd;
 DMA_HandleTypeDef hdma_sdio_rx;
@@ -116,7 +123,7 @@ void HAL_SD_MspInit(SD_HandleTypeDef* sdHandle)
     hdma_sdio_rx.Init.PeriphBurst = DMA_PBURST_INC4;
     if (HAL_DMA_Init(&hdma_sdio_rx) != HAL_OK) {
       DEBUG_PRINT("hdma_sdio_rx error.\n");
-      return ;
+      return;
     }
 
     __HAL_LINKDMA(sdHandle, hdmarx, hdma_sdio_rx);
@@ -137,7 +144,7 @@ void HAL_SD_MspInit(SD_HandleTypeDef* sdHandle)
     hdma_sdio_tx.Init.PeriphBurst = DMA_PBURST_INC4;
     if (HAL_DMA_Init(&hdma_sdio_tx) != HAL_OK) {
       DEBUG_PRINT("hdma_sdio_tx error.\n");
-      return ;
+      return;
     }
 
     __HAL_LINKDMA(sdHandle, hdmatx, hdma_sdio_tx);
@@ -271,4 +278,40 @@ uint8_t sd_detect(void)
     return SD_NOT_PRESENT;
   else
     return SD_PRESENT;
+}
+
+static HAL_StatusTypeDef sd_sdio_read(uint8_t* buff, LBA_t sector, UINT count)
+{
+  uint16_t retry = 0xFFFF;
+  HAL_StatusTypeDef sd_state;
+
+  do {
+    sd_state = HAL_SD_ReadBlocks_IT(&hsd, buff, sector, count);
+  } while (--retry && sd_state != HAL_OK);
+  if (sd_state != HAL_OK) {
+    DEBUG_PRINT("SD read error (%d)\n", sd_state);
+    return sd_state;
+  } else {
+    while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
+  }
+
+  return sd_state;
+}
+
+static HAL_StatusTypeDef sd_sdio_write(uint8_t* buff, LBA_t sector, UINT count)
+{
+  uint16_t retry = 0xFFFF;
+  HAL_StatusTypeDef sd_state = HAL_ERROR;
+
+  do {
+    sd_state = HAL_SD_WriteBlocks_IT(&hsd, (uint8_t*)buff, sector, count);
+  } while (--retry && sd_state != HAL_OK);
+  if (sd_state != HAL_OK) {
+    DEBUG_PRINT("SD write error (%d)\n", sd_state);
+    return sd_state;
+  } else {
+    while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
+  }
+
+  return sd_state;
 }

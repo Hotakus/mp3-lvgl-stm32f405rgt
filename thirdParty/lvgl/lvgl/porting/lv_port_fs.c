@@ -13,7 +13,7 @@
 #include "ff_user.h"
 #include "w25qxx.h"
 #include "sdio.h"
-
+#include "ff_devices.h"
  /*********************
   *      DEFINES
   *********************/
@@ -77,62 +77,62 @@ void lv_port_fs_init(void)
     /*----------------------------------------------------
      * Initialize your storage device and File System
      * -------------------------------------------------*/
-    fs_init( );
+  fs_init();
 
-    /*---------------------------------------------------
-     * Register the file system interface  in LittlevGL
-     *--------------------------------------------------*/
+  /*---------------------------------------------------
+   * Register the file system interface  in LittlevGL
+   *--------------------------------------------------*/
 
-    if (dev_conf_status[SD_SDIO_INDEX] == 1 && dev_conf_status[SPIF_INDEX] == 1)
-        return;
+  if (dev_conf_status[SD_SDIO_INDEX] == 1 && dev_conf_status[SPIF_INDEX] == 1)
+    return;
 
-    /* Add a simple drive to open images */
-    static lv_fs_drv_t fs_drv[2];
-    lv_fs_drv_init(&fs_drv[SD_SDIO_INDEX]);
-    lv_fs_drv_init(&fs_drv[SPIF_INDEX]);
+/* Add a simple drive to open images */
+  static lv_fs_drv_t fs_drv[2];
+  lv_fs_drv_init(&fs_drv[SD_SDIO_INDEX]);
+  lv_fs_drv_init(&fs_drv[SPIF_INDEX]);
 
-    /*Set up fields...*/
-    /* For SD card */
+  /*Set up fields...*/
+  /* For SD card */
 
-    fs_drv[0].file_size = sizeof(file_t);
-    fs_drv[0].letter = 'S';
-    fs_drv[0].open_cb = fs_open;
-    fs_drv[0].close_cb = fs_close;
-    fs_drv[0].read_cb = fs_read;
-    fs_drv[0].write_cb = fs_write;
-    fs_drv[0].seek_cb = fs_seek;
-    fs_drv[0].tell_cb = fs_tell;
-    fs_drv[0].free_space_cb = fs_free;
-    fs_drv[0].size_cb = fs_size;
-    fs_drv[0].remove_cb = fs_remove;
-    fs_drv[0].rename_cb = fs_rename;
-    fs_drv[0].trunc_cb = fs_trunc;
-    fs_drv[0].rddir_size = sizeof(dir_t);
-    fs_drv[0].dir_close_cb = fs_dir_close;
-    fs_drv[0].dir_open_cb = fs_dir_open;
-    fs_drv[0].dir_read_cb = fs_dir_read;
-    lv_fs_drv_register(&fs_drv[0]);
+  fs_drv[0].file_size = sizeof(file_t);
+  fs_drv[0].letter = 'S';
+  fs_drv[0].open_cb = fs_open;
+  fs_drv[0].close_cb = fs_close;
+  fs_drv[0].read_cb = fs_read;
+  fs_drv[0].write_cb = fs_write;
+  fs_drv[0].seek_cb = fs_seek;
+  fs_drv[0].tell_cb = fs_tell;
+  fs_drv[0].free_space_cb = fs_free;
+  fs_drv[0].size_cb = fs_size;
+  fs_drv[0].remove_cb = fs_remove;
+  fs_drv[0].rename_cb = fs_rename;
+  fs_drv[0].trunc_cb = fs_trunc;
+  fs_drv[0].rddir_size = sizeof(dir_t);
+  fs_drv[0].dir_close_cb = fs_dir_close;
+  fs_drv[0].dir_open_cb = fs_dir_open;
+  fs_drv[0].dir_read_cb = fs_dir_read;
+  lv_fs_drv_register(&fs_drv[0]);
 
-    /* For SPI FLASH */
+  /* For SPI FLASH */
 
-    fs_drv[1].file_size = sizeof(file_t);
-    fs_drv[1].letter = 'F';
-    fs_drv[1].open_cb = fs_open;
-    fs_drv[1].close_cb = fs_close;
-    fs_drv[1].read_cb = fs_read;
-    fs_drv[1].write_cb = fs_write;
-    fs_drv[1].seek_cb = fs_seek;
-    fs_drv[1].tell_cb = fs_tell;
-    fs_drv[1].free_space_cb = fs_free;
-    fs_drv[1].size_cb = fs_size;
-    fs_drv[1].remove_cb = fs_remove;
-    fs_drv[1].rename_cb = fs_rename;
-    fs_drv[1].trunc_cb = fs_trunc;
-    fs_drv[1].rddir_size = sizeof(dir_t);
-    fs_drv[1].dir_close_cb = fs_dir_close;
-    fs_drv[1].dir_open_cb = fs_dir_open;
-    fs_drv[1].dir_read_cb = fs_dir_read;
-    lv_fs_drv_register(&fs_drv[1]);
+  fs_drv[1].file_size = sizeof(file_t);
+  fs_drv[1].letter = 'F';
+  fs_drv[1].open_cb = fs_open;
+  fs_drv[1].close_cb = fs_close;
+  fs_drv[1].read_cb = fs_read;
+  fs_drv[1].write_cb = fs_write;
+  fs_drv[1].seek_cb = fs_seek;
+  fs_drv[1].tell_cb = fs_tell;
+  fs_drv[1].free_space_cb = fs_free;
+  fs_drv[1].size_cb = fs_size;
+  fs_drv[1].remove_cb = fs_remove;
+  fs_drv[1].rename_cb = fs_rename;
+  fs_drv[1].trunc_cb = fs_trunc;
+  fs_drv[1].rddir_size = sizeof(dir_t);
+  fs_drv[1].dir_close_cb = fs_dir_close;
+  fs_drv[1].dir_open_cb = fs_dir_open;
+  fs_drv[1].dir_read_cb = fs_dir_read;
+  lv_fs_drv_register(&fs_drv[1]);
 
 }
 
@@ -143,45 +143,43 @@ void lv_port_fs_init(void)
  /* Initialize your Storage device and File system. */
 static void fs_init(void)
 {
-    DEBUG_PRINT("spif init.\n");
 
+  fatfs_dev_init();
+
+  if (fr_lv[SPIF_INDEX] != FR_OK) {
+    fr_lv[SPIF_INDEX] = f_mount(&fs_lv[SPIF_INDEX], "SPIF:", 1);
     if (fr_lv[SPIF_INDEX] != FR_OK) {
-        fr_lv[SPIF_INDEX] = f_mount(&fs_lv[SPIF_INDEX], "SPIF:", 1);
-        if (fr_lv[SPIF_INDEX] != FR_OK) {
-            DEBUG_PRINT("spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX]);
-        }
-        DEBUG_PRINT("spi flash mount successfully.\n\n");
+      DEBUG_PRINT("spi flash mount error. (fr: %d)\n", fr_lv[SPIF_INDEX]);
     }
+    DEBUG_PRINT("spi flash mount successfully.\n\n");
+  }
 
-    DEBUG_PRINT("sd init.\n");
-    /*E.g. for FatFS initalize the SD card and FatFS itself*/
-    /*You code here*/
+  /*E.g. for FatFS initalize the SD card and FatFS itself*/
+  /*You code here*/
+  if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
+    fr_lv[SD_SDIO_INDEX] = f_mount(&fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1);
     if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
-        fr_lv[SD_SDIO_INDEX] = f_mount(&fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1);
-        if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
-            DEBUG_PRINT("sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX]);
-            if (fr_lv[SD_SDIO_INDEX] == FR_NOT_READY)
-                DEBUG_PRINT("no sd card.\n");
-        } else
-            DEBUG_PRINT("sd card mount successfully.\n");
-    }
+      DEBUG_PRINT("sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX]);
+      if (fr_lv[SD_SDIO_INDEX] == FR_NOT_READY)
+        DEBUG_PRINT("no sd card.\n");
+    } else
+      DEBUG_PRINT("sd card mount successfully.\n");
+  }
 
-    
 
-    if (fr_lv[SD_SDIO_INDEX] == FR_OK) {
-        sd_show_card_info( );
-    }
 
-    if (fr_lv[SPIF_INDEX] == FR_OK) {
-        extern w25qxx_feature_s w25qxx;
-        printf("SPI FLASH:\n");
-        printf("Capacity : %d Bytes\nJEDECID  : %X\n",
-            w25qxx.capacity,
-            w25qxx.JEDECID
-        );
-    }
+  if (fr_lv[SD_SDIO_INDEX] == FR_OK) {
+    sd_show_card_info();
+  }
 
-    DEBUG_PRINT("done\n");
+  if (fr_lv[SPIF_INDEX] == FR_OK) {
+    extern w25qxx_feature_s w25qxx;
+    printf("SPI FLASH:\n");
+    printf("Capacity : %d Bytes\nJEDECID  : %X\n",
+      w25qxx.capacity,
+      w25qxx.JEDECID
+    );
+  }
 
 }
 
@@ -196,49 +194,49 @@ static void fs_init(void)
  */
 static lv_fs_res_t fs_open(lv_fs_drv_t* drv, void* file_p, const char* path, lv_fs_mode_t mode)
 {
-    char pathBuf[128] = { 0 };
-    uint8_t opt_mode = 0;
+  char pathBuf[128] = { 0 };
+  uint8_t opt_mode = 0;
 
-    // 根据传入的参数判断是什么存储设备
-    switch (drv->letter) {
-    case 'S':       // SD card
-        sprintf(pathBuf, "SD_SDIO:/%s", path);
-        break;
-    case 'F':       // SPI FALSH
-        sprintf(pathBuf, "SPIF:/%s", path);
-        break;
-    default:
-        printf("No drive %c\n", drv->letter);
-        return LV_FS_RES_NOT_EX;
-    }
+  // 根据传入的参数判断是什么存储设备
+  switch (drv->letter) {
+  case 'S':       // SD card
+    sprintf(pathBuf, "SD_SDIO:/%s", path);
+    break;
+  case 'F':       // SPI FALSH
+    sprintf(pathBuf, "SPIF:/%s", path);
+    break;
+  default:
+    printf("No drive %c\n", drv->letter);
+    return LV_FS_RES_NOT_EX;
+  }
 
-    /* 判断文件操作方法 */
-    if (mode == LV_FS_MODE_WR) {
-        /*Open a file for write*/
-        /* Add your code here*/
+  /* 判断文件操作方法 */
+  if (mode == LV_FS_MODE_WR) {
+      /*Open a file for write*/
+      /* Add your code here*/
 
-        opt_mode = FA_OPEN_ALWAYS | FA_WRITE;
-    } else if (mode == LV_FS_MODE_RD) {
-        /*Open a file for read*/
-        /* Add your code here*/
+    opt_mode = FA_OPEN_ALWAYS | FA_WRITE;
+  } else if (mode == LV_FS_MODE_RD) {
+      /*Open a file for read*/
+      /* Add your code here*/
 
-        opt_mode = FA_OPEN_EXISTING | FA_READ;
-    } else if (mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) {
-        /*Open a file for read and write*/
-        /* Add your code here*/
+    opt_mode = FA_OPEN_EXISTING | FA_READ;
+  } else if (mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) {
+      /*Open a file for read and write*/
+      /* Add your code here*/
 
-        opt_mode = FA_WRITE | FA_READ;
-    }
+    opt_mode = FA_WRITE | FA_READ;
+  }
 
-    /* 调用FatFs的函数 */
+  /* 调用FatFs的函数 */
 
-    FRESULT fres = f_open(file_p, pathBuf, opt_mode);
+  FRESULT fres = f_open(file_p, pathBuf, opt_mode);
 
-    if (fres != FR_OK) {
-        printf("f_open error (%d)\n", fres);
-        return LV_FS_RES_NOT_IMP;
-    } else
-        return LV_FS_RES_OK;
+  if (fres != FR_OK) {
+    printf("f_open error (%d)\n", fres);
+    return LV_FS_RES_NOT_IMP;
+  } else
+    return LV_FS_RES_OK;
 
 }
 
@@ -254,13 +252,13 @@ static lv_fs_res_t fs_close(lv_fs_drv_t* drv, void* file_p)
 {
 
     /* Add your code here*/
-    if (f_close(file_p) != FR_OK) {
+  if (f_close(file_p) != FR_OK) {
 
-        return LV_FS_RES_NOT_IMP;
-    } else {
+    return LV_FS_RES_NOT_IMP;
+  } else {
 
-        return LV_FS_RES_OK;
-    }
+    return LV_FS_RES_OK;
+  }
 
 }
 
@@ -278,14 +276,14 @@ static lv_fs_res_t fs_read(lv_fs_drv_t* drv, void* file_p, void* buf, uint32_t b
 {
 
     /* Add your code here*/
-    FRESULT fres = f_read((FIL*)file_p, buf, btr, br);
-    if (fres != FR_OK) {
-        printf("f_read error (%d)\n", fres);
-        return LV_FS_RES_NOT_IMP;
-    } else {
+  FRESULT fres = f_read((FIL*)file_p, buf, btr, br);
+  if (fres != FR_OK) {
+    printf("f_read error (%d)\n", fres);
+    return LV_FS_RES_NOT_IMP;
+  } else {
 
-        return LV_FS_RES_OK;
-    }
+    return LV_FS_RES_OK;
+  }
 }
 
 /**
@@ -300,12 +298,12 @@ static lv_fs_res_t fs_read(lv_fs_drv_t* drv, void* file_p, void* buf, uint32_t b
 static lv_fs_res_t fs_write(lv_fs_drv_t* drv, void* file_p, const void* buf, uint32_t btw, uint32_t* bw)
 {
     /* Add your code here*/
-    FRESULT fres = f_write((FIL*)file_p, buf, btw, bw);
-    if (fres != FR_OK) {
-        printf("f_read error (%d)\n", fres);
-        return LV_FS_RES_NOT_IMP;
-    } else
-        return LV_FS_RES_OK;
+  FRESULT fres = f_write((FIL*)file_p, buf, btw, bw);
+  if (fres != FR_OK) {
+    printf("f_read error (%d)\n", fres);
+    return LV_FS_RES_NOT_IMP;
+  } else
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -320,14 +318,14 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t* drv, void* file_p, uint32_t pos)
 {
 
     /* Add your code here*/
-    FRESULT fres = f_lseek((FIL*)file_p, pos);
-    if (fres != FR_OK) {
-        printf("f_lseek error (%d)\n", fres);
-        return LV_FS_RES_NOT_IMP;
-    } else {
+  FRESULT fres = f_lseek((FIL*)file_p, pos);
+  if (fres != FR_OK) {
+    printf("f_lseek error (%d)\n", fres);
+    return LV_FS_RES_NOT_IMP;
+  } else {
 
-        return LV_FS_RES_OK;
-    }
+    return LV_FS_RES_OK;
+  }
 }
 
 /**
@@ -339,13 +337,13 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t* drv, void* file_p, uint32_t pos)
  */
 static lv_fs_res_t fs_size(lv_fs_drv_t* drv, void* file_p, uint32_t* size_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+  lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
-    /* Add your code here*/
-    *size_p = f_size((FIL*)file_p);
-    res = LV_FS_RES_OK;
+  /* Add your code here*/
+  *size_p = f_size((FIL*)file_p);
+  res = LV_FS_RES_OK;
 
-    return res;
+  return res;
 }
 /**
  * Give the position of the read write pointer
@@ -358,8 +356,8 @@ static lv_fs_res_t fs_size(lv_fs_drv_t* drv, void* file_p, uint32_t* size_p)
 static lv_fs_res_t fs_tell(lv_fs_drv_t* drv, void* file_p, uint32_t* pos_p)
 {
     /* Add your code here*/
-    *pos_p = f_tell((FIL*)file_p);
-    return LV_FS_RES_OK;
+  *pos_p = f_tell((FIL*)file_p);
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -370,7 +368,7 @@ static lv_fs_res_t fs_tell(lv_fs_drv_t* drv, void* file_p, uint32_t* pos_p)
  */
 static lv_fs_res_t fs_remove(lv_fs_drv_t* drv, const char* path)
 {
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -382,7 +380,7 @@ static lv_fs_res_t fs_remove(lv_fs_drv_t* drv, const char* path)
  */
 static lv_fs_res_t fs_trunc(lv_fs_drv_t* drv, void* file_p)
 {
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -394,7 +392,7 @@ static lv_fs_res_t fs_trunc(lv_fs_drv_t* drv, void* file_p)
  */
 static lv_fs_res_t fs_rename(lv_fs_drv_t* drv, const char* oldname, const char* newname)
 {
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -407,38 +405,38 @@ static lv_fs_res_t fs_rename(lv_fs_drv_t* drv, const char* oldname, const char* 
  */
 static lv_fs_res_t fs_free(lv_fs_drv_t* drv, uint32_t* total_p, uint32_t* free_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    FRESULT fres = FR_INVALID_PARAMETER;
-    char pathBuf[10] = { 0 };
+  lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+  FRESULT fres = FR_INVALID_PARAMETER;
+  char pathBuf[10] = { 0 };
 
-    uint32_t t_size = 0;
-    uint32_t f_size = 0;
+  uint32_t t_size = 0;
+  uint32_t f_size = 0;
 
-    // 根据传入的参数判断是什么存储设备
-    switch (drv->letter) {
-    case 'S':       // SD card
-        strcpy(pathBuf, "SD_SDIO:/");
-        break;
-    case 'F':       // SPI FALSH
-        strcpy(pathBuf, "SPIF:/");
-        break;
-    default:
-        printf("No drive %c\n", drv->letter);
-        return LV_FS_RES_NOT_EX;
-    }
+  // 根据传入的参数判断是什么存储设备
+  switch (drv->letter) {
+  case 'S':       // SD card
+    strcpy(pathBuf, "SD_SDIO:/");
+    break;
+  case 'F':       // SPI FALSH
+    strcpy(pathBuf, "SPIF:/");
+    break;
+  default:
+    printf("No drive %c\n", drv->letter);
+    return LV_FS_RES_NOT_EX;
+  }
 
-    /* Add your code here*/
-    fres = exf_getfree(pathBuf, &t_size, &f_size);
-    if (fres != FR_OK)
-        res = LV_FS_RES_NOT_IMP;
-    else {
-        *total_p = t_size;
-        *free_p = f_size;
-        printf("t_size: %d\tf_size: %d\n", t_size, f_size);
-        res = LV_FS_RES_OK;
-    }
+  /* Add your code here*/
+  fres = exf_getfree(pathBuf, &t_size, &f_size);
+  if (fres != FR_OK)
+    res = LV_FS_RES_NOT_IMP;
+  else {
+    *total_p = t_size;
+    *free_p = f_size;
+    printf("t_size: %d\tf_size: %d\n", t_size, f_size);
+    res = LV_FS_RES_OK;
+  }
 
-    return res;
+  return res;
 }
 
 /**
@@ -476,7 +474,7 @@ static lv_fs_res_t fs_dir_open(lv_fs_drv_t* drv, void* rddir_p, const char* path
 
     // return res;
 
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -506,7 +504,7 @@ static lv_fs_res_t fs_dir_read(lv_fs_drv_t* drv, void* rddir_p, char* fn)
 
     // return res;
 
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 /**
@@ -530,7 +528,7 @@ static lv_fs_res_t fs_dir_close(lv_fs_drv_t* drv, void* rddir_p)
 
     // return res;
 
-    return LV_FS_RES_OK;
+  return LV_FS_RES_OK;
 }
 
 #else /* Enable this file at the top */

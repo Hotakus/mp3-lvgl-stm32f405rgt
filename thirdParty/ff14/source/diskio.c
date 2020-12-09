@@ -13,6 +13,7 @@
 #include "sdio.h"
 #include "ff.h"
 #include "diskio.h"		/* Declarations of disk functions */
+#include "ff_devices.h"
 
 
 /* Definitions of physical drive number for each drive */
@@ -22,7 +23,7 @@
 #define DEV_USB		      3	/* Example: Map USB MSD to physical drive 3 */
 
 HAL_SD_CardInfoTypeDef card_info = {
-    .CardType = 0xFF,
+  .CardType = 0xFF,
 };
 
 /*-----------------------------------------------------------------------*/
@@ -30,19 +31,19 @@ HAL_SD_CardInfoTypeDef card_info = {
 /*-----------------------------------------------------------------------*/
 
 DSTATUS disk_status(
-    BYTE pdrv		/* Physical drive nmuber to identify the drive */
+  BYTE pdrv		/* Physical drive nmuber to identify the drive */
 )
 {
-    switch (pdrv) {
-    case DEV_SPIF:
-        return !STA_NOINIT;
-    case DEV_SD_SDIO:
-        return !STA_NOINIT;
-    case DEV_USB:
-        // translate the reslut code here
-        return !STA_NOINIT;
-    }
-    return STA_NOINIT;
+  switch (pdrv) {
+  case DEV_SPIF:
+    return !STA_NOINIT;
+  case DEV_SD_SDIO:
+    return !STA_NOINIT;
+  case DEV_USB:
+      // translate the reslut code here
+    return !STA_NOINIT;
+  }
+  return STA_NOINIT;
 }
 
 /*-----------------------------------------------------------------------*/
@@ -50,44 +51,44 @@ DSTATUS disk_status(
 /*-----------------------------------------------------------------------*/
 
 DSTATUS disk_initialize(
-    BYTE pdrv				/* Physical drive nmuber to identify the drive */
+  BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
 {
 
-    HAL_StatusTypeDef sd_state = HAL_ERROR;
-    uint16_t retry = 5;
+  HAL_StatusTypeDef state = HAL_ERROR;
+  uint16_t retry = 5;
 
-    switch (pdrv) {
-    case DEV_SPIF:
-        w25qxx_init();
-        return !STA_NOINIT;
-    case DEV_SD_SDIO:
-        /* initialize card */
-        do {
-            sd_state = sd_sdio_init();
-            if (sd_state != HAL_OK) {
-                printf("SD init retry %d. (%d)\n", retry, sd_state);
-            }
-        } while (--retry && (sd_state != HAL_OK));
-        if (sd_state != HAL_OK)
-            return STA_NOINIT;
+  switch (pdrv) {
+  case DEV_SPIF:
+    w25qxx_init();
+    return !STA_NOINIT;
+  case DEV_SD_SDIO:
+      /* initialize card */
+    do {
+      state = sd_sdio_init();
+      if (state != HAL_OK) {
+        printf("SD init retry %d. (%d)\n", retry, state);
+      }
+    } while (--retry && (state != HAL_OK));
+    if (state != HAL_OK)
+      return STA_NOINIT;
 
-        /* Get Card info */
-        if (card_info.CardType == 0xFF) {
-            do {
-                sd_state = HAL_SD_GetCardInfo(&hsd, &card_info);
-                if (sd_state != HAL_OK) {
-                    printf("SD get info retry %d. (%d)\n", retry, sd_state);
-                }
-            } while (--retry && (sd_state != HAL_OK));
-            if (sd_state != HAL_OK)
-                return STA_NOINIT;
+  /* Get Card info */
+    if (card_info.CardType == 0xFF) {
+      do {
+        state = HAL_SD_GetCardInfo(&hsd, &card_info);
+        if (state != HAL_OK) {
+          printf("SD get info retry %d. (%d)\n", retry, state);
         }
-        return !STA_NOINIT;
-    case DEV_USB:
+      } while (--retry && (state != HAL_OK));
+      if (state != HAL_OK)
         return STA_NOINIT;
     }
+    return !STA_NOINIT;
+  case DEV_USB:
     return STA_NOINIT;
+  }
+  return STA_NOINIT;
 }
 
 
@@ -97,45 +98,22 @@ DSTATUS disk_initialize(
 /*-----------------------------------------------------------------------*/
 
 DRESULT disk_read(
-    BYTE pdrv,		/* Physical drive nmuber to identify the drive */
-    BYTE* buff,		/* Data buffer to store read data */
-    LBA_t sector,	/* Start sector in LBA */
-    UINT count		/* Number of sectors to read */
+  BYTE pdrv,		/* Physical drive nmuber to identify the drive */
+  BYTE* buff,		/* Data buffer to store read data */
+  LBA_t sector,	/* Start sector in LBA */
+  UINT count		/* Number of sectors to read */
 )
 {
-    uint16_t retry = 0xFFFF;
-    HAL_StatusTypeDef sd_state;
-    w25qxx_stat w25qxx_err;
+  uint16_t retry = 0xFFFF;
+  HAL_StatusTypeDef state;
 
-    switch (pdrv) {
-    case DEV_SPIF:
-        w25qxx_err = w25qxx_read_sector(buff, sector, count);
-        if (w25qxx_err != W25QXX_STAT_OK)
-            return RES_ERROR;
-        return RES_OK;
-    case DEV_SD_SDIO:
+  state = fs_dev[pdrv].read(buff, sector, count);
+  if (state != HAL_OK) {
+    DEBUG_PRINT("dev : %d read error (%d)\n", pdrv, state);
+    return RES_ERROR;
+  }
 
-        // while (count--) 
-        {
-            do {
-                sd_state = HAL_SD_ReadBlocks_IT(&hsd, buff, sector, count);
-            } while (--retry && sd_state != HAL_OK);
-            if (sd_state != HAL_OK) {
-                DEBUG_PRINT("SD read error (%d)\n", sd_state);
-                return RES_ERROR;
-            } else {
-                while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
-                sector++;
-            }
-        }
-
-        return RES_OK;
-    case DEV_USB:
-        // translate the reslut code here
-        return RES_PARERR;
-    }
-
-    return RES_PARERR;
+  return RES_OK;
 }
 
 
@@ -147,44 +125,22 @@ DRESULT disk_read(
 #if FF_FS_READONLY == 0
 
 DRESULT disk_write(
-    BYTE pdrv,			/* Physical drive nmuber to identify the drive */
-    const BYTE* buff,	/* Data to be written */
-    LBA_t sector,		/* Start sector in LBA */
-    UINT count			/* Number of sectors to write */
+  BYTE pdrv,			/* Physical drive nmuber to identify the drive */
+  const BYTE* buff,	/* Data to be written */
+  LBA_t sector,		/* Start sector in LBA */
+  UINT count			/* Number of sectors to write */
 )
 {
-    uint16_t retry = 0xFFFF;
-    HAL_StatusTypeDef sd_state;
-    w25qxx_stat w25qxx_err;
+  uint16_t retry = 0xFFFF;
+  HAL_StatusTypeDef state;
 
-    switch (pdrv) {
-    case DEV_SPIF:
-        w25qxx_err = w25qxx_writ_sector((uint8_t*)buff, sector, count);
-        if (w25qxx_err != W25QXX_STAT_OK)
-            return RES_ERROR;
-        return RES_OK;
-    case DEV_SD_SDIO:
+  state = fs_dev[pdrv].write((uint8_t*)buff, sector, count);
+  if (state != HAL_OK) {
+    DEBUG_PRINT("dev : %d write error (%d)\n", pdrv, state);
+    return RES_ERROR;
+  }
 
-        //while (count--) 
-        {
-            do {
-                sd_state = HAL_SD_WriteBlocks_IT(&hsd, (uint8_t*)buff, sector, count);
-            } while (--retry && sd_state != HAL_OK);
-            if (sd_state != HAL_OK) {
-                DEBUG_PRINT("SD write error (%d)\n", sd_state);
-                return RES_ERROR;
-            } else {
-                while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
-                sector++;
-            }
-        }
-
-        return RES_OK;
-    case DEV_USB:
-        return RES_PARERR;
-    }
-
-    return RES_PARERR;
+  return RES_OK;
 }
 
 #endif
@@ -196,51 +152,51 @@ DRESULT disk_write(
 extern w25qxx_feature_s w25qxx;
 
 DRESULT disk_ioctl(
-    BYTE pdrv,		/* Physical drive nmuber (0..) */
-    BYTE cmd,		/* Control code */
-    void* buff		/* Buffer to send/receive control data */
+  BYTE pdrv,		/* Physical drive nmuber (0..) */
+  BYTE cmd,		/* Control code */
+  void* buff		/* Buffer to send/receive control data */
 )
 {
-    switch (pdrv) {
-    case DEV_SPIF:
+  switch (pdrv) {
+  case DEV_SPIF:
 
-        switch (cmd) {
-        case CTRL_SYNC:
-            return RES_OK;
-        case GET_SECTOR_COUNT:
-            *(DWORD*)buff = w25qxx.sect_cnt;
-            return RES_OK;
-        case GET_SECTOR_SIZE:
-            *(DWORD*)buff = 4096;
-            return RES_OK;
-        case GET_BLOCK_SIZE:
-            *(DWORD*)buff = 1;
-            return RES_OK;
-        case CTRL_TRIM:
-            return RES_OK;
-        }
-
-    case DEV_SD_SDIO:
-        switch (cmd) {
-        case CTRL_SYNC:
-            return RES_OK;
-        case GET_SECTOR_COUNT:
-            *(DWORD*)buff = card_info.BlockNbr;
-            return RES_OK;
-        case GET_SECTOR_SIZE:
-            *(DWORD*)buff = card_info.BlockSize;
-            return RES_OK;
-        case GET_BLOCK_SIZE:
-            *(DWORD*)buff = 1;
-            return RES_OK;
-        case CTRL_TRIM:
-            return RES_OK;
-        }
-    case DEV_USB:
-
-        return RES_OK;
+    switch (cmd) {
+    case CTRL_SYNC:
+      return RES_OK;
+    case GET_SECTOR_COUNT:
+      *(DWORD*)buff = w25qxx.sect_cnt;
+      return RES_OK;
+    case GET_SECTOR_SIZE:
+      *(DWORD*)buff = 4096;
+      return RES_OK;
+    case GET_BLOCK_SIZE:
+      *(DWORD*)buff = 1;
+      return RES_OK;
+    case CTRL_TRIM:
+      return RES_OK;
     }
 
-    return RES_PARERR;
+  case DEV_SD_SDIO:
+    switch (cmd) {
+    case CTRL_SYNC:
+      return RES_OK;
+    case GET_SECTOR_COUNT:
+      *(DWORD*)buff = card_info.BlockNbr;
+      return RES_OK;
+    case GET_SECTOR_SIZE:
+      *(DWORD*)buff = card_info.BlockSize;
+      return RES_OK;
+    case GET_BLOCK_SIZE:
+      *(DWORD*)buff = 1;
+      return RES_OK;
+    case CTRL_TRIM:
+      return RES_OK;
+    }
+  case DEV_USB:
+
+    return RES_OK;
+  }
+
+  return RES_PARERR;
 }
 

@@ -18,7 +18,6 @@ extern "C" {
 /* includes */
 #include "stm32f4xx_hal.h"
 #include "uart.h"
-// #include "ff.h"
 #include "ff_user_typedef.h"
 
 

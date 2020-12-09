@@ -11,6 +11,7 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __SDIO_H
 #define __SDIO_H
+
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -19,7 +20,7 @@
 #include "stm32f4xx_hal.h"
 #include "pro_conf.h"
 #include "uart.h"
-
+#include "ff_user_typedef.h"
 
 
 extern DMA_HandleTypeDef hdma_sdio_rx;

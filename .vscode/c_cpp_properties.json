@@ -135,7 +135,7 @@
                 "__vfp_status(x,y)=0"
             ],
             "intelliSenseMode": "${default}",
-            "compilerPath": "",
+            "compilerPath": "E:/software/MinGW/bin/gcc.exe",
             "cStandard": "c99"
         }
     ],
