@@ -1,18 +1,17 @@
-F/************************************************
+/************************************************
  * @file app_setting.c
  * @author Trisuborn (ttowfive@gmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2020-11-26
- * 
+ *
  * @copyright Copyright (c) 2020
- * 
+ *
  ************************************************/
-#include "app_setting.h"
-#include "sys_conf.h"
 #include "pro_conf.h"
-
 #include "app_ui.h"
+#include "app_setting.h"
+
 
 /**********************
  *  DEFINE
@@ -30,37 +29,37 @@ static void setting_remove(void);
  *  STATIC VARIABLE
  **********************/
 static app_ui_ctl_handler ctl_handler = {
-    .create = setting_create,
-    .remove = setting_remove,
+  .create = setting_create,
+  .remove = setting_remove,
 };
 
 static app_ui_t app_setting = {
-    .ui_name = THIS_UI_NAME,
-    .ctl_h = &ctl_handler,
+  .ui_name = THIS_UI_NAME,
+  .ctl_h = &ctl_handler,
 };
 
 
-static lv_obj_t * obj_cont = NULL;           // icons顶层容器
+static lv_obj_t* obj_cont = NULL;           // icons顶层容器
 
  /**********************
  *  FUNCTIONS
  **********************/
 /************************************************
  * @brief 事件句柄
- * 
- * @param obj       
- * @param event 
+ *
+ * @param obj
+ * @param event
  ************************************************/
-static void event_handler(lv_obj_t * obj, lv_event_t event)
+static void event_handler(lv_obj_t* obj, lv_event_t event)
 {
-    app_ui_t * ui = NULL;
-    switch (event) {
-    case LV_EVENT_CLICKED:
+  app_ui_t* ui = NULL;
+  switch (event) {
+  case LV_EVENT_CLICKED:
 
-        break;
-    default:
-        break;
-    }
+    break;
+  default:
+    break;
+  }
 
 }
 
@@ -78,11 +77,11 @@ static void setting_create(void)
  ************************************************/
 static void setting_remove(void)
 {
-    lv_obj_del( obj_cont );
+  lv_obj_del(obj_cont);
 }
 
-app_ui_t *setting_ui_get( void )
+app_ui_t* setting_ui_get(void)
 {
-    return &app_setting;
+  return &app_setting;
 }
 

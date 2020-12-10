@@ -66,18 +66,18 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
       .rel_path = "S:/icons/mainmenu/music_icon_rel.bin",
       .pr_path = "S:/icons/mainmenu/music_icon_pr.bin",
     },
-        {
-          .en_name = "calendar",
-          .cn_name = "日历",
-          .rel_path = "S:/icons/mainmenu/calendar_icon_rel.bin",
-          .pr_path = "S:/icons/mainmenu/calendar_icon_pr.bin",
-        },
-        {
-          .en_name = "folder",
-          .cn_name = "文件夹",
-          .rel_path = "S:/icons/mainmenu/folder_icon_rel.bin",
-          .pr_path = "S:/icons/mainmenu/folder_icon_pr.bin",
-        },
+    {
+      .en_name = "calendar",
+      .cn_name = "日历",
+      .rel_path = "S:/icons/mainmenu/calendar_icon_rel.bin",
+      .pr_path = "S:/icons/mainmenu/calendar_icon_pr.bin",
+    },
+    {
+      .en_name = "folder",
+      .cn_name = "文件夹",
+      .rel_path = "S:/icons/mainmenu/folder_icon_rel.bin",
+      .pr_path = "S:/icons/mainmenu/folder_icon_pr.bin",
+    },
   },
   /* row 2 */
     {
@@ -85,14 +85,14 @@ static icon_t icons[ICONS_ROW][ICONS_COL] = {
         .rel_path = NULL,
         .pr_path = NULL,
       },
-        {
-          .rel_path = NULL,
-          .pr_path = NULL,
-        },
-        {
-          .rel_path = NULL,
-          .pr_path = NULL,
-        },
+      {
+        .rel_path = NULL,
+        .pr_path = NULL,
+      },
+      {
+        .rel_path = NULL,
+        .pr_path = NULL,
+      },
     },
 
 };

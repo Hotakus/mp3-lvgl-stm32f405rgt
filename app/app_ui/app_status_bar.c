@@ -55,6 +55,8 @@ static uint8_t battery_per_sw = 0;      // 电量百分比显示开关, 默认�
 static uint8_t attach_info_sw = 0;      // 状态栏附属信息开关, 默认开启
 static uint8_t date_info_sw = 1;      // 日期信息开关, 默认开启
 
+static uint8_t left_eq = 0;
+
  /**********************
  *  FUNCTIONS
  **********************/
@@ -111,7 +113,7 @@ void status_bar_time_update(void)
   rtc_init();
   rtc_obtain_info(&rtc_info);
 
-  sprintf(
+  SPRINTF(
     tbuf, "%02d : %02d %s %d",
     rtc_info.time.Hours,
     rtc_info.time.Minutes,
@@ -132,7 +134,7 @@ void status_bar_attach_info_update(const char* attach_info)
 {
   char* tbuf = NULL;
   tbuf = (char*)MALLOC(sizeof(char) * STRLEN(attach_info) + 13);
-  sprintf(
+  SPRINTF(
     tbuf, "Cur Music : %s",
     attach_info
   );
@@ -158,7 +160,7 @@ void status_bar_bat_info_update(uint8_t now)
       return;
     }
   } else
-    res = adc_get_value(100);
+    res = adc_get(100);
 
   double probe_adc_pixel = 3.3 / ((double)(1 << 12));
   double full_charge_adc_pixel = (FULL_CHARGE / 3.3) * (1 << 12);
@@ -266,12 +268,19 @@ void time_info_delete(void)
  ************************************************/
 void battery_info_create(void)
 {
+  char buf[4] = {0};
+
   battery_icon = lv_img_create(sbb, NULL);
   lv_img_set_src(battery_icon, &LV_SYMBOL_BATTERY_1);
   status_bar_bat_info_update(1);
+
+  battery_percentage = lv_label_create( sbb, NULL );
+  SPRINTF(buf, "%d%%", left_eq);
+  lv_label_set_text( battery_percentage, buf );
+
 }
 void battery_info_delete(void)
 {
-    // lv_obj_del( time_bar );
+  // lv_obj_del(time_bar);
 }
 

@@ -12,7 +12,6 @@
 #define APP_SETTING_H
 
 /* includes */
-
 #include "app_typedef.h"
 /* definations */
 

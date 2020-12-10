@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2020
  * 
  ************************************************/
+#include "pro_conf.h"
 #include "app_ui.h"
 /* ui */
 #include "app_mainmenu.h"

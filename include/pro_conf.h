@@ -72,9 +72,11 @@ extern "C" {
 #define RT_FREE         rt_free
 #define RT_MEMSET       rt_memset
 #define RT_MEMCMP       rt_memcmp
+#define RT_SPRINTF      rt_sprintf
 
 #define DEBUG_PRINT     RT_PRINT
 #define DELAY           RT_DELAY
+#define SPRINTF         RT_SPRINTF
 #define STRCMP          RT_STRCMP
 #define STRCAT          RT_STRCAT
 #define STRLEN          RT_STRLEN
