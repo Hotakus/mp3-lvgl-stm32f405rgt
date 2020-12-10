@@ -16,10 +16,10 @@ extern fatfs_dev_opr_t dev_spif;
 /************************************************
  * @brief FatFs Devices Operational structrue
 *************************************************/
-fatfs_dev_opr_t fs_dev[FF_VOLUMES];
+fatfs_dev_opr_t* fs_dev[FF_VOLUMES];
 
 void fatfs_dev_init(void)
 {
-  fs_dev[0] = dev_spif;
-  fs_dev[1] = dev_sd;
+  fs_dev[0] = &dev_spif;
+  fs_dev[1] = &dev_sd;
 }

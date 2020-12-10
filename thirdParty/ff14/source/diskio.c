@@ -40,7 +40,6 @@ DSTATUS disk_status(
   case DEV_SD_SDIO:
     return !STA_NOINIT;
   case DEV_USB:
-      // translate the reslut code here
     return !STA_NOINIT;
   }
   return STA_NOINIT;
@@ -58,21 +57,14 @@ DSTATUS disk_initialize(
   HAL_StatusTypeDef state = HAL_ERROR;
   uint16_t retry = 5;
 
+  state = fs_dev[pdrv]->init();
+  if (state != HAL_OK)
+    return state;
+
   switch (pdrv) {
   case DEV_SPIF:
-    w25qxx_init();
-    return !STA_NOINIT;
+    break;
   case DEV_SD_SDIO:
-      /* initialize card */
-    do {
-      state = sd_sdio_init();
-      if (state != HAL_OK) {
-        printf("SD init retry %d. (%d)\n", retry, state);
-      }
-    } while (--retry && (state != HAL_OK));
-    if (state != HAL_OK)
-      return STA_NOINIT;
-
   /* Get Card info */
     if (card_info.CardType == 0xFF) {
       do {
@@ -81,14 +73,13 @@ DSTATUS disk_initialize(
           printf("SD get info retry %d. (%d)\n", retry, state);
         }
       } while (--retry && (state != HAL_OK));
-      if (state != HAL_OK)
-        return STA_NOINIT;
     }
-    return !STA_NOINIT;
+    break;
   case DEV_USB:
     return STA_NOINIT;
   }
-  return STA_NOINIT;
+
+  return state;
 }
 
 
@@ -107,7 +98,7 @@ DRESULT disk_read(
   uint16_t retry = 0xFFFF;
   HAL_StatusTypeDef state;
 
-  state = fs_dev[pdrv].read(buff, sector, count);
+  state = fs_dev[pdrv]->read(buff, sector, count);
   if (state != HAL_OK) {
     DEBUG_PRINT("dev : %d read error (%d)\n", pdrv, state);
     return RES_ERROR;
@@ -115,8 +106,6 @@ DRESULT disk_read(
 
   return RES_OK;
 }
-
-
 
 /*-----------------------------------------------------------------------*/
 /* Write Sector(s)                                                       */
@@ -134,7 +123,7 @@ DRESULT disk_write(
   uint16_t retry = 0xFFFF;
   HAL_StatusTypeDef state;
 
-  state = fs_dev[pdrv].write((uint8_t*)buff, sector, count);
+  state = fs_dev[pdrv]->write((uint8_t*)buff, sector, count);
   if (state != HAL_OK) {
     DEBUG_PRINT("dev : %d write error (%d)\n", pdrv, state);
     return RES_ERROR;

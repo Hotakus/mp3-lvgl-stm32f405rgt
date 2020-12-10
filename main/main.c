@@ -13,9 +13,11 @@
 int main()
 {
 #if USER_USE_OS == 0
-    HAL_Init();
-    uart1_conf(115200);
+  HAL_Init();
+  uart1_conf(115200);
 #endif
-    
-    return 0;
+
+  
+
+  return 0;
 }

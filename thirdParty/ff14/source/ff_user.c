@@ -241,7 +241,7 @@ to_free:
  ************************************************/
 void list_get_file_path(uint16_t spos, uint16_t epos, const char* file_type)
 {
-
+  
 }
 
 

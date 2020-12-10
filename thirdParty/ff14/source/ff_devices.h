@@ -17,7 +17,7 @@
 
 #include "ff_user_typedef.h"
 
-extern fatfs_dev_opr_t fs_dev[FF_VOLUMES];
+extern fatfs_dev_opr_t* fs_dev[FF_VOLUMES];
 
 void fatfs_dev_init(void);
 
