@@ -2,9 +2,8 @@
 #define APP_UI_H
 
 /* includes */
-#include "sys_conf.h"
+#include "stm32f4xx_hal.h"
 #include "app_typedef.h"
-#include "pro_conf.h"
 
 /* ui */
 #include "app_mainmenu.h"

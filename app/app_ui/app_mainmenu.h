@@ -2,10 +2,9 @@
 #define APP_MAINMENU_H
 
 /* includes */
-#include "sys_conf.h"
+
 #include "app_typedef.h"
-#include "pro_conf.h"
-#include "app_ui.h"
+
 
 /* definations */
 

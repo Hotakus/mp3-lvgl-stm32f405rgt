@@ -1,4 +1,4 @@
-/************************************************
+F/************************************************
  * @file app_setting.c
  * @author Trisuborn (ttowfive@gmail.com)
  * @brief 
@@ -9,6 +9,10 @@
  * 
  ************************************************/
 #include "app_setting.h"
+#include "sys_conf.h"
+#include "pro_conf.h"
+
+#include "app_ui.h"
 
 /**********************
  *  DEFINE

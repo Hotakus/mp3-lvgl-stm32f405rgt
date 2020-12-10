@@ -77,8 +77,8 @@ void NMI_Handler(void)
 void MemManage_Handler(void)
 {
     /* Go to infinite loop when Memory Manage exception occurs */
-    while (1) {
-    }
+  while (1) {
+  }
 }
 
 /**
@@ -89,8 +89,8 @@ void MemManage_Handler(void)
 void BusFault_Handler(void)
 {
     /* Go to infinite loop when Bus Fault exception occurs */
-    while (1) {
-    }
+  while (1) {
+  }
 }
 
 /**
@@ -101,8 +101,8 @@ void BusFault_Handler(void)
 void UsageFault_Handler(void)
 {
     /* Go to infinite loop when Usage Fault exception occurs */
-    while (1) {
-    }
+  while (1) {
+  }
 }
 
 /**
@@ -141,7 +141,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-    HAL_IncTick();
+  HAL_IncTick();
 }
 
 /**
@@ -152,8 +152,8 @@ void SysTick_Handler(void)
 void HardFault_Handler(void)
 {
     /* Go to infinite loop when Hard Fault exception occurs */
-    while (1) {
-    }
+  while (1) {
+  }
 }
 #endif
 
@@ -181,13 +181,13 @@ void SDIO_IRQHandler(void)
 {
 
 #if USER_USE_RTTHREAD == 1
-    OS_INT_ENTER();
+  OS_INT_ENTER();
 #endif
 
-    HAL_SD_IRQHandler(&hsd);
+  HAL_SD_IRQHandler(&hsd);
 
 #if USER_USE_RTTHREAD == 1
-    OS_INT_EXIT();
+  OS_INT_EXIT();
 #endif
 
 }
@@ -195,26 +195,26 @@ void SDIO_IRQHandler(void)
 void DMA2_Stream3_IRQHandler(void)
 {
 #if USER_USE_RTTHREAD == 1
-    OS_INT_ENTER();
+  OS_INT_ENTER();
 #endif
 
-    HAL_DMA_IRQHandler(&hdma_sdio_rx);
+  HAL_DMA_IRQHandler(&hdma_sdio_rx);
 
 #if USER_USE_RTTHREAD == 1
-    OS_INT_EXIT();
+  OS_INT_EXIT();
 #endif
 }
 
 void DMA2_Stream6_IRQHandler(void)
 {
 #if USER_USE_RTTHREAD == 1
-    OS_INT_ENTER();
+  OS_INT_ENTER();
 #endif
 
-    HAL_DMA_IRQHandler(&hdma_sdio_tx);
+  HAL_DMA_IRQHandler(&hdma_sdio_tx);
 
 #if USER_USE_RTTHREAD == 1
-    OS_INT_EXIT();
+  OS_INT_EXIT();
 #endif
 }
 

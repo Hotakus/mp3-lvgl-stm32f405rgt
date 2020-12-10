@@ -1,48 +1,125 @@
-Load "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\project\\obj\\MP3_F405.axf" 
-Set JLink Project File to "e:\work\Embed\project\stm32\STM32F405\mp3-lvgl-stm32f405rgt\JLinkSettings.ini"* JLink Info: Device "STM32F405RG" selected.
-
-JLink info:
-------------
-DLL: V6.70e, compiled Apr 17 2020 17:55:05
-Firmware: J-Link V9 compiled Dec 13 2019 11:14:50
-Hardware: V9.60
-S/N : 20684001 
-
-* JLink Info: Found SW-DP with ID 0x2BA01477
-* JLink Info: Found SW-DP with ID 0x2BA01477
-* JLink Info: Unknown DP version. Assuming DPv0
-* JLink Info: Scanning AP map to find all available APs
-* JLink Info: AP[1]: Stopped AP scan as end of AP map has been reached
-* JLink Info: AP[0]: AHB-AP (IDR: 0x24770011)
-* JLink Info: Iterating through AP map to find AHB-AP to use
-* JLink Info: AP[0]: Core found
-* JLink Info: AP[0]: AHB-AP ROM base: 0xE00FF000
-* JLink Info: CPUID register: 0x410FC241. Implementer code: 0x41 (ARM)
-* JLink Info: Found Cortex-M4 r0p1, Little endian.
-* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
-* JLink Info: CoreSight components:
-* JLink Info: ROMTbl[0] @ E00FF000
-* JLink Info: ROMTbl[0][0]: E000E000, CID: B105E00D, PID: 000BB00C SCS-M7
-* JLink Info: ROMTbl[0][1]: E0001000, CID: B105E00D, PID: 003BB002 DWT
-* JLink Info: ROMTbl[0][2]: E0002000, CID: B105E00D, PID: 002BB003 FPB
-* JLink Info: ROMTbl[0][3]: E0000000, CID: B105E00D, PID: 003BB001 ITM
-* JLink Info: ROMTbl[0][4]: E0040000, CID: B105900D, PID: 000BB9A1 TPIU
-* JLink Info: ROMTbl[0][5]: E0041000, CID: B105900D, PID: 000BB925 ETM
-ROMTableAddr = 0xE00FF000
-* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
-* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
-
-Target info:
-------------
-Device: STM32F405RGTx
-VTarget = 4.982V
-State of Pins: TCK: 1, TDI: 1, TDO: 1, TMS: 1, TRES: 0, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 12000 kHz
-
-Erase Done.Programming Done.Verify OK.* JLink Info: Reset: Halt core after reset via DEMCR.VC_CORERESET.
-* JLink Info: Reset: Reset device via AIRCR.SYSRESETREQ.
-Application running ...
-Flash Load finished at 07:38:12
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+Note: source file '.\lib\STM32F4xx_HAL_Driver\Src\Legacy\stm32f4xx_hal_can.c' - object file renamed from '.\project\obj\stm32f4xx_hal_can.o' to '.\project\obj\stm32f4xx_hal_can_1.o'.compiling app_ui.c...
+app\app_ui.c(160): warning:  #223-D: function "DEBUG_PRINT" declared implicitly
+      DEBUG_PRINT( "No ui object to create: %s\n", ui->ui_name );
+app\app_ui.c: 1 warning, 0 errors
+compiling app_calculator.c...
+app\app_ui\app_calculator.c(79): warning:  #177-D: variable "ui"  was declared but never referenced
+    app_ui_t* ui = NULL;
+app\app_ui\app_calculator.c(49): warning:  #177-D: variable "mode_dropdown"  was declared but never referenced
+  static lv_obj_t* mode_dropdown = NULL;             // ???????€????????????????
+app\app_ui\app_calculator.c(53): warning:  #550-D: variable "res_history"  was set but never used
+  static lv_obj_t* res_history = NULL;
+app\app_ui\app_calculator.c(54): warning:  #550-D: variable "res_current"  was set but never used
+  static lv_obj_t* res_current = NULL;
+app\app_ui\app_calculator.c(60): warning:  #550-D: variable "opr_ch_list"  was set but never used
+  static lv_obj_t* opr_ch_list = NULL;                   // ??????????????????
+app\app_ui\app_calculator.c(61): warning:  #177-D: variable "opr_ch_obj"  was declared but never referenced
+  static lv_obj_t* opr_ch_obj[4] = { NULL };               // ??????????????????
+app\app_ui\app_calculator.c(62): warning:  #177-D: variable "nor_ext_ch_obj"  was declared but never referenced
+  static lv_obj_t* nor_ext_ch_obj[4] = { NULL };           // ????€?????????????????????????
+app\app_ui\app_calculator.c(63): warning:  #177-D: variable "prog_ext_ch_obj"  was declared but never referenced
+  static lv_obj_t* prog_ext_ch_obj[4] = { NULL };          // ?????????????????????????????????
+app\app_ui\app_calculator.c(66): warning:  #550-D: variable "num_obj"  was set but never used
+  static lv_obj_t* num_obj[12] = { NULL };     // ????????????
+app\app_ui\app_calculator.c(77): warning:  #177-D: function "event_handler"  was declared but never referenced
+  static void event_handler(lv_obj_t* obj, lv_event_t event)
+app\app_ui\app_calculator.c: 10 warnings, 0 errors
+compiling app_task.c...
+compiling app_calendar.c...
+app\app_ui\app_calendar.c(67): warning:  #177-D: variable "ui"  was declared but never referenced
+    app_ui_t* ui = NULL;
+app\app_ui\app_calendar.c: 1 warning, 0 errors
+compiling app_env.c...
+app\app_ui\app_env.c(137): warning:  #177-D: function "show_temp_rh_info"  was declared but never referenced
+  static void show_temp_rh_info(void)
+app\app_ui\app_env.c(61): warning:  #177-D: function "event_handler"  was declared but never referenced
+  static void event_handler(lv_obj_t* obj, lv_event_t event)
+app\app_ui\app_env.c: 2 warnings, 0 errors
+compiling app_folder.c...
+app\app_ui\app_folder.c(71): warning:  #177-D: variable "ui"  was declared but never referenced
+    app_ui_t* ui = NULL;
+app\app_ui\app_folder.c(120): warning:  #223-D: function "sprintf" declared implicitly
+    sprintf(lab_buf,
+app\app_ui\app_folder.c: 2 warnings, 0 errors
+compiling app_setting.c...
+app\app_ui\app_setting.c(1): error:  #77-D: this declaration has no storage class or type specifier
+  F/************************************************
+.\include\machine\stm32f405xx.h(66): error:  #65: expected a ";"
+  typedef enum
+.\include\machine\stm32f405xx.h(156): warning:  #12-D: parsing restarts here after previous syntax error
+  } IRQn_Type;
+.\include\cmsis\core_cm4.h(1688): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1705): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1724): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1743): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1762): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1777): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1794): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE uint32_t __NVIC_GetActive(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1816): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+.\include\cmsis\core_cm4.h(1838): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(1913): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
+.\include\cmsis\core_cm4.h(1928): error:  #20: identifier "IRQn_Type" is undefined
+  __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
+.\include\cmsis\core_cm4.h(2030): error:  #20: identifier "SysTick_IRQn" is undefined
+    NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(263): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(264): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_EnableIRQ(IRQn_Type IRQn);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(265): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_DisableIRQ(IRQn_Type IRQn);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(277): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t* pPreemptPriority, uint32_t* pSubPriority);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(278): error:  #20: identifier "IRQn_Type" is undefined
+  uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(279): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(280): error:  #20: identifier "IRQn_Type" is undefined
+  void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn);
+.\lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h(281): error:  #20: identifier "IRQn_Type" is undefined
+  uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn);
+app\app_ui\app_setting.c(56): warning:  #177-D: variable "ui"  was declared but never referenced
+      app_ui_t * ui = NULL;
+app\app_ui\app_setting.c(54): warning:  #177-D: function "event_handler"  was declared but never referenced
+  static void event_handler(lv_obj_t * obj, lv_event_t event)
+app\app_ui\app_setting.c: 3 warnings, 22 errors
+compiling app_mainmenu.c...
+compiling app_music.c...
+app\app_ui\app_music.c(57): warning:  #177-D: variable "ui"  was declared but never referenced
+    app_ui_t* ui = NULL;
+app\app_ui\app_music.c(55): warning:  #177-D: function "event_handler"  was declared but never referenced
+  static void event_handler(lv_obj_t* obj, lv_event_t event)
+app\app_ui\app_music.c: 2 warnings, 0 errors
+compiling app_status_bar.c...
+app\app_ui\app_status_bar.c(114): warning:  #223-D: function "sprintf" declared implicitly
+    sprintf(
+app\app_ui\app_status_bar.c(135): warning:  #223-D: function "sprintf" declared implicitly
+    sprintf(
+app\app_ui\app_status_bar.c(161): warning:  #223-D: function "adc_get_value" declared implicitly
+      res = adc_get_value(100);
+app\app_ui\app_status_bar.c(170): warning:  #186-D: pointless comparison of unsigned integer with zero
+    if (left_eq >= 0 && left_eq <= 9) {
+app\app_ui\app_status_bar.c(182): warning:  #223-D: function "printf" declared implicitly
+    printf("Cur EQ : %d %%\n", left_eq);
+app\app_ui\app_status_bar.c(50): warning:  #177-D: variable "battery_percentage"  was declared but never referenced
+  static lv_obj_t* battery_percentage = NULL;     // battery  
+app\app_ui\app_status_bar.c(54): warning:  #177-D: variable "battery_per_sw"  was declared but never referenced
+  static uint8_t battery_per_sw = 0;      // ???????????????????????€???, ????????????
+app\app_ui\app_status_bar.c(56): warning:  #177-D: variable "date_info_sw"  was declared but never referenced
+  static uint8_t date_info_sw = 1;      // ??????????????€???, ????????€???
+app\app_ui\app_status_bar.c: 8 warnings, 0 errors
+".\project\obj\MP3_F405.axf" - 22 Error(s), 29 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:03

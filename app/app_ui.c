@@ -9,7 +9,9 @@
  * 
  ************************************************/
 #include "app_ui.h"
-
+/* ui */
+#include "app_mainmenu.h"
+#include "app_status_bar.h"
 
 /**********************
  *  STATIC PROTOTYPES

@@ -2,10 +2,7 @@
 #define APP_MAIN_H
 
 /* includes */
-#include "sys_conf.h"
 
-#include "app_task.h"
-#include "app_ui.h"
 
 /* definations */
 

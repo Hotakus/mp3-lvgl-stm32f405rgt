@@ -12,7 +12,7 @@
 #define APP_TYPEDEF_H
 
 /* includes */
-#include "sys_conf.h"
+#include "stm32f4xx_hal.h"
 #include "lvgl.h"
 
 #define APP_UI_NUM      50      // app 的最大UI数量

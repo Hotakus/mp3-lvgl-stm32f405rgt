@@ -44,6 +44,7 @@
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\iic",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\vs10xx",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\vs10xx\\decode",
+                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\adc",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include\\rw",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\core\\startup",

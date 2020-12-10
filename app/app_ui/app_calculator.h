@@ -12,10 +12,8 @@
 #define APP_CALCULATOR_H
 
 /* includes */
-#include "sys_conf.h"
 #include "app_typedef.h"
-#include "pro_conf.h"
-#include "app_ui.h"
+
 
 /* definations */
 

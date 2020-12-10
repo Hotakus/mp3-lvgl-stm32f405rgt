@@ -2,7 +2,6 @@
 #define APP_TASK_H
 
 /* includes */
-#include "sys_conf.h"
 
 /* definations */
 

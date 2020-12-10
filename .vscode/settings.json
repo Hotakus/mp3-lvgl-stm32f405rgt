@@ -1,8 +1,9 @@
 {
     "files.associations": {
-        "string": "c",
-        "main.h": "c",
-        "utility": "c"
+      "string": "c",
+      "main.h": "c",
+      "utility": "c",
+      "app_calendar.h": "c"
     },
 
     // "editor.formatOnSave": true,

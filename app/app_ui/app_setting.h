@@ -12,11 +12,8 @@
 #define APP_SETTING_H
 
 /* includes */
-#include "sys_conf.h"
-#include "pro_conf.h"
-#include "app_typedef.h"
-#include "app_ui.h"
 
+#include "app_typedef.h"
 /* definations */
 
 /* functions */

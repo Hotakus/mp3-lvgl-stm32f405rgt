@@ -292,7 +292,10 @@ static HAL_StatusTypeDef sd_sdio_read(uint8_t* buff, LBA_t sector, UINT count)
     DEBUG_PRINT("SD read error (%d)\n", sd_state);
     return sd_state;
   } else {
+    // HAL_SD_CardStateTypeDef card_stat;
+    // while (HAL_SD_GetCardState(&hsd) != HAL_SD_CARD_TRANSFER);
     while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
+    // DEBUG_PRINT("r1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
   }
 
   return sd_state;
@@ -311,7 +314,17 @@ static HAL_StatusTypeDef sd_sdio_write(uint8_t* buff, LBA_t sector, UINT count)
     return sd_state;
   } else {
     while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
+    // DEBUG_PRINT("w1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
+    // while (HAL_SD_GetCardState(&hsd) != HAL_SD_CARD_TRANSFER || HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY) {
+    //   // DEBUG_PRINT("w1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetCardState(&hsd));
+    //   // DEBUG_PRINT("w2 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
+    // }
+    // {
+    //   DEBUG_PRINT("w2 HAL_SD_GetCardState (%x)\n", HAL_SD_GetCardState(&hsd));
+    // }
   }
+
+
 
   return sd_state;
 }

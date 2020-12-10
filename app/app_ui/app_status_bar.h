@@ -12,11 +12,8 @@
 #define APP_STATUS_BAR_H
 
 /* includes */
-#include "sys_conf.h"
-#include "app_typedef.h"
-#include "pro_conf.h"
-#include "app_ui.h"
 
+#include "app_typedef.h"
 /* definations */
 #define BATTERY_CALCULATE_CNT       10
 #define FULL_CHARGE                 2.05
