@@ -91,7 +91,7 @@ void MX_USB_DEVICE_Init(void)
   /* USER CODE END USB_DEVICE_Init_PostTreatment */
 }
 
-INIT_APP_EXPORT(MX_USB_DEVICE_Init);
+// INIT_APP_EXPORT(MX_USB_DEVICE_Init);
 /**
   * @}
   */

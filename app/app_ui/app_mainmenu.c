@@ -173,7 +173,7 @@ static void mainmenu_create(void)
         icons[row][col].label,
         LV_LABEL_PART_MAIN,
         LV_STATE_DEFAULT,
-        &ariblk_14 
+        &ariblk_14
       );
       lv_obj_set_style_local_text_color(icons[row][col].label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
       lv_label_set_text(icons[row][col].label, icons[row][col].en_name);
