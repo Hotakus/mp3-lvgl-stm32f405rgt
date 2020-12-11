@@ -171,7 +171,6 @@ void w25qxx_powerUp(void)
     DEBUG_PRINT("W25QXX init failed.\n");
     return;
   }
-  DEBUG_PRINT("W25QXX init successfully.. (%x)\n", status);
   w25qxx_get_JEDECID();
 }
 

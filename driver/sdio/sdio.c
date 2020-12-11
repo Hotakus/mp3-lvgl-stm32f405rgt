@@ -57,6 +57,7 @@ HAL_StatusTypeDef MX_SDIO_SD_Init(void)
     DEBUG_PRINT("SD Card into HighSpeed failed.\n");
     return HAL_ERROR;
   }
+
   return HAL_OK;
 }
 
@@ -196,7 +197,7 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* sdHandle)
 /************************************************
  * @brief User functions
 *************************************************/
-static uint8_t conf_flag = 0;
+
 HAL_StatusTypeDef sd_sdio_init(void)
 {
   HAL_StatusTypeDef status = HAL_ERROR;
@@ -210,18 +211,12 @@ HAL_StatusTypeDef sd_sdio_init(void)
     return HAL_ERROR;
   }
 
-  DEBUG_PRINT("SD Card init successfully.\n");
-
   return status;
-
 }
 
 void sd_sdio_deinit(void)
 {
-  if (conf_flag) {
     HAL_SD_MspDeInit(&hsd);
-    conf_flag = 0;
-  }
 }
 
 void sd_show_card_info(void)
@@ -292,10 +287,7 @@ static HAL_StatusTypeDef sd_sdio_read(uint8_t* buff, LBA_t sector, UINT count)
     DEBUG_PRINT("SD read error (%d)\n", sd_state);
     return sd_state;
   } else {
-    // HAL_SD_CardStateTypeDef card_stat;
-    // while (HAL_SD_GetCardState(&hsd) != HAL_SD_CARD_TRANSFER);
     while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
-    // DEBUG_PRINT("r1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
   }
 
   return sd_state;
@@ -314,17 +306,7 @@ static HAL_StatusTypeDef sd_sdio_write(uint8_t* buff, LBA_t sector, UINT count)
     return sd_state;
   } else {
     while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
-    // DEBUG_PRINT("w1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
-    // while (HAL_SD_GetCardState(&hsd) != HAL_SD_CARD_TRANSFER || HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY) {
-    //   // DEBUG_PRINT("w1 HAL_SD_GetCardState (%x)\n", HAL_SD_GetCardState(&hsd));
-    //   // DEBUG_PRINT("w2 HAL_SD_GetCardState (%x)\n", HAL_SD_GetState(&hsd));
-    // }
-    // {
-    //   DEBUG_PRINT("w2 HAL_SD_GetCardState (%x)\n", HAL_SD_GetCardState(&hsd));
-    // }
   }
-
-
-
+  
   return sd_state;
 }

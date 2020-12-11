@@ -1,6 +1,15 @@
+#include "app_ui.h"
 #include "app_main.h"
+#include "app_task.h"
+
 #include "pro_conf.h"
 #include "lvgl_user.h"
+
+
+#include "lvgl.h"
+#include "lv_port_fs.h"
+#include "lv_port_indev.h"
+#include "lv_port_disp.h"
 
 /************************************************
  * @brief EXTERN VARIABLE

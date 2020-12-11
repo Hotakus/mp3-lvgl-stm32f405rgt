@@ -68,11 +68,13 @@ extern "C" {
 #define RT_STRCMP       rt_strcmp
 #define RT_STRCAT       rt_strcat
 #define RT_STRLEN       rt_strlen
+#define RT_SPRINTF      rt_sprintf
 #define RT_MALLOC       rt_malloc
 #define RT_FREE         rt_free
 #define RT_MEMSET       rt_memset
 #define RT_MEMCMP       rt_memcmp
-#define RT_SPRINTF      rt_sprintf
+#define RT_MEMCPY       rt_memcpy
+
 
 #define DEBUG_PRINT     RT_PRINT
 #define DELAY           RT_DELAY
@@ -84,6 +86,7 @@ extern "C" {
 #define FREE            RT_FREE
 #define MEMSET          RT_MEMSET
 #define MEMCMP          RT_MEMCMP
+#define MEMCPY          RT_MEMCPY
 
 #elif USER_USE_RTTHREAD == 0
 #define SECTION(x) __attribute__((section(x)))

@@ -160,7 +160,7 @@ static void mainmenu_create(void)
         /* 找到合法成员 */
       if (icons[row][col].rel_path == NULL || icons[row][col].pr_path == NULL)
         continue;
-    /* 创建imgbtn并自动对齐 */
+      /* 创建imgbtn并自动对齐 */
       icons[row][col].btn = lv_imgbtn_create(obj_cont, NULL);
       icons[row][col].btn->user_data = icons[row][col].en_name;
       lv_imgbtn_set_src(icons[row][col].btn, LV_BTN_STATE_RELEASED, icons[row][col].rel_path);
@@ -173,7 +173,7 @@ static void mainmenu_create(void)
         icons[row][col].label,
         LV_LABEL_PART_MAIN,
         LV_STATE_DEFAULT,
-        &ariblk_14
+        &ariblk_14 
       );
       lv_obj_set_style_local_text_color(icons[row][col].label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
       lv_label_set_text(icons[row][col].label, icons[row][col].en_name);

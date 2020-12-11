@@ -124,7 +124,7 @@ void DebugMon_Handler(void)
 }
 
 
-#if USER_USE_RTTHREAD == 0u
+#if USER_USE_OS == 0u
 /**
   * @brief  This function handles PendSVC exception.
   * @param  None
@@ -180,13 +180,13 @@ void HardFault_Handler(void)
 void SDIO_IRQHandler(void)
 {
 
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_ENTER();
 #endif
 
   HAL_SD_IRQHandler(&hsd);
 
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_EXIT();
 #endif
 
@@ -194,27 +194,44 @@ void SDIO_IRQHandler(void)
 
 void DMA2_Stream3_IRQHandler(void)
 {
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_ENTER();
 #endif
 
   HAL_DMA_IRQHandler(&hdma_sdio_rx);
 
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_EXIT();
 #endif
 }
 
 void DMA2_Stream6_IRQHandler(void)
 {
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_ENTER();
 #endif
 
   HAL_DMA_IRQHandler(&hdma_sdio_tx);
 
-#if USER_USE_RTTHREAD == 1
+#if USER_USE_OS == 1
   OS_INT_EXIT();
+#endif
+}
+
+/**
+  * @brief This function handles USB On The Go FS global interrupt.
+  */
+extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
+void OTG_FS_IRQHandler(void)
+{
+#if USER_USE_OS == 1
+ OS_INT_ENTER();
+#endif
+  
+  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
+  
+#if USER_USE_OS == 1
+ OS_INT_EXIT();
 #endif
 }
 
