@@ -1,0 +1,4 @@
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\Keil5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+Note: source file '.\lib\STM32F4xx_HAL_Driver\Src\Legacy\stm32f4xx_hal_can.c' - object file renamed from '.\project\obj\stm32f4xx_hal_can.o' to '.\project\obj\stm32f4xx_hal_can_1.o'.".\project\obj\MP3_F405.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:03

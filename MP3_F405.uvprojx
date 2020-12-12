@@ -339,7 +339,7 @@
               <MiscControls>--locale=english</MiscControls>
               <Define>USE_FULL_LL_DRIVER,USE_HAL_DRIVER,STM32F405xx,ARM_MATH_CM4,ARM_MATH_ROUNDING,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>.\main;.\include;.\include\cmsis;.\include\machine;.\include\math;.\lib\STM32F4xx_HAL_Driver\Inc;.\lib\STM32F4xx_HAL_Driver\Inc\Legacy;.\thirdParty\ff14\source;.\thirdParty\rt-thread-nano-sorted;.\thirdParty\rt-thread-nano-sorted\finsh;.\thirdParty\rt-thread-nano-sorted\include;.\thirdParty\rt-thread-nano-sorted\include\libc;.\driver\spi;.\driver\uart;.\driver\tim;.\driver\rtc;.\driver\sdio;.\driver\w25qxx;.\driver\screen;.\driver\screen\lcd_st7789;.\driver\screen\lcd_st7735;.\driver\file_thrans_with_fatfs;.\thirdParty\lvgl;.\thirdParty\lvgl\lvgl;.\thirdParty\lvgl\lvgl\porting;.\thirdParty\lvgl\lvgl\user;.\thirdParty\lvgl\lvgl\src;.\thirdParty\lvgl\lvgl\src\lv_core;.\thirdParty\lvgl\lvgl\src\lv_draw;.\thirdParty\lvgl\lvgl\src\lv_font;.\thirdParty\lvgl\lvgl\src\lv_gpu;.\thirdParty\lvgl\lvgl\src\lv_hal;.\thirdParty\lvgl\lvgl\src\lv_misc;.\thirdParty\lvgl\lvgl\src\lv_themes;.\thirdParty\lvgl\lvgl\src\lv_widgets;.\app;.\app\app_ui;.\driver\sensor\SHT;.\driver\iic;.\driver\vs10xx;.\driver\vs10xx\decode;.\driver\adc;.\thirdParty\usb_device_msc\user\inc;.\thirdParty\usb_device_msc\Core\Inc;.\thirdParty\usb_device_msc\Class\MSC\Inc</IncludePath>
+              <IncludePath>.\main;.\include;.\include\cmsis;.\include\machine;.\include\math;.\lib\STM32F4xx_HAL_Driver\Inc;.\lib\STM32F4xx_HAL_Driver\Inc\Legacy;.\thirdParty\ff14\source;.\thirdParty\rt-thread-nano-sorted;.\thirdParty\rt-thread-nano-sorted\finsh;.\thirdParty\rt-thread-nano-sorted\include;.\thirdParty\rt-thread-nano-sorted\include\libc;.\driver\spi;.\driver\uart;.\driver\tim;.\driver\rtc;.\driver\sdio;.\driver\w25qxx;.\driver\screen;.\driver\screen\lcd_st7789;.\driver\screen\lcd_st7735;.\driver\file_thrans_with_fatfs;.\thirdParty\lvgl;.\thirdParty\lvgl\lvgl;.\thirdParty\lvgl\lvgl\porting;.\thirdParty\lvgl\lvgl\user;.\thirdParty\lvgl\lvgl\src;.\thirdParty\lvgl\lvgl\src\lv_core;.\thirdParty\lvgl\lvgl\src\lv_draw;.\thirdParty\lvgl\lvgl\src\lv_font;.\thirdParty\lvgl\lvgl\src\lv_gpu;.\thirdParty\lvgl\lvgl\src\lv_hal;.\thirdParty\lvgl\lvgl\src\lv_misc;.\thirdParty\lvgl\lvgl\src\lv_themes;.\thirdParty\lvgl\lvgl\src\lv_widgets;.\app;.\app\app_ui;.\driver\sensor\SHT;.\driver\iic;.\driver\vs10xx;.\driver\vs10xx\decode;.\driver\adc;.\thirdParty\usb_device\user;.\thirdParty\usb_device\Core\Inc;.\thirdParty\usb_device\Class\CDC\Inc;.\thirdParty\usb_device\Class\MSC\Inc;.\thirdParty\usb_device\user\MSC\inc;.\thirdParty\usb_device\user\CDC\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2967,67 +2967,92 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>usb_msc/core</GroupName>
+          <GroupName>usb_dev/core</GroupName>
           <Files>
-            <File>
-              <FileName>usbd_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Class\MSC\Src\usbd_msc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc_bot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Class\MSC\Src\usbd_msc_bot.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc_data.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Class\MSC\Src\usbd_msc_data.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc_scsi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Class\MSC\Src\usbd_msc_scsi.c</FilePath>
-            </File>
             <File>
               <FileName>usbd_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Core\Src\usbd_core.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\Core\Src\usbd_core.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Core\Src\usbd_ctlreq.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\Core\Src\usbd_ctlreq.c</FilePath>
             </File>
             <File>
               <FileName>usbd_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\Core\Src\usbd_ioreq.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\Core\Src\usbd_ioreq.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>usb_msc/user</GroupName>
+          <GroupName>usb_dev/user</GroupName>
           <Files>
             <File>
               <FileName>usb_device.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\user\src\usb_device.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\user\usb_device.c</FilePath>
             </File>
             <File>
               <FileName>usbd_conf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\user\src\usbd_conf.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\user\usbd_conf.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>usb_dev/msc/core</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\Class\MSC\Src\usbd_msc.c</FilePath>
             </File>
             <File>
-              <FileName>usbd_desc.c</FileName>
+              <FileName>usbd_msc_bot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\user\src\usbd_desc.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\Class\MSC\Src\usbd_msc_bot.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msc_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\Class\MSC\Src\usbd_msc_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msc_scsi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\Class\MSC\Src\usbd_msc_scsi.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_storage_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\user\MSC\src\usbd_storage_desc.c</FilePath>
             </File>
             <File>
               <FileName>usbd_storage_if.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\thirdParty\usb_device_msc\user\src\usbd_storage_if.c</FilePath>
+              <FilePath>.\thirdParty\usb_device\user\MSC\src\usbd_storage_if.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>usb_dev/cdc/core</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_cdc_desc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\user\CDC\src\usbd_cdc_desc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\user\CDC\src\usbd_cdc_if.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\thirdParty\usb_device\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>

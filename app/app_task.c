@@ -8,14 +8,15 @@
  * @copyright Copyright (c) 2020
  *
  ************************************************/
-#include "app_task.h"
+#include "ff.h"
+#include "tim.h"
+#include "sdio.h"
 #include "lvgl.h"
 #include "pro_conf.h"
 #include "sys_conf.h"
-#include "app_status_bar.h"
-#include "ff.h"
-#include "sdio.h"
+#include "app_task.h"
 #include "lv_port_fs.h"
+#include "app_status_bar.h"
 
 static rt_thread_t u_threadx[APP_THREAD_NUM] = { RT_NULL };
 static struct rt_thread u_static_threadx[APP_THREAD_NUM];
@@ -62,18 +63,21 @@ static rt_thread_t* led_blink_th = &u_threadx[2];      // 从线程堆分配线�
 static void led_blink_thread(void* param)
 {
   param = param;
-  GPIO_InitTypeDef pin;
-  __HAL_RCC_GPIOA_CLK_ENABLE();
 
-  pin.Pin = LED_PIN;
-  pin.Mode = GPIO_MODE_OUTPUT_PP;
-  pin.Pull = GPIO_PULLUP;
-  pin.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(GPIOA, &pin);
+  LED_PWM_Init();
+
+  HAL_TIM_PWM_Start(&h_tim1, TIM_CHANNEL_1);
 
   while (1) {
-    HAL_GPIO_TogglePin(GPIOA, LED_PIN);
-    rt_thread_mdelay(500);
+    for (uint8_t i = 0; i < 100; i++) {
+      __HAL_TIM_SET_COMPARE(&h_tim1, TIM_CHANNEL_1, i);
+      DELAY(10);
+    }
+    DELAY(10);
+    for (uint8_t i = 100; i > 0; i--) {
+      __HAL_TIM_SET_COMPARE(&h_tim1, TIM_CHANNEL_1, i);
+      DELAY(10);
+    }
   }
 }
 
