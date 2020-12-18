@@ -88,11 +88,11 @@
   */
 /* Create buffer for reception and transmission           */
 /* It's up to user to redefine and/or remove those define */
-/** Received data over USB are stored in this buffer      */
-uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
 
+/** Received data over USB are stored in this buffer      */
+uint8_t *UserRxBufferFS = NULL;
 /** Data to send over USB CDC are stored in this buffer   */
-uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
+uint8_t *UserTxBufferFS = NULL;
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
 
@@ -154,6 +154,9 @@ static int8_t CDC_Init_FS(void)
 {
   /* USER CODE BEGIN 3 */
   /* Set Application Buffers */
+  UserTxBufferFS = (uint8_t*)MALLOC(sizeof(uint8_t)*APP_TX_DATA_SIZE);
+  UserRxBufferFS = (uint8_t*)MALLOC(sizeof(uint8_t)*APP_RX_DATA_SIZE);
+
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
   return (USBD_OK);
@@ -166,6 +169,8 @@ static int8_t CDC_Init_FS(void)
   */
 static int8_t CDC_DeInit_FS(void)
 {
+  FREE(UserTxBufferFS);
+  FREE(UserRxBufferFS);
   /* USER CODE BEGIN 4 */
   return (USBD_OK);
   /* USER CODE END 4 */
@@ -259,7 +264,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
+int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);

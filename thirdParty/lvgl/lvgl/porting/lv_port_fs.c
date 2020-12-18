@@ -14,19 +14,19 @@
 #include "w25qxx.h"
 #include "sdio.h"
 #include "ff_devices.h"
+
  /*********************
   *      DEFINES
   *********************/
 
-  /**********************
-   *      TYPEDEFS
-   **********************/
-
-   /* Create a type to store the required data about your file.
-    * If you are using a File System library
-    * it already should have a File type.
-    * For example FatFS has `FIL`. In this case use `typedef FIL file_t`
-    */
+/**********************
+ *      TYPEDEFS
+ **********************/
+ /* Create a type to store the required data about your file.
+  * If you are using a File System library
+  * it already should have a File type.
+  * For example FatFS has `FIL`. In this case use `typedef FIL file_t`
+  */
 typedef FIL file_t;
 
 /*Similarly to `file_t` create a type for directory reading too */
@@ -111,6 +111,7 @@ void lv_port_fs_init(void)
   fs_drv[0].dir_close_cb = fs_dir_close;
   fs_drv[0].dir_open_cb = fs_dir_open;
   fs_drv[0].dir_read_cb = fs_dir_read;
+
   lv_fs_drv_register(&fs_drv[0]);
 
   /* For SPI FLASH */
@@ -200,15 +201,16 @@ static lv_fs_res_t fs_open(lv_fs_drv_t* drv, void* file_p, const char* path, lv_
   // 根据传入的参数判断是什么存储设备
   switch (drv->letter) {
   case 'S':       // SD card
-    sprintf(pathBuf, "SD_SDIO:/%s", path);
+    SPRINTF(pathBuf, "SD_SDIO:/%s", path);
     break;
   case 'F':       // SPI FALSH
-    sprintf(pathBuf, "SPIF:/%s", path);
+    SPRINTF(pathBuf, "SPIF:/%s", path);
     break;
   default:
     printf("No drive %c\n", drv->letter);
     return LV_FS_RES_NOT_EX;
   }
+
 
   /* 判断文件操作方法 */
   if (mode == LV_FS_MODE_WR) {
@@ -230,7 +232,7 @@ static lv_fs_res_t fs_open(lv_fs_drv_t* drv, void* file_p, const char* path, lv_
 
   /* 调用FatFs的函数 */
 
-  FRESULT fres = f_open(file_p, pathBuf, opt_mode);
+  FRESULT fres = f_open((FIL*)file_p, pathBuf, opt_mode);
 
   if (fres != FR_OK) {
     printf("f_open error (%d)\n", fres);
@@ -252,13 +254,11 @@ static lv_fs_res_t fs_close(lv_fs_drv_t* drv, void* file_p)
 {
 
     /* Add your code here*/
-  if (f_close(file_p) != FR_OK) {
-
+  if (f_close(file_p) != FR_OK)
     return LV_FS_RES_NOT_IMP;
-  } else {
-
+  else
     return LV_FS_RES_OK;
-  }
+
 
 }
 
@@ -456,10 +456,10 @@ static lv_fs_res_t fs_dir_open(lv_fs_drv_t* drv, void* rddir_p, const char* path
     // // 根据传入的参数判断是什么存储设备
     // switch ( drv->letter ) {
     // case 'S':       // SD card
-    //     sprintf( pathBuf, "SD_SDIO:/%s", path );
+    //     SPRINTF( pathBuf, "SD_SDIO:/%s", path );
     //     break;
     // case 'F':       // SPI FALSH
-    //     sprintf( pathBuf, "SPIF:/%s", path );
+    //     SPRINTF( pathBuf, "SPIF:/%s", path );
     //     break;
     // default:
     //     printf( "No drive %c\n", drv->letter );

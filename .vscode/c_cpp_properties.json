@@ -47,10 +47,8 @@
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\driver\\adc",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Core\\Inc",
-                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Class\\CDC\\Inc",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Class\\MSC\\Inc",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user\\MSC\\inc",
-                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user\\CDC\\inc",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include",
                 "E:\\software\\Keil5\\ARM\\ARMCC\\include\\rw",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\core\\startup",
@@ -62,9 +60,7 @@
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\lvgl\\lvgl\\font",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Core\\Src",
                 "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Class\\MSC\\Src",
-                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user\\MSC\\src",
-                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user\\CDC\\src",
-                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\Class\\CDC\\Src"
+                "e:\\work\\Embed\\project\\stm32\\STM32F405\\mp3-lvgl-stm32f405rgt\\thirdParty\\usb_device\\user\\MSC\\src"
             ],
             "defines": [
                 "USE_FULL_LL_DRIVER",

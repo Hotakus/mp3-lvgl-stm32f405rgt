@@ -9,6 +9,7 @@
  *
  ************************************************/
 #include "main.h"
+#include "lvgl.h"
 
 int main()
 {
@@ -16,6 +17,7 @@ int main()
   HAL_Init();
   uart1_conf(115200);
 #endif
+
 
   return 0;
 }
