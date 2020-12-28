@@ -18,6 +18,5 @@ int main()
   uart1_conf(115200);
 #endif
 
-
   return 0;
 }

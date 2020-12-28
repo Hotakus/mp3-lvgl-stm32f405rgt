@@ -20,7 +20,7 @@
 #include "mp3_decode.h"
 
 /* definition */
-#define VS10xx_SPI              SPI1
+#define VS10xx_SPI              SPI3
 #define VS10xx_XRESET           GPIO_PIN_0        // PC
 #define VS10xx_DREQ             GPIO_PIN_1        // PC
 #define VS10xx_XDCS             GPIO_PIN_2        // PC

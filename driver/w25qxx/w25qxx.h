@@ -10,12 +10,19 @@ extern "C" {
 #include <stdio.h>
 #include "uart.h"
 
-
+#define W25QXX_EVAL 0
 
 /* definations */
+#if W25QXX_EVAL == 1
 #define W25QXX_SPI          SPI3
 #define W25QXX_CS           GPIO_PIN_15
 #define W25QXX_CS_PORT      GPIOA
+#else
+#define W25QXX_SPI          SPI1
+#define W25QXX_CS           GPIO_PIN_4
+#define W25QXX_CS_PORT      GPIOC
+#endif
+
 #define W25QXX_CS_CLR       W25QXX_CS_PORT->BSRR = ((uint32_t)W25QXX_CS)<<16
 #define W25QXX_CS_SET       W25QXX_CS_PORT->BSRR = ((uint32_t)W25QXX_CS)
 

@@ -157,15 +157,15 @@ static void fs_init(void)
 
   /*E.g. for FatFS initalize the SD card and FatFS itself*/
   /*You code here*/
-  if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
-    fr_lv[SD_SDIO_INDEX] = f_mount(&fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1);
-    if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
-      DEBUG_PRINT("sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX]);
-      if (fr_lv[SD_SDIO_INDEX] == FR_NOT_READY)
-        DEBUG_PRINT("no sd card.\n");
-    } else
-      DEBUG_PRINT("sd card mount successfully.\n");
-  }
+  // if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
+  //   fr_lv[SD_SDIO_INDEX] = f_mount(&fs_lv[SD_SDIO_INDEX], "SD_SDIO:", 1);
+  //   if (fr_lv[SD_SDIO_INDEX] != FR_OK) {
+  //     DEBUG_PRINT("sd card mount error. (fr: %d)\n", fr_lv[SD_SDIO_INDEX]);
+  //     if (fr_lv[SD_SDIO_INDEX] == FR_NOT_READY)
+  //       DEBUG_PRINT("no sd card.\n");
+  //   } else
+  //     DEBUG_PRINT("sd card mount successfully.\n");
+  // }
 
 
 

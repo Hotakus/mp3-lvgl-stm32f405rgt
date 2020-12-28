@@ -37,6 +37,16 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    // /* ADG736 */
+    // GPIO_InitStruct.Pin = GPIO_PIN_13;
+    // GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    // GPIO_InitStruct.Pull = GPIO_PULLUP;
+    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // // GPIOA->BSRR = (uint32_t)GPIO_PIN_13;
+    // HAL_GPIO_WritePin( GPIOA, GPIO_PIN_13, GPIO_PIN_SET );
+
   }
 }
 
@@ -95,9 +105,9 @@ uint8_t my_getc(void)
 PUTCHAR_PROTOTYPE
 {
   if (ch == '\n')
-    my_putc('\r');
-  my_putc((uint8_t)ch);
-  return ch;
+  my_putc('\r');
+my_putc((uint8_t)ch);
+return ch;
 }
 
 GETCHAR_PROTOTYPE

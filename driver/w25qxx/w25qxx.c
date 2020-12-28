@@ -38,8 +38,8 @@ w25qxx_feature_s w25qxx = {
 };
 
 fatfs_dev_opr_t dev_spif = {
-  .init  = w25qxx_init,
-  .read  = w25qxx_read_sector,
+  .init = w25qxx_init,
+  .read = w25qxx_read_sector,
   .write = w25qxx_writ_sector,
 };
 
@@ -52,6 +52,8 @@ static void w25qxx_gpio(void)
   GPIO_InitTypeDef w25qxx_g = { 0 };
 
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   w25qxx_g.Pin = W25QXX_CS;
   w25qxx_g.Mode = GPIO_MODE_OUTPUT_PP;
@@ -171,6 +173,7 @@ void w25qxx_powerUp(void)
     DEBUG_PRINT("W25QXX init failed.\n");
     return;
   }
+  DEBUG_PRINT("W25QXX init Ok.\n");
   w25qxx_get_JEDECID();
 }
 
@@ -391,7 +394,7 @@ HAL_StatusTypeDef w25qxx_writ_sector(
   uint32_t cnt
 )
 {
-  if ( w25qxx_erase_sector(sector, cnt) != HAL_OK )
+  if (w25qxx_erase_sector(sector, cnt) != HAL_OK)
     return HAL_OK;
   return w25qxx_writ_page(send_buf, (sector << 4), (cnt << 4));
 }

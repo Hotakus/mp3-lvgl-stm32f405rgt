@@ -76,15 +76,14 @@ RT_WEAK void* rt_heap_end_get(void)
 #include "uart.h"
 void rt_hw_board_init()
 {
-    /* HAL init */
-  HAL_Init();
+  /* HAL init */
+  // HAL_Init();
 
   /* System Clock Update */
   SystemClock_Config();
-
   /* System Tick Configuration */
   _SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
-
+	
   uart1_conf(115200);
 
   cpu_usage_init();

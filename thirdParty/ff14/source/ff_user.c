@@ -10,6 +10,8 @@
 *************************************************/
 #include "ff_user.h"
 
+#if USER_USE_FATFS == 1
+
 //得到磁盘剩余容量
 //drv:磁盘编号("0:"/"1:")
 //total:总容量     （单位KB）
@@ -287,7 +289,9 @@ void ptest(int argc, const char** argv)
   DEBUG_PRINT("%s file cnt : %d\n", list->type, list->file_cnt);
 
 }
+#if USER_USE_RTTHREAD == (1u)
 MSH_CMD_EXPORT(ptest, ptest);
+#endif
 
 const char* get_dev_name(const char* path)
 {
@@ -377,3 +381,63 @@ const char* get_file_name(const char* path)
   }
 
 }
+
+
+/* FatFs get_fattime(); */
+/*
+*   Return Value
+*   Currnet local time shall be returned as bit-fields packed into a DWORD value. The bit fields are as follows:
+*
+*   bit31:25
+*       Year origin from the 1980   (0..127, e.g. 37 for 2017) 1980 + 37 = 2017
+*   bit24:21
+*       Month                       (1..12)
+*   bit20:16
+*       Day of the month            (1..31)
+*   bit15:11
+*       Hour                        (0..23)
+*   bit10:5
+*       Minute                      (0..59)
+*   bit4:0
+*       Second / 2                  (0..29, e.g. 25 for 50)
+*   Description:
+*       The get_fattime function shall return any valid time even if the system does not support a real time clock.
+*       If a zero is returned, the file will not have a valid timestamp.
+*/
+#include "rtc.h"
+DWORD get_fattime(void)
+{
+    DWORD fatfs_time;
+    RTC_INFO rtc_info;
+
+    rtc_init();
+
+    rtc_obtain_info(&rtc_info);
+
+    /* 根据格式将获取的时间数据进行转换 */
+    fatfs_time = (rtc_info.date.Year + 20) << 25;     //对齐到2000年 1980 + 20 = 2000
+    fatfs_time |= rtc_info.date.Month << 21;
+    fatfs_time |= rtc_info.date.Date << 16;
+
+    fatfs_time |= rtc_info.time.Hours << 11;
+    fatfs_time |= rtc_info.time.Minutes << 5;
+    fatfs_time |= rtc_info.time.Seconds >> 1;
+
+    /* 根据格式将获取的时间数据进行转换 */
+    // fatfs_time = (rtc_data.rtcDateStruct.RTC_Year + 20) << 25;     //对齐到2000年 1980 + 20 = 2000
+    // fatfs_time |= rtc_data.rtcDateStruct.RTC_Month << 21;
+    // fatfs_time |= rtc_data.rtcDateStruct.RTC_Date << 16;
+
+    // fatfs_time |= rtc_data.rtcTimeStruct.RTC_Hours << 11;
+    // fatfs_time |= rtc_data.rtcTimeStruct.RTC_Minutes << 5;
+    // fatfs_time |= rtc_data.rtcTimeStruct.RTC_Seconds >> 1;
+
+    return fatfs_time;
+}
+
+#else
+__weak DWORD get_fattime(void)
+{
+	return 0;
+}
+#endif

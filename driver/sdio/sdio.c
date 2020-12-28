@@ -216,7 +216,7 @@ HAL_StatusTypeDef sd_sdio_init(void)
 
 void sd_sdio_deinit(void)
 {
-    HAL_SD_MspDeInit(&hsd);
+  HAL_SD_MspDeInit(&hsd);
 }
 
 void sd_show_card_info(void)
@@ -307,6 +307,6 @@ static HAL_StatusTypeDef sd_sdio_write(uint8_t* buff, LBA_t sector, UINT count)
   } else {
     while (HAL_SD_GetState(&hsd) != HAL_SD_STATE_READY);
   }
-  
+
   return sd_state;
 }

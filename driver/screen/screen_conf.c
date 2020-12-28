@@ -54,6 +54,8 @@ static scr_opr_handler scr_opr_s = {
 
     .SCR_X_MAX = 128,
     .SCR_Y_MAX = 128,
+#else
+		0
 #endif
 };
 
