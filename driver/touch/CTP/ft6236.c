@@ -58,10 +58,7 @@ void ctp_ft6236_init(void)
 {
     uint8_t val = 0x0;
 
-    if (!ft6236_init_flag) {
-        ctp_ft6236_gpio();
-        ft6236_init_flag = 1;
-    }
+    ctp_ft6236_gpio();
     ctp_ft6236_reset();
 
     DEBUG_PRINT("FT6236 configured start.\n");
@@ -102,15 +99,16 @@ HAL_StatusTypeDef ctp_ft6236_read_reg(uint8_t reg_addr, uint8_t* val, uint32_t l
     HAL_StatusTypeDef err;
 
     err = HAL_I2C_Master_Transmit(&h_i2c1, FT6236_ADDR, &reg_addr, 1, 0xFFFFFFFF);
-    if (err != HAL_OK)
+    if (err != HAL_OK)if (err != HAL_OK) {
+        DEBUG_PRINT("r1err (%d)\n", err);
         return err;
+    }
 
     err = HAL_I2C_Master_Receive(&h_i2c1, FT6236_ADDR, val, 1, 0xFFFFFFFF);
-    if (err != HAL_OK)
+    if (err != HAL_OK)if (err != HAL_OK) {
+        DEBUG_PRINT("r2err (%d)\n", err);
         return err;
-
-    DEBUG_PRINT("ctp_ft6236_read_reg ok.\n");
-
+    }
     return HAL_OK;
 }
 
@@ -124,16 +122,15 @@ HAL_StatusTypeDef ctp_ft6236_read_reg(uint8_t reg_addr, uint8_t* val, uint32_t l
 void ctp_ft6236_writ_reg(uint8_t reg_addr, uint8_t* val, uint32_t len)
 {
     HAL_StatusTypeDef err;
-    uint8_t buf[2];
+    uint8_t buf[2] = { 0 };
 
     buf[0] = reg_addr;
     buf[1] = *val;
-    err = HAL_I2C_Master_Transmit(&h_i2c1, FT6236_ADDR, buf, 2, 0xFFFFFFFF);
-    if (err != HAL_OK)
+    err = i2c_send(&h_i2c1, FT6236_ADDR, buf, sizeof(buf));
+    if (err != HAL_OK) {
+        DEBUG_PRINT("w1err (%d)\n", err);
         return;
-
-    DEBUG_PRINT("ctp_ft6236_writ_reg ok.\n");
-
+    }
 }
 
 /************************************************
@@ -142,9 +139,9 @@ void ctp_ft6236_writ_reg(uint8_t reg_addr, uint8_t* val, uint32_t len)
 static void ctp_ft6236_reset(void)
 {
     FT6236_RST_LOW;
-    DELAY(100);
+    DELAY(6);
     FT6236_RST_HIGH;
-    DELAY(100);
+    DELAY(310);
 }
 
 /************************************************

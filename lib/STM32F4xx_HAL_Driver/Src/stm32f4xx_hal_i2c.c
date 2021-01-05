@@ -300,6 +300,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "stdio.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -1068,6 +1069,7 @@ HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevA
     /* Send Slave Address */
     if (I2C_MasterRequestWrite(hi2c, DevAddress, Timeout, tickstart) != HAL_OK)
     {
+    //   printf("I2C_MasterRequestWrite i2c device : 0x%x error\n", DevAddress);
       return HAL_ERROR;
     }
 

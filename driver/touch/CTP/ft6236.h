@@ -43,8 +43,8 @@
 #define FT6236_I2C          I2C1
 #define FT6236_RST          GPIO_PIN_1  // PB
 #define FT6236_INT          GPIO_PIN_3  // PA
-#define FT6236_RST_HIGH     GPIOA->BSRR = ((uint32_t)FT6236_RST)
-#define FT6236_RST_LOW      GPIOA->BSRR = ((uint32_t)FT6236_RST)<<16
+#define FT6236_RST_HIGH     GPIOB->BSRR = ((uint32_t)FT6236_RST)
+#define FT6236_RST_LOW      GPIOB->BSRR = ((uint32_t)FT6236_RST)<<16
 
 /************************************************
  * @brief FT6236 部分寄存器定义 

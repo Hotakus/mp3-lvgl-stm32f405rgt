@@ -25,7 +25,7 @@ static void periphal_init(void)
     DELAY(100);
 
     /* I2C1 init */
-    i2c_conf(&h_i2c1, 400, 0x94);
+    i2c_conf(&h_i2c1, 100, 0x94);
 
     /* SPI1 init */
     spi_conf(
@@ -38,7 +38,7 @@ static void periphal_init(void)
 
 static void device_init(void)
 {
-    ctp_ft6236_init();
+    // ctp_ft6236_init();
 }
 
 int main()
