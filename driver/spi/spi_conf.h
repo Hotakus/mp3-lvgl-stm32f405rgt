@@ -9,6 +9,8 @@ extern "C" {
 #include "sys_conf.h"
 #include <stdio.h>
 
+extern SPI_HandleTypeDef h_spi1;
+
 /* definations */
 #define SPI_DUMMY_BYTE  0xFF
 

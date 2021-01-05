@@ -11,15 +11,14 @@ extern "C" {
 
 
 /* definations */
+/* Screen's display direction */
 #define ST7789_NOMAL            0xC8u
 #define ST7789_RIGHT_TO_LEFT    0x68u
 #define ST7789_LEFT_TO_RIGHT    0xA8u
 #define ST7789_UPSIDE_DOWN      0x08u
-#define ST7789_DIRECTION        ST7789_NOMAL
+#define DIRECTION        ST7789_RIGHT_TO_LEFT
 
 #if (USER_USE_SCR == USE_SCR_LCD_ST7789_130)
-/* Screen's display direction */
-#define ST7789_USE_HORIZONTAL 0
 
 #define ST7789_SCR_X    240
 #define ST7789_SCR_Y    240
@@ -92,7 +91,6 @@ extern "C" {
 #define ST7789_CTL_GPIO             GPIOA
 #define ST7789_DAT_GPIO             GPIOB
 
-W25QXX_CS_PORT->BSRR = ((uint32_t)W25QXX_CS)<<16
 
 #define ST7789_CS_HIGH              ST7789_CTL_GPIO->BSRR  = ((uint32_t)ST7789_CS)
 #define ST7789_CS_LOW               ST7789_CTL_GPIO->BSRR  = ((uint32_t)ST7789_CS)<<16

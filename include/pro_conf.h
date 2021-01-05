@@ -29,7 +29,7 @@ extern "C" {
 #define USE_SCR_LCD_ST7789_130              0u
 #define USE_SCR_LCD_ST7789_200              1u
 #define USE_SCR_LCD_144_ST7735              2u
-#define USER_USE_SCR                        2
+#define USER_USE_SCR                        USE_SCR_LCD_ST7789_200
 
 
 /* USER USE OS */

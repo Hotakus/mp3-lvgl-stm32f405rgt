@@ -14,6 +14,10 @@
 
 #define  I2C_NUM    3
 
+I2C_HandleTypeDef h_i2c1 = {
+    .Instance = I2C1,
+};
+
 static uint16_t i2c_clk_m = 1000;
 
 
@@ -58,10 +62,10 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 
 /************************************************
  * @brief I2C configure
- * 
- * @param h_i2c 
- * @param i2c_clk 
- * @param own_addr 
+ *
+ * @param h_i2c
+ * @param i2c_clk
+ * @param own_addr
 *************************************************/
 void i2c_conf(I2C_HandleTypeDef* h_i2c, uint16_t i2c_clk, uint8_t own_addr)
 {
@@ -70,7 +74,7 @@ void i2c_conf(I2C_HandleTypeDef* h_i2c, uint16_t i2c_clk, uint8_t own_addr)
         return;
     }
 
-    if ( h_i2c->Instance == NULL )
+    if (h_i2c->Instance == NULL)
         return;
 
     HAL_I2C_DeInit(h_i2c);
@@ -91,24 +95,24 @@ void i2c_conf(I2C_HandleTypeDef* h_i2c, uint16_t i2c_clk, uint8_t own_addr)
 
 /************************************************
  * @brief I2Cx 发送
- * 
+ *
  * @param I2Cx 对应1...3
- * @param dev_addr 
- * @param send_buf 
- * @param size 
- * @return HAL_StatusTypeDef 
+ * @param dev_addr
+ * @param send_buf
+ * @param size
+ * @return HAL_StatusTypeDef
 *************************************************/
-HAL_StatusTypeDef i2c_send( I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t *send_buf, size_t size )
+HAL_StatusTypeDef i2c_send(I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t* send_buf, size_t size)
 {
-    if ( h_i2c->Instance == NULL )
+    if (h_i2c->Instance == NULL)
         return HAL_ERROR;
-    return HAL_I2C_Master_Transmit(h_i2c, dev_addr, send_buf, size, I2C_TIMEOUT );
+    return HAL_I2C_Master_Transmit(h_i2c, dev_addr, send_buf, size, I2C_TIMEOUT);
 }
 
 
-HAL_StatusTypeDef i2c_read( I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t *rec_buf, size_t size )
+HAL_StatusTypeDef i2c_read(I2C_HandleTypeDef* h_i2c, uint16_t dev_addr, uint8_t* rec_buf, size_t size)
 {
-    if ( h_i2c->Instance == NULL )
+    if (h_i2c->Instance == NULL)
         return HAL_ERROR;
-    return HAL_I2C_Master_Receive(h_i2c, dev_addr, rec_buf, size, I2C_TIMEOUT );
+    return HAL_I2C_Master_Receive(h_i2c, dev_addr, rec_buf, size, I2C_TIMEOUT);
 }

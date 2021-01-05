@@ -33,7 +33,7 @@
 
 // <o>the stack size of main thread<1-4086>
 //  <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE     512
+#define RT_MAIN_THREAD_STACK_SIZE     1024
 
 // </h>
 

@@ -1,10 +1,19 @@
+/************************************************
+ * @file ft6236.h
+ * @author Trisuborn (ttowfive@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2021-01-05
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+*************************************************/
 #ifndef FT6236_H
 #define FT6236_H
 
 /* includes */
-#include "stm32f4xx_conf.h"
+#include "stm32f4xx.h"
 #include <stdio.h>
-
 
 /* definations */
 /************************************************
@@ -32,10 +41,10 @@
  * @brief FT6236 I2C 接口定义
  ************************************************/
 #define FT6236_I2C          I2C1
-#define FT6236_RST          GPIO_Pin_2  // PA
-#define FT6236_INT          GPIO_Pin_3  // PA
-#define FT6236_RST_HIGH     GPIOA->BSRRL  |= FT6236_RST
-#define FT6236_RST_LOW      GPIOA->BSRRH  |= FT6236_RST
+#define FT6236_RST          GPIO_PIN_1  // PB
+#define FT6236_INT          GPIO_PIN_3  // PA
+#define FT6236_RST_HIGH     GPIOA->BSRR = ((uint32_t)FT6236_RST)
+#define FT6236_RST_LOW      GPIOA->BSRR = ((uint32_t)FT6236_RST)<<16
 
 /************************************************
  * @brief FT6236 部分寄存器定义 
@@ -106,8 +115,8 @@ enum ft6236_gestrue_reg {
  * @brief FT6236 函数
  ************************************************/
 void ctp_ft6236_init( void );
-ErrorStatus ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, u32 len );
-void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, u32 len );
+HAL_StatusTypeDef ctp_ft6236_read_reg( uint8_t reg_addr, uint8_t *val, uint32_t len );
+void ctp_ft6236_writ_reg( uint8_t reg_addr, uint8_t *val, uint32_t len );
 touch_coordinate_s *ctp_ft6236_get_coordinate( uint8_t TPx );
 touch_gesture_t cp_ft6236_get_gesture( void );
 

@@ -55,10 +55,11 @@ static scr_opr_handler scr_opr_s = {
     .SCR_X_MAX = 128,
     .SCR_Y_MAX = 128,
 #else
-		0
+    0
 #endif
 };
 
-scr_opr_handler* scr_get_opr_handler(void) {
+scr_opr_handler* scr_get_opr_handler(void)
+{
     return &scr_opr_s;
 }

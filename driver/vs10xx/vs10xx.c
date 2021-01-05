@@ -90,19 +90,7 @@ void vs10xx_init(void)
   DEBUG_PRINT("%x\n", vs10xx_read_reg(REG_VS10xx_SCI_CLOCKF));
   DEBUG_PRINT("%x\n", vs10xx_read_reg(REG_VS10xx_SCI_VOL));
 
-
-  spi_conf(
-    &h_vs10xx_spi,
-    SPI_BAUDRATEPRESCALER_128,
-    SPI_MODE_1,
-    SPI_DIRECTION_2LINES
-  );
-
-  /* vs10xx sin test */
-// #define SINTEST 1
-// #if SINTEST == 1
-//     vs10xx_sin_test( 200 );
-// #endif
+  vs10xx_sin_test(500);
 
   DEBUG_PRINT("VS10xx init done.\n");
 }
@@ -115,7 +103,9 @@ void vs10xx_init(void)
  ************************************************/
 static ErrorStatus vs10xx_wait(uint32_t timeout)
 {
-  while (--timeout && !DREQ_STAT);
+  while (--timeout && !DREQ_STAT) {
+    DEBUG_PRINT("%d ", DREQ_STAT);
+  }
   if (!timeout)
     return ERROR;
   return SUCCESS;
@@ -139,7 +129,7 @@ void vs10xx_sw_reset(void)
   ErrorStatus err = ERROR;
 
   /* 新模式、使能SinTest、使能流模式、软复位 */
-  vs10xx_writ_reg(REG_VS10xx_SCI_MODE, (1 << 11 | 1 << 5 | 1 << 2 | 1 << 1));
+  vs10xx_writ_reg(REG_VS10xx_SCI_MODE, (1 << 11 | 1 << 5 | 1 << 2));
   err = vs10xx_wait(0xFFFFFFFF);  // 等软复位结束
   if (err != SUCCESS) {
     DEBUG_PRINT("Soft reset occured an error.\n");
@@ -209,8 +199,10 @@ void vs10xx_sin_test(uint16_t test_time)
   VS10xx_XDCS_LOW;
   VS10xx_CS_HIGH;
 
-  for (uint8_t i = 0; i < 8; i++)
+  for (uint8_t i = 0; i < 8; i++) {
     vs10xx_trans_byte(sin_start[i]);
+    DEBUG_PRINT("%x ", sin_start[i]);
+  }
 
   DELAY(test_time);
 
@@ -280,11 +272,12 @@ void vs10xx_play_mp3(const char* path)
   }
 
   /* 得到首帧地址 */
-  // size_t cur_pos = mp3.frame_spos;
+  // size_t cur_pos = 0;
   size_t cur_pos = mp3.frame_spos;
   uint8_t* a_buf = (uint8_t*)MALLOC(sizeof(uint8_t) * BYTES_PER_TRANS);
 
   DEBUG_PRINT("mp3.sample_rate  : %d \n", mp3.sample_rate);
+  DEBUG_PRINT("cur_pos  : %d \n", cur_pos);
 
 
   vs10xx_reset_decodeTime();
@@ -302,11 +295,33 @@ void vs10xx_play_mp3(const char* path)
       vs10xx_trans_byte(a_buf[len]);
     cur_pos += BYTES_PER_TRANS;
     VS10xx_XDCS_HIGH;
+    // DEBUG_PRINT("%d ", DREQ_STAT);
     // uint16_t c_time = vs10xx_read_reg(REG_VS10xx_SCI_DECODETIME);
     // printf("Cur time : %d : %d", c_time / 60, c_time % 60);
-    // my_putc('\r');
+
   }
 
   f_close(&mp3_fil);
   FREE(a_buf);
 }
+
+static void DREQ(void)
+{
+  DEBUG_PRINT("DREQ_STAT : %d\n", DREQ_STAT);
+}
+
+static void VS10_DEBUG(int argc, char** argv)
+{
+  if (*argv[1] == '1')
+    VS10xx_XDCS_HIGH;
+  else
+    VS10xx_XDCS_LOW;
+
+  if (*argv[2] == '1')
+    VS10xx_CS_HIGH;
+  else
+    VS10xx_CS_LOW;
+
+  DREQ();
+}
+MSH_CMD_EXPORT(VS10_DEBUG, VS10_DEBUG);

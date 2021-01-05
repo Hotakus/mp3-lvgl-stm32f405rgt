@@ -13,6 +13,10 @@
 
 GPIO_InitTypeDef spix_gpio;
 
+SPI_HandleTypeDef h_spi1 = {
+    .Instance = SPI1,
+};
+
 /************************************************
  * @brief 根据用户输入信息配置SPI
  *

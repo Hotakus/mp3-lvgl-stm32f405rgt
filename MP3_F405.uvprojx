@@ -339,7 +339,7 @@
               <MiscControls>--locale=english</MiscControls>
               <Define>USE_FULL_LL_DRIVER,USE_HAL_DRIVER,STM32F405xx,ARM_MATH_CM4,ARM_MATH_ROUNDING,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>.\main;.\include;.\include\cmsis;.\include\machine;.\include\math;.\lib\STM32F4xx_HAL_Driver\Inc;.\lib\STM32F4xx_HAL_Driver\Inc\Legacy;.\thirdParty\ff14\source;.\thirdParty\rt-thread-nano-sorted;.\thirdParty\rt-thread-nano-sorted\finsh;.\thirdParty\rt-thread-nano-sorted\include;.\thirdParty\rt-thread-nano-sorted\include\libc;.\driver\spi;.\driver\uart;.\driver\tim;.\driver\rtc;.\driver\sdio;.\driver\w25qxx;.\driver\screen;.\driver\screen\lcd_st7789;.\driver\screen\lcd_st7735;.\driver\file_thrans_with_fatfs;.\thirdParty\lvgl;.\thirdParty\lvgl\lvgl;.\thirdParty\lvgl\lvgl\porting;.\thirdParty\lvgl\lvgl\user;.\thirdParty\lvgl\lvgl\src;.\thirdParty\lvgl\lvgl\src\lv_core;.\thirdParty\lvgl\lvgl\src\lv_draw;.\thirdParty\lvgl\lvgl\src\lv_font;.\thirdParty\lvgl\lvgl\src\lv_gpu;.\thirdParty\lvgl\lvgl\src\lv_hal;.\thirdParty\lvgl\lvgl\src\lv_misc;.\thirdParty\lvgl\lvgl\src\lv_themes;.\thirdParty\lvgl\lvgl\src\lv_widgets;.\app;.\app\app_ui;.\driver\sensor\SHT;.\driver\iic;.\driver\vs10xx;.\driver\vs10xx\decode;.\driver\adc;.\thirdParty\usb_device\user;.\thirdParty\usb_device\Core\Inc;.\thirdParty\usb_device\Class\MSC\Inc;.\thirdParty\usb_device\user\MSC\inc;.\driver\mpu9250</IncludePath>
+              <IncludePath>.\main;.\include;.\include\cmsis;.\include\machine;.\include\math;.\lib\STM32F4xx_HAL_Driver\Inc;.\lib\STM32F4xx_HAL_Driver\Inc\Legacy;.\thirdParty\ff14\source;.\thirdParty\rt-thread-nano-sorted;.\thirdParty\rt-thread-nano-sorted\finsh;.\thirdParty\rt-thread-nano-sorted\include;.\thirdParty\rt-thread-nano-sorted\include\libc;.\driver\spi;.\driver\uart;.\driver\tim;.\driver\rtc;.\driver\sdio;.\driver\w25qxx;.\driver\screen;.\driver\screen\lcd_st7789;.\driver\screen\lcd_st7735;.\driver\file_thrans_with_fatfs;.\thirdParty\lvgl;.\thirdParty\lvgl\lvgl;.\thirdParty\lvgl\lvgl\porting;.\thirdParty\lvgl\lvgl\user;.\thirdParty\lvgl\lvgl\src;.\thirdParty\lvgl\lvgl\src\lv_core;.\thirdParty\lvgl\lvgl\src\lv_draw;.\thirdParty\lvgl\lvgl\src\lv_font;.\thirdParty\lvgl\lvgl\src\lv_gpu;.\thirdParty\lvgl\lvgl\src\lv_hal;.\thirdParty\lvgl\lvgl\src\lv_misc;.\thirdParty\lvgl\lvgl\src\lv_themes;.\thirdParty\lvgl\lvgl\src\lv_widgets;.\app;.\app\app_ui;.\driver\sensor\SHT;.\driver\iic;.\driver\vs10xx;.\driver\vs10xx\decode;.\driver\adc;.\thirdParty\usb_device\user;.\thirdParty\usb_device\Core\Inc;.\thirdParty\usb_device\Class\MSC\Inc;.\thirdParty\usb_device\user\MSC\inc;.\driver\mpu9250;.\driver\touch\CTP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -643,6 +643,11 @@
               <FileName>mpu9250.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\driver\mpu9250\mpu9250.c</FilePath>
+            </File>
+            <File>
+              <FileName>ft6236.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\touch\CTP\ft6236.c</FilePath>
             </File>
           </Files>
         </Group>

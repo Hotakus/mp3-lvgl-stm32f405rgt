@@ -20,6 +20,8 @@ extern "C" {
 #include <stdio.h>
 #include "pro_conf.h"
 
+extern I2C_HandleTypeDef h_i2c1;
+
 /* definations */
 #define I2C_RETRY_TIMES     0xFF
 #define I2C_TIMEOUT         0xFFFFFFFF  
